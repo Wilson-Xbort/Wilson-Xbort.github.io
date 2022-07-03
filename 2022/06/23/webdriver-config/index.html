@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"wilson-xbort.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="1.安装Selenium1.1 在Anaconda下 1pip install selnium #查找Python 安装位置  1where Python 2.下载火狐WebDriver2.1 下载Tips：一般下载最新版本就行网站如下： 1https:&#x2F;&#x2F;github.com&#x2F;mozilla&#x2F;geckodriver&#x2F;releases&#x2F; 2.2 解压后放在Python的安装位置 2.3 在Anac">
+  <meta name="description" content="1.安装Selenium 1.1 在Anaconda下  1pip install selnium #查找Python 安装位置  1where Python 2.下载火狐WebDriver 2.1 下载 Tips：一般下载最新版本就行  网站如下： 1https:&#x2F;&#x2F;github.com&#x2F;mozilla&#x2F;geckodriver&#x2F;releases&#x2F; 2.2 解压后放在Python的安装位置  2.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="配置Firefox WebDriver, 安装Selenium">
 <meta property="og:url" content="https://wilson-xbort.github.io/2022/06/23/webdriver-config/index.html">
 <meta property="og:site_name" content="博客">
-<meta property="og:description" content="1.安装Selenium1.1 在Anaconda下 1pip install selnium #查找Python 安装位置  1where Python 2.下载火狐WebDriver2.1 下载Tips：一般下载最新版本就行网站如下： 1https:&#x2F;&#x2F;github.com&#x2F;mozilla&#x2F;geckodriver&#x2F;releases&#x2F; 2.2 解压后放在Python的安装位置 2.3 在Anac">
+<meta property="og:description" content="1.安装Selenium 1.1 在Anaconda下  1pip install selnium #查找Python 安装位置  1where Python 2.下载火狐WebDriver 2.1 下载 Tips：一般下载最新版本就行  网站如下： 1https:&#x2F;&#x2F;github.com&#x2F;mozilla&#x2F;geckodriver&#x2F;releases&#x2F; 2.2 解压后放在Python的安装位置  2.">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://wilson-xbort.github.io/2022/06/23/webdriver-config/img1.png">
 <meta property="og:image" content="https://wilson-xbort.github.io/2022/06/23/webdriver-config/img2.png">
@@ -260,17 +260,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1-安装Selenium"><a href="#1-安装Selenium" class="headerlink" title="1.安装Selenium"></a>1.安装Selenium</h2><h4 id="1-1-在Anaconda下"><a href="#1-1-在Anaconda下" class="headerlink" title="1.1 在Anaconda下"></a>1.1 在Anaconda下</h4><p><img src="/2022/06/23/webdriver-config/img1.png"></p>
+        <h2 id="1-安装Selenium">1.安装Selenium</h2>
+<h4 id="1-1-在Anaconda下">1.1 在Anaconda下</h4>
+<p><img src="/2022/06/23/webdriver-config/img1.png" alt></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install selnium</span><br></pre></td></tr></table></figure>
 <p>#查找Python 安装位置</p>
-<p><img src="/2022/06/23/webdriver-config/img2.png"></p>
+<p><img src="/2022/06/23/webdriver-config/img2.png" alt></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where Python</span><br></pre></td></tr></table></figure>
-<h2 id="2-下载火狐WebDriver"><a href="#2-下载火狐WebDriver" class="headerlink" title="2.下载火狐WebDriver"></a>2.下载火狐WebDriver</h2><h4 id="2-1-下载"><a href="#2-1-下载" class="headerlink" title="2.1 下载"></a>2.1 下载</h4><h4 id="Tips：一般下载最新版本就行"><a href="#Tips：一般下载最新版本就行" class="headerlink" title="Tips：一般下载最新版本就行"></a>Tips：一般下载最新版本就行</h4><p><img src="/2022/06/23/webdriver-config/img3.png"><br>网站如下：</p>
+<h2 id="2-下载火狐WebDriver">2.下载火狐WebDriver</h2>
+<h4 id="2-1-下载">2.1 下载</h4>
+<h4 id="Tips：一般下载最新版本就行">Tips：一般下载最新版本就行</h4>
+<p><img src="/2022/06/23/webdriver-config/img3.png" alt><br>
+网站如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/mozilla/geckodriver/releases/</span><br></pre></td></tr></table></figure>
-<h4 id="2-2-解压后放在Python的安装位置"><a href="#2-2-解压后放在Python的安装位置" class="headerlink" title="2.2 解压后放在Python的安装位置"></a>2.2 解压后放在Python的安装位置</h4><p><img src="/2022/06/23/webdriver-config/img4.png"></p>
-<h4 id="2-3-在Anaconda-Jupyter下进行测试"><a href="#2-3-在Anaconda-Jupyter下进行测试" class="headerlink" title="2.3 在Anaconda Jupyter下进行测试"></a>2.3 在Anaconda Jupyter下进行测试</h4><p><img src="/2022/06/23/webdriver-config/img5.png"><br>代码如下：</p>
+<h4 id="2-2-解压后放在Python的安装位置">2.2 解压后放在Python的安装位置</h4>
+<p><img src="/2022/06/23/webdriver-config/img4.png" alt></p>
+<h4 id="2-3-在Anaconda-Jupyter下进行测试">2.3 在Anaconda Jupyter下进行测试</h4>
+<p><img src="/2022/06/23/webdriver-config/img5.png" alt><br>
+代码如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from selenium import webdriver</span><br><span class="line">import time</span><br><span class="line">driver = webdriver.Firefox()</span><br><span class="line">driver.implicitly_wait(5)</span><br><span class="line">driver.get(&quot;https://www.baidu.com&quot;)</span><br><span class="line">time.sleep(3)</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
-<h2 id="测试成功"><a href="#测试成功" class="headerlink" title="测试成功"></a>测试成功</h2><p><img src="/2022/06/23/webdriver-config/img6.png"></p>
+<h2 id="测试成功">测试成功</h2>
+<p><img src="/2022/06/23/webdriver-config/img6.png" alt></p>
 
     </div>
 

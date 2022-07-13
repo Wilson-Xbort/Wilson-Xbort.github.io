@@ -70,6 +70,62 @@
       </tags>
   </entry>
   <entry>
+    <title>删除重复元素</title>
+    <url>/2022/07/10/delete-duplicate-elements/</url>
+    <content><![CDATA[<h3 id="快速入手">快速入手</h3>
+<h4 id="代码如下：">代码如下：</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">void elimdups(std::vector&lt;std::string&gt;&amp; vs)</span><br><span class="line">&#123;</span><br><span class="line">    std::sort(vs.begin(), vs.end());</span><br><span class="line">    auto new_end = std::unique(vs.begin(), vs.end());</span><br><span class="line">    // 删除重复</span><br><span class="line">    vs.erase(new_end, vs.end());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="思路：先用std-sort-排序，通过std-unique-将重复元素放入容器末尾，最后擦除">思路：先用std::sort()排序，通过std::unique() 将重复元素放入容器末尾，最后擦除</h4>
+]]></content>
+      <tags>
+        <tag>C++</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>安装</title>
+    <url>/2022/05/31/install/</url>
+    <content><![CDATA[<h2 id="快速开始-win-下的安装）">快速开始(win 下的安装）</h2>
+<h4 id="1-安装node-js-下载长期支持版本-以下为网址">1.安装node.js, 下载长期支持版本, 以下为网址:</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://nodejs.cn/download/</span><br></pre></td></tr></table></figure>
+<h4 id="2-安装git，以下为网址">2. 安装git，以下为网址:</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://git-scm.com/downloads</span><br></pre></td></tr></table></figure>
+<h4 id="3-git配置">3. git配置</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.email &quot;Your email&quot;</span><br><span class="line">git config --global user.name &quot;Your name&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="4-创建存放文件夹-such-as-“blog”">4. 创建存放文件夹 such as “blog”</h4>
+<h4 id="5-打开cmd-输入">5. 打开cmd, 输入</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+<h4 id="6-进入github-创建仓库repository">6. 进入github,创建仓库repository</h4>
+<h4 id="7-安装插件">7. 安装插件</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cnpm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
+<h4 id="8-更改配置文件-config-xml">8. 更改配置文件_config.xml</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repo: https://github.com/Githubname/Githubname.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
+<h2 id="测试">测试</h2>
+<h4 id="1-运行">1.  运行</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<h4 id="2-创建博客">2.  创建博客</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo n &quot;My blog name&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="3-生成">3.  生成</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+<h4 id="4-运行服务">4. 运行服务</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<h4 id="5-部署">5.部署</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<h2 id="遇到deloy错误的解决方案">遇到deloy错误的解决方案</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">OpenSSL SSL_read: Connection was reset, errno 10054 ...</span><br></pre></td></tr></table></figure>
+<h4 id="1-进入站点根目录删除-deploy-git文件夹-删除git提交内容文件夹）">1. 进入站点根目录删除.deploy_git文件夹(删除git提交内容文件夹）</h4>
+<h4 id="2-执行命令">2. 执行命令</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global http.sslVerify &quot;false&quot;</span><br><span class="line">git config --global core.autocrlf false</span><br><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+<h2 id="经验：">经验：</h2>
+<h4 id="Hexo可能出现部分图片能加载成功，部分图片加载不出的情况">Hexo可能出现部分图片能加载成功，部分图片加载不出的情况</h4>
+<h2 id="解决方案：">解决方案：</h2>
+<h4 id="你可以看看是不是图片名称有重名，将图片名称更改至不重复的即可">你可以看看是不是图片名称有重名，将图片名称更改至不重复的即可</h4>
+]]></content>
+      <tags>
+        <tag>安装</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>basic_algorithm</title>
     <url>/2022/07/01/basic-algorithm/</url>
     <content><![CDATA[<h3 id="二分查找：">二分查找：</h3>
@@ -126,62 +182,6 @@
       <tags>
         <tag>C++</tag>
         <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>删除重复元素</title>
-    <url>/2022/07/10/delete-duplicate-elements/</url>
-    <content><![CDATA[<h3 id="快速入手">快速入手</h3>
-<h4 id="代码如下：">代码如下：</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">void elimdups(std::vector&lt;std::string&gt;&amp; vs)</span><br><span class="line">&#123;</span><br><span class="line">    std::sort(vs.begin(), vs.end());</span><br><span class="line">    auto new_end = std::unique(vs.begin(), vs.end());</span><br><span class="line">    // 删除重复</span><br><span class="line">    vs.erase(new_end, vs.end());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="思路：先用std-sort-排序，通过std-unique-将重复元素放入容器末尾，最后擦除">思路：先用std::sort()排序，通过std::unique() 将重复元素放入容器末尾，最后擦除</h4>
-]]></content>
-      <tags>
-        <tag>C++</tag>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>安装</title>
-    <url>/2022/05/31/install/</url>
-    <content><![CDATA[<h2 id="快速开始-win-下的安装）">快速开始(win 下的安装）</h2>
-<h4 id="1-安装node-js-下载长期支持版本-以下为网址">1.安装node.js, 下载长期支持版本, 以下为网址:</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://nodejs.cn/download/</span><br></pre></td></tr></table></figure>
-<h4 id="2-安装git，以下为网址">2. 安装git，以下为网址:</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://git-scm.com/downloads</span><br></pre></td></tr></table></figure>
-<h4 id="3-git配置">3. git配置</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.email &quot;Your email&quot;</span><br><span class="line">git config --global user.name &quot;Your name&quot;</span><br></pre></td></tr></table></figure>
-<h4 id="4-创建存放文件夹-such-as-“blog”">4. 创建存放文件夹 such as “blog”</h4>
-<h4 id="5-打开cmd-输入">5. 打开cmd, 输入</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
-<h4 id="6-进入github-创建仓库repository">6. 进入github,创建仓库repository</h4>
-<h4 id="7-安装插件">7. 安装插件</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cnpm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
-<h4 id="8-更改配置文件-config-xml">8. 更改配置文件_config.xml</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repo: https://github.com/Githubname/Githubname.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
-<h2 id="测试">测试</h2>
-<h4 id="1-运行">1.  运行</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-<h4 id="2-创建博客">2.  创建博客</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo n &quot;My blog name&quot;</span><br></pre></td></tr></table></figure>
-<h4 id="3-生成">3.  生成</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
-<h4 id="4-运行服务">4. 运行服务</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-<h4 id="5-部署">5.部署</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-<h2 id="遇到deloy错误的解决方案">遇到deloy错误的解决方案</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">OpenSSL SSL_read: Connection was reset, errno 10054 ...</span><br></pre></td></tr></table></figure>
-<h4 id="1-进入站点根目录删除-deploy-git文件夹-删除git提交内容文件夹）">1. 进入站点根目录删除.deploy_git文件夹(删除git提交内容文件夹）</h4>
-<h4 id="2-执行命令">2. 执行命令</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global http.sslVerify &quot;false&quot;</span><br><span class="line">git config --global core.autocrlf false</span><br><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-<h2 id="经验：">经验：</h2>
-<h4 id="Hexo可能出现部分图片能加载成功，部分图片加载不出的情况">Hexo可能出现部分图片能加载成功，部分图片加载不出的情况</h4>
-<h2 id="解决方案：">解决方案：</h2>
-<h4 id="你可以看看是不是图片名称有重名，将图片名称更改至不重复的即可">你可以看看是不是图片名称有重名，将图片名称更改至不重复的即可</h4>
-]]></content>
-      <tags>
-        <tag>安装</tag>
       </tags>
   </entry>
   <entry>
@@ -274,18 +274,6 @@
       </tags>
   </entry>
   <entry>
-    <title>字符串转数字</title>
-    <url>/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/</url>
-    <content><![CDATA[<h3 id="如图：">如图：</h3>
-<p><img src="/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/img1.PNG" alt></p>
-<h3 id="代码">代码:</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vector&lt;int&gt; diffWaysToCompute(string expression) &#123;</span><br><span class="line">        vector&lt;int&gt; ops;</span><br><span class="line">        for (int i = 0; i &lt; expression.size();) &#123;</span><br><span class="line">            // 如果不是数字</span><br><span class="line">            if (!isdigit(expression[i])) &#123;</span><br><span class="line">                if (expression[i] == &#x27;+&#x27;) &#123;</span><br><span class="line">                    ops.push_back(ADDITION);</span><br><span class="line">                &#125; else if (expression[i] == &#x27;-&#x27;) &#123;</span><br><span class="line">                    ops.push_back(SUBTRACTION);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    ops.push_back(MULTIPLICATION);</span><br><span class="line">                &#125;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                int t = 0;</span><br><span class="line">                while (i &lt; expression.size() &amp;&amp; isdigit(expression[i])) &#123;</span><br><span class="line">                    t = t * 10 + expression[i] - &#x27;0&#x27;; // 转换为数字w</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                ops.push_back(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <tags>
-        <tag>C++</tag>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>水晶头连线</title>
     <url>/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/</url>
     <content><![CDATA[<h3 id="颜色：">颜色：</h3>
@@ -297,6 +285,34 @@
 ]]></content>
       <tags>
         <tag>网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面试小知识： 取反符号~</title>
+    <url>/2022/07/13/%E9%9D%A2%E8%AF%95%E5%B0%8F%E7%9F%A5%E8%AF%86%EF%BC%9A-%E5%8F%96%E5%8F%8D%E7%AC%A6%E5%8F%B7/</url>
+    <content><![CDATA[<blockquote>
+<p>今天在力扣刷题的时候看到这么一个问题： ~ 0 = ？<br>
+按照公式：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">~x = -(x + 1) </span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结束啦</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>字符串转数字</title>
+    <url>/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/</url>
+    <content><![CDATA[<h3 id="如图：">如图：</h3>
+<p><img src="/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/img1.PNG" alt></p>
+<h3 id="代码">代码:</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vector&lt;int&gt; diffWaysToCompute(string expression) &#123;</span><br><span class="line">        vector&lt;int&gt; ops;</span><br><span class="line">        for (int i = 0; i &lt; expression.size();) &#123;</span><br><span class="line">            // 如果不是数字</span><br><span class="line">            if (!isdigit(expression[i])) &#123;</span><br><span class="line">                if (expression[i] == &#x27;+&#x27;) &#123;</span><br><span class="line">                    ops.push_back(ADDITION);</span><br><span class="line">                &#125; else if (expression[i] == &#x27;-&#x27;) &#123;</span><br><span class="line">                    ops.push_back(SUBTRACTION);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    ops.push_back(MULTIPLICATION);</span><br><span class="line">                &#125;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                int t = 0;</span><br><span class="line">                while (i &lt; expression.size() &amp;&amp; isdigit(expression[i])) &#123;</span><br><span class="line">                    t = t * 10 + expression[i] - &#x27;0&#x27;; // 转换为数字w</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                ops.push_back(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>C++</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
 </search>

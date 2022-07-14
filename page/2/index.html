@@ -205,6 +205,95 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/06/23/webdriver-config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ico.jpg">
+      <meta itemprop="name" content="Willson-Xbort">
+      <meta itemprop="description" content="none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/23/webdriver-config/" class="post-title-link" itemprop="url">配置Firefox WebDriver, 安装Selenium</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-23 00:00:00" itemprop="dateCreated datePublished" datetime="2022-06-23T00:00:00+08:00">2022-06-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-03 16:46:33" itemprop="dateModified" datetime="2022-07-03T16:46:33+08:00">2022-07-03</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-安装Selenium">1.安装Selenium</h2>
+<h4 id="1-1-在Anaconda下">1.1 在Anaconda下</h4>
+<p><img src="/2022/06/23/webdriver-config/img1.png" alt></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install selnium</span><br></pre></td></tr></table></figure>
+<p>#查找Python 安装位置</p>
+<p><img src="/2022/06/23/webdriver-config/img2.png" alt></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where Python</span><br></pre></td></tr></table></figure>
+<h2 id="2-下载火狐WebDriver">2.下载火狐WebDriver</h2>
+<h4 id="2-1-下载">2.1 下载</h4>
+<h4 id="Tips：一般下载最新版本就行">Tips：一般下载最新版本就行</h4>
+<p><img src="/2022/06/23/webdriver-config/img3.png" alt><br>
+网站如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/mozilla/geckodriver/releases/</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-解压后放在Python的安装位置">2.2 解压后放在Python的安装位置</h4>
+<p><img src="/2022/06/23/webdriver-config/img4.png" alt></p>
+<h4 id="2-3-在Anaconda-Jupyter下进行测试">2.3 在Anaconda Jupyter下进行测试</h4>
+<p><img src="/2022/06/23/webdriver-config/img5.png" alt><br>
+代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from selenium import webdriver</span><br><span class="line">import time</span><br><span class="line">driver = webdriver.Firefox()</span><br><span class="line">driver.implicitly_wait(5)</span><br><span class="line">driver.get(&quot;https://www.baidu.com&quot;)</span><br><span class="line">time.sleep(3)</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
+<h2 id="测试成功">测试成功</h2>
+<p><img src="/2022/06/23/webdriver-config/img6.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <!-- after add -->
+    
+       <!-- after add finish -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/05/31/install/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -375,7 +464,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -129,6 +129,19 @@
       </tags>
   </entry>
   <entry>
+    <title>删除重复元素</title>
+    <url>/2022/07/10/delete-duplicate-elements/</url>
+    <content><![CDATA[<h3 id="快速入手">快速入手</h3>
+<h4 id="代码如下：">代码如下：</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">void elimdups(std::vector&lt;std::string&gt;&amp; vs)</span><br><span class="line">&#123;</span><br><span class="line">    std::sort(vs.begin(), vs.end());</span><br><span class="line">    auto new_end = std::unique(vs.begin(), vs.end());</span><br><span class="line">    // 删除重复</span><br><span class="line">    vs.erase(new_end, vs.end());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="思路：先用std-sort-排序，通过std-unique-将重复元素放入容器末尾，最后擦除">思路：先用std::sort()排序，通过std::unique() 将重复元素放入容器末尾，最后擦除</h4>
+]]></content>
+      <tags>
+        <tag>C++</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>安装</title>
     <url>/2022/05/31/install/</url>
     <content><![CDATA[<h2 id="快速开始-win-下的安装）">快速开始(win 下的安装）</h2>
@@ -169,19 +182,6 @@
 ]]></content>
       <tags>
         <tag>安装</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>删除重复元素</title>
-    <url>/2022/07/10/delete-duplicate-elements/</url>
-    <content><![CDATA[<h3 id="快速入手">快速入手</h3>
-<h4 id="代码如下：">代码如下：</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">void elimdups(std::vector&lt;std::string&gt;&amp; vs)</span><br><span class="line">&#123;</span><br><span class="line">    std::sort(vs.begin(), vs.end());</span><br><span class="line">    auto new_end = std::unique(vs.begin(), vs.end());</span><br><span class="line">    // 删除重复</span><br><span class="line">    vs.erase(new_end, vs.end());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="思路：先用std-sort-排序，通过std-unique-将重复元素放入容器末尾，最后擦除">思路：先用std::sort()排序，通过std::unique() 将重复元素放入容器末尾，最后擦除</h4>
-]]></content>
-      <tags>
-        <tag>C++</tag>
-        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -339,6 +339,20 @@
       <tags>
         <tag>python</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>面试小知识: delete 和 delete[]</title>
+    <url>/2022/07/14/%E9%9D%A2%E8%AF%95%E5%B0%8F%E7%9F%A5%E8%AF%86-delete-%E5%92%8C-delete/</url>
+    <content><![CDATA[<blockquote>
+<p>面试小知识 delete 和 delete[]的区别</p>
+</blockquote>
+<ol>
+<li>区别是什么？</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">前提 ： 在自定义类型下</span><br><span class="line">delete用来释放new分配的单个对象指针指向的内存，</span><br><span class="line">delete[] : 用来释放new分配的对象数组指针指向的内存。</span><br></pre></td></tr></table></figure>
+<p>可见网址:<br>
+<a href="https://blog.csdn.net/heibao111728/article/details/84952023">https://blog.csdn.net/heibao111728/article/details/84952023</a></p>
+]]></content>
   </entry>
   <entry>
     <title>面试小知识： 取反符号~</title>

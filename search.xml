@@ -276,13 +276,40 @@
   <entry>
     <title>字符串转数字</title>
     <url>/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/</url>
-    <content><![CDATA[<h3 id="如图：">如图：</h3>
+    <content><![CDATA[<blockquote>
+<p>如图：</p>
+</blockquote>
 <p><img src="/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/img1.PNG" alt></p>
-<h3 id="代码">代码:</h3>
+<blockquote>
+<p>代码:</p>
+</blockquote>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vector&lt;int&gt; diffWaysToCompute(string expression) &#123;</span><br><span class="line">        vector&lt;int&gt; ops;</span><br><span class="line">        for (int i = 0; i &lt; expression.size();) &#123;</span><br><span class="line">            // 如果不是数字</span><br><span class="line">            if (!isdigit(expression[i])) &#123;</span><br><span class="line">                if (expression[i] == &#x27;+&#x27;) &#123;</span><br><span class="line">                    ops.push_back(ADDITION);</span><br><span class="line">                &#125; else if (expression[i] == &#x27;-&#x27;) &#123;</span><br><span class="line">                    ops.push_back(SUBTRACTION);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    ops.push_back(MULTIPLICATION);</span><br><span class="line">                &#125;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                int t = 0;</span><br><span class="line">                while (i &lt; expression.size() &amp;&amp; isdigit(expression[i])) &#123;</span><br><span class="line">                    t = t * 10 + expression[i] - &#x27;0&#x27;; // 转换为数字w</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                ops.push_back(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
       <tags>
         <tag>C++</tag>
         <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>智能指针</title>
+    <url>/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/</url>
+    <content><![CDATA[<blockquote>
+<p>C++ primer 第12章 动态内存与智能指针</p>
+</blockquote>
+<p><img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img1.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img2.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img3.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img4.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img5.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img6.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img7.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img8.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img9.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img10.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img11.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img12.PNG" alt></p>
+]]></content>
+      <tags>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -300,14 +327,33 @@
       </tags>
   </entry>
   <entry>
+    <title>流迭代器</title>
+    <url>/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
+    <content><![CDATA[<blockquote>
+<p>C++ primer 第十章 泛型算法</p>
+</blockquote>
+<p><img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img1.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img2.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img3.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img4.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img5.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img6.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img7.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img8.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img9.PNG" alt></p>
+]]></content>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>统计学习方法</title>
     <url>/2022/07/14/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<h4 id="一写文章就开始啰嗦…">一写文章就开始啰嗦…</h4>
 <blockquote>
 <p>感知机</p>
 </blockquote>
-<p>1.1 感知机详解链接：<br>
-<a href="https://www.pkudodo.com/2018/11/18/1-4/">https://www.pkudodo.com/2018/11/18/1-4/</a></p>
+<p>1.1 感知机详解链接：<a href="https://www.pkudodo.com/2018/11/18/1-4/">https://www.pkudodo.com/2018/11/18/1-4/</a></p>
 <p>1.2 MNIST训练集下载：</p>
 <pre><code>1.2.1 进入如下网址下载：
     https://github.com/Dod-o/Statistical-Learning-Method_Code
@@ -319,8 +365,7 @@
 <blockquote>
 <p>K近邻</p>
 </blockquote>
-<p>1.1 K近邻详解：<br>
-<a href="https://www.pkudodo.com/2018/11/19/1-2/">https://www.pkudodo.com/2018/11/19/1-2/</a></p>
+<p>1.1 K近邻详解：<a href="https://www.pkudodo.com/2018/11/19/1-2/">https://www.pkudodo.com/2018/11/19/1-2/</a></p>
 <p>1.2 MNIST训练集下载：</p>
 <pre><code>1.2.1 进入如下网址下载：
     https://github.com/Dod-o/Statistical-Learning-Method_Code

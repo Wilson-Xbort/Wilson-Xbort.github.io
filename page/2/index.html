@@ -205,6 +205,124 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/01/basic-algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ico.jpg">
+      <meta itemprop="name" content="Willson-Xbort">
+      <meta itemprop="description" content="none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/07/01/basic-algorithm/" class="post-title-link" itemprop="url">basic_algorithm</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-07-01 14:13:18" itemprop="dateCreated datePublished" datetime="2022-07-01T14:13:18+08:00">2022-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-06 16:29:28" itemprop="dateModified" datetime="2022-07-06T16:29:28+08:00">2022-07-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="二分查找：">二分查找：</h3>
+<p><img src="/2022/07/01/basic-algorithm/binary_search_img3.PNG" alt><br>
+<img src="/2022/07/01/basic-algorithm/binary_search_img2.PNG" alt><br>
+<img src="/2022/07/01/basic-algorithm/binary_search_img1.PNG" alt></p>
+<h4 id="核心思路：">核心思路：</h4>
+<pre><code>-&gt;middle
+-&gt;求左边界和右边界之和的平均值,使用此值为下标作为比较的参数
+</code></pre>
+<h4 id="代码：">代码：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int search(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">        int left = 0, right = nums.size() - 1;</span><br><span class="line">        while(left &lt;= right)&#123;</span><br><span class="line">            int mid = (right - left) / 2 + left;</span><br><span class="line">            int num = nums[mid];</span><br><span class="line">            if (num == target) &#123;</span><br><span class="line">                return mid;</span><br><span class="line">            &#125; else if (num &gt; target) &#123;</span><br><span class="line">                right = mid - 1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                left = mid + 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="参考链接：">参考链接：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://leetcode.cn/problems/rotate-array/solution/xuan-zhuan-shu-zu-by-leetcode-solution-nipk/</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="双指针：">双指针：</h3>
+<h4 id="核心思路：-2">核心思路：</h4>
+<pre><code>-&gt;使用两个指针分别指向位置 p0 和 p1，每次比较两个指针对应的数，选择较小的那个放入答案并移动指针
+-&gt;双指针也不一定非得一个指向头，一个指向尾
+</code></pre>
+<h4 id="例题：">例题：</h4>
+<p><img src="/2022/07/01/basic-algorithm/three_algorithm.PNG" alt><br>
+<img src="/2022/07/01/basic-algorithm/three_algorithm1.PNG" alt><br>
+<img src="/2022/07/01/basic-algorithm/three_algorithm2.PNG" alt><br>
+<img src="/2022/07/01/basic-algorithm/three_algorithm3.PNG" alt><br>
+<img src="/2022/07/01/basic-algorithm/three_algorithm4.PNG" alt></p>
+<h4 id="参考链接：-2">参考链接：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://leetcode.cn/problems/rotate-array/solution/xuan-zhuan-shu-zu-by-leetcode-solution-nipk/</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="例题2：">例题2：</h4>
+<p><img src="/2022/07/01/basic-algorithm/two_pointer_1.PNG" alt><br>
+<img src="/2022/07/01/basic-algorithm/two_pointer_2.PNG" alt></p>
+<h4 id="参考链接：-3">参考链接：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://leetcode.cn/problems/move-zeroes/solution/yi-dong-ling-by-leetcode-solution/</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="例题2：-2">例题2：</h4>
+<p><img src="/2022/07/01/basic-algorithm/two_pointer_3.PNG" alt><br>
+<img src="/2022/07/01/basic-algorithm/two_pointer_4.PNG" alt></p>
+<h4 id="参考链接：-4">参考链接：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/solution/liang-shu-zhi-he-ii-shu-ru-you-xu-shu-zu-by-leet-2/</span><br></pre></td></tr></table></figure>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] twoSum(int[] numbers, int target) &#123;</span><br><span class="line">        int low = 0, high = numbers.length - 1;</span><br><span class="line">        while (low &lt; high) &#123;</span><br><span class="line">            int sum = numbers[low] + numbers[high];</span><br><span class="line">            if (sum == target) &#123;</span><br><span class="line">                return new int[]&#123;low + 1, high + 1&#125;;</span><br><span class="line">            &#125; else if (sum &lt; target) &#123;</span><br><span class="line">                ++low;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                --high;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return new int[]&#123;-1, -1&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="滑动窗口：">滑动窗口：</h3>
+<h4 id="例题1：">例题1：</h4>
+<p><img src="/2022/07/01/basic-algorithm/sliding_window_2.PNG" alt><br>
+<img src="/2022/07/01/basic-algorithm/sliding_window_1.PNG" alt></p>
+<h4 id="代码：-2">代码：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int lengthOfLongestSubstring(string s) &#123;</span><br><span class="line">        // 哈希集合，记录每个字符是否出现过</span><br><span class="line">        unordered_set&lt;char&gt; occ;</span><br><span class="line">        int n = s.size();</span><br><span class="line">        // 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动</span><br><span class="line">        int rk = -1, ans = 0;</span><br><span class="line">        // 枚举左指针的位置，初始值隐性地表示为 -1</span><br><span class="line">        for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">            if (i != 0) &#123;</span><br><span class="line">                // 左指针向右移动一格，移除一个字符</span><br><span class="line">                occ.erase(s[i - 1]);</span><br><span class="line">            &#125;</span><br><span class="line">            while (rk + 1 &lt; n &amp;&amp; !occ.count(s[rk + 1])) &#123;</span><br><span class="line">                // 不断地移动右指针</span><br><span class="line">                occ.insert(s[rk + 1]);</span><br><span class="line">                ++rk;</span><br><span class="line">            &#125;</span><br><span class="line">            // ☆第 i 到 rk 个字符是一个极长的无重复字符子串</span><br><span class="line">            ans = max(ans, rk - i + 1);</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="例题2：-3">例题2：</h4>
+<h4 id="代码：-3">代码：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    bool checkInclusion(string s1, string s2) &#123;</span><br><span class="line">        int n1 = s1.size(), n2 = s2.size();</span><br><span class="line">        if(n1 &gt; n2) return false;</span><br><span class="line">        vector&lt;int&gt; cnt1(26), cnt2(26);</span><br><span class="line">        for (int i = 0; i &lt; n1; ++i) &#123;</span><br><span class="line">            ++cnt1[s1[i] - &#x27;a&#x27;];</span><br><span class="line">            ++cnt2[s2[i] - &#x27;a&#x27;];</span><br><span class="line">        &#125;</span><br><span class="line">        if (cnt1 == cnt2) return true;</span><br><span class="line">        for (int i = n1; i &lt; n2; ++i) &#123;</span><br><span class="line">            ++cnt2[s2[i] - &#x27;a&#x27;];</span><br><span class="line">            // 如果之前没匹配到的话就一定没有这个字符</span><br><span class="line">            --cnt2[s2[i - n1] - &#x27;a&#x27;];</span><br><span class="line">            if (cnt1 == cnt2) &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <!-- after add -->
+    
+       <!-- after add finish -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -695,14 +813,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

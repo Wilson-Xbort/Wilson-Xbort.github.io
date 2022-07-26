@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>STL底层实现</title>
+    <url>/2022/07/25/STL%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<blockquote>
+<p>vector</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">底层实现是数组。</span><br><span class="line">1.由于数组的特性,vector也可以使用下标快速访问。</span><br><span class="line">2.顺序存储，插入/删除到非尾结点位置所需时间复杂度0(n)</span><br><span class="line">3.新建vector时，和数组一样分配一片连续内存空间，当添加元素时，如果初始分配的空间满了，将会重新申请一个2倍质数大小左右的空间，</span><br><span class="line">将原空间的内容拷贝过来后释放原空间内存。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>map, unordered_map, multimap, unordered_multimap</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">map 和 multimap 的底层数据结构是红黑树，根据红黑树的原理，map和multimap可以实现0(lgn)的查找，删除，插入，实现key为序列的排序，并且map和multimap是有序的。</span><br><span class="line">unordered_map, unordered_map 的底层数据结构是哈希表。</span><br><span class="line">multimap 和 map 的区别在于，multimap允许关键字重复，而map不允许重复。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>list</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">底层实现是双向链表。拥有链表的特性。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>deque</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">底层实现是双向队列，可以在头尾插入和删除元素。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>set &amp; multiset &amp; unordered_set &amp; unordered_multiset</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">以上四种容器也都是关联容器，set系与map系的区别在于map中存储的是&lt;key-value&gt;，而set可以理解为关键字即值，即只保存关键字的容器。</span><br><span class="line">set 的底层实现是红黑树(平衡树),。</span><br><span class="line">unordered_set, unordered_multiset底层实现为哈希表。</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>STL</tag>
+        <tag>C++</tag>
+        <tag>容器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>尾置返回类型</title>
     <url>/2022/06/30/Trailing-return-type/</url>
     <content><![CDATA[<h3 id="C-Primer-第五版-第六章-P221-P224">C++ Primer 第五版 第六章 P221~P224</h3>
@@ -27,13 +56,46 @@
       </tags>
   </entry>
   <entry>
-    <title>STL底层实现</title>
-    <url>/2022/07/25/STL%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[]]></content>
+    <title>性能测试工具的简单使用</title>
+    <url>/2022/07/03/Use-of-performance-test-tools/</url>
+    <content><![CDATA[<h2 id="下载工具：">下载工具：</h2>
+<table>
+<thead>
+<tr>
+<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon1.PNG" alt="virtual User Generator"></th>
+<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon2.PNG" alt="controller"></th>
+<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon3.PNG" alt="Analysis"></th>
+</tr>
+</thead>
+</table>
+<h2 id="打开virtual-User-Generator：">打开virtual User Generator：</h2>
+<ol>
+<li>点击录制按钮，选择协议<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img1.png" alt><br>
+2.在高级选项中选择明确包含url的脚本<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img2.png" alt><br>
+3.点击开始录制后就会进入你所写的url链接，结束后就可以看到Action的代码<br>
+4.可以点击<em>设计工作室</em>进行关联<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img3.png" alt><br>
+5.点击运行，看到为√的时候就成功了<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img4.png" alt></li>
+</ol>
+<h2 id="打开controller：">打开controller：</h2>
+<p>1.选择脚本<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img5.png" alt><br>
+2.进行设置，在基本计划下可以设置用户数量<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img6.png" alt><br>
+3.点击运行时设置，可以将自动事务的勾选去掉<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img7.png" alt><br>
+4.设置全部完成后可以运行<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img8.png" alt><br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img9.png" alt><br>
+5.点击结果-&gt;分析结果<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img10.png" alt><br>
+将会自动打开<em>Analysis</em>显示结果</p>
+]]></content>
       <tags>
-        <tag>C++</tag>
-        <tag>STL</tag>
-        <tag>容器</tag>
+        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -109,106 +171,46 @@
       </tags>
   </entry>
   <entry>
-    <title>性能测试工具的简单使用</title>
-    <url>/2022/07/03/Use-of-performance-test-tools/</url>
-    <content><![CDATA[<h2 id="下载工具：">下载工具：</h2>
-<table>
-<thead>
-<tr>
-<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon1.PNG" alt="virtual User Generator"></th>
-<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon2.PNG" alt="controller"></th>
-<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon3.PNG" alt="Analysis"></th>
-</tr>
-</thead>
-</table>
-<h2 id="打开virtual-User-Generator：">打开virtual User Generator：</h2>
-<ol>
-<li>点击录制按钮，选择协议<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img1.png" alt><br>
-2.在高级选项中选择明确包含url的脚本<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img2.png" alt><br>
-3.点击开始录制后就会进入你所写的url链接，结束后就可以看到Action的代码<br>
-4.可以点击<em>设计工作室</em>进行关联<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img3.png" alt><br>
-5.点击运行，看到为√的时候就成功了<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img4.png" alt></li>
-</ol>
-<h2 id="打开controller：">打开controller：</h2>
-<p>1.选择脚本<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img5.png" alt><br>
-2.进行设置，在基本计划下可以设置用户数量<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img6.png" alt><br>
-3.点击运行时设置，可以将自动事务的勾选去掉<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img7.png" alt><br>
-4.设置全部完成后可以运行<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img8.png" alt><br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img9.png" alt><br>
-5.点击结果-&gt;分析结果<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img10.png" alt><br>
-将会自动打开<em>Analysis</em>显示结果</p>
+    <title>安装</title>
+    <url>/2022/05/31/install/</url>
+    <content><![CDATA[<h2 id="快速开始-win-下的安装）">快速开始(win 下的安装）</h2>
+<h4 id="1-安装node-js-下载长期支持版本-以下为网址">1.安装node.js, 下载长期支持版本, 以下为网址:</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://nodejs.cn/download/</span><br></pre></td></tr></table></figure>
+<h4 id="2-安装git，以下为网址">2. 安装git，以下为网址:</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://git-scm.com/downloads</span><br></pre></td></tr></table></figure>
+<h4 id="3-git配置">3. git配置</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.email &quot;Your email&quot;</span><br><span class="line">git config --global user.name &quot;Your name&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="4-创建存放文件夹-such-as-“blog”">4. 创建存放文件夹 such as “blog”</h4>
+<h4 id="5-打开cmd-输入">5. 打开cmd, 输入</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+<h4 id="6-进入github-创建仓库repository">6. 进入github,创建仓库repository</h4>
+<h4 id="7-安装插件">7. 安装插件</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cnpm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
+<h4 id="8-更改配置文件-config-xml">8. 更改配置文件_config.xml</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repo: https://github.com/Githubname/Githubname.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
+<h2 id="测试">测试</h2>
+<h4 id="1-运行">1.  运行</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<h4 id="2-创建博客">2.  创建博客</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo n &quot;My blog name&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="3-生成">3.  生成</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+<h4 id="4-运行服务">4. 运行服务</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<h4 id="5-部署">5.部署</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<h2 id="遇到deloy错误的解决方案">遇到deloy错误的解决方案</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">OpenSSL SSL_read: Connection was reset, errno 10054 ...</span><br></pre></td></tr></table></figure>
+<h4 id="1-进入站点根目录删除-deploy-git文件夹-删除git提交内容文件夹）">1. 进入站点根目录删除.deploy_git文件夹(删除git提交内容文件夹）</h4>
+<h4 id="2-执行命令">2. 执行命令</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global http.sslVerify &quot;false&quot;</span><br><span class="line">git config --global core.autocrlf false</span><br><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+<h2 id="经验：">经验：</h2>
+<h4 id="Hexo可能出现部分图片能加载成功，部分图片加载不出的情况">Hexo可能出现部分图片能加载成功，部分图片加载不出的情况</h4>
+<h2 id="解决方案：">解决方案：</h2>
+<h4 id="你可以看看是不是图片名称有重名，将图片名称更改至不重复的即可">你可以看看是不是图片名称有重名，将图片名称更改至不重复的即可</h4>
 ]]></content>
       <tags>
-        <tag>工具</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>leetcode 303 场周赛复盘</title>
-    <url>/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/</url>
-    <content><![CDATA[<blockquote>
-<p>第一题</p>
-</blockquote>
-<p><img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img1.PNG" alt></p>
-<p>代码：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">char</span> <span class="title">repeatedCharacter</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        map&lt;<span class="type">char</span>, <span class="type">int</span>&gt; m;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">char</span> i = <span class="string">&#x27;a&#x27;</span>;  i &lt;= <span class="string">&#x27;z&#x27;</span>; i++) &#123;</span><br><span class="line">            m.<span class="built_in">insert</span>(<span class="built_in">pair</span>&lt;<span class="type">char</span>, <span class="type">int</span>&gt;(i, <span class="number">0</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> ss : s) &#123;</span><br><span class="line">            ++m[ss];</span><br><span class="line">            <span class="keyword">if</span>(m[ss] == <span class="number">2</span>) <span class="keyword">return</span> ss;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img2.PNG" alt></p>
-<blockquote>
-<p>第二题</p>
-</blockquote>
-<p><img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img3.PNG" alt><br>
-<img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img5.PNG" alt></p>
-<p>代码：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">equalPairs</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; grid)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> m = grid.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">vec_col</span>(m * m, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; vec_row;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            vec_row.<span class="built_in">push_back</span>(grid[i]);</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; m; j++) &#123;</span><br><span class="line">                vec_col[j].<span class="built_in">push_back</span>(grid[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; m; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(vec_row[i] == vec_col[j]) ++ cnt; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img4.PNG" alt></p>
-<blockquote>
-<p>tip: 前两题较简单，第三题有点难度</p>
-</blockquote>
-<blockquote>
-<p>第三题</p>
-</blockquote>
-<blockquote>
-<p>tips: 我觉得最妙的点在于评分取负号</p>
-</blockquote>
-<p><img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img6.PNG" alt><br>
-<img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img7.PNG" alt><br>
-<img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img8.PNG" alt></p>
-<p>代码:</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FoodRatings</span> &#123;</span><br><span class="line">    <span class="comment">// 修改食物评分时要影响到cs中set的结构</span></span><br><span class="line">    <span class="comment">// 想要获取set必须要知道key(烹饪方式)</span></span><br><span class="line">    <span class="comment">// 所以食物 -&gt;(评分， 烹饪方式)</span></span><br><span class="line">    unordered_map&lt;string, pair&lt;<span class="type">int</span>, string&gt;&gt; fs;</span><br><span class="line">    <span class="comment">// 烹饪方式 -&gt; (评分, 名字)</span></span><br><span class="line">    <span class="comment">// 需要通过烹饪方式查询评分和食物名字</span></span><br><span class="line">    <span class="comment">// 要返回评分最高的食物和返回字典序较小的名字</span></span><br><span class="line">    <span class="comment">// 所以先评分，后名字</span></span><br><span class="line">    unordered_map&lt;string, set&lt;pair&lt;<span class="type">int</span>, string&gt;&gt;&gt; cs;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">FoodRatings</span>(vector&lt;string&gt; &amp;foods, vector&lt;string&gt; &amp;cuisines, vector&lt;<span class="type">int</span>&gt; &amp;ratings) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; foods.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">            <span class="comment">// 食物, 烹饪方式</span></span><br><span class="line">            <span class="keyword">auto</span> &amp;f = foods[i], &amp;c = cuisines[i];</span><br><span class="line">            <span class="comment">// 评分</span></span><br><span class="line">            <span class="type">int</span> r = ratings[i];</span><br><span class="line">            <span class="comment">// 评分， 烹饪方式赋值</span></span><br><span class="line">            fs[f] = &#123;r, c&#125;;</span><br><span class="line">            <span class="comment">// emplace就不需要make_pair</span></span><br><span class="line">            <span class="comment">// 因为要返回评分最高的食物和返回字典序较小的名字</span></span><br><span class="line">            <span class="comment">// 序列是相反的</span></span><br><span class="line">            <span class="comment">// 评分取负号，保证最小对应最高评分</span></span><br><span class="line">            cs[c].<span class="built_in">emplace</span>(-r, f);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">changeRating</span><span class="params">(string food, <span class="type">int</span> newRating)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 取出食物对应的 (评分，烹饪方式)</span></span><br><span class="line">        <span class="keyword">auto</span> &amp;[r, c] = fs[food];</span><br><span class="line">        <span class="comment">// 获取评分和名字</span></span><br><span class="line">        <span class="keyword">auto</span> &amp;s = cs[c];</span><br><span class="line">        s.<span class="built_in">erase</span>(&#123;-r, food&#125;); <span class="comment">// 移除旧数据</span></span><br><span class="line">        s.<span class="built_in">emplace</span>(-newRating, food); <span class="comment">// 添加新数据</span></span><br><span class="line">        <span class="comment">// 修改评分</span></span><br><span class="line">        r = newRating;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">string <span class="title">highestRated</span><span class="params">(string cuisine)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 至少有一种，所以取begin()-&gt;第二项（名字）</span></span><br><span class="line">        <span class="keyword">return</span> cs[cuisine].<span class="built_in">begin</span>()-&gt;second;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
-<iframe src="//player.bilibili.com/player.html?aid=258805927&bvid=BV14a411U7QZ&cid=782543429&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-
-
-<blockquote>
-<p>第四题</p>
-</blockquote>
-<blockquote>
-<p>看不懂的可以看视频 , 韦恩图</p>
-</blockquote>
-<p><img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img9.PNG" alt></p>
-<p>代码</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 数：                  1      2      3</span></span><br><span class="line">    <span class="comment">// 二进制为1的个数：     1      1      2</span></span><br><span class="line">    <span class="comment">// 表格：</span></span><br><span class="line">    <span class="comment">// |-------------------------------------------------|</span></span><br><span class="line">    <span class="comment">// cx(去重后):        |   1   |   2    |</span></span><br><span class="line">    <span class="comment">// cnt:               |   2   |   1    |</span></span><br><span class="line">    <span class="comment">// |-------------------------------------------------|</span></span><br><span class="line">    <span class="comment">// 五种：                1 + 2  -&gt; 从c(x) = 1的集合中取一个, c(x) = 2 中取一个  || 2 * 1  -&gt; 有两个1</span></span><br><span class="line">    <span class="comment">//                       1 * 2  -&gt; (2, 1) 和 （1，2）</span></span><br><span class="line">    <span class="comment">//                       1 * 1  -&gt; 自己和自己</span></span><br><span class="line">    <span class="comment">// 遍历去重后的 nums\textit&#123;nums&#125;nums，统计 c(nums[i])c(nums[i])的个数，记录在 cnt 中，</span></span><br><span class="line">    <span class="comment">// 然后写一个二重循环遍历 cnt，对于所有的 c(x)+c(y)≥k，</span></span><br><span class="line">    <span class="comment">// 累加 cnt[c(x)]⋅cnt[c(y)]，表示从这两组中各选一个 x 和 y 组成优质数对的个数。</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">countExcellentPairs</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; cnt;</span><br><span class="line">        <span class="comment">// 获取cnt表</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> x : <span class="built_in">unordered_set</span>&lt;<span class="type">int</span>&gt;(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>())) <span class="comment">// 去重</span></span><br><span class="line">            ++cnt[__builtin_popcount(x)];</span><br><span class="line">        <span class="type">long</span> ans = <span class="number">0L</span>;</span><br><span class="line">        <span class="comment">// cx -&gt; x中1的个数， ccx -&gt; 值为x的个数</span></span><br><span class="line">        <span class="comment">// cy -&gt; y中1的个数， ccy -&gt; 值为y的个数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;[cx, ccx] : cnt)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;[cy, ccy] : cnt)</span><br><span class="line">                <span class="keyword">if</span> (cx + cy &gt;= k) <span class="comment">// (x,y) 是优质数对</span></span><br><span class="line">                    ans += (<span class="type">long</span>) ccx * ccy; </span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-<div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
-<iframe src="//player.bilibili.com/player.html?aid=258805927&bvid=BV14a411U7QZ&cid=782543429&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-
-
-<hr>
-</div></div>]]></content>
-      <tags>
-        <tag>C++</tag>
-        <tag>leetcode</tag>
+        <tag>安装</tag>
       </tags>
   </entry>
   <entry>
@@ -261,46 +263,57 @@
       </tags>
   </entry>
   <entry>
-    <title>安装</title>
-    <url>/2022/05/31/install/</url>
-    <content><![CDATA[<h2 id="快速开始-win-下的安装）">快速开始(win 下的安装）</h2>
-<h4 id="1-安装node-js-下载长期支持版本-以下为网址">1.安装node.js, 下载长期支持版本, 以下为网址:</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://nodejs.cn/download/</span><br></pre></td></tr></table></figure>
-<h4 id="2-安装git，以下为网址">2. 安装git，以下为网址:</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://git-scm.com/downloads</span><br></pre></td></tr></table></figure>
-<h4 id="3-git配置">3. git配置</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.email &quot;Your email&quot;</span><br><span class="line">git config --global user.name &quot;Your name&quot;</span><br></pre></td></tr></table></figure>
-<h4 id="4-创建存放文件夹-such-as-“blog”">4. 创建存放文件夹 such as “blog”</h4>
-<h4 id="5-打开cmd-输入">5. 打开cmd, 输入</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
-<h4 id="6-进入github-创建仓库repository">6. 进入github,创建仓库repository</h4>
-<h4 id="7-安装插件">7. 安装插件</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cnpm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
-<h4 id="8-更改配置文件-config-xml">8. 更改配置文件_config.xml</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repo: https://github.com/Githubname/Githubname.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
-<h2 id="测试">测试</h2>
-<h4 id="1-运行">1.  运行</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-<h4 id="2-创建博客">2.  创建博客</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo n &quot;My blog name&quot;</span><br></pre></td></tr></table></figure>
-<h4 id="3-生成">3.  生成</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
-<h4 id="4-运行服务">4. 运行服务</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-<h4 id="5-部署">5.部署</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-<h2 id="遇到deloy错误的解决方案">遇到deloy错误的解决方案</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">OpenSSL SSL_read: Connection was reset, errno 10054 ...</span><br></pre></td></tr></table></figure>
-<h4 id="1-进入站点根目录删除-deploy-git文件夹-删除git提交内容文件夹）">1. 进入站点根目录删除.deploy_git文件夹(删除git提交内容文件夹）</h4>
-<h4 id="2-执行命令">2. 执行命令</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global http.sslVerify &quot;false&quot;</span><br><span class="line">git config --global core.autocrlf false</span><br><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-<h2 id="经验：">经验：</h2>
-<h4 id="Hexo可能出现部分图片能加载成功，部分图片加载不出的情况">Hexo可能出现部分图片能加载成功，部分图片加载不出的情况</h4>
-<h2 id="解决方案：">解决方案：</h2>
-<h4 id="你可以看看是不是图片名称有重名，将图片名称更改至不重复的即可">你可以看看是不是图片名称有重名，将图片名称更改至不重复的即可</h4>
-]]></content>
+    <title>leetcode 303 场周赛复盘</title>
+    <url>/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/</url>
+    <content><![CDATA[<blockquote>
+<p>第一题</p>
+</blockquote>
+<p><img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img1.PNG" alt></p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">char</span> <span class="title">repeatedCharacter</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        map&lt;<span class="type">char</span>, <span class="type">int</span>&gt; m;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">char</span> i = <span class="string">&#x27;a&#x27;</span>;  i &lt;= <span class="string">&#x27;z&#x27;</span>; i++) &#123;</span><br><span class="line">            m.<span class="built_in">insert</span>(<span class="built_in">pair</span>&lt;<span class="type">char</span>, <span class="type">int</span>&gt;(i, <span class="number">0</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> ss : s) &#123;</span><br><span class="line">            ++m[ss];</span><br><span class="line">            <span class="keyword">if</span>(m[ss] == <span class="number">2</span>) <span class="keyword">return</span> ss;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img2.PNG" alt></p>
+<blockquote>
+<p>第二题</p>
+</blockquote>
+<p><img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img3.PNG" alt><br>
+<img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img5.PNG" alt></p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">equalPairs</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; grid)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> m = grid.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">vec_col</span>(m * m, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; vec_row;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            vec_row.<span class="built_in">push_back</span>(grid[i]);</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; m; j++) &#123;</span><br><span class="line">                vec_col[j].<span class="built_in">push_back</span>(grid[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; m; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(vec_row[i] == vec_col[j]) ++ cnt; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img4.PNG" alt></p>
+<blockquote>
+<p>tip: 前两题较简单，第三题有点难度</p>
+</blockquote>
+<blockquote>
+<p>第三题</p>
+</blockquote>
+<blockquote>
+<p>tips: 我觉得最妙的点在于评分取负号</p>
+</blockquote>
+<p><img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img6.PNG" alt><br>
+<img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img7.PNG" alt><br>
+<img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img8.PNG" alt></p>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FoodRatings</span> &#123;</span><br><span class="line">    <span class="comment">// 修改食物评分时要影响到cs中set的结构</span></span><br><span class="line">    <span class="comment">// 想要获取set必须要知道key(烹饪方式)</span></span><br><span class="line">    <span class="comment">// 所以食物 -&gt;(评分， 烹饪方式)</span></span><br><span class="line">    unordered_map&lt;string, pair&lt;<span class="type">int</span>, string&gt;&gt; fs;</span><br><span class="line">    <span class="comment">// 烹饪方式 -&gt; (评分, 名字)</span></span><br><span class="line">    <span class="comment">// 需要通过烹饪方式查询评分和食物名字</span></span><br><span class="line">    <span class="comment">// 要返回评分最高的食物和返回字典序较小的名字</span></span><br><span class="line">    <span class="comment">// 所以先评分，后名字</span></span><br><span class="line">    unordered_map&lt;string, set&lt;pair&lt;<span class="type">int</span>, string&gt;&gt;&gt; cs;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">FoodRatings</span>(vector&lt;string&gt; &amp;foods, vector&lt;string&gt; &amp;cuisines, vector&lt;<span class="type">int</span>&gt; &amp;ratings) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; foods.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">            <span class="comment">// 食物, 烹饪方式</span></span><br><span class="line">            <span class="keyword">auto</span> &amp;f = foods[i], &amp;c = cuisines[i];</span><br><span class="line">            <span class="comment">// 评分</span></span><br><span class="line">            <span class="type">int</span> r = ratings[i];</span><br><span class="line">            <span class="comment">// 评分， 烹饪方式赋值</span></span><br><span class="line">            fs[f] = &#123;r, c&#125;;</span><br><span class="line">            <span class="comment">// emplace就不需要make_pair</span></span><br><span class="line">            <span class="comment">// 因为要返回评分最高的食物和返回字典序较小的名字</span></span><br><span class="line">            <span class="comment">// 序列是相反的</span></span><br><span class="line">            <span class="comment">// 评分取负号，保证最小对应最高评分</span></span><br><span class="line">            cs[c].<span class="built_in">emplace</span>(-r, f);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">changeRating</span><span class="params">(string food, <span class="type">int</span> newRating)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 取出食物对应的 (评分，烹饪方式)</span></span><br><span class="line">        <span class="keyword">auto</span> &amp;[r, c] = fs[food];</span><br><span class="line">        <span class="comment">// 获取评分和名字</span></span><br><span class="line">        <span class="keyword">auto</span> &amp;s = cs[c];</span><br><span class="line">        s.<span class="built_in">erase</span>(&#123;-r, food&#125;); <span class="comment">// 移除旧数据</span></span><br><span class="line">        s.<span class="built_in">emplace</span>(-newRating, food); <span class="comment">// 添加新数据</span></span><br><span class="line">        <span class="comment">// 修改评分</span></span><br><span class="line">        r = newRating;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">string <span class="title">highestRated</span><span class="params">(string cuisine)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 至少有一种，所以取begin()-&gt;第二项（名字）</span></span><br><span class="line">        <span class="keyword">return</span> cs[cuisine].<span class="built_in">begin</span>()-&gt;second;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>第四题</p>
+</blockquote>
+<blockquote>
+<p>看不懂的可以看视频 , 韦恩图</p>
+</blockquote>
+<p><img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img9.PNG" alt></p>
+<p>代码</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 数：                  1      2      3</span></span><br><span class="line">    <span class="comment">// 二进制为1的个数：     1      1      2</span></span><br><span class="line">    <span class="comment">// 表格：</span></span><br><span class="line">    <span class="comment">// |-------------------------------------------------|</span></span><br><span class="line">    <span class="comment">// cx(去重后):        |   1   |   2    |</span></span><br><span class="line">    <span class="comment">// cnt:               |   2   |   1    |</span></span><br><span class="line">    <span class="comment">// |-------------------------------------------------|</span></span><br><span class="line">    <span class="comment">// 五种：                1 + 2  -&gt; 从c(x) = 1的集合中取一个, c(x) = 2 中取一个  || 2 * 1  -&gt; 有两个1</span></span><br><span class="line">    <span class="comment">//                       1 * 2  -&gt; (2, 1) 和 （1，2）</span></span><br><span class="line">    <span class="comment">//                       1 * 1  -&gt; 自己和自己</span></span><br><span class="line">    <span class="comment">// 遍历去重后的 nums\textit&#123;nums&#125;nums，统计 c(nums[i])c(nums[i])的个数，记录在 cnt 中，</span></span><br><span class="line">    <span class="comment">// 然后写一个二重循环遍历 cnt，对于所有的 c(x)+c(y)≥k，</span></span><br><span class="line">    <span class="comment">// 累加 cnt[c(x)]⋅cnt[c(y)]，表示从这两组中各选一个 x 和 y 组成优质数对的个数。</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">countExcellentPairs</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; cnt;</span><br><span class="line">        <span class="comment">// 获取cnt表</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> x : <span class="built_in">unordered_set</span>&lt;<span class="type">int</span>&gt;(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>())) <span class="comment">// 去重</span></span><br><span class="line">            ++cnt[__builtin_popcount(x)];</span><br><span class="line">        <span class="type">long</span> ans = <span class="number">0L</span>;</span><br><span class="line">        <span class="comment">// cx -&gt; x中1的个数， ccx -&gt; 值为x的个数</span></span><br><span class="line">        <span class="comment">// cy -&gt; y中1的个数， ccy -&gt; 值为y的个数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;[cx, ccx] : cnt)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;[cy, ccy] : cnt)</span><br><span class="line">                <span class="keyword">if</span> (cx + cy &gt;= k) <span class="comment">// (x,y) 是优质数对</span></span><br><span class="line">                    ans += (<span class="type">long</span>) ccx * ccy; </span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
+<iframe src="//player.bilibili.com/player.html?aid=258805927&bvid=BV14a411U7QZ&cid=782543429&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+<hr>
+</div>]]></content>
       <tags>
-        <tag>安装</tag>
+        <tag>C++</tag>
+        <tag>leetcode</tag>
       </tags>
   </entry>
   <entry>
@@ -311,22 +324,6 @@
 ]]></content>
       <tags>
         <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>字符串转数字</title>
-    <url>/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/</url>
-    <content><![CDATA[<blockquote>
-<p>如图：</p>
-</blockquote>
-<p><img src="/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/img1.PNG" alt></p>
-<blockquote>
-<p>代码:</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vector&lt;int&gt; diffWaysToCompute(string expression) &#123;</span><br><span class="line">        vector&lt;int&gt; ops;</span><br><span class="line">        for (int i = 0; i &lt; expression.size();) &#123;</span><br><span class="line">            // 如果不是数字</span><br><span class="line">            if (!isdigit(expression[i])) &#123;</span><br><span class="line">                if (expression[i] == &#x27;+&#x27;) &#123;</span><br><span class="line">                    ops.push_back(ADDITION);</span><br><span class="line">                &#125; else if (expression[i] == &#x27;-&#x27;) &#123;</span><br><span class="line">                    ops.push_back(SUBTRACTION);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    ops.push_back(MULTIPLICATION);</span><br><span class="line">                &#125;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                int t = 0;</span><br><span class="line">                while (i &lt; expression.size() &amp;&amp; isdigit(expression[i])) &#123;</span><br><span class="line">                    t = t * 10 + expression[i] - &#x27;0&#x27;; // 转换为数字w</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                ops.push_back(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <tags>
-        <tag>C++</tag>
-        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -360,10 +357,26 @@
       </tags>
   </entry>
   <entry>
+    <title>字符串转数字</title>
+    <url>/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/</url>
+    <content><![CDATA[<blockquote>
+<p>如图：</p>
+</blockquote>
+<p><img src="/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/img1.PNG" alt></p>
+<blockquote>
+<p>代码:</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vector&lt;int&gt; diffWaysToCompute(string expression) &#123;</span><br><span class="line">        vector&lt;int&gt; ops;</span><br><span class="line">        for (int i = 0; i &lt; expression.size();) &#123;</span><br><span class="line">            // 如果不是数字</span><br><span class="line">            if (!isdigit(expression[i])) &#123;</span><br><span class="line">                if (expression[i] == &#x27;+&#x27;) &#123;</span><br><span class="line">                    ops.push_back(ADDITION);</span><br><span class="line">                &#125; else if (expression[i] == &#x27;-&#x27;) &#123;</span><br><span class="line">                    ops.push_back(SUBTRACTION);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    ops.push_back(MULTIPLICATION);</span><br><span class="line">                &#125;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                int t = 0;</span><br><span class="line">                while (i &lt; expression.size() &amp;&amp; isdigit(expression[i])) &#123;</span><br><span class="line">                    t = t * 10 + expression[i] - &#x27;0&#x27;; // 转换为数字w</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                ops.push_back(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>C++</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数据结构-二叉树复习</title>
     <url>/2022/07/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%A4%8D%E4%B9%A0/</url>
     <content><![CDATA[<blockquote>
-<p>链表复习 -&gt; 树的遍历 (重要)</p>
+<p>二叉树复习 -&gt; 树的遍历 (重要)</p>
 </blockquote>
 <ol>
 <li>建立二叉树</li>
@@ -405,6 +418,80 @@
 <p>迭代实现 暂时没看懂</p>
 </blockquote>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// https://leetcode.cn/problems/binary-tree-postorder-traversal/solution/er-cha-shu-de-hou-xu-bian-li-by-leetcode-solution/</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode *root)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stack&lt;TreeNode *&gt; stk;</span><br><span class="line">        TreeNode *prev = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">while</span> (root != <span class="literal">nullptr</span> || !stk.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="keyword">while</span> (root != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">                stk.<span class="built_in">emplace</span>(root);</span><br><span class="line">                root = root-&gt;left;</span><br><span class="line">            &#125;</span><br><span class="line">            root = stk.<span class="built_in">top</span>();</span><br><span class="line">            stk.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">if</span> (root-&gt;right == <span class="literal">nullptr</span> || root-&gt;right == prev) &#123;</span><br><span class="line">                res.<span class="built_in">emplace_back</span>(root-&gt;val);</span><br><span class="line">                prev = root;</span><br><span class="line">                root = <span class="literal">nullptr</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                stk.<span class="built_in">emplace</span>(root);</span><br><span class="line">                root = root-&gt;right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>层序遍历<br>
+<img src="/2022/07/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%A4%8D%E4%B9%A0/binary_tree_review_img4.PNG" alt></li>
+</ol>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">levelOrder</span>(TreeNode* root) &#123;</span><br><span class="line">        <span class="comment">//创建返回数组</span></span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; ans;</span><br><span class="line">        <span class="comment">//创建队列</span></span><br><span class="line">        queue&lt;TreeNode*&gt; que;</span><br><span class="line">        <span class="comment">//若空</span></span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">nullptr</span>) <span class="keyword">return</span> ans;</span><br><span class="line">        <span class="comment">//根节点压入队列</span></span><br><span class="line">        que.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="comment">//若队列不为空，循环</span></span><br><span class="line">        <span class="keyword">while</span>(!que.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            <span class="comment">//当前队列长度</span></span><br><span class="line">            <span class="type">int</span> queLen = que.<span class="built_in">size</span>();</span><br><span class="line">            ans.<span class="built_in">push_back</span>(<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line">            <span class="comment">//循环遍历当前层所有节点</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; queLen; ++i)&#123;</span><br><span class="line">                <span class="comment">//选择节点</span></span><br><span class="line">                <span class="keyword">auto</span> node = que.<span class="built_in">front</span>();</span><br><span class="line">                <span class="comment">//选择的当前节点弹出队列</span></span><br><span class="line">                que.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="comment">//将选择的当前节点的值压入数组</span></span><br><span class="line">                ans.<span class="built_in">back</span>().<span class="built_in">push_back</span>(node-&gt;val);</span><br><span class="line">                <span class="comment">//寻找当前节点的下一层节点压入队列</span></span><br><span class="line">                <span class="keyword">if</span>(node-&gt;left) que.<span class="built_in">push</span>(node-&gt;left);</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;right) que.<span class="built_in">push</span>(node-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>二叉树复习 -&gt; 运用递归解决树的问题</p>
+</blockquote>
+<ol>
+<li>二叉树的最大深度<br>
+<img src="/2022/07/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%A4%8D%E4%B9%A0/binary_tree_review_img5.PNG" alt></li>
+</ol>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> left_depth = <span class="built_in">maxDepth</span>(root-&gt;left);</span><br><span class="line">        <span class="type">int</span> right_depth = <span class="built_in">maxDepth</span>(root-&gt;right);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(left_depth, right_depth) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>2.对称二叉树<br>
+<img src="/2022/07/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%A4%8D%E4%B9%A0/binary_tree_review_img6.PNG" alt><br>
+<img src="/2022/07/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%A4%8D%E4%B9%A0/binary_tree_review_img7.PNG" alt></p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isSymmetricHelper</span><span class="params">(TreeNode* left, TreeNode* right)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 如果左右节点都为空, 说明当前节点是叶子节点，返回true</span></span><br><span class="line">        <span class="keyword">if</span>(left == <span class="literal">nullptr</span> &amp;&amp; right == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="comment">// 如果当前节点只有一个子节点或者有两个子节点，但两个子节点的值不相同，直接返回false</span></span><br><span class="line">        <span class="keyword">if</span> (left == <span class="literal">nullptr</span> || right == <span class="literal">nullptr</span> || left-&gt;val != right-&gt;val)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">//然后左子节点的左子节点和右子节点的右子节点比较，左子节点的右子节点和右子节点的左子节点比较</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">isSymmetricHelper</span>(left-&gt;left, right-&gt;right) &amp;&amp; <span class="built_in">isSymmetricHelper</span>(left-&gt;right, right-&gt;left);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isSymmetric</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="comment">//从两个子节点开始判断</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">isSymmetricHelper</span>(root-&gt;left, root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>路径总和（这题也是很妙的做法）</li>
+</ol>
+<p><img src="/2022/07/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%A4%8D%E4%B9%A0/binary_tree_review_img8.PNG" alt><br>
+<img src="/2022/07/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%A4%8D%E4%B9%A0/binary_tree_review_img9.PNG" alt></p>
+<blockquote>
+<p>递归法，没递归到一个节点，就拿target-当前节点值，如果存在路径总和等于target，那么最后一个叶子节点一定等于target剩下的值。<br>
+如果递归到叶子节点后，剩余的target值不等于叶子节点，说明不存在路径总和等于target。<br>
+时间复杂度O（n），空间复杂度O（1）。</p>
+</blockquote>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> boolean <span class="title">hasPathSum</span><span class="params">(TreeNode root, <span class="type">int</span> targetSum)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == null)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root.left==null &amp;&amp; root.right==null)&#123;</span><br><span class="line">            <span class="keyword">return</span> root.val == targetSum;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">hasPathSum</span>(root.left,targetSum - root.val) || <span class="built_in">hasPathSum</span>(root.right,targetSum - root.val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>二叉树复习 -&gt; 总结</p>
+</blockquote>
+<ol>
+<li>从中序与后序遍历序列构造二叉树</li>
+</ol>
+<p><img src="/2022/07/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%A4%8D%E4%B9%A0/binary_tree_review_img10.PNG" alt></p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">dfs</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; inorder, vector&lt;<span class="type">int</span>&gt;&amp; postorder, <span class="type">int</span> head1, <span class="type">int</span> tail1, <span class="type">int</span> head2, <span class="type">int</span> tail2)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 判断什么时候停止递归</span></span><br><span class="line">        <span class="keyword">if</span>(head2 &gt; tail2) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="type">int</span> last_elem = postorder[tail2];</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(last_elem);</span><br><span class="line">        <span class="keyword">if</span>(head2 == tail2) <span class="keyword">return</span> root;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 寻找分割点</span></span><br><span class="line">        <span class="type">int</span> spilit = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(inorder[head1 + spilit] != last_elem) spilit++; </span><br><span class="line">        root-&gt;left = <span class="built_in">dfs</span>(inorder, postorder, head1, head1 + spilit - <span class="number">1</span>, head2, head2 + spilit - <span class="number">1</span>);</span><br><span class="line">        root-&gt;right = <span class="built_in">dfs</span>(inorder, postorder, head1 + spilit + <span class="number">1</span>, tail1, head2 + spilit, tail2 - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; inorder, vector&lt;<span class="type">int</span>&gt;&amp; postorder)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> len = inorder.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 如果是空树,返回nullptr</span></span><br><span class="line">        <span class="keyword">if</span>(len == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(inorder, postorder, <span class="number">0</span>, len - <span class="number">1</span>, <span class="number">0</span>, len - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>从前序与中序遍历序列构造二叉树<br>
+<img src="/2022/07/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%A4%8D%E4%B9%A0/binary_tree_review_img11.PNG" alt></li>
+</ol>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; index;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">myBuildTree</span><span class="params">(<span class="type">const</span> vector&lt;<span class="type">int</span>&gt;&amp; preorder, <span class="type">const</span> vector&lt;<span class="type">int</span>&gt;&amp; inorder, <span class="type">int</span> preorder_left, <span class="type">int</span> preorder_right, <span class="type">int</span> inorder_left, <span class="type">int</span> inorder_right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (preorder_left &gt; preorder_right) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 前序遍历中的第一个节点就是根节点</span></span><br><span class="line">        <span class="type">int</span> preorder_root = preorder_left;</span><br><span class="line">        <span class="comment">// 在中序遍历中定位根节点</span></span><br><span class="line">        <span class="type">int</span> inorder_root = index[preorder[preorder_root]];</span><br><span class="line">        <span class="comment">// 建立根节点</span></span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(preorder[preorder_root]);</span><br><span class="line">        <span class="comment">// 获取左子树的节点数</span></span><br><span class="line">        <span class="type">int</span> size_left_subtree = inorder_root - inorder_left;</span><br><span class="line">        root-&gt;left = <span class="built_in">myBuildTree</span>(preorder, inorder, preorder_left + <span class="number">1</span>, preorder_left + size_left_subtree, inorder_left, inorder_root - <span class="number">1</span>);</span><br><span class="line">        root-&gt;right = <span class="built_in">myBuildTree</span>(preorder, inorder, preorder_left + <span class="number">1</span> + size_left_subtree, preorder_right, inorder_root + <span class="number">1</span>, inorder_right);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; preorder, vector&lt;<span class="type">int</span>&gt;&amp; inorder)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = preorder.<span class="built_in">size</span>();</span><br><span class="line">         <span class="comment">// 构造哈希映射，帮助我们快速定位根节点</span></span><br><span class="line">         <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">             index[inorder[i]] = i;</span><br><span class="line">         &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">myBuildTree</span>(preorder, inorder, <span class="number">0</span>, n - <span class="number">1</span>, <span class="number">0</span>, n - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>3.填充每个节点的下一个右侧节点指针<br>
+<img src="/2022/07/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%A4%8D%E4%B9%A0/binary_tree_review_img12.PNG" alt></p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Node* <span class="title">connect</span><span class="params">(Node* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">nullptr</span>) <span class="keyword">return</span> root;</span><br><span class="line">        queue&lt;Node*&gt; Q;</span><br><span class="line">        Q.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="keyword">while</span>(!Q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="type">int</span> size = Q.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i ++) &#123;</span><br><span class="line">                Node* node = Q.<span class="built_in">front</span>();</span><br><span class="line">                Q.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="comment">// 因为最后一个节点的next不需要赋值</span></span><br><span class="line">                <span class="keyword">if</span>(i &lt; size - <span class="number">1</span>) node-&gt;next = Q.<span class="built_in">front</span>();</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;left) Q.<span class="built_in">push</span>(node-&gt;left) ;</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;right) Q.<span class="built_in">push</span>(node-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>4.填充每个节点的下一个右侧节点指针 II<br>
+<img src="/2022/07/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%A4%8D%E4%B9%A0/binary_tree_review_img13.PNG" alt></p>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Node* <span class="title">connect</span><span class="params">(Node* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        queue&lt;Node*&gt; que;</span><br><span class="line">        que.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="keyword">while</span>(!que.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="type">int</span> size = que.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i ++)&#123;</span><br><span class="line">                Node* node = que.<span class="built_in">front</span>();</span><br><span class="line">                que.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="keyword">if</span>(i &lt; size - <span class="number">1</span>) node-&gt;next = que.<span class="built_in">front</span>();</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;left) que.<span class="built_in">push</span>(node-&gt;left);</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;right) que.<span class="built_in">push</span>(node-&gt;right);</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>5.二叉树的最近公共祖先</p>
+<blockquote>
+<p>tip: 这题也是挺巧的,如果left为空，说明这两个节点在cur结点的右子树上，我们只需要返回右子树查找的结果即可，反之<br>
+查找左子树，如果left和right都不为空，说明这两个节点一个在cur的左子树上一个在cur的右子树上，我们只需要返回cur结点<br>
+即可</p>
+</blockquote>
+<p><img src="/2022/07/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%A4%8D%E4%B9%A0/binary_tree_review_img14.PNG" alt></p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span>(root == <span class="literal">nullptr</span> || root == p || root == q) <span class="keyword">return</span> root;</span><br><span class="line">       TreeNode* left = <span class="built_in">lowestCommonAncestor</span>(root-&gt;left, p, q);</span><br><span class="line">       TreeNode* right = <span class="built_in">lowestCommonAncestor</span>(root-&gt;right, p, q);</span><br><span class="line">       <span class="comment">// 公共节点在根节点的右子树上</span></span><br><span class="line">       <span class="keyword">if</span>(left == <span class="literal">nullptr</span>) <span class="keyword">return</span> right;</span><br><span class="line">       <span class="comment">// 公共节点在根节点的左子树上</span></span><br><span class="line">       <span class="keyword">if</span>(right == <span class="literal">nullptr</span>) <span class="keyword">return</span> left;</span><br><span class="line">       <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>6.二叉树的序列化与反序列化</p>
+<p><img src="/2022/07/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%A4%8D%E4%B9%A0/binary_tree_review_img15.PNG" alt><br>
+<img src="/2022/07/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%A4%8D%E4%B9%A0/binary_tree_review_img16.PNG" alt></p>
+<p>链接： <a href="https://leetcode.cn/problems/serialize-and-deserialize-binary-tree/solution/er-cha-shu-de-xu-lie-hua-yu-fan-xu-lie-hua-by-le-2/">https://leetcode.cn/problems/serialize-and-deserialize-binary-tree/solution/er-cha-shu-de-xu-lie-hua-yu-fan-xu-lie-hua-by-le-2/</a></p>
+<blockquote>
+<p>tips: 条例非常清晰，代码可阅读性很高</p>
+</blockquote>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Codec</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reserialize</span><span class="params">(TreeNode* root, string&amp; str)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            str += <span class="string">&quot;None,&quot;</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            str += <span class="built_in">to_string</span>(root-&gt;val) + <span class="string">&quot;,&quot;</span>;</span><br><span class="line">            <span class="built_in">reserialize</span>(root-&gt;left, str);</span><br><span class="line">            <span class="built_in">reserialize</span>(root-&gt;right, str);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Encodes a tree to a single string.</span></span><br><span class="line">    <span class="function">string <span class="title">serialize</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        string ret;</span><br><span class="line">        <span class="built_in">reserialize</span>(root, ret);</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">TreeNode* <span class="title">rdeserialize</span><span class="params">(list&lt;string&gt;&amp; dataArray)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(dataArray.<span class="built_in">front</span>() == <span class="string">&quot;None&quot;</span>)&#123;</span><br><span class="line">            dataArray.<span class="built_in">erase</span>(dataArray.<span class="built_in">begin</span>());</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(<span class="built_in">stoi</span>(dataArray.<span class="built_in">front</span>()));</span><br><span class="line">        dataArray.<span class="built_in">erase</span>(dataArray.<span class="built_in">begin</span>());</span><br><span class="line">        root-&gt;left = <span class="built_in">rdeserialize</span>(dataArray);</span><br><span class="line">        root-&gt;right = <span class="built_in">rdeserialize</span>(dataArray);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Decodes your encoded data to tree.</span></span><br><span class="line">    <span class="function">TreeNode* <span class="title">deserialize</span><span class="params">(string data)</span> </span>&#123;</span><br><span class="line">        list&lt;string&gt; dataArray;</span><br><span class="line">        string str;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; ch : data) &#123;</span><br><span class="line">            <span class="keyword">if</span>(ch == <span class="string">&#x27;,&#x27;</span>) &#123;</span><br><span class="line">                dataArray.<span class="built_in">push_back</span>(str);</span><br><span class="line">                str.<span class="built_in">clear</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> str.<span class="built_in">push_back</span>(ch);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!str.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            dataArray.<span class="built_in">push_back</span>(str);</span><br><span class="line">            str.<span class="built_in">clear</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">rdeserialize</span>(dataArray);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Your Codec object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment">// Codec ser, deser;</span></span><br><span class="line"><span class="comment">// TreeNode* ans = deser.deserialize(ser.serialize(root));</span></span><br></pre></td></tr></table></figure>
+<hr>
 ]]></content>
       <tags>
         <tag>C++</tag>
@@ -662,6 +749,26 @@
       </tags>
   </entry>
   <entry>
+    <title>流迭代器</title>
+    <url>/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
+    <content><![CDATA[<blockquote>
+<p>C++ primer 第十章 泛型算法</p>
+</blockquote>
+<p><img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img1.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img2.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img3.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img4.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img5.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img6.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img7.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img8.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img9.PNG" alt></p>
+]]></content>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>统计学习方法</title>
     <url>/2022/07/14/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<h4 id="一写文章就开始啰嗦…">一写文章就开始啰嗦…</h4>
@@ -700,26 +807,6 @@
 </div>]]></content>
       <tags>
         <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>流迭代器</title>
-    <url>/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
-    <content><![CDATA[<blockquote>
-<p>C++ primer 第十章 泛型算法</p>
-</blockquote>
-<p><img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img1.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img2.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img3.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img4.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img5.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img6.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img7.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img8.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img9.PNG" alt></p>
-]]></content>
-      <tags>
-        <tag>C++</tag>
       </tags>
   </entry>
   <entry>

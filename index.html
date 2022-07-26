@@ -205,6 +205,287 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ico.jpg">
+      <meta itemprop="name" content="Willson-Xbort">
+      <meta itemprop="description" content="none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/" class="post-title-link" itemprop="url">leetcode 303 场周赛复盘</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-07-25 19:41:57" itemprop="dateCreated datePublished" datetime="2022-07-25T19:41:57+08:00">2022-07-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-26 16:16:06" itemprop="dateModified" datetime="2022-07-26T16:16:06+08:00">2022-07-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>第一题</p>
+</blockquote>
+<p><img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img1.PNG" alt></p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">char</span> <span class="title">repeatedCharacter</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        map&lt;<span class="type">char</span>, <span class="type">int</span>&gt; m;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">char</span> i = <span class="string">&#x27;a&#x27;</span>;  i &lt;= <span class="string">&#x27;z&#x27;</span>; i++) &#123;</span><br><span class="line">            m.<span class="built_in">insert</span>(<span class="built_in">pair</span>&lt;<span class="type">char</span>, <span class="type">int</span>&gt;(i, <span class="number">0</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> ss : s) &#123;</span><br><span class="line">            ++m[ss];</span><br><span class="line">            <span class="keyword">if</span>(m[ss] == <span class="number">2</span>) <span class="keyword">return</span> ss;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img2.PNG" alt></p>
+<blockquote>
+<p>第二题</p>
+</blockquote>
+<p><img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img3.PNG" alt><br>
+<img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img5.PNG" alt></p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">equalPairs</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; grid)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> m = grid.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">vec_col</span>(m * m, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; vec_row;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            vec_row.<span class="built_in">push_back</span>(grid[i]);</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; m; j++) &#123;</span><br><span class="line">                vec_col[j].<span class="built_in">push_back</span>(grid[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; m; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(vec_row[i] == vec_col[j]) ++ cnt; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img4.PNG" alt></p>
+<blockquote>
+<p>tip: 前两题较简单，第三题有点难度</p>
+</blockquote>
+<blockquote>
+<p>第三题</p>
+</blockquote>
+<blockquote>
+<p>tips: 我觉得最妙的点在于评分取负号</p>
+</blockquote>
+<p><img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img6.PNG" alt><br>
+<img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img7.PNG" alt><br>
+<img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img8.PNG" alt></p>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FoodRatings</span> &#123;</span><br><span class="line">    <span class="comment">// 修改食物评分时要影响到cs中set的结构</span></span><br><span class="line">    <span class="comment">// 想要获取set必须要知道key(烹饪方式)</span></span><br><span class="line">    <span class="comment">// 所以食物 -&gt;(评分， 烹饪方式)</span></span><br><span class="line">    unordered_map&lt;string, pair&lt;<span class="type">int</span>, string&gt;&gt; fs;</span><br><span class="line">    <span class="comment">// 烹饪方式 -&gt; (评分, 名字)</span></span><br><span class="line">    <span class="comment">// 需要通过烹饪方式查询评分和食物名字</span></span><br><span class="line">    <span class="comment">// 要返回评分最高的食物和返回字典序较小的名字</span></span><br><span class="line">    <span class="comment">// 所以先评分，后名字</span></span><br><span class="line">    unordered_map&lt;string, set&lt;pair&lt;<span class="type">int</span>, string&gt;&gt;&gt; cs;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">FoodRatings</span>(vector&lt;string&gt; &amp;foods, vector&lt;string&gt; &amp;cuisines, vector&lt;<span class="type">int</span>&gt; &amp;ratings) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; foods.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">            <span class="comment">// 食物, 烹饪方式</span></span><br><span class="line">            <span class="keyword">auto</span> &amp;f = foods[i], &amp;c = cuisines[i];</span><br><span class="line">            <span class="comment">// 评分</span></span><br><span class="line">            <span class="type">int</span> r = ratings[i];</span><br><span class="line">            <span class="comment">// 评分， 烹饪方式赋值</span></span><br><span class="line">            fs[f] = &#123;r, c&#125;;</span><br><span class="line">            <span class="comment">// emplace就不需要make_pair</span></span><br><span class="line">            <span class="comment">// 因为要返回评分最高的食物和返回字典序较小的名字</span></span><br><span class="line">            <span class="comment">// 序列是相反的</span></span><br><span class="line">            <span class="comment">// 评分取负号，保证最小对应最高评分</span></span><br><span class="line">            cs[c].<span class="built_in">emplace</span>(-r, f);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">changeRating</span><span class="params">(string food, <span class="type">int</span> newRating)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 取出食物对应的 (评分，烹饪方式)</span></span><br><span class="line">        <span class="keyword">auto</span> &amp;[r, c] = fs[food];</span><br><span class="line">        <span class="comment">// 获取评分和名字</span></span><br><span class="line">        <span class="keyword">auto</span> &amp;s = cs[c];</span><br><span class="line">        s.<span class="built_in">erase</span>(&#123;-r, food&#125;); <span class="comment">// 移除旧数据</span></span><br><span class="line">        s.<span class="built_in">emplace</span>(-newRating, food); <span class="comment">// 添加新数据</span></span><br><span class="line">        <span class="comment">// 修改评分</span></span><br><span class="line">        r = newRating;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">string <span class="title">highestRated</span><span class="params">(string cuisine)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 至少有一种，所以取begin()-&gt;第二项（名字）</span></span><br><span class="line">        <span class="keyword">return</span> cs[cuisine].<span class="built_in">begin</span>()-&gt;second;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
+<iframe src="//player.bilibili.com/player.html?aid=258805927&bvid=BV14a411U7QZ&cid=782543429&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+<blockquote>
+<p>第四题</p>
+</blockquote>
+<blockquote>
+<p>看不懂的可以看视频 , 韦恩图</p>
+</blockquote>
+<p><img src="/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/leetcode_303_img9.PNG" alt></p>
+<p>代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 数：                  1      2      3</span></span><br><span class="line">    <span class="comment">// 二进制为1的个数：     1      1      2</span></span><br><span class="line">    <span class="comment">// 表格：</span></span><br><span class="line">    <span class="comment">// |-------------------------------------------------|</span></span><br><span class="line">    <span class="comment">// cx(去重后):        |   1   |   2    |</span></span><br><span class="line">    <span class="comment">// cnt:               |   2   |   1    |</span></span><br><span class="line">    <span class="comment">// |-------------------------------------------------|</span></span><br><span class="line">    <span class="comment">// 五种：                1 + 2  -&gt; 从c(x) = 1的集合中取一个, c(x) = 2 中取一个  || 2 * 1  -&gt; 有两个1</span></span><br><span class="line">    <span class="comment">//                       1 * 2  -&gt; (2, 1) 和 （1，2）</span></span><br><span class="line">    <span class="comment">//                       1 * 1  -&gt; 自己和自己</span></span><br><span class="line">    <span class="comment">// 遍历去重后的 nums\textit&#123;nums&#125;nums，统计 c(nums[i])c(nums[i])的个数，记录在 cnt 中，</span></span><br><span class="line">    <span class="comment">// 然后写一个二重循环遍历 cnt，对于所有的 c(x)+c(y)≥k，</span></span><br><span class="line">    <span class="comment">// 累加 cnt[c(x)]⋅cnt[c(y)]，表示从这两组中各选一个 x 和 y 组成优质数对的个数。</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">countExcellentPairs</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; cnt;</span><br><span class="line">        <span class="comment">// 获取cnt表</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> x : <span class="built_in">unordered_set</span>&lt;<span class="type">int</span>&gt;(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>())) <span class="comment">// 去重</span></span><br><span class="line">            ++cnt[__builtin_popcount(x)];</span><br><span class="line">        <span class="type">long</span> ans = <span class="number">0L</span>;</span><br><span class="line">        <span class="comment">// cx -&gt; x中1的个数， ccx -&gt; 值为x的个数</span></span><br><span class="line">        <span class="comment">// cy -&gt; y中1的个数， ccy -&gt; 值为y的个数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;[cx, ccx] : cnt)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;[cy, ccy] : cnt)</span><br><span class="line">                <span class="keyword">if</span> (cx + cy &gt;= k) <span class="comment">// (x,y) 是优质数对</span></span><br><span class="line">                    ans += (<span class="type">long</span>) ccx * ccy; </span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
+<iframe src="//player.bilibili.com/player.html?aid=258805927&bvid=BV14a411U7QZ&cid=782543429&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+</div></div>
+      
+    </div>
+
+    
+    
+    
+
+    <!-- after add -->
+    
+       <!-- after add finish -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/25/STL%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ico.jpg">
+      <meta itemprop="name" content="Willson-Xbort">
+      <meta itemprop="description" content="none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/07/25/STL%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">STL底层实现</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-07-25 19:33:43 / 修改时间：19:37:00" itemprop="dateCreated datePublished" datetime="2022-07-25T19:33:43+08:00">2022-07-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+
+    <!-- after add -->
+    
+       <!-- after add finish -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%A4%8D%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ico.jpg">
+      <meta itemprop="name" content="Willson-Xbort">
+      <meta itemprop="description" content="none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/07/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%A4%8D%E4%B9%A0/" class="post-title-link" itemprop="url">数据结构-二叉树复习</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-07-22 07:44:24 / 修改时间：11:52:26" itemprop="dateCreated datePublished" datetime="2022-07-22T07:44:24+08:00">2022-07-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>链表复习 -&gt; 树的遍历 (重要)</p>
+</blockquote>
+<ol>
+<li>建立二叉树</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">TreeNode</span> &#123;</span><br><span class="line">     <span class="type">int</span> val;</span><br><span class="line">     TreeNode *left;</span><br><span class="line">     TreeNode *right;</span><br><span class="line">     <span class="built_in">TreeNode</span>() : <span class="built_in">val</span>(<span class="number">0</span>), <span class="built_in">left</span>(<span class="literal">nullptr</span>), <span class="built_in">right</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">     <span class="built_in">TreeNode</span>(<span class="type">int</span> x) : <span class="built_in">val</span>(x), <span class="built_in">left</span>(<span class="literal">nullptr</span>), <span class="built_in">right</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">     <span class="built_in">TreeNode</span>(<span class="type">int</span> x, TreeNode *left, TreeNode *right) : <span class="built_in">val</span>(x), <span class="built_in">left</span>(left), <span class="built_in">right</span>(right) &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>前序遍历<br>
+<img src="/2022/07/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%A4%8D%E4%B9%A0/binary_tree_review_img1.PNG" alt><br>
+<img src="/2022/07/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%A4%8D%E4%B9%A0/binary_tree_review_img2.PNG" alt></li>
+</ol>
+<blockquote>
+<p>递归实现</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">preorder</span><span class="params">(TreeNode* root,  vector&lt;<span class="type">int</span>&gt;&amp; res)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        res.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">        <span class="built_in">preorder</span>(root-&gt;left, res);</span><br><span class="line">        <span class="built_in">preorder</span>(root-&gt;right, res);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">        <span class="built_in">preorder</span>(root, res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>非递归实现（使用栈）</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> res; </span><br><span class="line">        stack&lt;TreeNode*&gt;stc;</span><br><span class="line">        stc.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="keyword">while</span>(!stc.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(stc.<span class="built_in">top</span>()-&gt;val);</span><br><span class="line">            TreeNode* tmp = stc.<span class="built_in">top</span>();</span><br><span class="line">            stc.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="comment">// 因为是stack(栈),需要先右后左</span></span><br><span class="line">            <span class="keyword">if</span>(tmp-&gt;right) stc.<span class="built_in">push</span>(tmp-&gt;right);</span><br><span class="line">            <span class="keyword">if</span>(tmp-&gt;left) stc.<span class="built_in">push</span>(tmp-&gt;left);</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>中序遍历<br>
+<img src="/2022/07/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%A4%8D%E4%B9%A0/binary_tree_review_img3.PNG" alt></li>
+</ol>
+<blockquote>
+<p>递归实现</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">inorder</span><span class="params">(TreeNode* root,  vector&lt;<span class="type">int</span>&gt;&amp; vc)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        <span class="built_in">inorder</span>(root-&gt;left, vc);</span><br><span class="line">        vc.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">        <span class="built_in">inorder</span>(root-&gt;right, vc);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; vc;</span><br><span class="line">        <span class="built_in">inorder</span>(root, vc);</span><br><span class="line">        <span class="keyword">return</span> vc;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>非递归实现</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://leetcode.cn/problems/binary-tree-inorder-traversal/solution/er-cha-shu-de-zhong-xu-bian-li-by-leetcode-solutio/</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">        stack&lt;TreeNode*&gt; stk;</span><br><span class="line">        <span class="comment">// 非叶子节点 || 栈不为空</span></span><br><span class="line">        <span class="keyword">while</span>(root != <span class="literal">nullptr</span> || !stk.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="keyword">while</span>(root != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">                stk.<span class="built_in">push</span>(root);</span><br><span class="line">                root = root-&gt;left;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 这里是root!</span></span><br><span class="line">            root = stk.<span class="built_in">top</span>();</span><br><span class="line">            stk.<span class="built_in">pop</span>();</span><br><span class="line">            res.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">            root = root-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>后序遍历</li>
+</ol>
+<blockquote>
+<p>递归实现</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">postorder</span><span class="params">(TreeNode* root,  vector&lt;<span class="type">int</span>&gt;&amp; vc)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">postorder</span>(root-&gt;left, vc);</span><br><span class="line">    <span class="built_in">postorder</span>(root-&gt;right, vc);</span><br><span class="line">    vc.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; vc;</span><br><span class="line">    <span class="built_in">postorder</span>(root, vc);</span><br><span class="line">    <span class="keyword">return</span> vc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>迭代实现 暂时没看懂</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://leetcode.cn/problems/binary-tree-postorder-traversal/solution/er-cha-shu-de-hou-xu-bian-li-by-leetcode-solution/</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode *root)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stack&lt;TreeNode *&gt; stk;</span><br><span class="line">        TreeNode *prev = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">while</span> (root != <span class="literal">nullptr</span> || !stk.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="keyword">while</span> (root != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">                stk.<span class="built_in">emplace</span>(root);</span><br><span class="line">                root = root-&gt;left;</span><br><span class="line">            &#125;</span><br><span class="line">            root = stk.<span class="built_in">top</span>();</span><br><span class="line">            stk.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">if</span> (root-&gt;right == <span class="literal">nullptr</span> || root-&gt;right == prev) &#123;</span><br><span class="line">                res.<span class="built_in">emplace_back</span>(root-&gt;val);</span><br><span class="line">                prev = root;</span><br><span class="line">                root = <span class="literal">nullptr</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                stk.<span class="built_in">emplace</span>(root);</span><br><span class="line">                root = root-&gt;right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <!-- after add -->
+    
+       <!-- after add finish -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8%E5%A4%8D%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -757,7 +1038,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-07-16 16:39:09" itemprop="dateModified" datetime="2022-07-16T16:39:09+08:00">2022-07-16</time>
+                <time title="修改时间：2022-07-26 16:16:20" itemprop="dateModified" datetime="2022-07-26T16:16:20+08:00">2022-07-26</time>
               </span>
 
           
@@ -796,8 +1077,10 @@
 <p>1.3 将csv放入文件夹<br>
 1.4 贴代码:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br></pre></td><td class="code"><pre><span class="line"># coding=utf-8</span><br><span class="line"># Author:Dodo</span><br><span class="line"># Date:2018-11-16</span><br><span class="line"># Email:lvtengchao@pku.edu.cn</span><br><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line">数据集：Mnist</span><br><span class="line">训练集数量：60000</span><br><span class="line">测试集数量：10000（实际使用：200）</span><br><span class="line">------------------------------</span><br><span class="line">运行结果：（邻近k数量：25）</span><br><span class="line">向量距离使用算法——欧式距离</span><br><span class="line">    正确率：97%</span><br><span class="line">    运行时长：308s</span><br><span class="line">向量距离使用算法——曼哈顿距离</span><br><span class="line">    正确率：14%</span><br><span class="line">    运行时长：246s</span><br><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line">import numpy as np</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def loadData(fileName):</span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    加载文件</span><br><span class="line">    :param fileName:要加载的文件路径</span><br><span class="line">    :return: 数据集和标签集</span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    print(&#x27;start read file&#x27;)</span><br><span class="line">    # 存放数据及标记</span><br><span class="line">    dataArr = [];</span><br><span class="line">    labelArr = []</span><br><span class="line">    # 读取文件</span><br><span class="line">    fr = open(fileName)</span><br><span class="line">    # 遍历文件中的每一行</span><br><span class="line">    for line in fr.readlines():</span><br><span class="line">        # 获取当前行，并按“，”切割成字段放入列表中</span><br><span class="line">        # strip：去掉每行字符串首尾指定的字符（默认空格或换行符）</span><br><span class="line">        # split：按照指定的字符将字符串切割成每个字段，返回列表形式</span><br><span class="line">        curLine = line.strip().split(&#x27;,&#x27;)</span><br><span class="line">        # 将每行中除标记外的数据放入数据集中（curLine[0]为标记信息）</span><br><span class="line">        # 在放入的同时将原先字符串形式的数据转换为整型</span><br><span class="line">        dataArr.append([int(num) for num in curLine[1:]])</span><br><span class="line">        # 将标记信息放入标记集中</span><br><span class="line">        # 放入的同时将标记转换为整型</span><br><span class="line">        labelArr.append(int(curLine[0]))</span><br><span class="line">    # 返回数据集和标记</span><br><span class="line">    return dataArr, labelArr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def calcDist(x1, x2):</span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    计算两个样本点向量之间的距离</span><br><span class="line">    使用的是欧氏距离，即 样本点每个元素相减的平方  再求和  再开方</span><br><span class="line">    欧式举例公式这里不方便写，可以百度或谷歌欧式距离（也称欧几里得距离）</span><br><span class="line">    :param x1:向量1</span><br><span class="line">    :param x2:向量2</span><br><span class="line">    :return:向量之间的欧式距离</span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    return np.sqrt(np.sum(np.square(x1 - x2)))</span><br><span class="line">    # 马哈顿距离计算公式</span><br><span class="line">    # return np.sum(x1 - x2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def getClosest(trainDataMat, trainLabelMat, x, topK):</span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    预测样本x的标记。</span><br><span class="line">    获取方式通过找到与样本x最近的topK个点，并查看它们的标签。</span><br><span class="line">    查找里面占某类标签最多的那类标签</span><br><span class="line">    （书中3.1 3.2节）</span><br><span class="line">    :param trainDataMat:训练集数据集</span><br><span class="line">    :param trainLabelMat:训练集标签集</span><br><span class="line">    :param x:要预测的样本x</span><br><span class="line">    :param topK:选择参考最邻近样本的数目（样本数目的选择关系到正确率，详看3.2.3 K值的选择）</span><br><span class="line">    :return:预测的标记</span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    # 建立一个存放向量x与每个训练集中样本距离的列表</span><br><span class="line">    # 列表的长度为训练集的长度，distList[i]表示x与训练集中第</span><br><span class="line">    ## i个样本的距离</span><br><span class="line">    distList = [0] * len(trainLabelMat)</span><br><span class="line">    # 遍历训练集中所有的样本点，计算与x的距离</span><br><span class="line">    for i in range(len(trainDataMat)):</span><br><span class="line">        # 获取训练集中当前样本的向量</span><br><span class="line">        x1 = trainDataMat[i]</span><br><span class="line">        # 计算向量x与训练集样本x的距离</span><br><span class="line">        curDist = calcDist(x1, x)</span><br><span class="line">        # 将距离放入对应的列表位置中</span><br><span class="line">        distList[i] = curDist</span><br><span class="line">    # 对距离列表进行排序</span><br><span class="line">    # argsort：函数将数组的值从小到大排序后，并按照其相对应的索引值输出</span><br><span class="line">    # 例如：</span><br><span class="line">    #   &gt;&gt;&gt; x = np.array([3, 1, 2])</span><br><span class="line">    #   &gt;&gt;&gt; np.argsort(x)</span><br><span class="line">    #   array([1, 2, 0])</span><br><span class="line">    # 返回的是列表中从小到大的元素索引值，对于我们这种需要查找最小距离的情况来说很合适</span><br><span class="line">    # array返回的是整个索引值列表，我们通过[:topK]取列表中前topL个放入list中。</span><br><span class="line">    # ----------------优化点-------------------</span><br><span class="line">    # 由于我们只取topK小的元素索引值，所以其实不需要对整个列表进行排序，而argsort是对整个</span><br><span class="line">    # 列表进行排序的，存在时间上的浪费。字典有现成的方法可以只排序top大或top小，可以自行查阅</span><br><span class="line">    # 对代码进行稍稍修改即可</span><br><span class="line">    # 这里没有对其进行优化主要原因是KNN的时间耗费大头在计算向量与向量之间的距离上，由于向量高维</span><br><span class="line">    # 所以计算时间需要很长，所以如果要提升时间，在这里优化的意义不大。</span><br><span class="line">    # 这边这么写是因为一维的数组，画张图就能理解</span><br><span class="line">    topKList = np.argsort(np.array(distList))[:topK]  # 升序排序</span><br><span class="line">    # 建立一个长度时的列表，用于选择数量最多的标记</span><br><span class="line">    # 3.2.4提到了分类决策使用的是投票表决，topK个标记每人有一票，在数组中每个标记代表的位置中投入</span><br><span class="line">    # 自己对应的地方，随后进行唱票选择最高票的标记</span><br><span class="line">    # 这里是分配10个空间，初始值为0</span><br><span class="line">    labelList = [0] * 10</span><br><span class="line">    # 对topK个索引进行遍历</span><br><span class="line">    for index in topKList:</span><br><span class="line">        # trainLabelMat[index]：在训练集标签中寻找topK元素索引对应的标记</span><br><span class="line">        # int(trainLabelMat[index])：将标记转换为int（实际上已经是int了，但是不int的话，报错）</span><br><span class="line">        # labelList[int(trainLabelMat[index])]：找到标记在labelList中对应的位置</span><br><span class="line">        # 最后加1，表示投了一票</span><br><span class="line">        labelList[int(trainLabelMat[index])] += 1</span><br><span class="line">    # max(labelList)：找到选票箱中票数最多的票数值</span><br><span class="line">    # labelList.index(max(labelList))：再根据最大值在列表中找到该值对应的索引，等同于预测的标记</span><br><span class="line">    return labelList.index(max(labelList))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def test(trainDataArr, trainLabelArr, testDataArr, testLabelArr, topK):</span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    测试正确率</span><br><span class="line">    :param trainDataArr:训练集数据集</span><br><span class="line">    :param trainLabelArr: 训练集标记</span><br><span class="line">    :param testDataArr: 测试集数据集</span><br><span class="line">    :param testLabelArr: 测试集标记</span><br><span class="line">    :param topK: 选择多少个邻近点参考</span><br><span class="line">    :return: 正确率</span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    print(&#x27;start test&#x27;)</span><br><span class="line">    # 将所有列表转换为矩阵形式，方便运算</span><br><span class="line">    trainDataMat = np.mat(trainDataArr);</span><br><span class="line">    trainLabelMat = np.mat(trainLabelArr).T</span><br><span class="line">    testDataMat = np.mat(testDataArr);</span><br><span class="line">    testLabelMat = np.mat(testLabelArr).T</span><br><span class="line">    # 错误值技术</span><br><span class="line">    errorCnt = 0</span><br><span class="line">    # 遍历测试集，对每个测试集样本进行测试</span><br><span class="line">    # 由于计算向量与向量之间的时间耗费太大，测试集有6000个样本，所以这里人为改成了</span><br><span class="line">    # 测试200个样本点，如果要全跑，将行注释取消，再下一行for注释即可，同时下面的print</span><br><span class="line">    # 和return也要相应的更换注释行</span><br><span class="line">    # for i in range(len(testDataMat)):</span><br><span class="line">    for i in range(200):</span><br><span class="line">        # print(&#x27;test %d:%d&#x27;%(i, len(trainDataArr)))</span><br><span class="line">        print(&#x27;test %d:%d&#x27; % (i, 200))</span><br><span class="line">        # 读取测试集当前测试样本的向量</span><br><span class="line">        x = testDataMat[i]</span><br><span class="line">        # 获取预测的标记</span><br><span class="line">        y = getClosest(trainDataMat, trainLabelMat, x, topK)</span><br><span class="line">        # 如果预测标记与实际标记不符，错误值计数加1</span><br><span class="line">        if y != testLabelMat[i]: errorCnt += 1</span><br><span class="line">    # 返回正确率</span><br><span class="line">    # return 1 - (errorCnt / len(testDataMat))</span><br><span class="line">    return 1 - (errorCnt / 200)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    start = time.time()</span><br><span class="line">    # 获取训练集</span><br><span class="line">    trainDataArr, trainLabelArr = loadData(&#x27;./mnist_train/mnist_train.csv&#x27;)</span><br><span class="line">    # 获取测试集</span><br><span class="line">    testDataArr, testLabelArr = loadData(&#x27;./mnist_test/mnist_test.csv&#x27;)</span><br><span class="line">    # 计算测试集正确率</span><br><span class="line">    accur = test(trainDataArr, trainLabelArr, testDataArr, testLabelArr, 25)</span><br><span class="line">    # 打印正确率</span><br><span class="line">    print(&#x27;accur is:%d&#x27; % (accur * 100), &#x27;%&#x27;)</span><br><span class="line">    end = time.time()</span><br><span class="line">    # 显示花费时间</span><br><span class="line">print(&#x27;time span:&#x27;, end - start)</span><br></pre></td></tr></table></figure>
-<p>KD树：<br>
-还未实现，只找了外链</p>
+<p>KD树：</p>
+<blockquote>
+<p>还未实现，只找了外链</p>
+</blockquote>
 
 <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
 <iframe src="//player.bilibili.com/player.html?aid=853980597&bvid=BV1EL4y1F7sz&cid=717808316&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
@@ -996,243 +1279,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ico.jpg">
-      <meta itemprop="name" content="Willson-Xbort">
-      <meta itemprop="description" content="none">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/" class="post-title-link" itemprop="url">水晶头连线</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-07-10 17:24:18" itemprop="dateCreated datePublished" datetime="2022-07-10T17:24:18+08:00">2022-07-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-07-11 20:06:25" itemprop="dateModified" datetime="2022-07-11T20:06:25+08:00">2022-07-11</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="颜色：">颜色：</h3>
-<blockquote>
-<p>白橙 橙 白绿 蓝 白蓝 绿 白棕 棕</p>
-</blockquote>
-<h3 id="图片：">图片：</h3>
-<p><img src="/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/conn_img1.PNG" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <!-- after add -->
-    
-       <!-- after add finish -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/10/delete-duplicate-elements/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ico.jpg">
-      <meta itemprop="name" content="Willson-Xbort">
-      <meta itemprop="description" content="none">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/07/10/delete-duplicate-elements/" class="post-title-link" itemprop="url">删除重复元素</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-07-10 16:33:17 / 修改时间：16:48:34" itemprop="dateCreated datePublished" datetime="2022-07-10T16:33:17+08:00">2022-07-10</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="快速入手">快速入手</h3>
-<h4 id="代码如下：">代码如下：</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void elimdups(std::vector&lt;std::string&gt;&amp; vs)</span><br><span class="line">&#123;</span><br><span class="line">    std::sort(vs.begin(), vs.end());</span><br><span class="line">    auto new_end = std::unique(vs.begin(), vs.end());</span><br><span class="line">    // 删除重复</span><br><span class="line">    vs.erase(new_end, vs.end());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="思路：先用std-sort-排序，通过std-unique-将重复元素放入容器末尾，最后擦除">思路：先用std::sort()排序，通过std::unique() 将重复元素放入容器末尾，最后擦除</h4>
-
-      
-    </div>
-
-    
-    
-    
-
-    <!-- after add -->
-    
-       <!-- after add finish -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/03/Use-of-performance-test-tools/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ico.jpg">
-      <meta itemprop="name" content="Willson-Xbort">
-      <meta itemprop="description" content="none">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/07/03/Use-of-performance-test-tools/" class="post-title-link" itemprop="url">性能测试工具的简单使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-07-03 10:06:36 / 修改时间：17:10:23" itemprop="dateCreated datePublished" datetime="2022-07-03T10:06:36+08:00">2022-07-03</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="下载工具：">下载工具：</h2>
-<table>
-<thead>
-<tr>
-<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon1.PNG" alt="virtual User Generator"></th>
-<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon2.PNG" alt="controller"></th>
-<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon3.PNG" alt="Analysis"></th>
-</tr>
-</thead>
-</table>
-<h2 id="打开virtual-User-Generator：">打开virtual User Generator：</h2>
-<ol>
-<li>点击录制按钮，选择协议<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img1.png" alt><br>
-2.在高级选项中选择明确包含url的脚本<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img2.png" alt><br>
-3.点击开始录制后就会进入你所写的url链接，结束后就可以看到Action的代码<br>
-4.可以点击<em>设计工作室</em>进行关联<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img3.png" alt><br>
-5.点击运行，看到为√的时候就成功了<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img4.png" alt></li>
-</ol>
-<h2 id="打开controller：">打开controller：</h2>
-<p>1.选择脚本<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img5.png" alt><br>
-2.进行设置，在基本计划下可以设置用户数量<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img6.png" alt><br>
-3.点击运行时设置，可以将自动事务的勾选去掉<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img7.png" alt><br>
-4.设置全部完成后可以运行<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img8.png" alt><br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img9.png" alt><br>
-5.点击结果-&gt;分析结果<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img10.png" alt><br>
-将会自动打开<em>Analysis</em>显示结果</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <!-- after add -->
-    
-       <!-- after add finish -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1304,14 +1350,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

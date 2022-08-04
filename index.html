@@ -205,6 +205,402 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/27/const-%E5%92%8C-static/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ico.jpg">
+      <meta itemprop="name" content="Willson-Xbort">
+      <meta itemprop="description" content="none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/07/27/const-%E5%92%8C-static/" class="post-title-link" itemprop="url">const 和 static</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-07-27 08:32:51 / 修改时间：09:43:53" itemprop="dateCreated datePublished" datetime="2022-07-27T08:32:51+08:00">2022-07-27</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>const 复习</p>
+</blockquote>
+<p>1.const 有哪些用法？</p>
+<pre><code>1.const修饰变量，使得变量成为一个常量
+</code></pre>
+<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img1.PNG" alt><br>
+注意点：const 变量要初始化</p>
+<pre><code>2.默认情况下,const对象只在文件内有效
+</code></pre>
+<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img2.PNG" alt></p>
+<pre><code>3.const 可以引用
+</code></pre>
+<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img3.PNG" alt><br>
+注意点：const不能改变</p>
+<pre><code>4.const 指针
+</code></pre>
+<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img4.PNG" alt><br>
+有以下几种形式：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="type">const</span>* p; <span class="comment">//指针本身可以修改，指向的内容不能修改</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* p; <span class="comment">//指针本身可以修改，指向的内容不能修改 -》 指向常量的指针</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span>* <span class="type">const</span> p; <span class="comment">// 指针本身不能修改，指向的内容可以修改</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="type">const</span>* <span class="type">const</span> p; <span class="comment">// 指针本身不能修改，指向的内容不能修改</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> p; <span class="comment">// 指针本身不能修改，指向的内容不能修改</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img5.PNG" alt><br>
+<img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img6.PNG" alt></p>
+<pre><code>5. const 加在函数后方，不能修改成员变量
+</code></pre>
+<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img7.PNG" alt><br>
+提示：只允许在类的非static成员函数后加const<br>
+注意点：函数后加的const其实this指针进行修饰，即const *this</p>
+<blockquote>
+<p>static 复习</p>
+</blockquote>
+<p>2.static 有哪些用法？</p>
+<pre><code>1. 修饰局部变量
+</code></pre>
+<p>看代码:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line">	cout &lt;&lt; ++a &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">		<span class="built_in">test</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img8.PNG" alt></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line">	cout &lt;&lt; ++a &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">		<span class="built_in">test</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img9.PNG" alt></p>
+<blockquote>
+<p>static 修饰的局部变量(静态变量)是存储在静态区内部，而不再是本来的栈区，它的生命周期和程序的生命周期已经一样长。<br>
+也就是说 静态变量出了作用域{} 也不会被销毁，除非程序结束。</p>
+</blockquote>
+<pre><code>2.修饰全局变量
+</code></pre>
+<p>测试：头文件不影响extern<br>
+<img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img10.PNG" alt><br>
+和<br>
+<img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img11.PNG" alt></p>
+<p>但是在源文件影响extern<br>
+<img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img12.PNG" alt><br>
+和<br>
+<img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img13.PNG" alt></p>
+<blockquote>
+<p>全局变量是具有外部链接属性的，而static修饰的全局变量的时候就把这个外部链接属性变成了内部链接属性。生命周期是整个工程。</p>
+</blockquote>
+<pre><code>3. 修饰函数
+</code></pre>
+<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img14.PNG" alt><br>
+和<br>
+<img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img15.PNG" alt></p>
+<p>发现和上方是同一个问题</p>
+<blockquote>
+<p>static修饰函数其实和全局变量差不多，因为函数也具有外部链接属性，被static修饰后就变成内部链接属性了，其他源文件不能再使用。</p>
+</blockquote>
+<p>参考资料：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_66769266/article/details/124247596">https://blog.csdn.net/m0_66769266/article/details/124247596</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <!-- after add -->
+    
+       <!-- after add finish -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/26/Linux-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%90%86%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ico.jpg">
+      <meta itemprop="name" content="Willson-Xbort">
+      <meta itemprop="description" content="none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/07/26/Linux-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">Linux 高性能服务器理解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-07-26 20:51:48" itemprop="dateCreated datePublished" datetime="2022-07-26T20:51:48+08:00">2022-07-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-27 19:41:23" itemprop="dateModified" datetime="2022-07-27T19:41:23+08:00">2022-07-27</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+
+    <!-- after add -->
+    
+       <!-- after add finish -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/26/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ico.jpg">
+      <meta itemprop="name" content="Willson-Xbort">
+      <meta itemprop="description" content="none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/07/26/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">基本排序算法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-07-26 20:50:26" itemprop="dateCreated datePublished" datetime="2022-07-26T20:50:26+08:00">2022-07-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-08-04 09:12:07" itemprop="dateModified" datetime="2022-08-04T09:12:07+08:00">2022-08-04</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="/2022/07/26/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/basic_sort_img1.png" alt><br>
+<img src="/2022/07/26/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/basic_sort_img2.png" alt></p>
+<h1>冒泡排序</h1>
+<h2 id="1-算法步骤">1. 算法步骤</h2>
+<ol>
+<li>
+<p>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</p>
+</li>
+<li>
+<p>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。</p>
+</li>
+<li>
+<p>针对所有的元素重复以上的步骤，除了最后一个。</p>
+</li>
+<li>
+<p>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</p>
+</li>
+</ol>
+<h2 id="2-动图演示">2. 动图演示</h2>
+<p><img src="/2022/07/26/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/bubbleSort.gif" alt="动图演示"></p>
+<ol>
+<li>代码:</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(vector&lt;<span class="type">int</span>&gt; vc, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;第&quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;轮 ： &quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> cnt = <span class="number">0</span>; cnt &lt; vc.<span class="built_in">size</span>() - <span class="number">1</span>; ++cnt) </span><br><span class="line">		cout &lt;&lt; vc[cnt] &lt;&lt; <span class="string">&quot; ,&quot;</span>;</span><br><span class="line">	cout &lt;&lt; vc[vc.<span class="built_in">size</span>() - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">bubble_sort</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; vc)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> len = vc.<span class="built_in">size</span>();</span><br><span class="line">	<span class="comment">// 每次确定一个最大值</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len - <span class="number">1</span>; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; len - i - <span class="number">1</span>; j++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (vc[j] &gt; vc[j + <span class="number">1</span>]) <span class="built_in">swap</span>(vc[j], vc[j + <span class="number">1</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">print</span>(vc, i);</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; vc = &#123; <span class="number">22</span>, <span class="number">34</span>, <span class="number">3</span>, <span class="number">32</span>, <span class="number">82</span>, <span class="number">55</span>, <span class="number">89</span>, <span class="number">50</span>, <span class="number">37</span>, <span class="number">5</span>, <span class="number">64</span>, <span class="number">35</span>, <span class="number">9</span>, <span class="number">70</span> &#125;;	</span><br><span class="line">	<span class="built_in">bubble_sort</span>(vc);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>插入排序</h1>
+<p>插入排序的代码实现虽然没有冒泡排序和选择排序那么简单粗暴，但它的原理应该是最容易理解的了，因为只要打过扑克牌的人都应该能够秒懂。插入排序是一种最简单直观的排序算法，它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。</p>
+<p>插入排序和冒泡排序一样，也有一种优化算法，叫做拆半插入。</p>
+<h2 id="1-算法步骤-2">1. 算法步骤</h2>
+<ol>
+<li>
+<p>将第一待排序序列第一个元素看做一个有序序列，把第二个元素到最后一个元素当成是未排序序列。</p>
+</li>
+<li>
+<p>从头到尾依次扫描未排序序列，将扫描到的每个元素插入有序序列的适当位置。（如果待插入的元素与有序序列中的某个元素相等，则将待插入元素插入到相等元素的后面。）</p>
+</li>
+</ol>
+<h2 id="2-动图演示-2">2. 动图演示</h2>
+<p><img src="/2022/07/26/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/insertionSort.gif" alt="动图演示"></p>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(vector&lt;<span class="type">int</span>&gt; vc, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;第&quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;轮 ： &quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> cnt = <span class="number">0</span>; cnt &lt; vc.<span class="built_in">size</span>() - <span class="number">1</span>; ++cnt)</span><br><span class="line">		cout &lt;&lt; vc[cnt] &lt;&lt; <span class="string">&quot; ,&quot;</span>;</span><br><span class="line">	cout &lt;&lt; vc[vc.<span class="built_in">size</span>() - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">insertion_sort</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; vc)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> len = vc.<span class="built_in">size</span>();</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; len; ++i) &#123;</span><br><span class="line">		<span class="type">int</span> key = vc[i];</span><br><span class="line">		<span class="type">int</span> j = i - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span> ((j &gt;= <span class="number">0</span>) &amp;&amp; (key &lt; vc[j])) &#123;</span><br><span class="line">			vc[j + <span class="number">1</span>] = vc[j];</span><br><span class="line">			j--;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// -1 + 1 = 0</span></span><br><span class="line">		vc[j + <span class="number">1</span>] = key;</span><br><span class="line">		<span class="built_in">print</span>(vc, i);</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; vc = &#123; <span class="number">22</span>, <span class="number">34</span>, <span class="number">3</span>, <span class="number">32</span>, <span class="number">82</span>, <span class="number">55</span>, <span class="number">89</span>, <span class="number">50</span>, <span class="number">37</span>, <span class="number">5</span>, <span class="number">64</span>, <span class="number">35</span>, <span class="number">9</span>, <span class="number">70</span> &#125;;</span><br><span class="line">	<span class="built_in">insertion_sort</span>(vc);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1>选择排序</h1>
+<p>选择排序是一种简单直观的排序算法，无论什么数据进去都是 O(n²) 的时间复杂度。所以用到它的时候，数据规模越小越好。唯一的好处可能就是不占用额外的内存空间了吧。</p>
+<h2 id="1-算法步骤-3">1. 算法步骤</h2>
+<ol>
+<li>
+<p>首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置</p>
+</li>
+<li>
+<p>再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。</p>
+</li>
+<li>
+<p>重复第二步，直到所有元素均排序完毕。</p>
+</li>
+</ol>
+<h2 id="2-动图演示-3">2. 动图演示</h2>
+<p><img src="/2022/07/26/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/selectionSort.gif" alt="动图演示"></p>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(vector&lt;<span class="type">int</span>&gt; vc, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;第&quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;轮 ： &quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> cnt = <span class="number">0</span>; cnt &lt; vc.<span class="built_in">size</span>() - <span class="number">1</span>; ++cnt) </span><br><span class="line">		cout &lt;&lt; vc[cnt] &lt;&lt; <span class="string">&quot; ,&quot;</span>;</span><br><span class="line">	cout &lt;&lt; vc[vc.<span class="built_in">size</span>() - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">selection_sort_min</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; vc)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> len = vc.<span class="built_in">size</span>();</span><br><span class="line">	<span class="type">int</span> min;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">		min = i; </span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; len; j++) </span><br><span class="line">			<span class="keyword">if</span> (vc[j] &lt; vc[min])</span><br><span class="line">				min = j;</span><br><span class="line">		<span class="built_in">swap</span>(vc[min], vc[i]);</span><br><span class="line">		<span class="built_in">print</span>(vc, i + <span class="number">1</span>);</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">selection_sort_max</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; vc)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> len = vc.<span class="built_in">size</span>();</span><br><span class="line">	<span class="type">int</span> max;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = len - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">		max = i;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = i - <span class="number">1</span>; j &gt;= <span class="number">0</span>; j--) &#123;</span><br><span class="line">			<span class="keyword">if</span> (vc[j] &gt; vc[max]) max = j;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">swap</span>(vc[i], vc[max]);</span><br><span class="line">		<span class="built_in">print</span>(vc, len - (i + <span class="number">1</span>));</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">/*vector&lt;int&gt; vc = &#123; 22, 34, 3, 32, 82, 55, 89, 50, 37, 5, 64, 35, 9, 70 &#125;;	</span></span><br><span class="line"><span class="comment">	selection_sort_min(vc);*/</span></span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; vc2 = &#123; <span class="number">22</span>, <span class="number">34</span>, <span class="number">3</span>, <span class="number">32</span>, <span class="number">82</span>, <span class="number">55</span>, <span class="number">89</span>, <span class="number">50</span>, <span class="number">37</span>, <span class="number">5</span>, <span class="number">64</span>, <span class="number">35</span>, <span class="number">9</span>, <span class="number">70</span> &#125;;</span><br><span class="line">	<span class="built_in">selection_sort_max</span>(vc2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>4.希尔排序</p>
+</blockquote>
+<h1>希尔排序</h1>
+<p>希尔排序，也称递减增量排序算法，是插入排序的一种更高效的改进版本。但希尔排序是非稳定排序算法。</p>
+<p>希尔排序是基于插入排序的以下两点性质而提出改进方法的：</p>
+<ul>
+<li>插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率；</li>
+<li>但插入排序一般来说是低效的，因为插入排序每次只能将数据移动一位；</li>
+</ul>
+<p>希尔排序的基本思想是：先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序，待整个序列中的记录“基本有序”时，再对全体记录进行依次直接插入排序。</p>
+<h2 id="1-算法步骤-4">1. 算法步骤</h2>
+<ol>
+<li>
+<p>选择一个增量序列 t1，t2，……，tk，其中 ti &gt; tj, tk = 1；</p>
+</li>
+<li>
+<p>按增量序列个数 k，对序列进行 k 趟排序；</p>
+</li>
+<li>
+<p>每趟排序，根据对应的增量 ti，将待排序列分割成若干长度为 m 的子序列，分别对各子表进行直接插入排序。仅增量因子为 1 时，整个序列作为一个表来处理，表长度即为整个序列的长度。</p>
+</li>
+</ol>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(vector&lt;<span class="type">int</span>&gt; vc, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;第&quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;轮 ： &quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> cnt = <span class="number">0</span>; cnt &lt; vc.<span class="built_in">size</span>() - <span class="number">1</span>; ++cnt)</span><br><span class="line">		cout &lt;&lt; vc[cnt] &lt;&lt; <span class="string">&quot; ,&quot;</span>;</span><br><span class="line">	cout &lt;&lt; vc[vc.<span class="built_in">size</span>() - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 希尔排序的间隔序列不推荐用2的幂(1 2 4 8 16...)，</span></span><br><span class="line"><span class="comment">// 因为这样直到间隔为1之前，都不会将奇数位置与偶数位置的元素进行比较，这样是低效的。</span></span><br><span class="line"><span class="comment">// 希尔自己认为可以用2的幂 - 1序列(1 3 7 15...)，后来又有文章建议用3x + 1(1 4 13 40 121...)，都是可以的。</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">shellSort</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; vc)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 间隔为3x + 1</span></span><br><span class="line">	<span class="type">int</span> gap = vc.<span class="built_in">size</span>() / <span class="number">3</span> + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (; gap &gt;= <span class="number">1</span>; gap /= <span class="number">3</span>) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; gap; ++i) &#123;</span><br><span class="line">			<span class="comment">// 组内排序</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> j = i + gap; j &lt; vc.<span class="built_in">size</span>(); j += gap) &#123;</span><br><span class="line">				<span class="keyword">for</span> (<span class="type">int</span> k = j; k - gap &gt;= <span class="number">0</span> &amp;&amp; vc[k] &lt; vc[k - gap]; k -= gap) &#123;</span><br><span class="line">					<span class="built_in">swap</span>(vc[k], vc[k - gap]);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">print</span>(vc, i + <span class="number">1</span>);</span><br><span class="line">			cout &lt;&lt; endl;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; vc = &#123; <span class="number">22</span>, <span class="number">34</span>, <span class="number">3</span>, <span class="number">32</span>, <span class="number">82</span>, <span class="number">55</span>, <span class="number">89</span>, <span class="number">50</span>, <span class="number">37</span>, <span class="number">5</span>, <span class="number">64</span>, <span class="number">35</span>, <span class="number">9</span>, <span class="number">70</span> &#125;;</span><br><span class="line">	<span class="built_in">shellSort</span>(vc);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>5.归并排序</p>
+</blockquote>
+<h1>归并排序</h1>
+<h2 id="1-算法步骤-5">1. 算法步骤</h2>
+<ol>
+<li>
+<p>申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列；</p>
+</li>
+<li>
+<p>设定两个指针，最初位置分别为两个已经排序序列的起始位置；</p>
+</li>
+<li>
+<p>比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置；</p>
+</li>
+<li>
+<p>重复步骤 3 直到某一指针达到序列尾；</p>
+</li>
+<li>
+<p>将另一序列剩下的所有元素直接复制到合并序列尾。</p>
+</li>
+</ol>
+<h2 id="2…-动图演示">2… 动图演示</h2>
+<p><img src="/2022/07/26/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/mergeSort.gif" alt="动图演示"></p>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(vector&lt;<span class="type">int</span>&gt; vc, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;第&quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;轮 ： &quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> cnt = <span class="number">0</span>; cnt &lt; vc.<span class="built_in">size</span>() - <span class="number">1</span>; ++cnt)</span><br><span class="line">		cout &lt;&lt; vc[cnt] &lt;&lt; <span class="string">&quot; ,&quot;</span>;</span><br><span class="line">	cout &lt;&lt; vc[vc.<span class="built_in">size</span>() - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; arr, <span class="type">int</span> l, <span class="type">int</span> mid, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> ptrL = l;</span><br><span class="line">    <span class="type">int</span> ptrR = mid;</span><br><span class="line">    <span class="type">static</span> vector&lt;<span class="type">int</span>&gt;tempary;</span><br><span class="line">    <span class="keyword">if</span> (arr.<span class="built_in">size</span>() &gt; tempary.<span class="built_in">size</span>()) &#123;</span><br><span class="line">        tempary.<span class="built_in">resize</span>(arr.<span class="built_in">size</span>());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (ptrL != mid &amp;&amp; ptrR != r) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[ptrL] &lt; arr[ptrR]) &#123;</span><br><span class="line">            tempary[index++] = arr[ptrL++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            tempary[index++] = arr[ptrR++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (ptrL != mid) &#123;</span><br><span class="line">        tempary[index++] = arr[ptrL++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (ptrR != r) &#123;</span><br><span class="line">        tempary[index++] = arr[ptrR++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">copy</span>(tempary.<span class="built_in">begin</span>(), tempary.<span class="built_in">begin</span>() + index, arr.<span class="built_in">begin</span>() + l);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">mergeSort</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; arr, <span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123; <span class="comment">// sort the range [l, r) in arr</span></span><br><span class="line">    <span class="keyword">if</span> (r - l &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">mergeSort</span>(arr, l, mid);</span><br><span class="line">    <span class="built_in">mergeSort</span>(arr, mid, r);</span><br><span class="line">    <span class="built_in">merge</span>(arr, l, mid, r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; vc = &#123; <span class="number">22</span>, <span class="number">34</span>, <span class="number">3</span>, <span class="number">32</span>, <span class="number">82</span>, <span class="number">55</span>, <span class="number">89</span>, <span class="number">50</span>, <span class="number">37</span>, <span class="number">5</span>, <span class="number">64</span>, <span class="number">35</span>, <span class="number">9</span>, <span class="number">70</span> &#125;;</span><br><span class="line">    <span class="built_in">mergeSort</span>(vc, <span class="number">0</span>, vc.<span class="built_in">size</span>());</span><br><span class="line">    <span class="built_in">print</span>(vc, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>6.堆排序</p>
+</blockquote>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>7.快速排序</p>
+</blockquote>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(vector&lt;<span class="type">int</span>&gt; vc, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;第&quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;轮 ： &quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> cnt = <span class="number">0</span>; cnt &lt; vc.<span class="built_in">size</span>() - <span class="number">1</span>; ++cnt)</span><br><span class="line">		cout &lt;&lt; vc[cnt] &lt;&lt; <span class="string">&quot; ,&quot;</span>;</span><br><span class="line">	cout &lt;&lt; vc[vc.<span class="built_in">size</span>() - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qsort</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; arr, <span class="type">int</span> low, <span class="type">int</span> high)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (high &lt;= low) <span class="keyword">return</span>;</span><br><span class="line">    <span class="type">int</span> left = low;</span><br><span class="line">    <span class="type">int</span> right = high;</span><br><span class="line">    <span class="type">int</span> key = arr[low];</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">/*从左向右找比key大的值*/</span></span><br><span class="line">        <span class="keyword">while</span> (arr[left] &lt;= key)</span><br><span class="line">        &#123;</span><br><span class="line">            left++;</span><br><span class="line">            <span class="keyword">if</span> (left == high) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/*从右向左找比key小的值*/</span></span><br><span class="line">        <span class="keyword">while</span> (arr[right] &gt;= key)</span><br><span class="line">        &#123;</span><br><span class="line">            right--;</span><br><span class="line">            <span class="keyword">if</span> (right == low)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (left &gt;= right) <span class="keyword">break</span>;</span><br><span class="line">        <span class="built_in">swap</span>(arr[left], arr[right]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*中枢值与j对应值交换*/</span></span><br><span class="line">    arr[low] = arr[right];</span><br><span class="line">    arr[right] = key;</span><br><span class="line">    <span class="built_in">Qsort</span>(arr, low, right - <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">Qsort</span>(arr, right + <span class="number">1</span>, high);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; vc = &#123; <span class="number">22</span>, <span class="number">34</span>, <span class="number">3</span>, <span class="number">32</span>, <span class="number">82</span>, <span class="number">55</span>, <span class="number">89</span>, <span class="number">50</span>, <span class="number">37</span>, <span class="number">5</span>, <span class="number">64</span>, <span class="number">35</span>, <span class="number">9</span>, <span class="number">70</span> &#125;;</span><br><span class="line">    <span class="built_in">Qsort</span>(vc, <span class="number">0</span>, vc.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">print</span>(vc, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>8.基数排序</p>
+</blockquote>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>9.桶排序</p>
+</blockquote>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>10.计数排序</p>
+</blockquote>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <!-- after add -->
+    
+       <!-- after add finish -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/25/leetcode-303-%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1107,286 +1503,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/14/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ico.jpg">
-      <meta itemprop="name" content="Willson-Xbort">
-      <meta itemprop="description" content="none">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/07/14/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">统计学习方法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-07-14 18:30:28" itemprop="dateCreated datePublished" datetime="2022-07-14T18:30:28+08:00">2022-07-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-07-26 16:16:20" itemprop="dateModified" datetime="2022-07-26T16:16:20+08:00">2022-07-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="一写文章就开始啰嗦…">一写文章就开始啰嗦…</h4>
-<blockquote>
-<p>感知机</p>
-</blockquote>
-<p>1.1 感知机详解链接：<a target="_blank" rel="noopener" href="https://www.pkudodo.com/2018/11/18/1-4/">https://www.pkudodo.com/2018/11/18/1-4/</a></p>
-<p>1.2 MNIST训练集下载：</p>
-<pre><code>1.2.1 进入如下网址下载：
-    https://github.com/Dod-o/Statistical-Learning-Method_Code
-1.2.2 点击Mnist 解压即可
-</code></pre>
-<p>1.3 将csv放入文件夹<br>
-1.4 贴代码:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">def loadData(fileName):</span><br><span class="line">    </span><br><span class="line"># 加载Mnist数据集</span><br><span class="line"># :param fileName:要加载的数据集路径</span><br><span class="line"># :return: list形式的数据集及标记</span><br><span class="line"> </span><br><span class="line">print(&#x27;start to read data&#x27;)</span><br><span class="line"># 存放数据及标记的list</span><br><span class="line">dataArr = []; labelArr = []</span><br><span class="line"># 打开文件</span><br><span class="line">fr = open(fileName, &#x27;r&#x27;)</span><br><span class="line"># 将文件按行读取</span><br><span class="line">for line in fr.readlines():</span><br><span class="line">    # 对每一行数据按切割福&#x27;,&#x27;进行切割，返回字段列表</span><br><span class="line">    curLine = line.strip().split(&#x27;,&#x27;)</span><br><span class="line">    # 最左边的是标签</span><br><span class="line">    # Mnsit有0-9是个标记，由于是二分类任务，所以将&gt;=5的作为1，&lt;5为-1</span><br><span class="line">    if int(curLine[0]) &gt;= 5:</span><br><span class="line">        labelArr.append(1)</span><br><span class="line">    else:</span><br><span class="line">        labelArr.append(-1)</span><br><span class="line">    #存放标记</span><br><span class="line">    #[int(num) for num in curLine[1:]] -&gt; 遍历每一行中除了以第一个元素（标记）外将所有元素转换成int类型</span><br><span class="line">    #[int(num)/255 for num in curLine[1:]] -&gt; 将所有数据除255归一化(非必须步骤，可以不归一化)</span><br><span class="line">    dataArr.append([int(num)/255 for num in curLine[1:]])</span><br><span class="line"></span><br><span class="line">#返回data和label</span><br><span class="line">return dataArr, labelArr</span><br><span class="line"></span><br><span class="line">def perceptron(dataArr, labelArr, iter=50):</span><br><span class="line">    </span><br><span class="line">    # 感知器训练过程</span><br><span class="line">    # :param dataArr:训练集的数据 (list)</span><br><span class="line">    # :param labelArr: 训练集的标签(list)</span><br><span class="line">    # :param iter: 迭代次数，默认50</span><br><span class="line">    # :return: 训练好的w和b</span><br><span class="line"></span><br><span class="line">    print(&#x27;start to trans&#x27;)</span><br><span class="line">    #将数据转换成矩阵形式（在机器学习中因为通常都是向量的运算，转换称矩阵形式方便运算）</span><br><span class="line">    #转换后的数据中每一个样本的向量都是横向的</span><br><span class="line">    dataMat = np.mat(dataArr)</span><br><span class="line">    #将标签转换成矩阵，之后转置(.T为转置)。</span><br><span class="line">    #转置是因为在运算中需要单独取label中的某一个元素，如果是1xN的矩阵的话，无法用label[i]的方式读取</span><br><span class="line">    #对于只有1xN的label可以不转换成矩阵，直接label[i]即可，这里转换是为了格式上的统一</span><br><span class="line">    labelMat = np.mat(labelArr).T</span><br><span class="line">    #获取数据矩阵的大小，为m*n</span><br><span class="line">    m, n = np.shape(dataMat) # 60000 * 784</span><br><span class="line">    print(&#x27;------------&#x27;,m, n,&#x27;-------------------&#x27;)</span><br><span class="line">    #创建初始权重w，初始值全为0。</span><br><span class="line">    #np.shape(dataMat)的返回值为m，n -&gt; np.shape(dataMat)[1])的值即为n，与</span><br><span class="line">    #样本长度保持一致</span><br><span class="line">    # 1 * n</span><br><span class="line">    w = np.zeros((1, np.shape(dataMat)[1]))</span><br><span class="line">    #初始化偏置b为0</span><br><span class="line">    b = 0</span><br><span class="line">    #初始化步长，也就是梯度下降过程中的n，控制梯度下降速率</span><br><span class="line">    h = 0.0001</span><br><span class="line"></span><br><span class="line">    #进行iter次迭代计算</span><br><span class="line">    for k in range(iter):</span><br><span class="line">        #对于每一个样本进行梯度下降</span><br><span class="line">        #李航书中在2.3.1开头部分使用的梯度下降，是全部样本都算一遍以后，统一</span><br><span class="line">        #进行一次梯度下降</span><br><span class="line">        #在2.3.1的后半部分可以看到（例如公式2.6 2.7），求和符号没有了，此时用</span><br><span class="line">        #的是随机梯度下降，即计算一个样本就针对该样本进行一次梯度下降。</span><br><span class="line">        #两者的差异各有千秋，但较为常用的是随机梯度下降。</span><br><span class="line">        for i in range(m):</span><br><span class="line">            #获取当前样本的向量</span><br><span class="line">            xi = dataMat[i]</span><br><span class="line">            #获取当前样本所对应的标签</span><br><span class="line">            yi = labelMat[i]</span><br><span class="line">            #判断是否是误分类样本</span><br><span class="line">            #误分类样本特征为： -yi(w*xi+b)&gt;=0，详细可参考书中2.2.2小节</span><br><span class="line">            #在书的公式中写的是&gt;0，实际上如果=0，说明改点在超平面上，也是不正确的</span><br><span class="line">            if -1 * yi * (w * xi.T + b) &gt;= 0:</span><br><span class="line">                #对于误分类样本，进行梯度下降，更新w和b</span><br><span class="line">                #按公式进行更新</span><br><span class="line">                w = w + h *  yi * xi</span><br><span class="line">                b = b + h * yi</span><br><span class="line">        #打印训练进度</span><br><span class="line">        print(&#x27;Round %d:%d training&#x27; % (k, iter))</span><br><span class="line"></span><br><span class="line">    #返回训练完的w、b</span><br><span class="line">    return w, b</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def test(dataArr, labelArr, w, b):</span><br><span class="line">   </span><br><span class="line">    # 测试准确率</span><br><span class="line">    # :param dataArr:测试集</span><br><span class="line">    # :param labelArr: 测试集标签</span><br><span class="line">    # :param w: 训练获得的权重w</span><br><span class="line">    # :param b: 训练获得的偏置b</span><br><span class="line">    # :return: 正确率</span><br><span class="line">    </span><br><span class="line">    print(&#x27;start to test&#x27;)</span><br><span class="line">    #将数据集转换为矩阵形式方便运算</span><br><span class="line">    dataMat = np.mat(dataArr)</span><br><span class="line">    #将label转换为矩阵并转置，详细信息参考上文perceptron中</span><br><span class="line">    #对于这部分的解说</span><br><span class="line">    labelMat = np.mat(labelArr).T</span><br><span class="line"></span><br><span class="line">    #获取测试数据集矩阵的大小</span><br><span class="line">    m, n = np.shape(dataMat)</span><br><span class="line">    #错误样本数计数</span><br><span class="line">    errorCnt = 0</span><br><span class="line">    #遍历所有测试样本</span><br><span class="line">    for i in range(m):</span><br><span class="line">        #获得单个样本向量</span><br><span class="line">        xi = dataMat[i]</span><br><span class="line">        #获得该样本标记</span><br><span class="line">        yi = labelMat[i]</span><br><span class="line">        #获得运算结果</span><br><span class="line">        result = -1 * yi * (w * xi.T + b)</span><br><span class="line">        #如果-yi(w*xi+b)&gt;=0，说明该样本被误分类，错误样本数加一</span><br><span class="line">        if result &gt;= 0:</span><br><span class="line">            errorCnt += 1</span><br><span class="line">    #正确率 = 1 - （样本分类错误数 / 样本总数）</span><br><span class="line">    accruRate = 1 - (errorCnt / m)</span><br><span class="line">    #返回正确率</span><br><span class="line">    return accruRate</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    #获取当前时间</span><br><span class="line">    #在文末同样获取当前时间，两时间差即为程序运行时间</span><br><span class="line">    start = time.time()</span><br><span class="line"></span><br><span class="line">    #获取训练集及标签</span><br><span class="line">    trainData, trainLabel = loadData(&#x27;./mnist_train/mnist_train.csv&#x27;)</span><br><span class="line">    #print(&#x27;train_Data :&#123;0&#125;, train_Label : &#123;1&#125;&#x27;, trainData, trainLabel)</span><br><span class="line"></span><br><span class="line">    #获取测试集及标签</span><br><span class="line">    testData, testLabel = loadData(&#x27;./mnist_test/mnist_test.csv&#x27;)</span><br><span class="line"></span><br><span class="line">    #训练获得权重</span><br><span class="line">    w, b = perceptron(trainData, trainLabel, iter = 30)</span><br><span class="line">    #进行测试，获得正确率</span><br><span class="line">    accruRate = test(testData, testLabel, w, b)</span><br><span class="line"></span><br><span class="line">    #获取当前时间，作为结束时间</span><br><span class="line">    end = time.time()</span><br><span class="line">    #显示正确率</span><br><span class="line">    print(&#x27;accuracy rate is:&#x27;, accruRate)</span><br><span class="line">    #显示用时时长</span><br><span class="line">    print(&#x27;time span:&#x27;, end - start)</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>K近邻</p>
-</blockquote>
-<p>1.1 K近邻详解：<a target="_blank" rel="noopener" href="https://www.pkudodo.com/2018/11/19/1-2/">https://www.pkudodo.com/2018/11/19/1-2/</a></p>
-<p>1.2 MNIST训练集下载：</p>
-<pre><code>1.2.1 进入如下网址下载：
-    https://github.com/Dod-o/Statistical-Learning-Method_Code
-1.2.2 点击Mnist 解压即可
-</code></pre>
-<p>1.3 将csv放入文件夹<br>
-1.4 贴代码:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br></pre></td><td class="code"><pre><span class="line"># coding=utf-8</span><br><span class="line"># Author:Dodo</span><br><span class="line"># Date:2018-11-16</span><br><span class="line"># Email:lvtengchao@pku.edu.cn</span><br><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line">数据集：Mnist</span><br><span class="line">训练集数量：60000</span><br><span class="line">测试集数量：10000（实际使用：200）</span><br><span class="line">------------------------------</span><br><span class="line">运行结果：（邻近k数量：25）</span><br><span class="line">向量距离使用算法——欧式距离</span><br><span class="line">    正确率：97%</span><br><span class="line">    运行时长：308s</span><br><span class="line">向量距离使用算法——曼哈顿距离</span><br><span class="line">    正确率：14%</span><br><span class="line">    运行时长：246s</span><br><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line">import numpy as np</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def loadData(fileName):</span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    加载文件</span><br><span class="line">    :param fileName:要加载的文件路径</span><br><span class="line">    :return: 数据集和标签集</span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    print(&#x27;start read file&#x27;)</span><br><span class="line">    # 存放数据及标记</span><br><span class="line">    dataArr = [];</span><br><span class="line">    labelArr = []</span><br><span class="line">    # 读取文件</span><br><span class="line">    fr = open(fileName)</span><br><span class="line">    # 遍历文件中的每一行</span><br><span class="line">    for line in fr.readlines():</span><br><span class="line">        # 获取当前行，并按“，”切割成字段放入列表中</span><br><span class="line">        # strip：去掉每行字符串首尾指定的字符（默认空格或换行符）</span><br><span class="line">        # split：按照指定的字符将字符串切割成每个字段，返回列表形式</span><br><span class="line">        curLine = line.strip().split(&#x27;,&#x27;)</span><br><span class="line">        # 将每行中除标记外的数据放入数据集中（curLine[0]为标记信息）</span><br><span class="line">        # 在放入的同时将原先字符串形式的数据转换为整型</span><br><span class="line">        dataArr.append([int(num) for num in curLine[1:]])</span><br><span class="line">        # 将标记信息放入标记集中</span><br><span class="line">        # 放入的同时将标记转换为整型</span><br><span class="line">        labelArr.append(int(curLine[0]))</span><br><span class="line">    # 返回数据集和标记</span><br><span class="line">    return dataArr, labelArr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def calcDist(x1, x2):</span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    计算两个样本点向量之间的距离</span><br><span class="line">    使用的是欧氏距离，即 样本点每个元素相减的平方  再求和  再开方</span><br><span class="line">    欧式举例公式这里不方便写，可以百度或谷歌欧式距离（也称欧几里得距离）</span><br><span class="line">    :param x1:向量1</span><br><span class="line">    :param x2:向量2</span><br><span class="line">    :return:向量之间的欧式距离</span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    return np.sqrt(np.sum(np.square(x1 - x2)))</span><br><span class="line">    # 马哈顿距离计算公式</span><br><span class="line">    # return np.sum(x1 - x2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def getClosest(trainDataMat, trainLabelMat, x, topK):</span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    预测样本x的标记。</span><br><span class="line">    获取方式通过找到与样本x最近的topK个点，并查看它们的标签。</span><br><span class="line">    查找里面占某类标签最多的那类标签</span><br><span class="line">    （书中3.1 3.2节）</span><br><span class="line">    :param trainDataMat:训练集数据集</span><br><span class="line">    :param trainLabelMat:训练集标签集</span><br><span class="line">    :param x:要预测的样本x</span><br><span class="line">    :param topK:选择参考最邻近样本的数目（样本数目的选择关系到正确率，详看3.2.3 K值的选择）</span><br><span class="line">    :return:预测的标记</span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    # 建立一个存放向量x与每个训练集中样本距离的列表</span><br><span class="line">    # 列表的长度为训练集的长度，distList[i]表示x与训练集中第</span><br><span class="line">    ## i个样本的距离</span><br><span class="line">    distList = [0] * len(trainLabelMat)</span><br><span class="line">    # 遍历训练集中所有的样本点，计算与x的距离</span><br><span class="line">    for i in range(len(trainDataMat)):</span><br><span class="line">        # 获取训练集中当前样本的向量</span><br><span class="line">        x1 = trainDataMat[i]</span><br><span class="line">        # 计算向量x与训练集样本x的距离</span><br><span class="line">        curDist = calcDist(x1, x)</span><br><span class="line">        # 将距离放入对应的列表位置中</span><br><span class="line">        distList[i] = curDist</span><br><span class="line">    # 对距离列表进行排序</span><br><span class="line">    # argsort：函数将数组的值从小到大排序后，并按照其相对应的索引值输出</span><br><span class="line">    # 例如：</span><br><span class="line">    #   &gt;&gt;&gt; x = np.array([3, 1, 2])</span><br><span class="line">    #   &gt;&gt;&gt; np.argsort(x)</span><br><span class="line">    #   array([1, 2, 0])</span><br><span class="line">    # 返回的是列表中从小到大的元素索引值，对于我们这种需要查找最小距离的情况来说很合适</span><br><span class="line">    # array返回的是整个索引值列表，我们通过[:topK]取列表中前topL个放入list中。</span><br><span class="line">    # ----------------优化点-------------------</span><br><span class="line">    # 由于我们只取topK小的元素索引值，所以其实不需要对整个列表进行排序，而argsort是对整个</span><br><span class="line">    # 列表进行排序的，存在时间上的浪费。字典有现成的方法可以只排序top大或top小，可以自行查阅</span><br><span class="line">    # 对代码进行稍稍修改即可</span><br><span class="line">    # 这里没有对其进行优化主要原因是KNN的时间耗费大头在计算向量与向量之间的距离上，由于向量高维</span><br><span class="line">    # 所以计算时间需要很长，所以如果要提升时间，在这里优化的意义不大。</span><br><span class="line">    # 这边这么写是因为一维的数组，画张图就能理解</span><br><span class="line">    topKList = np.argsort(np.array(distList))[:topK]  # 升序排序</span><br><span class="line">    # 建立一个长度时的列表，用于选择数量最多的标记</span><br><span class="line">    # 3.2.4提到了分类决策使用的是投票表决，topK个标记每人有一票，在数组中每个标记代表的位置中投入</span><br><span class="line">    # 自己对应的地方，随后进行唱票选择最高票的标记</span><br><span class="line">    # 这里是分配10个空间，初始值为0</span><br><span class="line">    labelList = [0] * 10</span><br><span class="line">    # 对topK个索引进行遍历</span><br><span class="line">    for index in topKList:</span><br><span class="line">        # trainLabelMat[index]：在训练集标签中寻找topK元素索引对应的标记</span><br><span class="line">        # int(trainLabelMat[index])：将标记转换为int（实际上已经是int了，但是不int的话，报错）</span><br><span class="line">        # labelList[int(trainLabelMat[index])]：找到标记在labelList中对应的位置</span><br><span class="line">        # 最后加1，表示投了一票</span><br><span class="line">        labelList[int(trainLabelMat[index])] += 1</span><br><span class="line">    # max(labelList)：找到选票箱中票数最多的票数值</span><br><span class="line">    # labelList.index(max(labelList))：再根据最大值在列表中找到该值对应的索引，等同于预测的标记</span><br><span class="line">    return labelList.index(max(labelList))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def test(trainDataArr, trainLabelArr, testDataArr, testLabelArr, topK):</span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    测试正确率</span><br><span class="line">    :param trainDataArr:训练集数据集</span><br><span class="line">    :param trainLabelArr: 训练集标记</span><br><span class="line">    :param testDataArr: 测试集数据集</span><br><span class="line">    :param testLabelArr: 测试集标记</span><br><span class="line">    :param topK: 选择多少个邻近点参考</span><br><span class="line">    :return: 正确率</span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    print(&#x27;start test&#x27;)</span><br><span class="line">    # 将所有列表转换为矩阵形式，方便运算</span><br><span class="line">    trainDataMat = np.mat(trainDataArr);</span><br><span class="line">    trainLabelMat = np.mat(trainLabelArr).T</span><br><span class="line">    testDataMat = np.mat(testDataArr);</span><br><span class="line">    testLabelMat = np.mat(testLabelArr).T</span><br><span class="line">    # 错误值技术</span><br><span class="line">    errorCnt = 0</span><br><span class="line">    # 遍历测试集，对每个测试集样本进行测试</span><br><span class="line">    # 由于计算向量与向量之间的时间耗费太大，测试集有6000个样本，所以这里人为改成了</span><br><span class="line">    # 测试200个样本点，如果要全跑，将行注释取消，再下一行for注释即可，同时下面的print</span><br><span class="line">    # 和return也要相应的更换注释行</span><br><span class="line">    # for i in range(len(testDataMat)):</span><br><span class="line">    for i in range(200):</span><br><span class="line">        # print(&#x27;test %d:%d&#x27;%(i, len(trainDataArr)))</span><br><span class="line">        print(&#x27;test %d:%d&#x27; % (i, 200))</span><br><span class="line">        # 读取测试集当前测试样本的向量</span><br><span class="line">        x = testDataMat[i]</span><br><span class="line">        # 获取预测的标记</span><br><span class="line">        y = getClosest(trainDataMat, trainLabelMat, x, topK)</span><br><span class="line">        # 如果预测标记与实际标记不符，错误值计数加1</span><br><span class="line">        if y != testLabelMat[i]: errorCnt += 1</span><br><span class="line">    # 返回正确率</span><br><span class="line">    # return 1 - (errorCnt / len(testDataMat))</span><br><span class="line">    return 1 - (errorCnt / 200)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    start = time.time()</span><br><span class="line">    # 获取训练集</span><br><span class="line">    trainDataArr, trainLabelArr = loadData(&#x27;./mnist_train/mnist_train.csv&#x27;)</span><br><span class="line">    # 获取测试集</span><br><span class="line">    testDataArr, testLabelArr = loadData(&#x27;./mnist_test/mnist_test.csv&#x27;)</span><br><span class="line">    # 计算测试集正确率</span><br><span class="line">    accur = test(trainDataArr, trainLabelArr, testDataArr, testLabelArr, 25)</span><br><span class="line">    # 打印正确率</span><br><span class="line">    print(&#x27;accur is:%d&#x27; % (accur * 100), &#x27;%&#x27;)</span><br><span class="line">    end = time.time()</span><br><span class="line">    # 显示花费时间</span><br><span class="line">print(&#x27;time span:&#x27;, end - start)</span><br></pre></td></tr></table></figure>
-<p>KD树：</p>
-<blockquote>
-<p>还未实现，只找了外链</p>
-</blockquote>
-
-<div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
-<iframe src="//player.bilibili.com/player.html?aid=853980597&bvid=BV1EL4y1F7sz&cid=717808316&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-
-</div>
-      
-    </div>
-
-    
-    
-    
-
-    <!-- after add -->
-    
-       <!-- after add finish -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/13/%E9%9D%A2%E8%AF%95%E5%B0%8F%E7%9F%A5%E8%AF%86%EF%BC%9A-%E5%8F%96%E5%8F%8D%E7%AC%A6%E5%8F%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ico.jpg">
-      <meta itemprop="name" content="Willson-Xbort">
-      <meta itemprop="description" content="none">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/07/13/%E9%9D%A2%E8%AF%95%E5%B0%8F%E7%9F%A5%E8%AF%86%EF%BC%9A-%E5%8F%96%E5%8F%8D%E7%AC%A6%E5%8F%B7/" class="post-title-link" itemprop="url">面试小知识： 取反符号~</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-07-13 19:34:48" itemprop="dateCreated datePublished" datetime="2022-07-13T19:34:48+08:00">2022-07-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-07-14 18:27:41" itemprop="dateModified" datetime="2022-07-14T18:27:41+08:00">2022-07-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="今天在力扣刷题的时候看到这么一个问题：-0-？">今天在力扣刷题的时候看到这么一个问题： ~ 0 = ？</h3>
-<blockquote>
-<p>按照公式：</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~x = -(x + 1) </span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <!-- after add -->
-    
-       <!-- after add finish -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/11/lambda-expression/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ico.jpg">
-      <meta itemprop="name" content="Willson-Xbort">
-      <meta itemprop="description" content="none">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/07/11/lambda-expression/" class="post-title-link" itemprop="url">lambda expression</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-07-11 11:22:09 / 修改时间：19:51:10" itemprop="dateCreated datePublished" datetime="2022-07-11T11:22:09+08:00">2022-07-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="lambda-介绍：">lambda 介绍：</h2>
-<p><img src="/2022/07/11/lambda-expression/lambda_img1.PNG" alt><br>
-<img src="/2022/07/11/lambda-expression/lambda_img2.PNG" alt><br>
-<img src="/2022/07/11/lambda-expression/lambda_img3.PNG" alt><br>
-<img src="/2022/07/11/lambda-expression/lambda_img4.PNG" alt></p>
-<blockquote>
-<p>find_if：</p>
-</blockquote>
-<p><img src="/2022/07/11/lambda-expression/lambda_img5.PNG" alt></p>
-<blockquote>
-<p>for_each：</p>
-</blockquote>
-<p><img src="/2022/07/11/lambda-expression/lambda_img6.PNG" alt></p>
-<blockquote>
-<p>示例：</p>
-</blockquote>
-<p><img src="/2022/07/11/lambda-expression/lambda_img7.PNG" alt></p>
-<blockquote>
-<p>值捕获 tips： 需要写在函数内部</p>
-</blockquote>
-<p><img src="/2022/07/11/lambda-expression/lambda_img8.PNG" alt></p>
-<blockquote>
-<p>引用捕获：</p>
-</blockquote>
-<p><img src="/2022/07/11/lambda-expression/lambda_img9.PNG" alt><br>
-<img src="/2022/07/11/lambda-expression/lambda_img10.PNG" alt></p>
-<blockquote>
-<p>隐式捕获：</p>
-</blockquote>
-<p><img src="/2022/07/11/lambda-expression/lambda_img11.PNG" alt><br>
-<img src="/2022/07/11/lambda-expression/lambda_img12.PNG" alt></p>
-<blockquote>
-<p>捕获列表：</p>
-</blockquote>
-<p><img src="/2022/07/11/lambda-expression/lambda_img13.PNG" alt></p>
-<blockquote>
-<p>可变lambda：</p>
-</blockquote>
-<p><img src="/2022/07/11/lambda-expression/lambda_img14.PNG" alt><br>
-<img src="/2022/07/11/lambda-expression/lambda_img15.PNG" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <!-- after add -->
-    
-       <!-- after add finish -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1454,14 +1574,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

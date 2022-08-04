@@ -1,35 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>STL底层实现</title>
-    <url>/2022/07/25/STL%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<blockquote>
-<p>vector</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">底层实现是数组。</span><br><span class="line">1.由于数组的特性,vector也可以使用下标快速访问。</span><br><span class="line">2.顺序存储，插入/删除到非尾结点位置所需时间复杂度0(n)</span><br><span class="line">3.新建vector时，和数组一样分配一片连续内存空间，当添加元素时，如果初始分配的空间满了，将会重新申请一个2倍质数大小左右的空间，</span><br><span class="line">将原空间的内容拷贝过来后释放原空间内存。</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>map, unordered_map, multimap, unordered_multimap</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">map 和 multimap 的底层数据结构是红黑树，根据红黑树的原理，map和multimap可以实现0(lgn)的查找，删除，插入，实现key为序列的排序，并且map和multimap是有序的。</span><br><span class="line">unordered_map, unordered_map 的底层数据结构是哈希表。</span><br><span class="line">multimap 和 map 的区别在于，multimap允许关键字重复，而map不允许重复。</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>list</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">底层实现是双向链表。拥有链表的特性。</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>deque</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">底层实现是双向队列，可以在头尾插入和删除元素。</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>set &amp; multiset &amp; unordered_set &amp; unordered_multiset</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">以上四种容器也都是关联容器，set系与map系的区别在于map中存储的是&lt;key-value&gt;，而set可以理解为关键字即值，即只保存关键字的容器。</span><br><span class="line">set 的底层实现是红黑树(平衡树),。</span><br><span class="line">unordered_set, unordered_multiset底层实现为哈希表。</span><br></pre></td></tr></table></figure>]]></content>
-      <tags>
-        <tag>STL</tag>
-        <tag>C++</tag>
-        <tag>容器</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>尾置返回类型</title>
     <url>/2022/06/30/Trailing-return-type/</url>
     <content><![CDATA[<h3 id="C-Primer-第五版-第六章-P221-P224">C++ Primer 第五版 第六章 P221~P224</h3>
@@ -56,46 +27,13 @@
       </tags>
   </entry>
   <entry>
-    <title>性能测试工具的简单使用</title>
-    <url>/2022/07/03/Use-of-performance-test-tools/</url>
-    <content><![CDATA[<h2 id="下载工具：">下载工具：</h2>
-<table>
-<thead>
-<tr>
-<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon1.PNG" alt="virtual User Generator"></th>
-<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon2.PNG" alt="controller"></th>
-<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon3.PNG" alt="Analysis"></th>
-</tr>
-</thead>
-</table>
-<h2 id="打开virtual-User-Generator：">打开virtual User Generator：</h2>
-<ol>
-<li>点击录制按钮，选择协议<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img1.png" alt><br>
-2.在高级选项中选择明确包含url的脚本<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img2.png" alt><br>
-3.点击开始录制后就会进入你所写的url链接，结束后就可以看到Action的代码<br>
-4.可以点击<em>设计工作室</em>进行关联<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img3.png" alt><br>
-5.点击运行，看到为√的时候就成功了<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img4.png" alt></li>
-</ol>
-<h2 id="打开controller：">打开controller：</h2>
-<p>1.选择脚本<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img5.png" alt><br>
-2.进行设置，在基本计划下可以设置用户数量<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img6.png" alt><br>
-3.点击运行时设置，可以将自动事务的勾选去掉<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img7.png" alt><br>
-4.设置全部完成后可以运行<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img8.png" alt><br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img9.png" alt><br>
-5.点击结果-&gt;分析结果<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img10.png" alt><br>
-将会自动打开<em>Analysis</em>显示结果</p>
-]]></content>
+    <title>Linux 高性能服务器理解</title>
+    <url>/2022/07/26/Linux-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[]]></content>
       <tags>
-        <tag>工具</tag>
+        <tag>C++</tag>
+        <tag>Linux</tag>
+        <tag>socket</tag>
       </tags>
   </entry>
   <entry>
@@ -158,6 +96,78 @@
       </tags>
   </entry>
   <entry>
+    <title>STL底层实现</title>
+    <url>/2022/07/25/STL%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<blockquote>
+<p>vector</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">底层实现是数组。</span><br><span class="line">1.由于数组的特性,vector也可以使用下标快速访问。</span><br><span class="line">2.顺序存储，插入/删除到非尾结点位置所需时间复杂度0(n)</span><br><span class="line">3.新建vector时，和数组一样分配一片连续内存空间，当添加元素时，如果初始分配的空间满了，将会重新申请一个2倍质数大小左右的空间，</span><br><span class="line">将原空间的内容拷贝过来后释放原空间内存。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>map, unordered_map, multimap, unordered_multimap</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">map 和 multimap 的底层数据结构是红黑树，根据红黑树的原理，map和multimap可以实现0(lgn)的查找，删除，插入，实现key为序列的排序，并且map和multimap是有序的。</span><br><span class="line">unordered_map, unordered_map 的底层数据结构是哈希表。</span><br><span class="line">multimap 和 map 的区别在于，multimap允许关键字重复，而map不允许重复。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>list</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">底层实现是双向链表。拥有链表的特性。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>deque</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">底层实现是双向队列，可以在头尾插入和删除元素。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>set &amp; multiset &amp; unordered_set &amp; unordered_multiset</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">以上四种容器也都是关联容器，set系与map系的区别在于map中存储的是&lt;key-value&gt;，而set可以理解为关键字即值，即只保存关键字的容器。</span><br><span class="line">set 的底层实现是红黑树(平衡树),。</span><br><span class="line">unordered_set, unordered_multiset底层实现为哈希表。</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>C++</tag>
+        <tag>STL</tag>
+        <tag>容器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>性能测试工具的简单使用</title>
+    <url>/2022/07/03/Use-of-performance-test-tools/</url>
+    <content><![CDATA[<h2 id="下载工具：">下载工具：</h2>
+<table>
+<thead>
+<tr>
+<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon1.PNG" alt="virtual User Generator"></th>
+<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon2.PNG" alt="controller"></th>
+<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon3.PNG" alt="Analysis"></th>
+</tr>
+</thead>
+</table>
+<h2 id="打开virtual-User-Generator：">打开virtual User Generator：</h2>
+<ol>
+<li>点击录制按钮，选择协议<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img1.png" alt><br>
+2.在高级选项中选择明确包含url的脚本<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img2.png" alt><br>
+3.点击开始录制后就会进入你所写的url链接，结束后就可以看到Action的代码<br>
+4.可以点击<em>设计工作室</em>进行关联<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img3.png" alt><br>
+5.点击运行，看到为√的时候就成功了<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img4.png" alt></li>
+</ol>
+<h2 id="打开controller：">打开controller：</h2>
+<p>1.选择脚本<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img5.png" alt><br>
+2.进行设置，在基本计划下可以设置用户数量<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img6.png" alt><br>
+3.点击运行时设置，可以将自动事务的勾选去掉<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img7.png" alt><br>
+4.设置全部完成后可以运行<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img8.png" alt><br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img9.png" alt><br>
+5.点击结果-&gt;分析结果<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img10.png" alt><br>
+将会自动打开<em>Analysis</em>显示结果</p>
+]]></content>
+      <tags>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>删除重复元素</title>
     <url>/2022/07/10/delete-duplicate-elements/</url>
     <content><![CDATA[<h3 id="快速入手">快速入手</h3>
@@ -211,55 +221,6 @@
 ]]></content>
       <tags>
         <tag>安装</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>lambda expression</title>
-    <url>/2022/07/11/lambda-expression/</url>
-    <content><![CDATA[<h2 id="lambda-介绍：">lambda 介绍：</h2>
-<p><img src="/2022/07/11/lambda-expression/lambda_img1.PNG" alt><br>
-<img src="/2022/07/11/lambda-expression/lambda_img2.PNG" alt><br>
-<img src="/2022/07/11/lambda-expression/lambda_img3.PNG" alt><br>
-<img src="/2022/07/11/lambda-expression/lambda_img4.PNG" alt></p>
-<blockquote>
-<p>find_if：</p>
-</blockquote>
-<p><img src="/2022/07/11/lambda-expression/lambda_img5.PNG" alt></p>
-<blockquote>
-<p>for_each：</p>
-</blockquote>
-<p><img src="/2022/07/11/lambda-expression/lambda_img6.PNG" alt></p>
-<blockquote>
-<p>示例：</p>
-</blockquote>
-<p><img src="/2022/07/11/lambda-expression/lambda_img7.PNG" alt></p>
-<blockquote>
-<p>值捕获 tips： 需要写在函数内部</p>
-</blockquote>
-<p><img src="/2022/07/11/lambda-expression/lambda_img8.PNG" alt></p>
-<blockquote>
-<p>引用捕获：</p>
-</blockquote>
-<p><img src="/2022/07/11/lambda-expression/lambda_img9.PNG" alt><br>
-<img src="/2022/07/11/lambda-expression/lambda_img10.PNG" alt></p>
-<blockquote>
-<p>隐式捕获：</p>
-</blockquote>
-<p><img src="/2022/07/11/lambda-expression/lambda_img11.PNG" alt><br>
-<img src="/2022/07/11/lambda-expression/lambda_img12.PNG" alt></p>
-<blockquote>
-<p>捕获列表：</p>
-</blockquote>
-<p><img src="/2022/07/11/lambda-expression/lambda_img13.PNG" alt></p>
-<blockquote>
-<p>可变lambda：</p>
-</blockquote>
-<p><img src="/2022/07/11/lambda-expression/lambda_img14.PNG" alt><br>
-<img src="/2022/07/11/lambda-expression/lambda_img15.PNG" alt></p>
-]]></content>
-      <tags>
-        <tag>C++</tag>
-        <tag>lambda</tag>
       </tags>
   </entry>
   <entry>
@@ -317,6 +278,129 @@
       </tags>
   </entry>
   <entry>
+    <title>const 和 static</title>
+    <url>/2022/07/27/const-%E5%92%8C-static/</url>
+    <content><![CDATA[<blockquote>
+<p>const 复习</p>
+</blockquote>
+<p>1.const 有哪些用法？</p>
+<pre><code>1.const修饰变量，使得变量成为一个常量
+</code></pre>
+<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img1.PNG" alt><br>
+注意点：const 变量要初始化</p>
+<pre><code>2.默认情况下,const对象只在文件内有效
+</code></pre>
+<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img2.PNG" alt></p>
+<pre><code>3.const 可以引用
+</code></pre>
+<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img3.PNG" alt><br>
+注意点：const不能改变</p>
+<pre><code>4.const 指针
+</code></pre>
+<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img4.PNG" alt><br>
+有以下几种形式：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="type">const</span>* p; <span class="comment">//指针本身可以修改，指向的内容不能修改</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* p; <span class="comment">//指针本身可以修改，指向的内容不能修改 -》 指向常量的指针</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span>* <span class="type">const</span> p; <span class="comment">// 指针本身不能修改，指向的内容可以修改</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="type">const</span>* <span class="type">const</span> p; <span class="comment">// 指针本身不能修改，指向的内容不能修改</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> p; <span class="comment">// 指针本身不能修改，指向的内容不能修改</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img5.PNG" alt><br>
+<img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img6.PNG" alt></p>
+<pre><code>5. const 加在函数后方，不能修改成员变量
+</code></pre>
+<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img7.PNG" alt><br>
+提示：只允许在类的非static成员函数后加const<br>
+注意点：函数后加的const其实this指针进行修饰，即const *this</p>
+<blockquote>
+<p>static 复习</p>
+</blockquote>
+<p>2.static 有哪些用法？</p>
+<pre><code>1. 修饰局部变量
+</code></pre>
+<p>看代码:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line">	cout &lt;&lt; ++a &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">		<span class="built_in">test</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img8.PNG" alt></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line">	cout &lt;&lt; ++a &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">		<span class="built_in">test</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img9.PNG" alt></p>
+<blockquote>
+<p>static 修饰的局部变量(静态变量)是存储在静态区内部，而不再是本来的栈区，它的生命周期和程序的生命周期已经一样长。<br>
+也就是说 静态变量出了作用域{} 也不会被销毁，除非程序结束。</p>
+</blockquote>
+<pre><code>2.修饰全局变量
+</code></pre>
+<p>测试：头文件不影响extern<br>
+<img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img10.PNG" alt><br>
+和<br>
+<img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img11.PNG" alt></p>
+<p>但是在源文件影响extern<br>
+<img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img12.PNG" alt><br>
+和<br>
+<img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img13.PNG" alt></p>
+<blockquote>
+<p>全局变量是具有外部链接属性的，而static修饰的全局变量的时候就把这个外部链接属性变成了内部链接属性。生命周期是整个工程。</p>
+</blockquote>
+<pre><code>3. 修饰函数
+</code></pre>
+<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img14.PNG" alt><br>
+和<br>
+<img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img15.PNG" alt></p>
+<p>发现和上方是同一个问题</p>
+<blockquote>
+<p>static修饰函数其实和全局变量差不多，因为函数也具有外部链接属性，被static修饰后就变成内部链接属性了，其他源文件不能再使用。</p>
+</blockquote>
+<p>参考资料：<a href="https://blog.csdn.net/m0_66769266/article/details/124247596">https://blog.csdn.net/m0_66769266/article/details/124247596</a></p>
+]]></content>
+      <tags>
+        <tag>C++</tag>
+        <tag>C++ primer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>lambda expression</title>
+    <url>/2022/07/11/lambda-expression/</url>
+    <content><![CDATA[<h2 id="lambda-介绍：">lambda 介绍：</h2>
+<p><img src="/2022/07/11/lambda-expression/lambda_img1.PNG" alt><br>
+<img src="/2022/07/11/lambda-expression/lambda_img2.PNG" alt><br>
+<img src="/2022/07/11/lambda-expression/lambda_img3.PNG" alt><br>
+<img src="/2022/07/11/lambda-expression/lambda_img4.PNG" alt></p>
+<blockquote>
+<p>find_if：</p>
+</blockquote>
+<p><img src="/2022/07/11/lambda-expression/lambda_img5.PNG" alt></p>
+<blockquote>
+<p>for_each：</p>
+</blockquote>
+<p><img src="/2022/07/11/lambda-expression/lambda_img6.PNG" alt></p>
+<blockquote>
+<p>示例：</p>
+</blockquote>
+<p><img src="/2022/07/11/lambda-expression/lambda_img7.PNG" alt></p>
+<blockquote>
+<p>值捕获 tips： 需要写在函数内部</p>
+</blockquote>
+<p><img src="/2022/07/11/lambda-expression/lambda_img8.PNG" alt></p>
+<blockquote>
+<p>引用捕获：</p>
+</blockquote>
+<p><img src="/2022/07/11/lambda-expression/lambda_img9.PNG" alt><br>
+<img src="/2022/07/11/lambda-expression/lambda_img10.PNG" alt></p>
+<blockquote>
+<p>隐式捕获：</p>
+</blockquote>
+<p><img src="/2022/07/11/lambda-expression/lambda_img11.PNG" alt><br>
+<img src="/2022/07/11/lambda-expression/lambda_img12.PNG" alt></p>
+<blockquote>
+<p>捕获列表：</p>
+</blockquote>
+<p><img src="/2022/07/11/lambda-expression/lambda_img13.PNG" alt></p>
+<blockquote>
+<p>可变lambda：</p>
+</blockquote>
+<p><img src="/2022/07/11/lambda-expression/lambda_img14.PNG" alt><br>
+<img src="/2022/07/11/lambda-expression/lambda_img15.PNG" alt></p>
+]]></content>
+      <tags>
+        <tag>C++</tag>
+        <tag>lambda</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python 每日一报</title>
     <url>/2022/06/30/python-%E6%AF%8F%E6%97%A5%E4%B8%80%E6%8A%A5/</url>
     <content><![CDATA[<h3 id="代码较简单">代码较简单</h3>
@@ -324,6 +408,165 @@
 ]]></content>
       <tags>
         <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基本排序算法</title>
+    <url>/2022/07/26/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p><img src="/2022/07/26/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/basic_sort_img1.png" alt><br>
+<img src="/2022/07/26/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/basic_sort_img2.png" alt></p>
+<h1>冒泡排序</h1>
+<h2 id="1-算法步骤">1. 算法步骤</h2>
+<ol>
+<li>
+<p>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</p>
+</li>
+<li>
+<p>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。</p>
+</li>
+<li>
+<p>针对所有的元素重复以上的步骤，除了最后一个。</p>
+</li>
+<li>
+<p>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</p>
+</li>
+</ol>
+<h2 id="2-动图演示">2. 动图演示</h2>
+<p><img src="/2022/07/26/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/bubbleSort.gif" alt="动图演示"></p>
+<ol>
+<li>代码:</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(vector&lt;<span class="type">int</span>&gt; vc, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;第&quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;轮 ： &quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> cnt = <span class="number">0</span>; cnt &lt; vc.<span class="built_in">size</span>() - <span class="number">1</span>; ++cnt) </span><br><span class="line">		cout &lt;&lt; vc[cnt] &lt;&lt; <span class="string">&quot; ,&quot;</span>;</span><br><span class="line">	cout &lt;&lt; vc[vc.<span class="built_in">size</span>() - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">bubble_sort</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; vc)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> len = vc.<span class="built_in">size</span>();</span><br><span class="line">	<span class="comment">// 每次确定一个最大值</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len - <span class="number">1</span>; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; len - i - <span class="number">1</span>; j++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (vc[j] &gt; vc[j + <span class="number">1</span>]) <span class="built_in">swap</span>(vc[j], vc[j + <span class="number">1</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">print</span>(vc, i);</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; vc = &#123; <span class="number">22</span>, <span class="number">34</span>, <span class="number">3</span>, <span class="number">32</span>, <span class="number">82</span>, <span class="number">55</span>, <span class="number">89</span>, <span class="number">50</span>, <span class="number">37</span>, <span class="number">5</span>, <span class="number">64</span>, <span class="number">35</span>, <span class="number">9</span>, <span class="number">70</span> &#125;;	</span><br><span class="line">	<span class="built_in">bubble_sort</span>(vc);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>插入排序</h1>
+<p>插入排序的代码实现虽然没有冒泡排序和选择排序那么简单粗暴，但它的原理应该是最容易理解的了，因为只要打过扑克牌的人都应该能够秒懂。插入排序是一种最简单直观的排序算法，它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。</p>
+<p>插入排序和冒泡排序一样，也有一种优化算法，叫做拆半插入。</p>
+<h2 id="1-算法步骤-2">1. 算法步骤</h2>
+<ol>
+<li>
+<p>将第一待排序序列第一个元素看做一个有序序列，把第二个元素到最后一个元素当成是未排序序列。</p>
+</li>
+<li>
+<p>从头到尾依次扫描未排序序列，将扫描到的每个元素插入有序序列的适当位置。（如果待插入的元素与有序序列中的某个元素相等，则将待插入元素插入到相等元素的后面。）</p>
+</li>
+</ol>
+<h2 id="2-动图演示-2">2. 动图演示</h2>
+<p><img src="/2022/07/26/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/insertionSort.gif" alt="动图演示"></p>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(vector&lt;<span class="type">int</span>&gt; vc, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;第&quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;轮 ： &quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> cnt = <span class="number">0</span>; cnt &lt; vc.<span class="built_in">size</span>() - <span class="number">1</span>; ++cnt)</span><br><span class="line">		cout &lt;&lt; vc[cnt] &lt;&lt; <span class="string">&quot; ,&quot;</span>;</span><br><span class="line">	cout &lt;&lt; vc[vc.<span class="built_in">size</span>() - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">insertion_sort</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; vc)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> len = vc.<span class="built_in">size</span>();</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; len; ++i) &#123;</span><br><span class="line">		<span class="type">int</span> key = vc[i];</span><br><span class="line">		<span class="type">int</span> j = i - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span> ((j &gt;= <span class="number">0</span>) &amp;&amp; (key &lt; vc[j])) &#123;</span><br><span class="line">			vc[j + <span class="number">1</span>] = vc[j];</span><br><span class="line">			j--;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// -1 + 1 = 0</span></span><br><span class="line">		vc[j + <span class="number">1</span>] = key;</span><br><span class="line">		<span class="built_in">print</span>(vc, i);</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; vc = &#123; <span class="number">22</span>, <span class="number">34</span>, <span class="number">3</span>, <span class="number">32</span>, <span class="number">82</span>, <span class="number">55</span>, <span class="number">89</span>, <span class="number">50</span>, <span class="number">37</span>, <span class="number">5</span>, <span class="number">64</span>, <span class="number">35</span>, <span class="number">9</span>, <span class="number">70</span> &#125;;</span><br><span class="line">	<span class="built_in">insertion_sort</span>(vc);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1>选择排序</h1>
+<p>选择排序是一种简单直观的排序算法，无论什么数据进去都是 O(n²) 的时间复杂度。所以用到它的时候，数据规模越小越好。唯一的好处可能就是不占用额外的内存空间了吧。</p>
+<h2 id="1-算法步骤-3">1. 算法步骤</h2>
+<ol>
+<li>
+<p>首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置</p>
+</li>
+<li>
+<p>再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。</p>
+</li>
+<li>
+<p>重复第二步，直到所有元素均排序完毕。</p>
+</li>
+</ol>
+<h2 id="2-动图演示-3">2. 动图演示</h2>
+<p><img src="/2022/07/26/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/selectionSort.gif" alt="动图演示"></p>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(vector&lt;<span class="type">int</span>&gt; vc, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;第&quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;轮 ： &quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> cnt = <span class="number">0</span>; cnt &lt; vc.<span class="built_in">size</span>() - <span class="number">1</span>; ++cnt) </span><br><span class="line">		cout &lt;&lt; vc[cnt] &lt;&lt; <span class="string">&quot; ,&quot;</span>;</span><br><span class="line">	cout &lt;&lt; vc[vc.<span class="built_in">size</span>() - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">selection_sort_min</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; vc)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> len = vc.<span class="built_in">size</span>();</span><br><span class="line">	<span class="type">int</span> min;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">		min = i; </span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; len; j++) </span><br><span class="line">			<span class="keyword">if</span> (vc[j] &lt; vc[min])</span><br><span class="line">				min = j;</span><br><span class="line">		<span class="built_in">swap</span>(vc[min], vc[i]);</span><br><span class="line">		<span class="built_in">print</span>(vc, i + <span class="number">1</span>);</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">selection_sort_max</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; vc)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> len = vc.<span class="built_in">size</span>();</span><br><span class="line">	<span class="type">int</span> max;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = len - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">		max = i;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = i - <span class="number">1</span>; j &gt;= <span class="number">0</span>; j--) &#123;</span><br><span class="line">			<span class="keyword">if</span> (vc[j] &gt; vc[max]) max = j;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">swap</span>(vc[i], vc[max]);</span><br><span class="line">		<span class="built_in">print</span>(vc, len - (i + <span class="number">1</span>));</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">/*vector&lt;int&gt; vc = &#123; 22, 34, 3, 32, 82, 55, 89, 50, 37, 5, 64, 35, 9, 70 &#125;;	</span></span><br><span class="line"><span class="comment">	selection_sort_min(vc);*/</span></span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; vc2 = &#123; <span class="number">22</span>, <span class="number">34</span>, <span class="number">3</span>, <span class="number">32</span>, <span class="number">82</span>, <span class="number">55</span>, <span class="number">89</span>, <span class="number">50</span>, <span class="number">37</span>, <span class="number">5</span>, <span class="number">64</span>, <span class="number">35</span>, <span class="number">9</span>, <span class="number">70</span> &#125;;</span><br><span class="line">	<span class="built_in">selection_sort_max</span>(vc2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>4.希尔排序</p>
+</blockquote>
+<h1>希尔排序</h1>
+<p>希尔排序，也称递减增量排序算法，是插入排序的一种更高效的改进版本。但希尔排序是非稳定排序算法。</p>
+<p>希尔排序是基于插入排序的以下两点性质而提出改进方法的：</p>
+<ul>
+<li>插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率；</li>
+<li>但插入排序一般来说是低效的，因为插入排序每次只能将数据移动一位；</li>
+</ul>
+<p>希尔排序的基本思想是：先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序，待整个序列中的记录“基本有序”时，再对全体记录进行依次直接插入排序。</p>
+<h2 id="1-算法步骤-4">1. 算法步骤</h2>
+<ol>
+<li>
+<p>选择一个增量序列 t1，t2，……，tk，其中 ti &gt; tj, tk = 1；</p>
+</li>
+<li>
+<p>按增量序列个数 k，对序列进行 k 趟排序；</p>
+</li>
+<li>
+<p>每趟排序，根据对应的增量 ti，将待排序列分割成若干长度为 m 的子序列，分别对各子表进行直接插入排序。仅增量因子为 1 时，整个序列作为一个表来处理，表长度即为整个序列的长度。</p>
+</li>
+</ol>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(vector&lt;<span class="type">int</span>&gt; vc, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;第&quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;轮 ： &quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> cnt = <span class="number">0</span>; cnt &lt; vc.<span class="built_in">size</span>() - <span class="number">1</span>; ++cnt)</span><br><span class="line">		cout &lt;&lt; vc[cnt] &lt;&lt; <span class="string">&quot; ,&quot;</span>;</span><br><span class="line">	cout &lt;&lt; vc[vc.<span class="built_in">size</span>() - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 希尔排序的间隔序列不推荐用2的幂(1 2 4 8 16...)，</span></span><br><span class="line"><span class="comment">// 因为这样直到间隔为1之前，都不会将奇数位置与偶数位置的元素进行比较，这样是低效的。</span></span><br><span class="line"><span class="comment">// 希尔自己认为可以用2的幂 - 1序列(1 3 7 15...)，后来又有文章建议用3x + 1(1 4 13 40 121...)，都是可以的。</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">shellSort</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; vc)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 间隔为3x + 1</span></span><br><span class="line">	<span class="type">int</span> gap = vc.<span class="built_in">size</span>() / <span class="number">3</span> + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (; gap &gt;= <span class="number">1</span>; gap /= <span class="number">3</span>) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; gap; ++i) &#123;</span><br><span class="line">			<span class="comment">// 组内排序</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> j = i + gap; j &lt; vc.<span class="built_in">size</span>(); j += gap) &#123;</span><br><span class="line">				<span class="keyword">for</span> (<span class="type">int</span> k = j; k - gap &gt;= <span class="number">0</span> &amp;&amp; vc[k] &lt; vc[k - gap]; k -= gap) &#123;</span><br><span class="line">					<span class="built_in">swap</span>(vc[k], vc[k - gap]);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">print</span>(vc, i + <span class="number">1</span>);</span><br><span class="line">			cout &lt;&lt; endl;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; vc = &#123; <span class="number">22</span>, <span class="number">34</span>, <span class="number">3</span>, <span class="number">32</span>, <span class="number">82</span>, <span class="number">55</span>, <span class="number">89</span>, <span class="number">50</span>, <span class="number">37</span>, <span class="number">5</span>, <span class="number">64</span>, <span class="number">35</span>, <span class="number">9</span>, <span class="number">70</span> &#125;;</span><br><span class="line">	<span class="built_in">shellSort</span>(vc);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>5.归并排序</p>
+</blockquote>
+<h1>归并排序</h1>
+<h2 id="1-算法步骤-5">1. 算法步骤</h2>
+<ol>
+<li>
+<p>申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列；</p>
+</li>
+<li>
+<p>设定两个指针，最初位置分别为两个已经排序序列的起始位置；</p>
+</li>
+<li>
+<p>比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置；</p>
+</li>
+<li>
+<p>重复步骤 3 直到某一指针达到序列尾；</p>
+</li>
+<li>
+<p>将另一序列剩下的所有元素直接复制到合并序列尾。</p>
+</li>
+</ol>
+<h2 id="2…-动图演示">2… 动图演示</h2>
+<p><img src="/2022/07/26/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/mergeSort.gif" alt="动图演示"></p>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(vector&lt;<span class="type">int</span>&gt; vc, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;第&quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;轮 ： &quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> cnt = <span class="number">0</span>; cnt &lt; vc.<span class="built_in">size</span>() - <span class="number">1</span>; ++cnt)</span><br><span class="line">		cout &lt;&lt; vc[cnt] &lt;&lt; <span class="string">&quot; ,&quot;</span>;</span><br><span class="line">	cout &lt;&lt; vc[vc.<span class="built_in">size</span>() - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; arr, <span class="type">int</span> l, <span class="type">int</span> mid, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> ptrL = l;</span><br><span class="line">    <span class="type">int</span> ptrR = mid;</span><br><span class="line">    <span class="type">static</span> vector&lt;<span class="type">int</span>&gt;tempary;</span><br><span class="line">    <span class="keyword">if</span> (arr.<span class="built_in">size</span>() &gt; tempary.<span class="built_in">size</span>()) &#123;</span><br><span class="line">        tempary.<span class="built_in">resize</span>(arr.<span class="built_in">size</span>());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (ptrL != mid &amp;&amp; ptrR != r) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[ptrL] &lt; arr[ptrR]) &#123;</span><br><span class="line">            tempary[index++] = arr[ptrL++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            tempary[index++] = arr[ptrR++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (ptrL != mid) &#123;</span><br><span class="line">        tempary[index++] = arr[ptrL++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (ptrR != r) &#123;</span><br><span class="line">        tempary[index++] = arr[ptrR++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">copy</span>(tempary.<span class="built_in">begin</span>(), tempary.<span class="built_in">begin</span>() + index, arr.<span class="built_in">begin</span>() + l);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">mergeSort</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; arr, <span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123; <span class="comment">// sort the range [l, r) in arr</span></span><br><span class="line">    <span class="keyword">if</span> (r - l &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">mergeSort</span>(arr, l, mid);</span><br><span class="line">    <span class="built_in">mergeSort</span>(arr, mid, r);</span><br><span class="line">    <span class="built_in">merge</span>(arr, l, mid, r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; vc = &#123; <span class="number">22</span>, <span class="number">34</span>, <span class="number">3</span>, <span class="number">32</span>, <span class="number">82</span>, <span class="number">55</span>, <span class="number">89</span>, <span class="number">50</span>, <span class="number">37</span>, <span class="number">5</span>, <span class="number">64</span>, <span class="number">35</span>, <span class="number">9</span>, <span class="number">70</span> &#125;;</span><br><span class="line">    <span class="built_in">mergeSort</span>(vc, <span class="number">0</span>, vc.<span class="built_in">size</span>());</span><br><span class="line">    <span class="built_in">print</span>(vc, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>6.堆排序</p>
+</blockquote>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>7.快速排序</p>
+</blockquote>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(vector&lt;<span class="type">int</span>&gt; vc, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;第&quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;轮 ： &quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> cnt = <span class="number">0</span>; cnt &lt; vc.<span class="built_in">size</span>() - <span class="number">1</span>; ++cnt)</span><br><span class="line">		cout &lt;&lt; vc[cnt] &lt;&lt; <span class="string">&quot; ,&quot;</span>;</span><br><span class="line">	cout &lt;&lt; vc[vc.<span class="built_in">size</span>() - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qsort</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; arr, <span class="type">int</span> low, <span class="type">int</span> high)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (high &lt;= low) <span class="keyword">return</span>;</span><br><span class="line">    <span class="type">int</span> left = low;</span><br><span class="line">    <span class="type">int</span> right = high;</span><br><span class="line">    <span class="type">int</span> key = arr[low];</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">/*从左向右找比key大的值*/</span></span><br><span class="line">        <span class="keyword">while</span> (arr[left] &lt;= key)</span><br><span class="line">        &#123;</span><br><span class="line">            left++;</span><br><span class="line">            <span class="keyword">if</span> (left == high) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/*从右向左找比key小的值*/</span></span><br><span class="line">        <span class="keyword">while</span> (arr[right] &gt;= key)</span><br><span class="line">        &#123;</span><br><span class="line">            right--;</span><br><span class="line">            <span class="keyword">if</span> (right == low)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (left &gt;= right) <span class="keyword">break</span>;</span><br><span class="line">        <span class="built_in">swap</span>(arr[left], arr[right]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*中枢值与j对应值交换*/</span></span><br><span class="line">    arr[low] = arr[right];</span><br><span class="line">    arr[right] = key;</span><br><span class="line">    <span class="built_in">Qsort</span>(arr, low, right - <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">Qsort</span>(arr, right + <span class="number">1</span>, high);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; vc = &#123; <span class="number">22</span>, <span class="number">34</span>, <span class="number">3</span>, <span class="number">32</span>, <span class="number">82</span>, <span class="number">55</span>, <span class="number">89</span>, <span class="number">50</span>, <span class="number">37</span>, <span class="number">5</span>, <span class="number">64</span>, <span class="number">35</span>, <span class="number">9</span>, <span class="number">70</span> &#125;;</span><br><span class="line">    <span class="built_in">Qsort</span>(vc, <span class="number">0</span>, vc.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">print</span>(vc, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>8.基数排序</p>
+</blockquote>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>9.桶排序</p>
+</blockquote>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>10.计数排序</p>
+</blockquote>
+<p>代码:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>C++</tag>
+        <tag>数据结构</tag>
+        <tag>排序算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>字符串转数字</title>
+    <url>/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/</url>
+    <content><![CDATA[<blockquote>
+<p>如图：</p>
+</blockquote>
+<p><img src="/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/img1.PNG" alt></p>
+<blockquote>
+<p>代码:</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vector&lt;int&gt; diffWaysToCompute(string expression) &#123;</span><br><span class="line">        vector&lt;int&gt; ops;</span><br><span class="line">        for (int i = 0; i &lt; expression.size();) &#123;</span><br><span class="line">            // 如果不是数字</span><br><span class="line">            if (!isdigit(expression[i])) &#123;</span><br><span class="line">                if (expression[i] == &#x27;+&#x27;) &#123;</span><br><span class="line">                    ops.push_back(ADDITION);</span><br><span class="line">                &#125; else if (expression[i] == &#x27;-&#x27;) &#123;</span><br><span class="line">                    ops.push_back(SUBTRACTION);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    ops.push_back(MULTIPLICATION);</span><br><span class="line">                &#125;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                int t = 0;</span><br><span class="line">                while (i &lt; expression.size() &amp;&amp; isdigit(expression[i])) &#123;</span><br><span class="line">                    t = t * 10 + expression[i] - &#x27;0&#x27;; // 转换为数字w</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                ops.push_back(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>C++</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -354,22 +597,6 @@
       <tags>
         <tag>安装</tag>
         <tag>配置</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>字符串转数字</title>
-    <url>/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/</url>
-    <content><![CDATA[<blockquote>
-<p>如图：</p>
-</blockquote>
-<p><img src="/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/img1.PNG" alt></p>
-<blockquote>
-<p>代码:</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vector&lt;int&gt; diffWaysToCompute(string expression) &#123;</span><br><span class="line">        vector&lt;int&gt; ops;</span><br><span class="line">        for (int i = 0; i &lt; expression.size();) &#123;</span><br><span class="line">            // 如果不是数字</span><br><span class="line">            if (!isdigit(expression[i])) &#123;</span><br><span class="line">                if (expression[i] == &#x27;+&#x27;) &#123;</span><br><span class="line">                    ops.push_back(ADDITION);</span><br><span class="line">                &#125; else if (expression[i] == &#x27;-&#x27;) &#123;</span><br><span class="line">                    ops.push_back(SUBTRACTION);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    ops.push_back(MULTIPLICATION);</span><br><span class="line">                &#125;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                int t = 0;</span><br><span class="line">                while (i &lt; expression.size() &amp;&amp; isdigit(expression[i])) &#123;</span><br><span class="line">                    t = t * 10 + expression[i] - &#x27;0&#x27;; // 转换为数字w</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                ops.push_back(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <tags>
-        <tag>C++</tag>
-        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -496,6 +723,142 @@
       <tags>
         <tag>C++</tag>
         <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>流迭代器</title>
+    <url>/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
+    <content><![CDATA[<blockquote>
+<p>C++ primer 第十章 泛型算法</p>
+</blockquote>
+<p><img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img1.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img2.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img3.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img4.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img5.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img6.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img7.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img8.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img9.PNG" alt></p>
+]]></content>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>水晶头连线</title>
+    <url>/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/</url>
+    <content><![CDATA[<h3 id="颜色：">颜色：</h3>
+<blockquote>
+<p>白橙 橙 白绿 蓝 白蓝 绿 白棕 棕</p>
+</blockquote>
+<h3 id="图片：">图片：</h3>
+<p><img src="/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/conn_img1.PNG" alt></p>
+]]></content>
+      <tags>
+        <tag>网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>智能指针</title>
+    <url>/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/</url>
+    <content><![CDATA[<blockquote>
+<p>C++ primer 第12章 动态内存与智能指针</p>
+</blockquote>
+<p><img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img1.PNG" alt></p>
+<blockquote>
+<p>shared_ptr</p>
+</blockquote>
+<p><img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img2.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img3.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img4.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img5.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img6.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img7.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img8.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img9.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img10.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img11.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img12.PNG" alt></p>
+<blockquote>
+<p>编写函数，返回一个动态分配的 int 的vector。将此vector 传递给另一个函数，这个函数读取标准输入，将读入的值保存在 vector 元素中。再将vector传递给另一个函数，打印读入的值。记得在恰当的时刻delete vector。</p>
+</blockquote>
+<p>代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line"></span><br><span class="line">using std::vector;</span><br><span class="line"></span><br><span class="line">vector&lt;int&gt;* alloc_vector()</span><br><span class="line">&#123;</span><br><span class="line">	return new vector&lt;int&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void assign_vector(vector&lt;int&gt;* p)</span><br><span class="line">&#123;</span><br><span class="line">	int i;</span><br><span class="line">	while (std::cin &gt;&gt; i)</span><br><span class="line">	&#123;</span><br><span class="line">		p-&gt;push_back(i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void print_vector(vector&lt;int&gt;* p)</span><br><span class="line">&#123;</span><br><span class="line">	for (auto i : *p)</span><br><span class="line">	&#123;</span><br><span class="line">		std::cout &lt;&lt; i &lt;&lt; std::endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	auto p = alloc_vector();</span><br><span class="line">	assign_vector(p);</span><br><span class="line">	print_vector(p);</span><br><span class="line">	delete p;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>重做上一题，这次使用 shared_ptr 而不是内置指针。</p>
+</blockquote>
+<p>代码如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;memory&gt;</span><br><span class="line"></span><br><span class="line">using std::vector;</span><br><span class="line"></span><br><span class="line">std::shared_ptr&lt;vector&lt;int&gt;&gt; alloc_vector()</span><br><span class="line">&#123;</span><br><span class="line">	return std::make_shared&lt;vector&lt;int&gt;&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void assign_vector(std::shared_ptr&lt;vector&lt;int&gt;&gt; p)</span><br><span class="line">&#123;</span><br><span class="line">	int i;</span><br><span class="line">	while (std::cin &gt;&gt; i)</span><br><span class="line">	&#123;</span><br><span class="line">		p-&gt;push_back(i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void print_vector(std::shared_ptr&lt;vector&lt;int&gt;&gt; p)</span><br><span class="line">&#123;</span><br><span class="line">	for (auto i : *p)</span><br><span class="line">	&#123;</span><br><span class="line">		std::cout &lt;&lt; i &lt;&lt; std::endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	auto p = alloc_vector();</span><br><span class="line">	assign_vector(p);</span><br><span class="line">	print_vector(p);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p>unique_ptr</p>
+</blockquote>
+<p><img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img13.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img14.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img15.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img16.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img17.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img18.PNG" alt></p>
+<blockquote>
+<p>如果你试图拷贝或赋值 unique_ptr，编译器并不总是能给出易于理解的错误信息。编写包含这种错误的程序，观察编译器如何诊断这种错误。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;memory&gt;</span><br><span class="line"></span><br><span class="line">using std::string; using std::unique_ptr;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    unique_ptr&lt;string&gt; p1(new string(&quot;pezy&quot;));</span><br><span class="line">    std::cout &lt;&lt; *p1 &lt;&lt; std::endl;</span><br><span class="line">    p1.reset(nullptr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>shared_ptr 为什么没有 release 成员？</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">release 成员的作用是放弃控制权并返回指针，因为在某一时刻只能有一个 unique_ptr 指向某个对象，unique_ptr 不能被赋值，所以要使用 release 成员将一个 unique_ptr 的指针的所有权传递给另一个 unique_ptr。而 shared_ptr 允许有多个 shared_ptr 指向同一个对象，因此不需要 release 成员。</span><br></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p>weak_ptr</p>
+</blockquote>
+<p><img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img19.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img20.PNG" alt></p>
+<blockquote>
+<p>定义你自己版本的 StrBlobPtr，更新 StrBlob 类，加入恰当的 friend 声明以及 begin 和 end 成员。</p>
+</blockquote>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;initializer_list&gt;</span><br><span class="line">#include &lt;memory&gt;</span><br><span class="line">#include &lt;exception&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;fstream&gt;</span><br><span class="line"></span><br><span class="line">using std::vector; using std::string;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">class StrBlobPtr;</span><br><span class="line">class ConstStrBlobStr;</span><br><span class="line"></span><br><span class="line">class StrBlob &#123;</span><br><span class="line">public:</span><br><span class="line">    friend class StrBlobPtr;</span><br><span class="line">    friend class ConstStrBlobPtr;</span><br><span class="line">    using size_type = vector&lt;string&gt;::size_type;</span><br><span class="line"></span><br><span class="line">    StrBlobPtr begin();</span><br><span class="line">    StrBlobPtr end();</span><br><span class="line">    ConstStrBlobPtr cbegin();</span><br><span class="line">    ConstStrBlobPtr cend();</span><br><span class="line">    StrBlob() :data(std::make_shared&lt;vector&lt;string&gt;&gt;()) &#123; &#125;</span><br><span class="line">    StrBlob(std::initializer_list&lt;string&gt; il) :data(std::make_shared&lt;vector&lt;string&gt;&gt;(il)) &#123; &#125;</span><br><span class="line"></span><br><span class="line">    size_type size() const &#123; return data-&gt;size(); &#125;</span><br><span class="line">    bool empty() const &#123; return data-&gt;empty(); &#125;</span><br><span class="line"></span><br><span class="line">    void push_back(const string&amp; t) &#123; data-&gt;push_back(t); &#125;</span><br><span class="line">    void pop_back() &#123;</span><br><span class="line">        check(0, &quot;pop_back on empty StrBlob&quot;);</span><br><span class="line">        data-&gt;pop_back();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::string&amp; front() &#123;</span><br><span class="line">        check(0, &quot;front on empty StrBlob&quot;);</span><br><span class="line">        return data-&gt;front();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::string&amp; back() &#123;</span><br><span class="line">        check(0, &quot;back on empty StrBlob&quot;);</span><br><span class="line">        return data-&gt;back();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    const std::string&amp; front() const &#123;</span><br><span class="line">        check(0, &quot;front on empty StrBlob&quot;);</span><br><span class="line">        return data-&gt;front();</span><br><span class="line">    &#125;</span><br><span class="line">    const std::string&amp; back() const &#123;</span><br><span class="line">        check(0, &quot;back on empty StrBlob&quot;);</span><br><span class="line">        return data-&gt;back();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">    void check(size_type i, const string&amp; msg) const &#123;</span><br><span class="line">        if (i &gt;= data-&gt;size()) throw std::out_of_range(msg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">    std::shared_ptr&lt;vector&lt;string&gt;&gt; data;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class ConstStrBlobPtr &#123;</span><br><span class="line">public:</span><br><span class="line">    ConstStrBlobPtr() : curr(0) &#123;&#125;</span><br><span class="line">    ConstStrBlobPtr(const StrBlob&amp; a, size_t sz = 0) :</span><br><span class="line">        wptr(a.data), curr(sz) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    string&amp; deref() const</span><br><span class="line">    &#123;</span><br><span class="line">        // 如果check成功，p就是一个shared_ptr,指向StrBlobPtr所</span><br><span class="line">        // 指向的vector。表达式(*p)[curr]解引用shared_ptr来获得vector,</span><br><span class="line">        // 然后使用下标运算符提取并返回curr位置上的元素</span><br><span class="line">        auto p = check(curr, &quot;dereference past end&quot;);</span><br><span class="line">        return (*p)[curr]; // 返回一个vector[curr]</span><br><span class="line">    &#125;</span><br><span class="line">    ConstStrBlobPtr&amp; incr()</span><br><span class="line">    &#123;</span><br><span class="line">        check(curr, &quot;increment past end of StrBlobPtr&quot;);</span><br><span class="line">        ++curr;</span><br><span class="line">        return *this;</span><br><span class="line">    &#125;</span><br><span class="line">    bool operator!=(const ConstStrBlobPtr&amp; p) &#123; return p.curr != curr; &#125;</span><br><span class="line">private:</span><br><span class="line">    // 若检查成功，chaek返回一个指向vector的shared_ptr</span><br><span class="line">    std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt;</span><br><span class="line">        check(std::size_t i, const std::string&amp; msg) const &#123;</span><br><span class="line">        auto ret = wptr.lock();</span><br><span class="line">        if (!ret) throw std::runtime_error(&quot;unbound StrBolbPtr&quot;);</span><br><span class="line">        if (i &gt;= ret-&gt;size()) throw std::out_of_range(msg);</span><br><span class="line">        return ret;</span><br><span class="line">    &#125;</span><br><span class="line">    // 保存一个weak_ptr,意味着底层vector可能会被销毁</span><br><span class="line">    std::weak_ptr &lt;std::vector&lt;std::string&gt;&gt; wptr;</span><br><span class="line">    // 在数组中的当前位置</span><br><span class="line">    std::size_t curr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class StrBlobPtr &#123;</span><br><span class="line">public:</span><br><span class="line">    StrBlobPtr() : curr(0) &#123;&#125;</span><br><span class="line">    StrBlobPtr(StrBlob &amp;a, size_t sz = 0) :</span><br><span class="line">        wptr(a.data), curr(sz) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    string&amp; deref() const</span><br><span class="line">    &#123;</span><br><span class="line">        // 如果check成功，p就是一个shared_ptr,指向StrBlobPtr所</span><br><span class="line">        // 指向的vector。表达式(*p)[curr]解引用shared_ptr来获得vector,</span><br><span class="line">        // 然后使用下标运算符提取并返回curr位置上的元素</span><br><span class="line">        auto p = check(curr, &quot;dereference past end&quot;);</span><br><span class="line">        return (*p)[curr]; // 返回一个vector[curr]</span><br><span class="line">    &#125;</span><br><span class="line">    StrBlobPtr&amp; incr()</span><br><span class="line">    &#123;</span><br><span class="line">        check(curr, &quot;increment past end of StrBlobPtr&quot;);</span><br><span class="line">        ++curr;</span><br><span class="line">        return *this;</span><br><span class="line">    &#125;</span><br><span class="line">    bool operator!=(const StrBlobPtr&amp; p) &#123; return p.curr != curr; &#125;</span><br><span class="line">private:</span><br><span class="line">    // 若检查成功，chaek返回一个指向vector的shared_ptr</span><br><span class="line">    std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt;</span><br><span class="line">        check(std::size_t i, const std::string&amp; msg) const &#123;</span><br><span class="line">        auto ret = wptr.lock();</span><br><span class="line">        if (!ret) throw std::runtime_error(&quot;unbound StrBolbPtr&quot;);</span><br><span class="line">        if (i &gt;= ret-&gt;size()) throw std::out_of_range(msg);</span><br><span class="line">        return ret;</span><br><span class="line">    &#125;</span><br><span class="line">    // 保存一个weak_ptr,意味着底层vector可能会被销毁</span><br><span class="line">    std::weak_ptr &lt;std::vector&lt;std::string&gt;&gt; wptr;</span><br><span class="line">    // 在数组中的当前位置</span><br><span class="line">    std::size_t curr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">StrBlobPtr StrBlob::begin()</span><br><span class="line">&#123;</span><br><span class="line">    return StrBlobPtr(*this);</span><br><span class="line">&#125;</span><br><span class="line">StrBlobPtr StrBlob::end()</span><br><span class="line">&#123;</span><br><span class="line">    return StrBlobPtr(*this, data-&gt;size());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ConstStrBlobPtr StrBlob::cbegin()</span><br><span class="line">&#123;</span><br><span class="line">    return ConstStrBlobPtr(*this);</span><br><span class="line">&#125;</span><br><span class="line">ConstStrBlobPtr StrBlob::cend()</span><br><span class="line">&#123;</span><br><span class="line">    return ConstStrBlobPtr(*this, data-&gt;size());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    std::ifstream is(&quot;test.txt&quot;);</span><br><span class="line">    StrBlob sb;</span><br><span class="line">    string s;</span><br><span class="line">    while (getline(is, s)) &#123;</span><br><span class="line">        sb.push_back(s);</span><br><span class="line">    &#125;</span><br><span class="line">    for (StrBlobPtr sbp = sb.begin(); sbp != sb.end(); sbp.incr()) &#123;</span><br><span class="line">        cout &lt;&lt; sbp.deref() &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>编写程序，逐行读入一个输入文件，将内容存入一个 StrBlob 中，用一个 StrBlobPtr 打印出 StrBlob 中的每个元素。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;fstream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;initializer_list&gt;</span><br><span class="line">#include &lt;memory&gt;</span><br><span class="line">#include &lt;exception&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;fstream&gt;</span><br><span class="line"></span><br><span class="line">using std::vector; using std::string;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">class StrBlobPtr;</span><br><span class="line">class ConstStrBlobStr;</span><br><span class="line"></span><br><span class="line">class StrBlob &#123;</span><br><span class="line">public:</span><br><span class="line">    friend class StrBlobPtr;</span><br><span class="line">    friend class ConstStrBlobPtr;</span><br><span class="line">    using size_type = vector&lt;string&gt;::size_type;</span><br><span class="line"></span><br><span class="line">    StrBlobPtr begin();</span><br><span class="line">    StrBlobPtr end();</span><br><span class="line">    ConstStrBlobPtr cbegin();</span><br><span class="line">    ConstStrBlobPtr cend();</span><br><span class="line">    StrBlob() :data(std::make_shared&lt;vector&lt;string&gt;&gt;()) &#123; &#125;</span><br><span class="line">    StrBlob(std::initializer_list&lt;string&gt; il) :data(std::make_shared&lt;vector&lt;string&gt;&gt;(il)) &#123; &#125;</span><br><span class="line"></span><br><span class="line">    size_type size() const &#123; return data-&gt;size(); &#125;</span><br><span class="line">    bool empty() const &#123; return data-&gt;empty(); &#125;</span><br><span class="line"></span><br><span class="line">    void push_back(const string&amp; t) &#123; data-&gt;push_back(t); &#125;</span><br><span class="line">    void pop_back() &#123;</span><br><span class="line">        check(0, &quot;pop_back on empty StrBlob&quot;);</span><br><span class="line">        data-&gt;pop_back();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::string&amp; front() &#123;</span><br><span class="line">        check(0, &quot;front on empty StrBlob&quot;);</span><br><span class="line">        return data-&gt;front();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::string&amp; back() &#123;</span><br><span class="line">        check(0, &quot;back on empty StrBlob&quot;);</span><br><span class="line">        return data-&gt;back();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    const std::string&amp; front() const &#123;</span><br><span class="line">        check(0, &quot;front on empty StrBlob&quot;);</span><br><span class="line">        return data-&gt;front();</span><br><span class="line">    &#125;</span><br><span class="line">    const std::string&amp; back() const &#123;</span><br><span class="line">        check(0, &quot;back on empty StrBlob&quot;);</span><br><span class="line">        return data-&gt;back();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">    void check(size_type i, const string&amp; msg) const &#123;</span><br><span class="line">        if (i &gt;= data-&gt;size()) throw std::out_of_range(msg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">    std::shared_ptr&lt;vector&lt;string&gt;&gt; data;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class ConstStrBlobPtr &#123;</span><br><span class="line">public:</span><br><span class="line">    ConstStrBlobPtr() : curr(0) &#123;&#125;</span><br><span class="line">    ConstStrBlobPtr(const StrBlob&amp; a, size_t sz = 0) :</span><br><span class="line">        wptr(a.data), curr(sz) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    string&amp; deref() const</span><br><span class="line">    &#123;</span><br><span class="line">        // 如果check成功，p就是一个shared_ptr,指向StrBlobPtr所</span><br><span class="line">        // 指向的vector。表达式(*p)[curr]解引用shared_ptr来获得vector,</span><br><span class="line">        // 然后使用下标运算符提取并返回curr位置上的元素</span><br><span class="line">        auto p = check(curr, &quot;dereference past end&quot;);</span><br><span class="line">        return (*p)[curr]; // 返回一个vector[curr]</span><br><span class="line">    &#125;</span><br><span class="line">    ConstStrBlobPtr&amp; incr()</span><br><span class="line">    &#123;</span><br><span class="line">        check(curr, &quot;increment past end of StrBlobPtr&quot;);</span><br><span class="line">        ++curr;</span><br><span class="line">        return *this;</span><br><span class="line">    &#125;</span><br><span class="line">    bool operator!=(const ConstStrBlobPtr&amp; p) &#123; return p.curr != curr; &#125;</span><br><span class="line">private:</span><br><span class="line">    // 若检查成功，chaek返回一个指向vector的shared_ptr</span><br><span class="line">    std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt;</span><br><span class="line">        check(std::size_t i, const std::string&amp; msg) const &#123;</span><br><span class="line">        auto ret = wptr.lock();</span><br><span class="line">        if (!ret) throw std::runtime_error(&quot;unbound StrBolbPtr&quot;);</span><br><span class="line">        if (i &gt;= ret-&gt;size()) throw std::out_of_range(msg);</span><br><span class="line">        return ret;</span><br><span class="line">    &#125;</span><br><span class="line">    // 保存一个weak_ptr,意味着底层vector可能会被销毁</span><br><span class="line">    std::weak_ptr &lt;std::vector&lt;std::string&gt;&gt; wptr;</span><br><span class="line">    // 在数组中的当前位置</span><br><span class="line">    std::size_t curr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class StrBlobPtr &#123;</span><br><span class="line">public:</span><br><span class="line">    StrBlobPtr() : curr(0) &#123;&#125;</span><br><span class="line">    StrBlobPtr(StrBlob &amp;a, size_t sz = 0) :</span><br><span class="line">        wptr(a.data), curr(sz) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    string&amp; deref() const</span><br><span class="line">    &#123;</span><br><span class="line">        // 如果check成功，p就是一个shared_ptr,指向StrBlobPtr所</span><br><span class="line">        // 指向的vector。表达式(*p)[curr]解引用shared_ptr来获得vector,</span><br><span class="line">        // 然后使用下标运算符提取并返回curr位置上的元素</span><br><span class="line">        auto p = check(curr, &quot;dereference past end&quot;);</span><br><span class="line">        return (*p)[curr]; // 返回一个vector[curr]</span><br><span class="line">    &#125;</span><br><span class="line">    StrBlobPtr&amp; incr()</span><br><span class="line">    &#123;</span><br><span class="line">        check(curr, &quot;increment past end of StrBlobPtr&quot;);</span><br><span class="line">        ++curr;</span><br><span class="line">        return *this;</span><br><span class="line">    &#125;</span><br><span class="line">    bool operator!=(const StrBlobPtr&amp; p) &#123; return p.curr != curr; &#125;</span><br><span class="line">private:</span><br><span class="line">    // 若检查成功，chaek返回一个指向vector的shared_ptr</span><br><span class="line">    std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt;</span><br><span class="line">        check(std::size_t i, const std::string&amp; msg) const &#123;</span><br><span class="line">        auto ret = wptr.lock();</span><br><span class="line">        if (!ret) throw std::runtime_error(&quot;unbound StrBolbPtr&quot;);</span><br><span class="line">        if (i &gt;= ret-&gt;size()) throw std::out_of_range(msg);</span><br><span class="line">        return ret;</span><br><span class="line">    &#125;</span><br><span class="line">    // 保存一个weak_ptr,意味着底层vector可能会被销毁</span><br><span class="line">    std::weak_ptr &lt;std::vector&lt;std::string&gt;&gt; wptr;</span><br><span class="line">    // 在数组中的当前位置</span><br><span class="line">    std::size_t curr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">StrBlobPtr StrBlob::begin()</span><br><span class="line">&#123;</span><br><span class="line">    return StrBlobPtr(*this);</span><br><span class="line">&#125;</span><br><span class="line">StrBlobPtr StrBlob::end()</span><br><span class="line">&#123;</span><br><span class="line">    return StrBlobPtr(*this, data-&gt;size());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ConstStrBlobPtr StrBlob::cbegin()</span><br><span class="line">&#123;</span><br><span class="line">    return ConstStrBlobPtr(*this);</span><br><span class="line">&#125;</span><br><span class="line">ConstStrBlobPtr StrBlob::cend()</span><br><span class="line">&#123;</span><br><span class="line">    return ConstStrBlobPtr(*this, data-&gt;size());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	ifstream ifs(&quot;books.txt&quot;);</span><br><span class="line">	StrBlob sb;</span><br><span class="line">	string s;</span><br><span class="line">	while (getline(ifs, s))</span><br><span class="line">	&#123;</span><br><span class="line">		sb.push_back(s);</span><br><span class="line">	&#125;</span><br><span class="line">	for (StrBlobPtr sbp = sb.begin(); sbp != sb.end(); sbp.incr())</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; sbp.deref() &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>智能指针最后练习</p>
+</blockquote>
+<h1>12.27：</h1>
+<p><img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img21.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img22.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img23.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img24.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img25.PNG" alt><br>
+<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img26.PNG" alt></p>
+<blockquote>
+<p>代码：</p>
+</blockquote>
+<ol>
+<li>头文件：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#pragma once</span><br><span class="line">#ifndef EX12_27_H</span><br><span class="line">#define EX12_27_H</span><br><span class="line"></span><br><span class="line">#include &lt;fstream&gt;</span><br><span class="line">#include &lt;memory&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;map&gt;</span><br><span class="line">#include &lt;set&gt;</span><br><span class="line"></span><br><span class="line">class QueryResult;</span><br><span class="line"></span><br><span class="line">class TextQuery</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">	// 类型定义</span><br><span class="line">	using line_no = std::vector&lt;std::string&gt;::size_type;</span><br><span class="line">	// 构造函数</span><br><span class="line">	TextQuery(std::ifstream&amp;);</span><br><span class="line">	QueryResult query(const std::string&amp; s) const;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">	// 保存输入文件的一份拷贝，输入文件中的每行保存为vector中的一个元素。当需要打印一行时，</span><br><span class="line">	// 可以用行号作为下标来提取行文本</span><br><span class="line">	std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; file;</span><br><span class="line">	// 使用一个map来将每个单词与它出现的行号set关联起来，可以方便地提取任意单词的set</span><br><span class="line">	std::map&lt;std::string, std::shared_ptr&lt;std::set&lt;line_no&gt;&gt;&gt; wm;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class QueryResult</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">	friend std::ostream&amp; print(std::ostream&amp;, const QueryResult&amp;);</span><br><span class="line"></span><br><span class="line">	QueryResult(std::string s,</span><br><span class="line">		std::shared_ptr&lt;std::set&lt;TextQuery::line_no&gt;&gt; p,</span><br><span class="line">		std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; f) :</span><br><span class="line">		sought(s), lines(p), file(f)</span><br><span class="line">	&#123;&#125;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">	std::string sought;</span><br><span class="line">	// 使用set来保存每个单词在输入文本中出现的行号，保证每行只出现一次且行号按升序保存</span><br><span class="line">	std::shared_ptr&lt;std::set&lt;TextQuery::line_no&gt;&gt; lines;</span><br><span class="line">	// 保存输入文件的一份拷贝，输入文件中的每行保存为vector中的一个元素。当需要打印一行时，</span><br><span class="line">	// 可以用行号作为下标来提取行文本</span><br><span class="line">	std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; file;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">std::ostream&amp; print(std::ostream&amp;, const QueryResult&amp;);</span><br><span class="line"></span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol start="2">
+<li>功能实现</li>
+</ol>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &quot;ex12_27.h&quot;</span><br><span class="line">#include &lt;sstream&gt;</span><br><span class="line">#include &lt;fstream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">TextQuery::TextQuery(ifstream&amp; ifs) : file(new vector&lt;string&gt;)</span><br><span class="line">&#123;</span><br><span class="line">	string text;</span><br><span class="line">	// 获取一行</span><br><span class="line">	while (getline(ifs, text))</span><br><span class="line">	&#123;</span><br><span class="line">		// 输入文件中的每行保存为vector中的一个元素</span><br><span class="line">		file-&gt;push_back(text);</span><br><span class="line">		// 从0开始, file-&gt;size()从1开始</span><br><span class="line">		int n = file-&gt;size() - 1;</span><br><span class="line">		cout &lt;&lt; &quot;n = &quot; &lt;&lt; n &lt;&lt; endl;</span><br><span class="line">		istringstream line(text);</span><br><span class="line">		string word;</span><br><span class="line">		while (line &gt;&gt; word)</span><br><span class="line">		&#123;</span><br><span class="line">			// 获取行号,wm[word] -&gt; size_t</span><br><span class="line">			auto&amp; lines = wm[word];</span><br><span class="line">			// cout &lt;&lt; &quot; [word] = &quot; &lt;&lt; word;</span><br><span class="line">			if (!lines)</span><br><span class="line">				lines.reset(new set&lt;line_no&gt;);</span><br><span class="line">			// cout &lt;&lt; endl &lt;&lt; n &lt;&lt; endl;</span><br><span class="line">			lines-&gt;insert(n);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">QueryResult TextQuery::query(const string&amp; s) const</span><br><span class="line">&#123;</span><br><span class="line">	static shared_ptr&lt;set&lt;line_no&gt;&gt; nodata(new set&lt;line_no&gt;);</span><br><span class="line">	auto loc = wm.find(s);</span><br><span class="line">	// 如果找到返回行数</span><br><span class="line">	if (loc == wm.end())</span><br><span class="line">		return QueryResult(s, nodata, file);</span><br><span class="line">	else</span><br><span class="line">		return QueryResult(s, loc-&gt;second, file);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 打印</span><br><span class="line">std::ostream&amp; print(std::ostream&amp; os, const QueryResult&amp; qr)</span><br><span class="line">&#123;</span><br><span class="line">	os &lt;&lt; qr.sought &lt;&lt; &quot; occurs &quot; &lt;&lt; qr.lines-&gt;size() &lt;&lt; &quot; &quot;</span><br><span class="line">		&lt;&lt; &quot;time&quot; &lt;&lt; (qr.lines-&gt;size() &gt; 1 ? &quot;s&quot; : &quot;&quot;) &lt;&lt; endl;</span><br><span class="line">	for (auto num : *qr.lines)</span><br><span class="line">		os &lt;&lt; &quot;\t(line &quot; &lt;&lt; num + 1 &lt;&lt; &quot;) &quot; &lt;&lt; *(qr.file-&gt;begin() + num) &lt;&lt; endl;</span><br><span class="line">	return os;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol start="3">
+<li>main函数实现</li>
+</ol>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;fstream&gt;</span><br><span class="line">#include &quot;ex12_27.h&quot;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">void runQueries(ifstream&amp; infile)</span><br><span class="line">&#123;</span><br><span class="line">	TextQuery tq(infile);</span><br><span class="line">	while (true)</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; &quot;enter word to look for, or q to quit: &quot;;</span><br><span class="line">		string s;</span><br><span class="line">		if (!(cin &gt;&gt; s) || s == &quot;q&quot;) break;</span><br><span class="line">		print(cout, tq.query(s)) &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	ifstream ifs(&quot;test.txt&quot;);</span><br><span class="line">	runQueries(ifs);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>12.28</h1>
+<blockquote>
+<p>编写程序实现文本查询，不要定义类来管理数据。你的程序应该接受一个文件，并与用户交互来查询单词。使用vector、map 和 set 容器来保存来自文件的数据并生成查询结果。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;string&gt;</span><br><span class="line">using std::string;</span><br><span class="line"></span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">using std::vector;</span><br><span class="line"></span><br><span class="line">#include &lt;memory&gt;</span><br><span class="line">using std::shared_ptr;</span><br><span class="line"></span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;fstream&gt;</span><br><span class="line">#include &lt;sstream&gt;</span><br><span class="line">#include &lt;map&gt;</span><br><span class="line">#include &lt;set&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	std::ifstream file(&quot;test.txt&quot;);</span><br><span class="line">	vector&lt;string&gt; input;</span><br><span class="line">	std::map&lt;string, std::set&lt;decltype(input.size())&gt;&gt; dictionary;</span><br><span class="line">	// size_t</span><br><span class="line">	decltype(input.size()) lineNo&#123; 0 &#125;;</span><br><span class="line"></span><br><span class="line">	for (string line; std::getline(file, line); ++lineNo)</span><br><span class="line">	&#123;</span><br><span class="line">		input.push_back(line);</span><br><span class="line">		std::istringstream line_stream(line);</span><br><span class="line">		for (string text, word; line_stream &gt;&gt; text; word.clear())</span><br><span class="line">		&#123;</span><br><span class="line">			// ispunct检查参数c是否为标点符号或特殊符号</span><br><span class="line">			// 将text不符合ispunct复制到word后</span><br><span class="line">			std::cout &lt;&lt; &quot;word-before : &quot; &lt;&lt; word &lt;&lt; std::endl;</span><br><span class="line">			std::remove_copy_if(text.begin(), text.end(), std::back_inserter(word), ispunct);</span><br><span class="line">			std::cout &lt;&lt; &quot;word_after : &quot; &lt;&lt; word &lt;&lt; std::endl;</span><br><span class="line">			dictionary[word].insert(lineNo);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	while (true)</span><br><span class="line">	&#123;</span><br><span class="line">		std::cout &lt;&lt; &quot;enter word to look for, or q to quit: &quot;;</span><br><span class="line">		string s;</span><br><span class="line">		if (!(std::cin &gt;&gt; s) || s == &quot;q&quot;) break;</span><br><span class="line">		auto found = dictionary.find(s);</span><br><span class="line">		if (found != dictionary.end())</span><br><span class="line">		&#123;</span><br><span class="line">			std::cout &lt;&lt; s &lt;&lt; &quot; occurs &quot; &lt;&lt; found-&gt;second.size() &lt;&lt; (found-&gt;second.size() &gt; 1 ? &quot; times&quot; : &quot; time&quot;) &lt;&lt; std::endl;</span><br><span class="line">			for (auto i : found-&gt;second)</span><br><span class="line">				std::cout &lt;&lt; &quot;\t(line &quot; &lt;&lt; i + 1 &lt;&lt; &quot;) &quot; &lt;&lt; input.at(i) &lt;&lt; std::endl;</span><br><span class="line">		&#125;</span><br><span class="line">		else std::cout &lt;&lt; s &lt;&lt; &quot; occurs 0 time&quot; &lt;&lt; std::endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -633,139 +996,16 @@
       </tags>
   </entry>
   <entry>
-    <title>智能指针</title>
-    <url>/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/</url>
-    <content><![CDATA[<blockquote>
-<p>C++ primer 第12章 动态内存与智能指针</p>
-</blockquote>
-<p><img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img1.PNG" alt></p>
+    <title>面试小知识： 取反符号~</title>
+    <url>/2022/07/13/%E9%9D%A2%E8%AF%95%E5%B0%8F%E7%9F%A5%E8%AF%86%EF%BC%9A-%E5%8F%96%E5%8F%8D%E7%AC%A6%E5%8F%B7/</url>
+    <content><![CDATA[<h3 id="今天在力扣刷题的时候看到这么一个问题：-0-？">今天在力扣刷题的时候看到这么一个问题： ~ 0 = ？</h3>
 <blockquote>
-<p>shared_ptr</p>
+<p>按照公式：</p>
 </blockquote>
-<p><img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img2.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img3.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img4.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img5.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img6.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img7.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img8.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img9.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img10.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img11.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img12.PNG" alt></p>
-<blockquote>
-<p>编写函数，返回一个动态分配的 int 的vector。将此vector 传递给另一个函数，这个函数读取标准输入，将读入的值保存在 vector 元素中。再将vector传递给另一个函数，打印读入的值。记得在恰当的时刻delete vector。</p>
-</blockquote>
-<p>代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line"></span><br><span class="line">using std::vector;</span><br><span class="line"></span><br><span class="line">vector&lt;int&gt;* alloc_vector()</span><br><span class="line">&#123;</span><br><span class="line">	return new vector&lt;int&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void assign_vector(vector&lt;int&gt;* p)</span><br><span class="line">&#123;</span><br><span class="line">	int i;</span><br><span class="line">	while (std::cin &gt;&gt; i)</span><br><span class="line">	&#123;</span><br><span class="line">		p-&gt;push_back(i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void print_vector(vector&lt;int&gt;* p)</span><br><span class="line">&#123;</span><br><span class="line">	for (auto i : *p)</span><br><span class="line">	&#123;</span><br><span class="line">		std::cout &lt;&lt; i &lt;&lt; std::endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	auto p = alloc_vector();</span><br><span class="line">	assign_vector(p);</span><br><span class="line">	print_vector(p);</span><br><span class="line">	delete p;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>重做上一题，这次使用 shared_ptr 而不是内置指针。</p>
-</blockquote>
-<p>代码如下:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;memory&gt;</span><br><span class="line"></span><br><span class="line">using std::vector;</span><br><span class="line"></span><br><span class="line">std::shared_ptr&lt;vector&lt;int&gt;&gt; alloc_vector()</span><br><span class="line">&#123;</span><br><span class="line">	return std::make_shared&lt;vector&lt;int&gt;&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void assign_vector(std::shared_ptr&lt;vector&lt;int&gt;&gt; p)</span><br><span class="line">&#123;</span><br><span class="line">	int i;</span><br><span class="line">	while (std::cin &gt;&gt; i)</span><br><span class="line">	&#123;</span><br><span class="line">		p-&gt;push_back(i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void print_vector(std::shared_ptr&lt;vector&lt;int&gt;&gt; p)</span><br><span class="line">&#123;</span><br><span class="line">	for (auto i : *p)</span><br><span class="line">	&#123;</span><br><span class="line">		std::cout &lt;&lt; i &lt;&lt; std::endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	auto p = alloc_vector();</span><br><span class="line">	assign_vector(p);</span><br><span class="line">	print_vector(p);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<blockquote>
-<p>unique_ptr</p>
-</blockquote>
-<p><img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img13.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img14.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img15.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img16.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img17.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img18.PNG" alt></p>
-<blockquote>
-<p>如果你试图拷贝或赋值 unique_ptr，编译器并不总是能给出易于理解的错误信息。编写包含这种错误的程序，观察编译器如何诊断这种错误。</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;memory&gt;</span><br><span class="line"></span><br><span class="line">using std::string; using std::unique_ptr;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    unique_ptr&lt;string&gt; p1(new string(&quot;pezy&quot;));</span><br><span class="line">    std::cout &lt;&lt; *p1 &lt;&lt; std::endl;</span><br><span class="line">    p1.reset(nullptr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>shared_ptr 为什么没有 release 成员？</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">release 成员的作用是放弃控制权并返回指针，因为在某一时刻只能有一个 unique_ptr 指向某个对象，unique_ptr 不能被赋值，所以要使用 release 成员将一个 unique_ptr 的指针的所有权传递给另一个 unique_ptr。而 shared_ptr 允许有多个 shared_ptr 指向同一个对象，因此不需要 release 成员。</span><br></pre></td></tr></table></figure>
-<hr>
-<blockquote>
-<p>weak_ptr</p>
-</blockquote>
-<p><img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img19.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img20.PNG" alt></p>
-<blockquote>
-<p>定义你自己版本的 StrBlobPtr，更新 StrBlob 类，加入恰当的 friend 声明以及 begin 和 end 成员。</p>
-</blockquote>
-<p>代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;initializer_list&gt;</span><br><span class="line">#include &lt;memory&gt;</span><br><span class="line">#include &lt;exception&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;fstream&gt;</span><br><span class="line"></span><br><span class="line">using std::vector; using std::string;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">class StrBlobPtr;</span><br><span class="line">class ConstStrBlobStr;</span><br><span class="line"></span><br><span class="line">class StrBlob &#123;</span><br><span class="line">public:</span><br><span class="line">    friend class StrBlobPtr;</span><br><span class="line">    friend class ConstStrBlobPtr;</span><br><span class="line">    using size_type = vector&lt;string&gt;::size_type;</span><br><span class="line"></span><br><span class="line">    StrBlobPtr begin();</span><br><span class="line">    StrBlobPtr end();</span><br><span class="line">    ConstStrBlobPtr cbegin();</span><br><span class="line">    ConstStrBlobPtr cend();</span><br><span class="line">    StrBlob() :data(std::make_shared&lt;vector&lt;string&gt;&gt;()) &#123; &#125;</span><br><span class="line">    StrBlob(std::initializer_list&lt;string&gt; il) :data(std::make_shared&lt;vector&lt;string&gt;&gt;(il)) &#123; &#125;</span><br><span class="line"></span><br><span class="line">    size_type size() const &#123; return data-&gt;size(); &#125;</span><br><span class="line">    bool empty() const &#123; return data-&gt;empty(); &#125;</span><br><span class="line"></span><br><span class="line">    void push_back(const string&amp; t) &#123; data-&gt;push_back(t); &#125;</span><br><span class="line">    void pop_back() &#123;</span><br><span class="line">        check(0, &quot;pop_back on empty StrBlob&quot;);</span><br><span class="line">        data-&gt;pop_back();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::string&amp; front() &#123;</span><br><span class="line">        check(0, &quot;front on empty StrBlob&quot;);</span><br><span class="line">        return data-&gt;front();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::string&amp; back() &#123;</span><br><span class="line">        check(0, &quot;back on empty StrBlob&quot;);</span><br><span class="line">        return data-&gt;back();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    const std::string&amp; front() const &#123;</span><br><span class="line">        check(0, &quot;front on empty StrBlob&quot;);</span><br><span class="line">        return data-&gt;front();</span><br><span class="line">    &#125;</span><br><span class="line">    const std::string&amp; back() const &#123;</span><br><span class="line">        check(0, &quot;back on empty StrBlob&quot;);</span><br><span class="line">        return data-&gt;back();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">    void check(size_type i, const string&amp; msg) const &#123;</span><br><span class="line">        if (i &gt;= data-&gt;size()) throw std::out_of_range(msg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">    std::shared_ptr&lt;vector&lt;string&gt;&gt; data;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class ConstStrBlobPtr &#123;</span><br><span class="line">public:</span><br><span class="line">    ConstStrBlobPtr() : curr(0) &#123;&#125;</span><br><span class="line">    ConstStrBlobPtr(const StrBlob&amp; a, size_t sz = 0) :</span><br><span class="line">        wptr(a.data), curr(sz) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    string&amp; deref() const</span><br><span class="line">    &#123;</span><br><span class="line">        // 如果check成功，p就是一个shared_ptr,指向StrBlobPtr所</span><br><span class="line">        // 指向的vector。表达式(*p)[curr]解引用shared_ptr来获得vector,</span><br><span class="line">        // 然后使用下标运算符提取并返回curr位置上的元素</span><br><span class="line">        auto p = check(curr, &quot;dereference past end&quot;);</span><br><span class="line">        return (*p)[curr]; // 返回一个vector[curr]</span><br><span class="line">    &#125;</span><br><span class="line">    ConstStrBlobPtr&amp; incr()</span><br><span class="line">    &#123;</span><br><span class="line">        check(curr, &quot;increment past end of StrBlobPtr&quot;);</span><br><span class="line">        ++curr;</span><br><span class="line">        return *this;</span><br><span class="line">    &#125;</span><br><span class="line">    bool operator!=(const ConstStrBlobPtr&amp; p) &#123; return p.curr != curr; &#125;</span><br><span class="line">private:</span><br><span class="line">    // 若检查成功，chaek返回一个指向vector的shared_ptr</span><br><span class="line">    std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt;</span><br><span class="line">        check(std::size_t i, const std::string&amp; msg) const &#123;</span><br><span class="line">        auto ret = wptr.lock();</span><br><span class="line">        if (!ret) throw std::runtime_error(&quot;unbound StrBolbPtr&quot;);</span><br><span class="line">        if (i &gt;= ret-&gt;size()) throw std::out_of_range(msg);</span><br><span class="line">        return ret;</span><br><span class="line">    &#125;</span><br><span class="line">    // 保存一个weak_ptr,意味着底层vector可能会被销毁</span><br><span class="line">    std::weak_ptr &lt;std::vector&lt;std::string&gt;&gt; wptr;</span><br><span class="line">    // 在数组中的当前位置</span><br><span class="line">    std::size_t curr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class StrBlobPtr &#123;</span><br><span class="line">public:</span><br><span class="line">    StrBlobPtr() : curr(0) &#123;&#125;</span><br><span class="line">    StrBlobPtr(StrBlob &amp;a, size_t sz = 0) :</span><br><span class="line">        wptr(a.data), curr(sz) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    string&amp; deref() const</span><br><span class="line">    &#123;</span><br><span class="line">        // 如果check成功，p就是一个shared_ptr,指向StrBlobPtr所</span><br><span class="line">        // 指向的vector。表达式(*p)[curr]解引用shared_ptr来获得vector,</span><br><span class="line">        // 然后使用下标运算符提取并返回curr位置上的元素</span><br><span class="line">        auto p = check(curr, &quot;dereference past end&quot;);</span><br><span class="line">        return (*p)[curr]; // 返回一个vector[curr]</span><br><span class="line">    &#125;</span><br><span class="line">    StrBlobPtr&amp; incr()</span><br><span class="line">    &#123;</span><br><span class="line">        check(curr, &quot;increment past end of StrBlobPtr&quot;);</span><br><span class="line">        ++curr;</span><br><span class="line">        return *this;</span><br><span class="line">    &#125;</span><br><span class="line">    bool operator!=(const StrBlobPtr&amp; p) &#123; return p.curr != curr; &#125;</span><br><span class="line">private:</span><br><span class="line">    // 若检查成功，chaek返回一个指向vector的shared_ptr</span><br><span class="line">    std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt;</span><br><span class="line">        check(std::size_t i, const std::string&amp; msg) const &#123;</span><br><span class="line">        auto ret = wptr.lock();</span><br><span class="line">        if (!ret) throw std::runtime_error(&quot;unbound StrBolbPtr&quot;);</span><br><span class="line">        if (i &gt;= ret-&gt;size()) throw std::out_of_range(msg);</span><br><span class="line">        return ret;</span><br><span class="line">    &#125;</span><br><span class="line">    // 保存一个weak_ptr,意味着底层vector可能会被销毁</span><br><span class="line">    std::weak_ptr &lt;std::vector&lt;std::string&gt;&gt; wptr;</span><br><span class="line">    // 在数组中的当前位置</span><br><span class="line">    std::size_t curr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">StrBlobPtr StrBlob::begin()</span><br><span class="line">&#123;</span><br><span class="line">    return StrBlobPtr(*this);</span><br><span class="line">&#125;</span><br><span class="line">StrBlobPtr StrBlob::end()</span><br><span class="line">&#123;</span><br><span class="line">    return StrBlobPtr(*this, data-&gt;size());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ConstStrBlobPtr StrBlob::cbegin()</span><br><span class="line">&#123;</span><br><span class="line">    return ConstStrBlobPtr(*this);</span><br><span class="line">&#125;</span><br><span class="line">ConstStrBlobPtr StrBlob::cend()</span><br><span class="line">&#123;</span><br><span class="line">    return ConstStrBlobPtr(*this, data-&gt;size());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    std::ifstream is(&quot;test.txt&quot;);</span><br><span class="line">    StrBlob sb;</span><br><span class="line">    string s;</span><br><span class="line">    while (getline(is, s)) &#123;</span><br><span class="line">        sb.push_back(s);</span><br><span class="line">    &#125;</span><br><span class="line">    for (StrBlobPtr sbp = sb.begin(); sbp != sb.end(); sbp.incr()) &#123;</span><br><span class="line">        cout &lt;&lt; sbp.deref() &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>编写程序，逐行读入一个输入文件，将内容存入一个 StrBlob 中，用一个 StrBlobPtr 打印出 StrBlob 中的每个元素。</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;fstream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;initializer_list&gt;</span><br><span class="line">#include &lt;memory&gt;</span><br><span class="line">#include &lt;exception&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;fstream&gt;</span><br><span class="line"></span><br><span class="line">using std::vector; using std::string;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">class StrBlobPtr;</span><br><span class="line">class ConstStrBlobStr;</span><br><span class="line"></span><br><span class="line">class StrBlob &#123;</span><br><span class="line">public:</span><br><span class="line">    friend class StrBlobPtr;</span><br><span class="line">    friend class ConstStrBlobPtr;</span><br><span class="line">    using size_type = vector&lt;string&gt;::size_type;</span><br><span class="line"></span><br><span class="line">    StrBlobPtr begin();</span><br><span class="line">    StrBlobPtr end();</span><br><span class="line">    ConstStrBlobPtr cbegin();</span><br><span class="line">    ConstStrBlobPtr cend();</span><br><span class="line">    StrBlob() :data(std::make_shared&lt;vector&lt;string&gt;&gt;()) &#123; &#125;</span><br><span class="line">    StrBlob(std::initializer_list&lt;string&gt; il) :data(std::make_shared&lt;vector&lt;string&gt;&gt;(il)) &#123; &#125;</span><br><span class="line"></span><br><span class="line">    size_type size() const &#123; return data-&gt;size(); &#125;</span><br><span class="line">    bool empty() const &#123; return data-&gt;empty(); &#125;</span><br><span class="line"></span><br><span class="line">    void push_back(const string&amp; t) &#123; data-&gt;push_back(t); &#125;</span><br><span class="line">    void pop_back() &#123;</span><br><span class="line">        check(0, &quot;pop_back on empty StrBlob&quot;);</span><br><span class="line">        data-&gt;pop_back();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::string&amp; front() &#123;</span><br><span class="line">        check(0, &quot;front on empty StrBlob&quot;);</span><br><span class="line">        return data-&gt;front();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::string&amp; back() &#123;</span><br><span class="line">        check(0, &quot;back on empty StrBlob&quot;);</span><br><span class="line">        return data-&gt;back();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    const std::string&amp; front() const &#123;</span><br><span class="line">        check(0, &quot;front on empty StrBlob&quot;);</span><br><span class="line">        return data-&gt;front();</span><br><span class="line">    &#125;</span><br><span class="line">    const std::string&amp; back() const &#123;</span><br><span class="line">        check(0, &quot;back on empty StrBlob&quot;);</span><br><span class="line">        return data-&gt;back();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">    void check(size_type i, const string&amp; msg) const &#123;</span><br><span class="line">        if (i &gt;= data-&gt;size()) throw std::out_of_range(msg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">    std::shared_ptr&lt;vector&lt;string&gt;&gt; data;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class ConstStrBlobPtr &#123;</span><br><span class="line">public:</span><br><span class="line">    ConstStrBlobPtr() : curr(0) &#123;&#125;</span><br><span class="line">    ConstStrBlobPtr(const StrBlob&amp; a, size_t sz = 0) :</span><br><span class="line">        wptr(a.data), curr(sz) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    string&amp; deref() const</span><br><span class="line">    &#123;</span><br><span class="line">        // 如果check成功，p就是一个shared_ptr,指向StrBlobPtr所</span><br><span class="line">        // 指向的vector。表达式(*p)[curr]解引用shared_ptr来获得vector,</span><br><span class="line">        // 然后使用下标运算符提取并返回curr位置上的元素</span><br><span class="line">        auto p = check(curr, &quot;dereference past end&quot;);</span><br><span class="line">        return (*p)[curr]; // 返回一个vector[curr]</span><br><span class="line">    &#125;</span><br><span class="line">    ConstStrBlobPtr&amp; incr()</span><br><span class="line">    &#123;</span><br><span class="line">        check(curr, &quot;increment past end of StrBlobPtr&quot;);</span><br><span class="line">        ++curr;</span><br><span class="line">        return *this;</span><br><span class="line">    &#125;</span><br><span class="line">    bool operator!=(const ConstStrBlobPtr&amp; p) &#123; return p.curr != curr; &#125;</span><br><span class="line">private:</span><br><span class="line">    // 若检查成功，chaek返回一个指向vector的shared_ptr</span><br><span class="line">    std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt;</span><br><span class="line">        check(std::size_t i, const std::string&amp; msg) const &#123;</span><br><span class="line">        auto ret = wptr.lock();</span><br><span class="line">        if (!ret) throw std::runtime_error(&quot;unbound StrBolbPtr&quot;);</span><br><span class="line">        if (i &gt;= ret-&gt;size()) throw std::out_of_range(msg);</span><br><span class="line">        return ret;</span><br><span class="line">    &#125;</span><br><span class="line">    // 保存一个weak_ptr,意味着底层vector可能会被销毁</span><br><span class="line">    std::weak_ptr &lt;std::vector&lt;std::string&gt;&gt; wptr;</span><br><span class="line">    // 在数组中的当前位置</span><br><span class="line">    std::size_t curr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class StrBlobPtr &#123;</span><br><span class="line">public:</span><br><span class="line">    StrBlobPtr() : curr(0) &#123;&#125;</span><br><span class="line">    StrBlobPtr(StrBlob &amp;a, size_t sz = 0) :</span><br><span class="line">        wptr(a.data), curr(sz) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    string&amp; deref() const</span><br><span class="line">    &#123;</span><br><span class="line">        // 如果check成功，p就是一个shared_ptr,指向StrBlobPtr所</span><br><span class="line">        // 指向的vector。表达式(*p)[curr]解引用shared_ptr来获得vector,</span><br><span class="line">        // 然后使用下标运算符提取并返回curr位置上的元素</span><br><span class="line">        auto p = check(curr, &quot;dereference past end&quot;);</span><br><span class="line">        return (*p)[curr]; // 返回一个vector[curr]</span><br><span class="line">    &#125;</span><br><span class="line">    StrBlobPtr&amp; incr()</span><br><span class="line">    &#123;</span><br><span class="line">        check(curr, &quot;increment past end of StrBlobPtr&quot;);</span><br><span class="line">        ++curr;</span><br><span class="line">        return *this;</span><br><span class="line">    &#125;</span><br><span class="line">    bool operator!=(const StrBlobPtr&amp; p) &#123; return p.curr != curr; &#125;</span><br><span class="line">private:</span><br><span class="line">    // 若检查成功，chaek返回一个指向vector的shared_ptr</span><br><span class="line">    std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt;</span><br><span class="line">        check(std::size_t i, const std::string&amp; msg) const &#123;</span><br><span class="line">        auto ret = wptr.lock();</span><br><span class="line">        if (!ret) throw std::runtime_error(&quot;unbound StrBolbPtr&quot;);</span><br><span class="line">        if (i &gt;= ret-&gt;size()) throw std::out_of_range(msg);</span><br><span class="line">        return ret;</span><br><span class="line">    &#125;</span><br><span class="line">    // 保存一个weak_ptr,意味着底层vector可能会被销毁</span><br><span class="line">    std::weak_ptr &lt;std::vector&lt;std::string&gt;&gt; wptr;</span><br><span class="line">    // 在数组中的当前位置</span><br><span class="line">    std::size_t curr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">StrBlobPtr StrBlob::begin()</span><br><span class="line">&#123;</span><br><span class="line">    return StrBlobPtr(*this);</span><br><span class="line">&#125;</span><br><span class="line">StrBlobPtr StrBlob::end()</span><br><span class="line">&#123;</span><br><span class="line">    return StrBlobPtr(*this, data-&gt;size());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ConstStrBlobPtr StrBlob::cbegin()</span><br><span class="line">&#123;</span><br><span class="line">    return ConstStrBlobPtr(*this);</span><br><span class="line">&#125;</span><br><span class="line">ConstStrBlobPtr StrBlob::cend()</span><br><span class="line">&#123;</span><br><span class="line">    return ConstStrBlobPtr(*this, data-&gt;size());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	ifstream ifs(&quot;books.txt&quot;);</span><br><span class="line">	StrBlob sb;</span><br><span class="line">	string s;</span><br><span class="line">	while (getline(ifs, s))</span><br><span class="line">	&#123;</span><br><span class="line">		sb.push_back(s);</span><br><span class="line">	&#125;</span><br><span class="line">	for (StrBlobPtr sbp = sb.begin(); sbp != sb.end(); sbp.incr())</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; sbp.deref() &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>智能指针最后练习</p>
-</blockquote>
-<h1>12.27：</h1>
-<p><img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img21.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img22.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img23.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img24.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img25.PNG" alt><br>
-<img src="/2022/07/14/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/smart_pointer_img26.PNG" alt></p>
-<blockquote>
-<p>代码：</p>
-</blockquote>
-<ol>
-<li>头文件：</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#pragma once</span><br><span class="line">#ifndef EX12_27_H</span><br><span class="line">#define EX12_27_H</span><br><span class="line"></span><br><span class="line">#include &lt;fstream&gt;</span><br><span class="line">#include &lt;memory&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;map&gt;</span><br><span class="line">#include &lt;set&gt;</span><br><span class="line"></span><br><span class="line">class QueryResult;</span><br><span class="line"></span><br><span class="line">class TextQuery</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">	// 类型定义</span><br><span class="line">	using line_no = std::vector&lt;std::string&gt;::size_type;</span><br><span class="line">	// 构造函数</span><br><span class="line">	TextQuery(std::ifstream&amp;);</span><br><span class="line">	QueryResult query(const std::string&amp; s) const;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">	// 保存输入文件的一份拷贝，输入文件中的每行保存为vector中的一个元素。当需要打印一行时，</span><br><span class="line">	// 可以用行号作为下标来提取行文本</span><br><span class="line">	std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; file;</span><br><span class="line">	// 使用一个map来将每个单词与它出现的行号set关联起来，可以方便地提取任意单词的set</span><br><span class="line">	std::map&lt;std::string, std::shared_ptr&lt;std::set&lt;line_no&gt;&gt;&gt; wm;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class QueryResult</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">	friend std::ostream&amp; print(std::ostream&amp;, const QueryResult&amp;);</span><br><span class="line"></span><br><span class="line">	QueryResult(std::string s,</span><br><span class="line">		std::shared_ptr&lt;std::set&lt;TextQuery::line_no&gt;&gt; p,</span><br><span class="line">		std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; f) :</span><br><span class="line">		sought(s), lines(p), file(f)</span><br><span class="line">	&#123;&#125;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">	std::string sought;</span><br><span class="line">	// 使用set来保存每个单词在输入文本中出现的行号，保证每行只出现一次且行号按升序保存</span><br><span class="line">	std::shared_ptr&lt;std::set&lt;TextQuery::line_no&gt;&gt; lines;</span><br><span class="line">	// 保存输入文件的一份拷贝，输入文件中的每行保存为vector中的一个元素。当需要打印一行时，</span><br><span class="line">	// 可以用行号作为下标来提取行文本</span><br><span class="line">	std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; file;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">std::ostream&amp; print(std::ostream&amp;, const QueryResult&amp;);</span><br><span class="line"></span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ol start="2">
-<li>功能实现</li>
-</ol>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &quot;ex12_27.h&quot;</span><br><span class="line">#include &lt;sstream&gt;</span><br><span class="line">#include &lt;fstream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">TextQuery::TextQuery(ifstream&amp; ifs) : file(new vector&lt;string&gt;)</span><br><span class="line">&#123;</span><br><span class="line">	string text;</span><br><span class="line">	// 获取一行</span><br><span class="line">	while (getline(ifs, text))</span><br><span class="line">	&#123;</span><br><span class="line">		// 输入文件中的每行保存为vector中的一个元素</span><br><span class="line">		file-&gt;push_back(text);</span><br><span class="line">		// 从0开始, file-&gt;size()从1开始</span><br><span class="line">		int n = file-&gt;size() - 1;</span><br><span class="line">		cout &lt;&lt; &quot;n = &quot; &lt;&lt; n &lt;&lt; endl;</span><br><span class="line">		istringstream line(text);</span><br><span class="line">		string word;</span><br><span class="line">		while (line &gt;&gt; word)</span><br><span class="line">		&#123;</span><br><span class="line">			// 获取行号,wm[word] -&gt; size_t</span><br><span class="line">			auto&amp; lines = wm[word];</span><br><span class="line">			// cout &lt;&lt; &quot; [word] = &quot; &lt;&lt; word;</span><br><span class="line">			if (!lines)</span><br><span class="line">				lines.reset(new set&lt;line_no&gt;);</span><br><span class="line">			// cout &lt;&lt; endl &lt;&lt; n &lt;&lt; endl;</span><br><span class="line">			lines-&gt;insert(n);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">QueryResult TextQuery::query(const string&amp; s) const</span><br><span class="line">&#123;</span><br><span class="line">	static shared_ptr&lt;set&lt;line_no&gt;&gt; nodata(new set&lt;line_no&gt;);</span><br><span class="line">	auto loc = wm.find(s);</span><br><span class="line">	// 如果找到返回行数</span><br><span class="line">	if (loc == wm.end())</span><br><span class="line">		return QueryResult(s, nodata, file);</span><br><span class="line">	else</span><br><span class="line">		return QueryResult(s, loc-&gt;second, file);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 打印</span><br><span class="line">std::ostream&amp; print(std::ostream&amp; os, const QueryResult&amp; qr)</span><br><span class="line">&#123;</span><br><span class="line">	os &lt;&lt; qr.sought &lt;&lt; &quot; occurs &quot; &lt;&lt; qr.lines-&gt;size() &lt;&lt; &quot; &quot;</span><br><span class="line">		&lt;&lt; &quot;time&quot; &lt;&lt; (qr.lines-&gt;size() &gt; 1 ? &quot;s&quot; : &quot;&quot;) &lt;&lt; endl;</span><br><span class="line">	for (auto num : *qr.lines)</span><br><span class="line">		os &lt;&lt; &quot;\t(line &quot; &lt;&lt; num + 1 &lt;&lt; &quot;) &quot; &lt;&lt; *(qr.file-&gt;begin() + num) &lt;&lt; endl;</span><br><span class="line">	return os;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ol start="3">
-<li>main函数实现</li>
-</ol>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;fstream&gt;</span><br><span class="line">#include &quot;ex12_27.h&quot;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">void runQueries(ifstream&amp; infile)</span><br><span class="line">&#123;</span><br><span class="line">	TextQuery tq(infile);</span><br><span class="line">	while (true)</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; &quot;enter word to look for, or q to quit: &quot;;</span><br><span class="line">		string s;</span><br><span class="line">		if (!(cin &gt;&gt; s) || s == &quot;q&quot;) break;</span><br><span class="line">		print(cout, tq.query(s)) &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	ifstream ifs(&quot;test.txt&quot;);</span><br><span class="line">	runQueries(ifs);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1>12.28</h1>
-<blockquote>
-<p>编写程序实现文本查询，不要定义类来管理数据。你的程序应该接受一个文件，并与用户交互来查询单词。使用vector、map 和 set 容器来保存来自文件的数据并生成查询结果。</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;string&gt;</span><br><span class="line">using std::string;</span><br><span class="line"></span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">using std::vector;</span><br><span class="line"></span><br><span class="line">#include &lt;memory&gt;</span><br><span class="line">using std::shared_ptr;</span><br><span class="line"></span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;fstream&gt;</span><br><span class="line">#include &lt;sstream&gt;</span><br><span class="line">#include &lt;map&gt;</span><br><span class="line">#include &lt;set&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	std::ifstream file(&quot;test.txt&quot;);</span><br><span class="line">	vector&lt;string&gt; input;</span><br><span class="line">	std::map&lt;string, std::set&lt;decltype(input.size())&gt;&gt; dictionary;</span><br><span class="line">	// size_t</span><br><span class="line">	decltype(input.size()) lineNo&#123; 0 &#125;;</span><br><span class="line"></span><br><span class="line">	for (string line; std::getline(file, line); ++lineNo)</span><br><span class="line">	&#123;</span><br><span class="line">		input.push_back(line);</span><br><span class="line">		std::istringstream line_stream(line);</span><br><span class="line">		for (string text, word; line_stream &gt;&gt; text; word.clear())</span><br><span class="line">		&#123;</span><br><span class="line">			// ispunct检查参数c是否为标点符号或特殊符号</span><br><span class="line">			// 将text不符合ispunct复制到word后</span><br><span class="line">			std::cout &lt;&lt; &quot;word-before : &quot; &lt;&lt; word &lt;&lt; std::endl;</span><br><span class="line">			std::remove_copy_if(text.begin(), text.end(), std::back_inserter(word), ispunct);</span><br><span class="line">			std::cout &lt;&lt; &quot;word_after : &quot; &lt;&lt; word &lt;&lt; std::endl;</span><br><span class="line">			dictionary[word].insert(lineNo);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	while (true)</span><br><span class="line">	&#123;</span><br><span class="line">		std::cout &lt;&lt; &quot;enter word to look for, or q to quit: &quot;;</span><br><span class="line">		string s;</span><br><span class="line">		if (!(std::cin &gt;&gt; s) || s == &quot;q&quot;) break;</span><br><span class="line">		auto found = dictionary.find(s);</span><br><span class="line">		if (found != dictionary.end())</span><br><span class="line">		&#123;</span><br><span class="line">			std::cout &lt;&lt; s &lt;&lt; &quot; occurs &quot; &lt;&lt; found-&gt;second.size() &lt;&lt; (found-&gt;second.size() &gt; 1 ? &quot; times&quot; : &quot; time&quot;) &lt;&lt; std::endl;</span><br><span class="line">			for (auto i : found-&gt;second)</span><br><span class="line">				std::cout &lt;&lt; &quot;\t(line &quot; &lt;&lt; i + 1 &lt;&lt; &quot;) &quot; &lt;&lt; input.at(i) &lt;&lt; std::endl;</span><br><span class="line">		&#125;</span><br><span class="line">		else std::cout &lt;&lt; s &lt;&lt; &quot; occurs 0 time&quot; &lt;&lt; std::endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>水晶头连线</title>
-    <url>/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/</url>
-    <content><![CDATA[<h3 id="颜色：">颜色：</h3>
-<blockquote>
-<p>白橙 橙 白绿 蓝 白蓝 绿 白棕 棕</p>
-</blockquote>
-<h3 id="图片：">图片：</h3>
-<p><img src="/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/conn_img1.PNG" alt></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">~x = -(x + 1) </span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>网络</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>流迭代器</title>
-    <url>/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
-    <content><![CDATA[<blockquote>
-<p>C++ primer 第十章 泛型算法</p>
-</blockquote>
-<p><img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img1.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img2.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img3.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img4.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img5.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img6.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img7.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img8.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img9.PNG" alt></p>
-]]></content>
-      <tags>
-        <tag>C++</tag>
+        <tag>面试</tag>
       </tags>
   </entry>
   <entry>
@@ -839,19 +1079,6 @@
 ]]></content>
       <tags>
         <tag>C++</tag>
-        <tag>面试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>面试小知识： 取反符号~</title>
-    <url>/2022/07/13/%E9%9D%A2%E8%AF%95%E5%B0%8F%E7%9F%A5%E8%AF%86%EF%BC%9A-%E5%8F%96%E5%8F%8D%E7%AC%A6%E5%8F%B7/</url>
-    <content><![CDATA[<h3 id="今天在力扣刷题的时候看到这么一个问题：-0-？">今天在力扣刷题的时候看到这么一个问题： ~ 0 = ？</h3>
-<blockquote>
-<p>按照公式：</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">~x = -(x + 1) </span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
         <tag>面试</tag>
       </tags>
   </entry>

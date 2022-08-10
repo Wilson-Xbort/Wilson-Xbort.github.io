@@ -20,18 +20,33 @@
     var CONFIG = {"hostname":"wilson-xbort.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="none">
+  <meta name="description" content="C++ primer 第15章 面向对象程序设计  虚函数     final 和 override  final 不允许后续的其他类覆盖 override 帮助编译器说明派生类中的虚函数    抽象基类(含有纯虚函数）  有纯虚函数的类才称之为抽象类        虚析构函数   重载和隐藏  同一作用域，那就是重载。不同作用域，那就是隐藏。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="虚函数复习">
 <meta property="og:url" content="https://wilson-xbort.github.io/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/index.html">
 <meta property="og:site_name" content="博客">
-<meta property="og:description" content="none">
+<meta property="og:description" content="C++ primer 第15章 面向对象程序设计  虚函数     final 和 override  final 不允许后续的其他类覆盖 override 帮助编译器说明派生类中的虚函数    抽象基类(含有纯虚函数）  有纯虚函数的类才称之为抽象类        虚析构函数   重载和隐藏  同一作用域，那就是重载。不同作用域，那就是隐藏。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wilson-xbort.github.io/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img1.PNG">
+<meta property="og:image" content="https://wilson-xbort.github.io/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img2.PNG">
+<meta property="og:image" content="https://wilson-xbort.github.io/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img3.PNG">
+<meta property="og:image" content="https://wilson-xbort.github.io/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img4.PNG">
+<meta property="og:image" content="https://wilson-xbort.github.io/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img5.PNG">
+<meta property="og:image" content="https://wilson-xbort.github.io/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img6.PNG">
+<meta property="og:image" content="https://wilson-xbort.github.io/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img7.PNG">
+<meta property="og:image" content="https://wilson-xbort.github.io/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img8.PNG">
+<meta property="og:image" content="https://wilson-xbort.github.io/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img9.PNG">
+<meta property="og:image" content="https://wilson-xbort.github.io/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img10.PNG">
+<meta property="og:image" content="https://wilson-xbort.github.io/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img11.PNG">
+<meta property="og:image" content="https://wilson-xbort.github.io/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img12.PNG">
+<meta property="og:image" content="https://wilson-xbort.github.io/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img13.PNG">
+<meta property="og:image" content="https://wilson-xbort.github.io/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img14.PNG">
 <meta property="article:published_time" content="2022-08-05T00:52:47.000Z">
-<meta property="article:modified_time" content="2022-08-08T06:06:08.020Z">
+<meta property="article:modified_time" content="2022-08-10T12:41:14.422Z">
 <meta property="article:author" content="Willson-Xbort">
-<meta property="article:tag" content="Hexo, NexT">
+<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wilson-xbort.github.io/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img1.PNG">
 
 <link rel="canonical" href="https://wilson-xbort.github.io/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/">
 
@@ -238,7 +253,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-08-08 14:06:08" itemprop="dateModified" datetime="2022-08-08T14:06:08+08:00">2022-08-08</time>
+                <time title="修改时间：2022-08-10 20:41:14" itemprop="dateModified" datetime="2022-08-10T20:41:14+08:00">2022-08-10</time>
               </span>
 
           
@@ -252,7 +267,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1>C++ primer 第15章 面向对象程序设计</h1>
+<blockquote>
+<p>虚函数</p>
+</blockquote>
+<p><img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img1.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img2.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img3.PNG" alt></p>
+<h2 id="final-和-override">final 和 override</h2>
+<blockquote>
+<p>final 不允许后续的其他类覆盖<br>
+override 帮助编译器说明派生类中的虚函数</p>
+</blockquote>
+<p><img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img4.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img5.PNG" alt></p>
+<h2 id="抽象基类-含有纯虚函数）">抽象基类(含有纯虚函数）</h2>
+<blockquote>
+<p>有纯虚函数的类才称之为抽象类</p>
+</blockquote>
+<p><img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img6.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img7.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img8.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img9.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img10.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img11.PNG" alt></p>
+<h2 id="虚析构函数">虚析构函数</h2>
+<p><img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img12.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img13.PNG" alt></p>
+<h2 id="重载和隐藏">重载和隐藏</h2>
+<blockquote>
+<p>同一作用域，那就是重载。不同作用域，那就是隐藏。</p>
+</blockquote>
+<p><img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img14.PNG" alt></p>
+
     </div>
 
     
@@ -275,6 +322,9 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i># C++</a>
+          </div>
 
         
 
@@ -347,6 +397,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">C++ primer 第15章 面向对象程序设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#final-%E5%92%8C-override"><span class="nav-number">1.1.</span> <span class="nav-text">final 和 override</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E5%9F%BA%E7%B1%BB-%E5%90%AB%E6%9C%89%E7%BA%AF%E8%99%9A%E5%87%BD%E6%95%B0%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">抽象基类(含有纯虚函数）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">虚析构函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD%E5%92%8C%E9%9A%90%E8%97%8F"><span class="nav-number">1.4.</span> <span class="nav-text">重载和隐藏</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -362,7 +413,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

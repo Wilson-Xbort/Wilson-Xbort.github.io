@@ -14,20 +14,40 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">judge</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* string, <span class="type">const</span> <span class="type">char</span>* strSearch, <span class="type">int</span> len)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (string[i] != strSearch[i]) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">char</span>* _strstr(<span class="type">const</span> <span class="type">char</span>* string, <span class="type">const</span> <span class="type">char</span>* strSearch) &#123;</span><br><span class="line">	<span class="type">int</span> len_str = <span class="built_in">strlen</span>(string);</span><br><span class="line">	<span class="type">int</span> len_compare = <span class="built_in">strlen</span>(strSearch);</span><br><span class="line">	<span class="keyword">if</span> (len_str &lt; len_compare) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="type">const</span> <span class="type">char</span>* pos = string;</span><br><span class="line">	<span class="comment">// 去除&#x27;\0&#x27;</span></span><br><span class="line">	<span class="type">const</span> <span class="type">char</span>* pos_end = string + len_str - <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (; pos &lt;= pos_end - len_compare; pos++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">judge</span>(pos, strSearch, len_compare) == <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">return</span> pos;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span> </span>&#123;</span><br><span class="line">	<span class="type">const</span> <span class="type">char</span> a[] = <span class="string">&quot;Hello, world&quot;</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, _strstr(a, <span class="string">&quot;,&quot;</span>));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="虚函数程序题">虚函数程序题</h2>
 <p>代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="type">int</span> iValue;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">fun1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Base fun1&quot;</span> &lt;&lt; endl;</span><br><span class="line">		<span class="built_in">fun2</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">fun2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Base fun2&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived</span> : <span class="keyword">public</span> Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="type">char</span>* pValue;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">fun1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Derived fun1&quot;</span> &lt;&lt; endl;</span><br><span class="line">		<span class="built_in">fun2</span>();</span><br><span class="line">		Base::<span class="built_in">fun1</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">fun2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Derived fun2&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MoreDerived</span> : <span class="keyword">public</span> Derived &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="type">static</span> <span class="type">double</span> dValue;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="built_in">sizeof</span>(Base) &lt;&lt; endl	 </span><br><span class="line">		&lt;&lt; <span class="built_in">sizeof</span>(Derived) &lt;&lt; endl</span><br><span class="line">		&lt;&lt; <span class="built_in">sizeof</span>(MoreDerived) &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	Derived d;</span><br><span class="line"></span><br><span class="line">	Base&amp; rB = d;</span><br><span class="line">	rB.<span class="built_in">fun1</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	Base* pB = &amp;d;</span><br><span class="line">	pB-&gt;<span class="built_in">fun1</span>();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 以下3种写法一样</span></span><br><span class="line">	pB = (Base*)&amp;d;</span><br><span class="line">	<span class="comment">// pB = &amp;d;</span></span><br><span class="line">	<span class="comment">// pB = &amp;(Base&amp;)d;</span></span><br><span class="line">	pB-&gt;<span class="built_in">fun1</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="首先要知道的知识">首先要知道的知识</h2>
+<ol>
+<li>字节对齐：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">类的默认的对齐方式：规定各成员变量存放的起始地址相对于结构的起始地址的偏移量必须为该变量的类型所占用的字节数的倍数。</span><br><span class="line">各成员变量在存放的时候根据在结构中出现的顺序依次申请空间结构的字节边界数。</span><br><span class="line">结构中占用最大空间的类型所占用的字节数的倍数。</span><br></pre></td></tr></table></figure>
+<p>常用类型的对齐方式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.	char 1的倍数</span><br><span class="line">2.	int 4的倍数</span><br><span class="line">3.	float 4的倍数</span><br><span class="line">4.	double 8的倍数</span><br><span class="line">5.	short 2的倍数</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>虚指针：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">多态是由虚函数实现的，而虚函数主要通过虚函数表（V-Table） 来实现。</span><br><span class="line">虚函数表每一项存储的一个虚函数的地址。  </span><br><span class="line">类的每一个对象都会包含一个虚指针，这个虚指针指向虚函数表。</span><br><span class="line"></span><br><span class="line">在32位下，虚指针占4个字节，在64位下，虚指针占8个字节。</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>C++ 对象的内存布局查看</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 打开vs2022自带的【x86 Native Tools Command Prompt for VS 2022】</span><br><span class="line">2. 转入到要调试的cpp目录下： 例如C:\\Users\\Administrator\\source\\repos\\test</span><br><span class="line">3. 输入cl -d1reportSingleClassLayoutXXX MMM.cpp 【xxx为类名，MMM是文件名】</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>左值和右值</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">左值（L-value）：表示存储在计算机内存的对象，可寻址，相当于地址值</span><br><span class="line"></span><br><span class="line">右值（R-value）：代表的为真实值，可读，即数据值</span><br><span class="line"></span><br><span class="line">因为左值是一个地址值，因此可以对左值进行赋值操作，而右值本身就是同一个数据值，就不存在对一个数据值就行赋值的操作。</span><br><span class="line"></span><br><span class="line">int a,b;</span><br><span class="line">a=5;//为合法的操作，因为a是个地址值；</span><br><span class="line">b=a;//这个也是个合法操作，在这里b为地址值，a取其数据值即5(注意这里不是取地址值，因为a是作为一个右值)</span><br><span class="line">5=5;//这是一个非法操作，因为左值是个数据值，右值也是个数据值</span><br></pre></td></tr></table></figure>
+<h2 id="开始调试">开始调试</h2>
+<table>
+<thead>
+<tr>
+<th><img src="/2022/08/08/2022-8-4%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/virtual_interview_img2.PNG" alt></th>
+<th><img src="/2022/08/08/2022-8-4%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/virtual_interview_img3.PNG" alt="controller"></th>
+<th><img src="/2022/08/08/2022-8-4%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/virtual_interview_img4.PNG" alt="Analysis"></th>
+</tr>
+</thead>
+</table>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cout &lt;&lt; sizeof(Base) &lt;&lt; endl	// 	虚指针8字节，int字节对齐=8 =》 16</span><br><span class="line">     &lt;&lt; sizeof(Derived) &lt;&lt; endl //  继承后pValue 字节对齐 + 8 =》 16 + 8 = 24</span><br><span class="line">	 &lt;&lt; sizeof(MoreDerived) &lt;&lt; endl; // 因为是static在静态区，不变还是24</span><br><span class="line"></span><br><span class="line">Derived d;</span><br><span class="line"></span><br><span class="line">Base&amp; rB = d;</span><br><span class="line">rB.fun1();	// 不管谁指向/引用谁，都是自动识别调子类自己的函数(调用被重写过的函数）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Base* pB = &amp;d;</span><br><span class="line">pB-&gt;fun1(); // 不管谁指向/引用谁，都是自动识别调子类自己的函数(调用被重写过的函数）</span><br><span class="line"></span><br><span class="line">pB = (Base*)&amp;d;</span><br><span class="line">//pB = &amp;(Base&amp;)d;</span><br><span class="line">// pB = &amp;d;</span><br><span class="line">pB-&gt;fun3(); // 强转后还是先调用被重写的函数，如果没有再往基类找</span><br></pre></td></tr></table></figure>]]></content>
       <tags>
         <tag>算法</tag>
         <tag>八股文</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux 高性能服务器理解</title>
-    <url>/2022/07/26/Linux-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%90%86%E8%A7%A3/</url>
-    <content><![CDATA[]]></content>
-      <tags>
-        <tag>Linux</tag>
-        <tag>C++</tag>
-        <tag>socket</tag>
       </tags>
   </entry>
   <entry>
@@ -54,6 +74,49 @@
 ]]></content>
       <tags>
         <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>性能测试工具的简单使用</title>
+    <url>/2022/07/03/Use-of-performance-test-tools/</url>
+    <content><![CDATA[<h2 id="下载工具：">下载工具：</h2>
+<table>
+<thead>
+<tr>
+<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon1.PNG" alt="virtual User Generator"></th>
+<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon2.PNG" alt="controller"></th>
+<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon3.PNG" alt="Analysis"></th>
+</tr>
+</thead>
+</table>
+<h2 id="打开virtual-User-Generator：">打开virtual User Generator：</h2>
+<ol>
+<li>点击录制按钮，选择协议<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img1.png" alt><br>
+2.在高级选项中选择明确包含url的脚本<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img2.png" alt><br>
+3.点击开始录制后就会进入你所写的url链接，结束后就可以看到Action的代码<br>
+4.可以点击<em>设计工作室</em>进行关联<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img3.png" alt><br>
+5.点击运行，看到为√的时候就成功了<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img4.png" alt></li>
+</ol>
+<h2 id="打开controller：">打开controller：</h2>
+<p>1.选择脚本<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img5.png" alt><br>
+2.进行设置，在基本计划下可以设置用户数量<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img6.png" alt><br>
+3.点击运行时设置，可以将自动事务的勾选去掉<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img7.png" alt><br>
+4.设置全部完成后可以运行<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img8.png" alt><br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img9.png" alt><br>
+5.点击结果-&gt;分析结果<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img10.png" alt><br>
+将会自动打开<em>Analysis</em>显示结果</p>
+]]></content>
+      <tags>
+        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -145,46 +208,26 @@
       </tags>
   </entry>
   <entry>
-    <title>性能测试工具的简单使用</title>
-    <url>/2022/07/03/Use-of-performance-test-tools/</url>
-    <content><![CDATA[<h2 id="下载工具：">下载工具：</h2>
-<table>
-<thead>
-<tr>
-<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon1.PNG" alt="virtual User Generator"></th>
-<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon2.PNG" alt="controller"></th>
-<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon3.PNG" alt="Analysis"></th>
-</tr>
-</thead>
-</table>
-<h2 id="打开virtual-User-Generator：">打开virtual User Generator：</h2>
-<ol>
-<li>点击录制按钮，选择协议<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img1.png" alt><br>
-2.在高级选项中选择明确包含url的脚本<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img2.png" alt><br>
-3.点击开始录制后就会进入你所写的url链接，结束后就可以看到Action的代码<br>
-4.可以点击<em>设计工作室</em>进行关联<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img3.png" alt><br>
-5.点击运行，看到为√的时候就成功了<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img4.png" alt></li>
-</ol>
-<h2 id="打开controller：">打开controller：</h2>
-<p>1.选择脚本<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img5.png" alt><br>
-2.进行设置，在基本计划下可以设置用户数量<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img6.png" alt><br>
-3.点击运行时设置，可以将自动事务的勾选去掉<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img7.png" alt><br>
-4.设置全部完成后可以运行<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img8.png" alt><br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img9.png" alt><br>
-5.点击结果-&gt;分析结果<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img10.png" alt><br>
-将会自动打开<em>Analysis</em>显示结果</p>
+    <title>Linux 高性能服务器理解</title>
+    <url>/2022/07/26/Linux-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>C++</tag>
+        <tag>Linux</tag>
+        <tag>socket</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>删除重复元素</title>
+    <url>/2022/07/10/delete-duplicate-elements/</url>
+    <content><![CDATA[<h3 id="快速入手">快速入手</h3>
+<h4 id="代码如下：">代码如下：</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">void elimdups(std::vector&lt;std::string&gt;&amp; vs)</span><br><span class="line">&#123;</span><br><span class="line">    std::sort(vs.begin(), vs.end());</span><br><span class="line">    auto new_end = std::unique(vs.begin(), vs.end());</span><br><span class="line">    // 删除重复</span><br><span class="line">    vs.erase(new_end, vs.end());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="思路：先用std-sort-排序，通过std-unique-将重复元素放入容器末尾，最后擦除">思路：先用std::sort()排序，通过std::unique() 将重复元素放入容器末尾，最后擦除</h4>
 ]]></content>
       <tags>
-        <tag>工具</tag>
+        <tag>算法</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -259,19 +302,6 @@
       <tags>
         <tag>C++</tag>
         <tag>C++ primer</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>删除重复元素</title>
-    <url>/2022/07/10/delete-duplicate-elements/</url>
-    <content><![CDATA[<h3 id="快速入手">快速入手</h3>
-<h4 id="代码如下：">代码如下：</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">void elimdups(std::vector&lt;std::string&gt;&amp; vs)</span><br><span class="line">&#123;</span><br><span class="line">    std::sort(vs.begin(), vs.end());</span><br><span class="line">    auto new_end = std::unique(vs.begin(), vs.end());</span><br><span class="line">    // 删除重复</span><br><span class="line">    vs.erase(new_end, vs.end());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="思路：先用std-sort-排序，通过std-unique-将重复元素放入容器末尾，最后擦除">思路：先用std::sort()排序，通过std::unique() 将重复元素放入容器末尾，最后擦除</h4>
-]]></content>
-      <tags>
-        <tag>算法</tag>
-        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -385,13 +415,33 @@
       </tags>
   </entry>
   <entry>
-    <title>python 每日一报</title>
-    <url>/2022/06/30/python-%E6%AF%8F%E6%97%A5%E4%B8%80%E6%8A%A5/</url>
-    <content><![CDATA[<h3 id="代码较简单">代码较简单</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from selenium import webdriver</span><br><span class="line">from selenium.webdriver.common.by import By</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">from selenium.webdriver.support.wait import WebDriverWait</span><br><span class="line"></span><br><span class="line">driver = webdriver.Firefox()</span><br><span class="line">driver.implicitly_wait(10)</span><br><span class="line">driver.get(&#x27;https://id.sspu.edu.cn/cas/login?service=https%3a%2f%2fhsm.sspu.edu.cn%2fselfreport%2fLoginSSO.aspx%3ftargetUrl%3d%7bbase64%7daHR0cHM6Ly9oc20uc3NwdS5lZHUuY24vc2VsZnJlcG9ydC9JbmRleC5hc3B4&#x27;)</span><br><span class="line">driver.find_element(By.ID, &quot;username&quot;).send_keys(&quot;your admin&quot;)</span><br><span class="line">driver.find_element(By.ID, &quot;password&quot;).send_keys(&quot;your password&quot;)</span><br><span class="line">driver.find_element(By.CSS_SELECTOR, &#x27;.submit_button&#x27;).click()</span><br><span class="line">driver.implicitly_wait(10)</span><br><span class="line">driver.find_element(By.XPATH, &quot;/html/body/form/div[6]/ul/li[1]/a/span&quot;).click();</span><br><span class="line"># 报送日期</span><br><span class="line">js=&quot;document.getElementById(&#x27;p1_BaoSRQ-inputEl&#x27;).removeAttribute(&#x27;readonly&#x27;)&quot;</span><br><span class="line">#js = &quot;$(&#x27;input:eq(0)&#x27;).removeAttr(&#x27;readonly&#x27;)&quot;</span><br><span class="line">driver.execute_script(js)</span><br><span class="line">input_datetime = driver.find_element(By.XPATH, &#x27;//*[@id=&quot;p1_BaoSRQ-inputEl&quot;]&#x27;)</span><br><span class="line">input_datetime.clear()</span><br><span class="line">input_datetime.send_keys(&quot;2022-06-23&quot;)</span><br><span class="line"></span><br><span class="line"># 国内</span><br><span class="line">driver.find_element(By.ID, &#x27;p1_TiWen-inputEl&#x27;).send_keys(36.6)</span><br><span class="line">driver.find_element(By.CSS_SELECTOR, &#x27;.f-btn-text&#x27;).click()</span><br><span class="line">time.sleep(1)</span><br><span class="line"># driver.find_element(By.CSS_SELECTOR, &#x27;.f-btn-text&#x27;).click()</span><br><span class="line">driver.quit()</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    print(&#x27;PyCharm&#x27;)</span><br><span class="line"></span><br><span class="line"># See PyCharm help at https://www.jetbrains.com/help/pycharm/</span><br></pre></td></tr></table></figure>
+    <title>配置Firefox WebDriver, 安装Selenium</title>
+    <url>/2022/06/23/webdriver-config/</url>
+    <content><![CDATA[<h2 id="1-安装Selenium">1.安装Selenium</h2>
+<h4 id="1-1-在Anaconda下">1.1 在Anaconda下</h4>
+<p><img src="/2022/06/23/webdriver-config/img1.png" alt></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install selnium</span><br></pre></td></tr></table></figure>
+<p>#查找Python 安装位置</p>
+<p><img src="/2022/06/23/webdriver-config/img2.png" alt></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">where Python</span><br></pre></td></tr></table></figure>
+<h2 id="2-下载火狐WebDriver">2.下载火狐WebDriver</h2>
+<h4 id="2-1-下载">2.1 下载</h4>
+<h4 id="Tips：一般下载最新版本就行">Tips：一般下载最新版本就行</h4>
+<p><img src="/2022/06/23/webdriver-config/img3.png" alt><br>
+网站如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://github.com/mozilla/geckodriver/releases/</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-解压后放在Python的安装位置">2.2 解压后放在Python的安装位置</h4>
+<p><img src="/2022/06/23/webdriver-config/img4.png" alt></p>
+<h4 id="2-3-在Anaconda-Jupyter下进行测试">2.3 在Anaconda Jupyter下进行测试</h4>
+<p><img src="/2022/06/23/webdriver-config/img5.png" alt><br>
+代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from selenium import webdriver</span><br><span class="line">import time</span><br><span class="line">driver = webdriver.Firefox()</span><br><span class="line">driver.implicitly_wait(5)</span><br><span class="line">driver.get(&quot;https://www.baidu.com&quot;)</span><br><span class="line">time.sleep(3)</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
+<h2 id="测试成功">测试成功</h2>
+<p><img src="/2022/06/23/webdriver-config/img6.png" alt></p>
 ]]></content>
       <tags>
-        <tag>python</tag>
+        <tag>安装</tag>
+        <tag>配置</tag>
       </tags>
   </entry>
   <entry>
@@ -449,49 +499,13 @@
       </tags>
   </entry>
   <entry>
-    <title>字符串转数字</title>
-    <url>/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/</url>
-    <content><![CDATA[<blockquote>
-<p>如图：</p>
-</blockquote>
-<p><img src="/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/img1.PNG" alt></p>
-<blockquote>
-<p>代码:</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vector&lt;int&gt; diffWaysToCompute(string expression) &#123;</span><br><span class="line">        vector&lt;int&gt; ops;</span><br><span class="line">        for (int i = 0; i &lt; expression.size();) &#123;</span><br><span class="line">            // 如果不是数字</span><br><span class="line">            if (!isdigit(expression[i])) &#123;</span><br><span class="line">                if (expression[i] == &#x27;+&#x27;) &#123;</span><br><span class="line">                    ops.push_back(ADDITION);</span><br><span class="line">                &#125; else if (expression[i] == &#x27;-&#x27;) &#123;</span><br><span class="line">                    ops.push_back(SUBTRACTION);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    ops.push_back(MULTIPLICATION);</span><br><span class="line">                &#125;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                int t = 0;</span><br><span class="line">                while (i &lt; expression.size() &amp;&amp; isdigit(expression[i])) &#123;</span><br><span class="line">                    t = t * 10 + expression[i] - &#x27;0&#x27;; // 转换为数字w</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                ops.push_back(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <tags>
-        <tag>算法</tag>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>配置Firefox WebDriver, 安装Selenium</title>
-    <url>/2022/06/23/webdriver-config/</url>
-    <content><![CDATA[<h2 id="1-安装Selenium">1.安装Selenium</h2>
-<h4 id="1-1-在Anaconda下">1.1 在Anaconda下</h4>
-<p><img src="/2022/06/23/webdriver-config/img1.png" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install selnium</span><br></pre></td></tr></table></figure>
-<p>#查找Python 安装位置</p>
-<p><img src="/2022/06/23/webdriver-config/img2.png" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">where Python</span><br></pre></td></tr></table></figure>
-<h2 id="2-下载火狐WebDriver">2.下载火狐WebDriver</h2>
-<h4 id="2-1-下载">2.1 下载</h4>
-<h4 id="Tips：一般下载最新版本就行">Tips：一般下载最新版本就行</h4>
-<p><img src="/2022/06/23/webdriver-config/img3.png" alt><br>
-网站如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://github.com/mozilla/geckodriver/releases/</span><br></pre></td></tr></table></figure>
-<h4 id="2-2-解压后放在Python的安装位置">2.2 解压后放在Python的安装位置</h4>
-<p><img src="/2022/06/23/webdriver-config/img4.png" alt></p>
-<h4 id="2-3-在Anaconda-Jupyter下进行测试">2.3 在Anaconda Jupyter下进行测试</h4>
-<p><img src="/2022/06/23/webdriver-config/img5.png" alt><br>
-代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from selenium import webdriver</span><br><span class="line">import time</span><br><span class="line">driver = webdriver.Firefox()</span><br><span class="line">driver.implicitly_wait(5)</span><br><span class="line">driver.get(&quot;https://www.baidu.com&quot;)</span><br><span class="line">time.sleep(3)</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
-<h2 id="测试成功">测试成功</h2>
-<p><img src="/2022/06/23/webdriver-config/img6.png" alt></p>
+    <title>python 每日一报</title>
+    <url>/2022/06/30/python-%E6%AF%8F%E6%97%A5%E4%B8%80%E6%8A%A5/</url>
+    <content><![CDATA[<h3 id="代码较简单">代码较简单</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from selenium import webdriver</span><br><span class="line">from selenium.webdriver.common.by import By</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">from selenium.webdriver.support.wait import WebDriverWait</span><br><span class="line"></span><br><span class="line">driver = webdriver.Firefox()</span><br><span class="line">driver.implicitly_wait(10)</span><br><span class="line">driver.get(&#x27;https://id.sspu.edu.cn/cas/login?service=https%3a%2f%2fhsm.sspu.edu.cn%2fselfreport%2fLoginSSO.aspx%3ftargetUrl%3d%7bbase64%7daHR0cHM6Ly9oc20uc3NwdS5lZHUuY24vc2VsZnJlcG9ydC9JbmRleC5hc3B4&#x27;)</span><br><span class="line">driver.find_element(By.ID, &quot;username&quot;).send_keys(&quot;your admin&quot;)</span><br><span class="line">driver.find_element(By.ID, &quot;password&quot;).send_keys(&quot;your password&quot;)</span><br><span class="line">driver.find_element(By.CSS_SELECTOR, &#x27;.submit_button&#x27;).click()</span><br><span class="line">driver.implicitly_wait(10)</span><br><span class="line">driver.find_element(By.XPATH, &quot;/html/body/form/div[6]/ul/li[1]/a/span&quot;).click();</span><br><span class="line"># 报送日期</span><br><span class="line">js=&quot;document.getElementById(&#x27;p1_BaoSRQ-inputEl&#x27;).removeAttribute(&#x27;readonly&#x27;)&quot;</span><br><span class="line">#js = &quot;$(&#x27;input:eq(0)&#x27;).removeAttr(&#x27;readonly&#x27;)&quot;</span><br><span class="line">driver.execute_script(js)</span><br><span class="line">input_datetime = driver.find_element(By.XPATH, &#x27;//*[@id=&quot;p1_BaoSRQ-inputEl&quot;]&#x27;)</span><br><span class="line">input_datetime.clear()</span><br><span class="line">input_datetime.send_keys(&quot;2022-06-23&quot;)</span><br><span class="line"></span><br><span class="line"># 国内</span><br><span class="line">driver.find_element(By.ID, &#x27;p1_TiWen-inputEl&#x27;).send_keys(36.6)</span><br><span class="line">driver.find_element(By.CSS_SELECTOR, &#x27;.f-btn-text&#x27;).click()</span><br><span class="line">time.sleep(1)</span><br><span class="line"># driver.find_element(By.CSS_SELECTOR, &#x27;.f-btn-text&#x27;).click()</span><br><span class="line">driver.quit()</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    print(&#x27;PyCharm&#x27;)</span><br><span class="line"></span><br><span class="line"># See PyCharm help at https://www.jetbrains.com/help/pycharm/</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>安装</tag>
-        <tag>配置</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -635,6 +649,22 @@
         <tag>C++</tag>
         <tag>数据结构</tag>
         <tag>排序算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>字符串转数字</title>
+    <url>/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/</url>
+    <content><![CDATA[<blockquote>
+<p>如图：</p>
+</blockquote>
+<p><img src="/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/img1.PNG" alt></p>
+<blockquote>
+<p>代码:</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vector&lt;int&gt; diffWaysToCompute(string expression) &#123;</span><br><span class="line">        vector&lt;int&gt; ops;</span><br><span class="line">        for (int i = 0; i &lt; expression.size();) &#123;</span><br><span class="line">            // 如果不是数字</span><br><span class="line">            if (!isdigit(expression[i])) &#123;</span><br><span class="line">                if (expression[i] == &#x27;+&#x27;) &#123;</span><br><span class="line">                    ops.push_back(ADDITION);</span><br><span class="line">                &#125; else if (expression[i] == &#x27;-&#x27;) &#123;</span><br><span class="line">                    ops.push_back(SUBTRACTION);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    ops.push_back(MULTIPLICATION);</span><br><span class="line">                &#125;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                int t = 0;</span><br><span class="line">                while (i &lt; expression.size() &amp;&amp; isdigit(expression[i])) &#123;</span><br><span class="line">                    t = t * 10 + expression[i] - &#x27;0&#x27;; // 转换为数字w</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                ops.push_back(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>算法</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -1000,20 +1030,40 @@
       </tags>
   </entry>
   <entry>
-    <title>流迭代器</title>
-    <url>/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
-    <content><![CDATA[<blockquote>
-<p>C++ primer 第十章 泛型算法</p>
+    <title>虚函数复习</title>
+    <url>/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/</url>
+    <content><![CDATA[<h1>C++ primer 第15章 面向对象程序设计</h1>
+<blockquote>
+<p>虚函数</p>
 </blockquote>
-<p><img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img1.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img2.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img3.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img4.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img5.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img6.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img7.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img8.PNG" alt><br>
-<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img9.PNG" alt></p>
+<p><img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img1.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img2.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img3.PNG" alt></p>
+<h2 id="final-和-override">final 和 override</h2>
+<blockquote>
+<p>final 不允许后续的其他类覆盖<br>
+override 帮助编译器说明派生类中的虚函数</p>
+</blockquote>
+<p><img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img4.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img5.PNG" alt></p>
+<h2 id="抽象基类-含有纯虚函数）">抽象基类(含有纯虚函数）</h2>
+<blockquote>
+<p>有纯虚函数的类才称之为抽象类</p>
+</blockquote>
+<p><img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img6.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img7.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img8.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img9.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img10.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img11.PNG" alt></p>
+<h2 id="虚析构函数">虚析构函数</h2>
+<p><img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img12.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img13.PNG" alt></p>
+<h2 id="重载和隐藏">重载和隐藏</h2>
+<blockquote>
+<p>同一作用域，那就是重载。不同作用域，那就是隐藏。</p>
+</blockquote>
+<p><img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img14.PNG" alt></p>
 ]]></content>
       <tags>
         <tag>C++</tag>
@@ -1034,9 +1084,47 @@
       </tags>
   </entry>
   <entry>
-    <title>虚函数复习</title>
-    <url>/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/</url>
-    <content><![CDATA[]]></content>
+    <title>访问控制与继承</title>
+    <url>/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/</url>
+    <content><![CDATA[<h1>C++ primer 第15章 面向对象程序设计</h1>
+<h2 id="访问控制和继承">访问控制和继承</h2>
+<p><img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img1.PNG" alt><br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img2.PNG" alt><br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img3.PNG" alt></p>
+<blockquote>
+<p>基类对象不能访问基类的peotected,private成员<br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_qx.jpg" alt></p>
+</blockquote>
+<p><img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img4.PNG" alt><br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img5.PNG" alt><br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img6.PNG" alt></p>
+<blockquote>
+<p>只有public继承的时候才能使用派生类向基类的转换</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>流迭代器</title>
+    <url>/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
+    <content><![CDATA[<blockquote>
+<p>C++ primer 第十章 泛型算法</p>
+</blockquote>
+<p><img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img1.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img2.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img3.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img4.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img5.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img6.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img7.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img8.PNG" alt><br>
+<img src="/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/iostream_iterator_img9.PNG" alt></p>
+]]></content>
+      <tags>
+        <tag>C++</tag>
+      </tags>
   </entry>
   <entry>
     <title>统计学习方法</title>

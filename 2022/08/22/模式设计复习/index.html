@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Gelasio:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wilson-xbort.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="设计模式复习 1. 备忘录模式  备忘录模式（Memento Pattern）保存一个对象的某个状态，以便在适当的时候恢复对象。备忘录模式属于行为型模式。  例题： 11.某系统提供了用户信息操作模块，用户可以修改自己的各项信息。为了使操作过程更加人性化，可以使用（）对系统进行改进，使得用户在进行了错误操作之后可以恢复到操作之前的状态。 2.适配器模式  适配器模式（Adapter）通常适用于以下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式复习">
+<meta property="og:url" content="https://wilson-xbort.github.io/2022/08/22/%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1%E5%A4%8D%E4%B9%A0/index.html">
+<meta property="og:site_name" content="博客">
+<meta property="og:description" content="设计模式复习 1. 备忘录模式  备忘录模式（Memento Pattern）保存一个对象的某个状态，以便在适当的时候恢复对象。备忘录模式属于行为型模式。  例题： 11.某系统提供了用户信息操作模块，用户可以修改自己的各项信息。为了使操作过程更加人性化，可以使用（）对系统进行改进，使得用户在进行了错误操作之后可以恢复到操作之前的状态。 2.适配器模式  适配器模式（Adapter）通常适用于以下">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-22T07:31:43.000Z">
+<meta property="article:modified_time" content="2022-08-22T11:23:56.337Z">
+<meta property="article:author" content="Willson-Xbort">
+<meta property="article:tag" content="Hexo, NexT">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://wilson-xbort.github.io/2022/08/22/%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1%E5%A4%8D%E4%B9%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>设计模式复习 | 博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+  <!--此处为建站时间 -->
+  <!--<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("09/24/2018 23:45:01");
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML ="(ㆆᴗㆆ)本弱已菜菜的存活了"+dnum+"&thinsp;天"; 
+        document.getElementById("times").innerHTML = hnum + "&thinsp;时" + mnum + "&thinsp;分" + snum + "&thinsp;秒"; 
+    } 
+  setInterval("createtime()",250);-->
+
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/08/22/%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1%E5%A4%8D%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ico.jpg">
+      <meta itemprop="name" content="Willson-Xbort">
+      <meta itemprop="description" content="none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          设计模式复习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-08-22 15:31:43 / 修改时间：19:23:56" itemprop="dateCreated datePublished" datetime="2022-08-22T15:31:43+08:00">2022-08-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="设计模式复习">设计模式复习</h2>
+<h3 id="1-备忘录模式">1. 备忘录模式</h3>
+<blockquote>
+<p>备忘录模式（Memento Pattern）保存一个对象的某个状态，以便在适当的时候恢复对象。备忘录模式属于行为型模式。</p>
+</blockquote>
+<h4 id="例题：-2">例题：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.某系统提供了用户信息操作模块，用户可以修改自己的各项信息。为了使操作过程更加人性化，可以使用（）对系统进行改进，使得用户在进行了错误操作之后可以恢复到操作之前的状态。</span><br></pre></td></tr></table></figure>
+<h3 id="2-适配器模式">2.适配器模式</h3>
+<blockquote>
+<p>适配器模式（Adapter）通常适用于以下场景。<br>
+以前开发的系统存在满足新系统功能需求的类，但其接口同新系统的接口不一致。<br>
+使用第三方提供的组件，但组件接口定义和自己要求的接口定义不同。</p>
+</blockquote>
+<h4 id="例题：-3">例题：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.当已有类能满足目前的需求但和当前的系统兼容性比较差的情况下，比较适合使用（ ）</span><br></pre></td></tr></table></figure>
+<h3 id="3-模板方法模式">3.模板方法模式</h3>
+<blockquote>
+<p>基本流程几乎一样采用模板方法模式</p>
+</blockquote>
+<h4 id="例题：-4">例题：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.在银行办理业务时，一般都包含几个基本步骤，即取号排队、办理具体业务和对银行工作人员进行评分。无论具体业务是取款、存款还是转账，其基本流程都一样。可以使用（ ）模拟银行业务办理流程。</span><br></pre></td></tr></table></figure>
+<h3 id="4-观察者模式">4. 观察者模式</h3>
+<blockquote>
+<p>观察者模式：定义对象之间的一种一对多的关系，当一个对象发生改变时，其他依赖于该对象的对象也会被通知自动改变。</p>
+</blockquote>
+<h4 id="例题：-5">例题：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.如果在更改一个对象的时候，需要同时连带改变其他的对象，而且不知道究竟应该有多少对象需要被连带改变，应该使用何种设计模式：</span><br></pre></td></tr></table></figure>
+<h3 id="5-命令模式">5.命令模式</h3>
+<blockquote>
+<p>命令模式：将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化，对请求排队或记录请求日志。</p>
+</blockquote>
+<h4 id="例题：-6">例题：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.在设计中如果一个对象请求另一个对象调用其方法到达某种目的，而不和请求的对象直接打交道，这种模式是（ ）。</span><br></pre></td></tr></table></figure>
+<h3 id="6-原型模式">6.原型模式</h3>
+<blockquote>
+<p>用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。<br>
+原型模式是一种创建型设计模式，Prototype模式允许一个对象再创建另外一个可定制的对象，根本无需知道任何如何创建的细节。<br>
+工作原理是:通过将一个原型对象传给那个要发动创建的对象，这个要发动创建的对象通过请求原型对象拷贝它们自己来实施创建。<br>
+它主要面对的问题是：“某些结构复杂的对象”的创建工作；由于需求的变化，这些对象经常面临着剧烈的变化，但是他们却拥有比较稳定一致的接口。</p>
+</blockquote>
+<h4 id="例题：-7">例题：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.（）模式的关键是将一个对象定义为原型，并为其提供复制自己的方法。 </span><br><span class="line">2. 以下哪个模式可以利用一个对象，快速地生成一批对象？（）</span><br></pre></td></tr></table></figure>
+<h3 id="7-责任链模式">7.责任链模式</h3>
+<blockquote>
+<p>责任链模式是一种设计模式。<br>
+在责任链模式里，很多对象由每一个对象对其下家的引用而连接起来形成一条链。<br>
+请求在这个链上传递，直到链上的某一个对象决定处理此请求。<br>
+发出这个请求的客户端并不知道链上的哪一个对象最终处理这个请求，这使得系统可以在不影响客户端的情况下动态地重新组织和分配责任。</p>
+</blockquote>
+<h4 id="例题：-8">例题：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.某OA系统需要提供一个假条审批的模块，如果员工请假天数小于3天，主任可以审批该假条；如果员工请假天数大于等于3天，小于10天，经理可以审批；如果员工请假天数大于等于10天，小于30天，总经理可以审批；如果超过30天，总经理也不能审批，提示相应的拒绝信息。如果假条审批使用模式来进行设计，可以使用（）模式。</span><br></pre></td></tr></table></figure>
+<h3 id="8-装饰者模式">8.装饰者模式</h3>
+<blockquote>
+<p>23种设计模式之一，英文叫Decorator Pattern，又叫装饰者模式。装饰模式是在不必改变原类文件和使用继承的情况下，动态地扩展一个对象的功能。它是通过创建一个包装对象，也就是装饰来包裹真实的对象。</p>
+</blockquote>
+<h4 id="例题：-9">例题：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.系统中的文本显示类（TextView）和图片显示类（PictureView）都继承了组件类（Component），分别显示文本和图片内容，现需要构造带有滚动条、或者带有黑色边框、或者既有滚动条又有黑色边框的文本显示控件和图片显示控件，但希望最多只增加三个类，（）设计模式可以实现该目的。</span><br></pre></td></tr></table></figure>
+<h3 id="9-享元模式">9.享元模式</h3>
+<blockquote>
+<p>通过共享以便有效的支持大量细颗粒对象。</p>
+</blockquote>
+<h4 id="例题：-10">例题：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1. 共享网络设备模拟：很多网络设备都是支持共享的，如交换机、集线器等，多台终端计算机可以连接同一台网络设备，并通过该网络设备进行数据转发。共享网络设备可以使用（）模拟共享网络设备的设计原理。</span><br></pre></td></tr></table></figure>
+<h3 id="10-外观模式">10.外观模式</h3>
+<blockquote>
+<p>为子系统中的一组接口提供一个一致的界面， 外观模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。</p>
+</blockquote>
+<h3 id="11-代理模式">11.代理模式</h3>
+<blockquote>
+<p>为其他对象提供一个代理以控制对这个对象的访问。</p>
+</blockquote>
+<h3 id="12-工厂方法模式">12.工厂方法模式</h3>
+<blockquote>
+<p>定义一个用于创建对象的接口，让子类决定实例化哪一个类，使一个类的实例化延迟到其子类。(工厂方法模式：客户必须清楚地指出想获取哪种产品；由接口的子类负责获取产品 )</p>
+</blockquote>
+<h3 id="13-访问者模式">13.访问者模式</h3>
+<blockquote>
+<p>在访问者模式（Visitor Pattern）中，我们使用了一个访问者类，它改变了元素类的执行算法。通过这种方式，元素的执行算法可以随着访问者改变而改变。这种类型的设计模式属于行为型模式。根据模式，元素对象已接受访问者对象，这样访问者对象就可以处理元素对象上的操作。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">某高校奖励审批系统可以实现教师奖励和学生奖励的审批(AwardCheck)，如果教师发表论文数超过10篇或者学生论文超过2篇可以评选科研奖，如果教师教学反馈分大于等于90分或者学生平均成绩大于等于90分可以评选成绩优秀奖。奖励审批系统可以使用（）设计该系统，以判断候选人集合中的教师或学生是否符合某种获奖要求。</span><br></pre></td></tr></table></figure>
+<h3 id="14-单例模式">14.单例模式</h3>
+<blockquote>
+<p>单例对于不频繁创建和销毁的对象只会增加系统开支，因为它一直存在，但是对于频繁创建和销毁的却可以在一定程度上减少开支。</p>
+</blockquote>
+<h3 id="15-策略模式">15.策略模式</h3>
+<blockquote>
+<p>策略模式（Strategy）-定义一系列的算法，把它们一个个封装起来，并且使它们可相互替换。本模式使得算法可独立于使用它的客户而变化。</p>
+</blockquote>
+<h3 id="16-建造者模式">16.建造者模式</h3>
+<blockquote>
+<p>建造者模式是设计模式的一种，又叫做生成器模式，将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</p>
+</blockquote>
+<h4 id="例题：-11">例题：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.KFC套餐一般包含主食（如汉堡、鸡肉卷等）和饮料（如果汁、可乐等）等组成部分，不同的套餐有不同的组成部分，而KFC的服务员可以根据顾客的要求，一步一步装配这些组成部分，构造一份完整的套餐，然后返回给顾客。可以使用（)描述KFC如何创建套餐。</span><br></pre></td></tr></table></figure>
+<h3 id="17-简单工厂模式">17.简单工厂模式</h3>
+<blockquote>
+<p>当客户获取产品时，工厂模式作为获取产品的接口。由接口直接负责获取产品</p>
+</blockquote>
+<h3 id="18-简单工厂模式">18.简单工厂模式</h3>
+<blockquote>
+<p>抽象工厂模式：客户不知道其想获取哪种产品；由接口中判断调用哪个子类，通过子类获取产品。</p>
+</blockquote>
+<h3 id="19-桥接模式">19.桥接模式</h3>
+<blockquote>
+<p>将抽象与实现分离，使它们可以独立变化。它是用组合关系代替继承关系来实现，从而降低 抽象和实现这两个可变维度的耦合度。</p>
+</blockquote>
+<h3 id="20-组合模式">20.组合模式</h3>
+<blockquote>
+<p>将对象组合成树形结构以表示部分和整体的层次结构</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <!-- after add -->
+    
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+    
+       <!-- after add finish -->
+
+
+      
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/08/11/%E6%A8%A1%E6%9D%BF%E4%B8%8E%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/" rel="prev" title="模板与泛型编程">
+      <i class="fa fa-chevron-left"></i> 模板与泛型编程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/" rel="next" title="CentOS配置和下载">
+      CentOS配置和下载 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%A4%8D%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">设计模式复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">1. 备忘录模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A-2"><span class="nav-number">1.1.1.</span> <span class="nav-text">例题：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">2.适配器模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A-3"><span class="nav-number">1.2.1.</span> <span class="nav-text">例题：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">3.模板方法模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A-4"><span class="nav-number">1.3.1.</span> <span class="nav-text">例题：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.4.</span> <span class="nav-text">4. 观察者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A-5"><span class="nav-number">1.4.1.</span> <span class="nav-text">例题：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.5.</span> <span class="nav-text">5.命令模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A-6"><span class="nav-number">1.5.1.</span> <span class="nav-text">例题：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.6.</span> <span class="nav-text">6.原型模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A-7"><span class="nav-number">1.6.1.</span> <span class="nav-text">例题：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.7.</span> <span class="nav-text">7.责任链模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A-8"><span class="nav-number">1.7.1.</span> <span class="nav-text">例题：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.8.</span> <span class="nav-text">8.装饰者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A-9"><span class="nav-number">1.8.1.</span> <span class="nav-text">例题：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.9.</span> <span class="nav-text">9.享元模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A-10"><span class="nav-number">1.9.1.</span> <span class="nav-text">例题：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.10.</span> <span class="nav-text">10.外观模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.11.</span> <span class="nav-text">11.代理模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.12.</span> <span class="nav-text">12.工厂方法模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.13.</span> <span class="nav-text">13.访问者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.14.</span> <span class="nav-text">14.单例模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.15.</span> <span class="nav-text">15.策略模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.16.</span> <span class="nav-text">16.建造者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A-11"><span class="nav-number">1.16.1.</span> <span class="nav-text">例题：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.17.</span> <span class="nav-text">17.简单工厂模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.18.</span> <span class="nav-text">18.简单工厂模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.19.</span> <span class="nav-text">19.桥接模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.20.</span> <span class="nav-text">20.组合模式</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Willson-Xbort"
+      src="/images/ico.jpg">
+  <p class="site-author-name" itemprop="name">Willson-Xbort</p>
+  <div class="site-description" itemprop="description">none</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wilson-xbort" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wilson-xbort" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Willson-Xbort</span>
+
+  <!-- after add-->
+  <!---->
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

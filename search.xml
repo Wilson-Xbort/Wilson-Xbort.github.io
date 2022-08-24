@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>CentOS配置和下载</title>
+    <url>/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/</url>
+    <content><![CDATA[<h1>CentOS配置和下载</h1>
+<h2 id="下载">下载</h2>
+<h3 id="进入官网">进入官网</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://www.centos.org/</span><br></pre></td></tr></table></figure>
+<h3 id="如图：">如图：</h3>
+<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_1.PNG" alt></p>
+<h3 id="点击CentOS-Linux">点击CentOS Linux</h3>
+<h3 id="如图：-2">如图：</h3>
+<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_2.png" alt></p>
+<h3 id="点击x86-64后，链接随便选一个">点击x86/64后，链接随便选一个</h3>
+<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_3.png" alt></p>
+<h2 id="问题">问题</h2>
+<h3 id="1-虚拟机安装出现system-not-found">1.虚拟机安装出现system not found</h3>
+<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_5.png" alt></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 打开虚拟机设置 -&gt; 设备状态 -&gt; 启动时连接</span><br></pre></td></tr></table></figure>
+<h3 id="2-安装好后发现无法联网">2.安装好后发现无法联网</h3>
+<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_6.png" alt><br>
+<img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_4.png" alt></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 进入root账号</span><br><span class="line">2. 输入 `cd /etc/sysconfig/network-scripts`</span><br><span class="line">3. 输入 `vi ifcfg-ens34`</span><br><span class="line">4. 输入i, `ONBOOT=no`,改成 `ONBOOT=yes`, 输入`wq!`</span><br><span class="line">5. 重启服务 `systemctl restart network`</span><br><span class="line">6. 输入`ip addr`</span><br></pre></td></tr></table></figure>
+<h2 id="配置">配置</h2>
+]]></content>
+      <tags>
+        <tag>配置</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2022-8-4面试整理</title>
     <url>/2022/08/08/2022-8-4%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/</url>
     <content><![CDATA[<h2 id="算法题1：">算法题1：</h2>
@@ -48,35 +77,6 @@
       <tags>
         <tag>算法</tag>
         <tag>八股文</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CentOS配置和下载</title>
-    <url>/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/</url>
-    <content><![CDATA[<h1>CentOS配置和下载</h1>
-<h2 id="下载">下载</h2>
-<h3 id="进入官网">进入官网</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://www.centos.org/</span><br></pre></td></tr></table></figure>
-<h3 id="如图：">如图：</h3>
-<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_1.PNG" alt></p>
-<h3 id="点击CentOS-Linux">点击CentOS Linux</h3>
-<h3 id="如图：-2">如图：</h3>
-<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_2.png" alt></p>
-<h3 id="点击x86-64后，链接随便选一个">点击x86/64后，链接随便选一个</h3>
-<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_3.png" alt></p>
-<h2 id="问题">问题</h2>
-<h3 id="1-虚拟机安装出现system-not-found">1.虚拟机安装出现system not found</h3>
-<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_5.png" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 打开虚拟机设置 -&gt; 设备状态 -&gt; 启动时连接</span><br></pre></td></tr></table></figure>
-<h3 id="2-安装好后发现无法联网">2.安装好后发现无法联网</h3>
-<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_6.png" alt><br>
-<img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_4.png" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 进入root账号</span><br><span class="line">2. 输入 `cd /etc/sysconfig/network-scripts`</span><br><span class="line">3. 输入 `vi ifcfg-ens34`</span><br><span class="line">4. 输入i, `ONBOOT=no`,改成 `ONBOOT=yes`, 输入`wq!`</span><br><span class="line">5. 重启服务 `systemctl restart network`</span><br><span class="line">6. 输入`ip addr`</span><br></pre></td></tr></table></figure>
-<h2 id="配置">配置</h2>
-]]></content>
-      <tags>
-        <tag>配置</tag>
-        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -145,49 +145,6 @@
       </tags>
   </entry>
   <entry>
-    <title>性能测试工具的简单使用</title>
-    <url>/2022/07/03/Use-of-performance-test-tools/</url>
-    <content><![CDATA[<h2 id="下载工具：">下载工具：</h2>
-<table>
-<thead>
-<tr>
-<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon1.PNG" alt="virtual User Generator"></th>
-<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon2.PNG" alt="controller"></th>
-<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon3.PNG" alt="Analysis"></th>
-</tr>
-</thead>
-</table>
-<h2 id="打开virtual-User-Generator：">打开virtual User Generator：</h2>
-<ol>
-<li>点击录制按钮，选择协议<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img1.png" alt><br>
-2.在高级选项中选择明确包含url的脚本<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img2.png" alt><br>
-3.点击开始录制后就会进入你所写的url链接，结束后就可以看到Action的代码<br>
-4.可以点击<em>设计工作室</em>进行关联<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img3.png" alt><br>
-5.点击运行，看到为√的时候就成功了<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img4.png" alt></li>
-</ol>
-<h2 id="打开controller：">打开controller：</h2>
-<p>1.选择脚本<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img5.png" alt><br>
-2.进行设置，在基本计划下可以设置用户数量<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img6.png" alt><br>
-3.点击运行时设置，可以将自动事务的勾选去掉<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img7.png" alt><br>
-4.设置全部完成后可以运行<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img8.png" alt><br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img9.png" alt><br>
-5.点击结果-&gt;分析结果<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img10.png" alt><br>
-将会自动打开<em>Analysis</em>显示结果</p>
-]]></content>
-      <tags>
-        <tag>工具</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>basic_algorithm</title>
     <url>/2022/07/01/basic-algorithm/</url>
     <content><![CDATA[<h3 id="二分查找：">二分查找：</h3>
@@ -240,6 +197,62 @@
 <h4 id="例题2：-3">例题2：</h4>
 <h4 id="代码：-3">代码：</h4>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    bool checkInclusion(string s1, string s2) &#123;</span><br><span class="line">        int n1 = s1.size(), n2 = s2.size();</span><br><span class="line">        if(n1 &gt; n2) return false;</span><br><span class="line">        vector&lt;int&gt; cnt1(26), cnt2(26);</span><br><span class="line">        for (int i = 0; i &lt; n1; ++i) &#123;</span><br><span class="line">            ++cnt1[s1[i] - &#x27;a&#x27;];</span><br><span class="line">            ++cnt2[s2[i] - &#x27;a&#x27;];</span><br><span class="line">        &#125;</span><br><span class="line">        if (cnt1 == cnt2) return true;</span><br><span class="line">        for (int i = n1; i &lt; n2; ++i) &#123;</span><br><span class="line">            ++cnt2[s2[i] - &#x27;a&#x27;];</span><br><span class="line">            // 如果之前没匹配到的话就一定没有这个字符</span><br><span class="line">            --cnt2[s2[i - n1] - &#x27;a&#x27;];</span><br><span class="line">            if (cnt1 == cnt2) &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>性能测试工具的简单使用</title>
+    <url>/2022/07/03/Use-of-performance-test-tools/</url>
+    <content><![CDATA[<h2 id="下载工具：">下载工具：</h2>
+<table>
+<thead>
+<tr>
+<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon1.PNG" alt="virtual User Generator"></th>
+<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon2.PNG" alt="controller"></th>
+<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon3.PNG" alt="Analysis"></th>
+</tr>
+</thead>
+</table>
+<h2 id="打开virtual-User-Generator：">打开virtual User Generator：</h2>
+<ol>
+<li>点击录制按钮，选择协议<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img1.png" alt><br>
+2.在高级选项中选择明确包含url的脚本<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img2.png" alt><br>
+3.点击开始录制后就会进入你所写的url链接，结束后就可以看到Action的代码<br>
+4.可以点击<em>设计工作室</em>进行关联<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img3.png" alt><br>
+5.点击运行，看到为√的时候就成功了<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img4.png" alt></li>
+</ol>
+<h2 id="打开controller：">打开controller：</h2>
+<p>1.选择脚本<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img5.png" alt><br>
+2.进行设置，在基本计划下可以设置用户数量<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img6.png" alt><br>
+3.点击运行时设置，可以将自动事务的勾选去掉<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img7.png" alt><br>
+4.设置全部完成后可以运行<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img8.png" alt><br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img9.png" alt><br>
+5.点击结果-&gt;分析结果<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img10.png" alt><br>
+将会自动打开<em>Analysis</em>显示结果</p>
+]]></content>
+      <tags>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>删除重复元素</title>
+    <url>/2022/07/10/delete-duplicate-elements/</url>
+    <content><![CDATA[<h3 id="快速入手">快速入手</h3>
+<h4 id="代码如下：">代码如下：</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">void elimdups(std::vector&lt;std::string&gt;&amp; vs)</span><br><span class="line">&#123;</span><br><span class="line">    std::sort(vs.begin(), vs.end());</span><br><span class="line">    auto new_end = std::unique(vs.begin(), vs.end());</span><br><span class="line">    // 删除重复</span><br><span class="line">    vs.erase(new_end, vs.end());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="思路：先用std-sort-排序，通过std-unique-将重复元素放入容器末尾，最后擦除">思路：先用std::sort()排序，通过std::unique() 将重复元素放入容器末尾，最后擦除</h4>
 ]]></content>
       <tags>
         <tag>算法</tag>
@@ -321,16 +334,21 @@
       </tags>
   </entry>
   <entry>
-    <title>删除重复元素</title>
-    <url>/2022/07/10/delete-duplicate-elements/</url>
-    <content><![CDATA[<h3 id="快速入手">快速入手</h3>
-<h4 id="代码如下：">代码如下：</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">void elimdups(std::vector&lt;std::string&gt;&amp; vs)</span><br><span class="line">&#123;</span><br><span class="line">    std::sort(vs.begin(), vs.end());</span><br><span class="line">    auto new_end = std::unique(vs.begin(), vs.end());</span><br><span class="line">    // 删除重复</span><br><span class="line">    vs.erase(new_end, vs.end());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="思路：先用std-sort-排序，通过std-unique-将重复元素放入容器末尾，最后擦除">思路：先用std::sort()排序，通过std::unique() 将重复元素放入容器末尾，最后擦除</h4>
+    <title>git使用</title>
+    <url>/2022/08/08/git%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h1>快速入门</h1>
+<h2 id="1-找到要上传的文件夹（Win10">1. 找到要上传的文件夹（Win10)</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.1 右击出现 Git Bash Here</span><br><span class="line">1.2 配置好邮箱，用户名，密码</span><br><span class="line">git config --global user.name &quot;xxx&quot;</span><br><span class="line">git config --global user.email &quot;xxx&quot;</span><br><span class="line">git config --global user.password &quot;xxx&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="2-基本指令">2.基本指令</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 初始化git, 会出现.git的文件夹</span><br><span class="line">git init</span><br><span class="line">// 可加可不加</span><br><span class="line">git add README.md </span><br><span class="line">// git commit 命令将暂存区内容添加到本地仓库</span><br><span class="line">git commit -m &quot;first commit&quot; </span><br><span class="line">// 创建一个新的本地分支main, 不进行切换</span><br><span class="line">git branch -M main</span><br><span class="line">// 添加远程仓库地址</span><br><span class="line">git remote add origin https://github.com/Wilson-Xbort/test.git </span><br><span class="line">// 将本地的 main 分支推送到 origin 主机的 main 分支。</span><br><span class="line">git push -u origin main</span><br><span class="line">// 压缩成.bundle</span><br><span class="line">git bundle create xxx.bundle HEAD main</span><br><span class="line">// 验证校验是否合法</span><br><span class="line">git bundle verify ./xxx.bundle</span><br><span class="line">// 删除远程库</span><br><span class="line">git remote rm origin</span><br><span class="line">// 解压.bundle</span><br><span class="line">git clone xxx.bundle</span><br></pre></td></tr></table></figure>
+<h2 id="3-error和解决方式">3. error和解决方式</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. error: failed to push some refs to &#x27;https://github.com/xxx/xxx.git&#x27;</span><br><span class="line">2. Git:nothing added to commit but untracked files present</span><br><span class="line">3. fatal: Updating an unborn branch with changes added to the index.</span><br></pre></td></tr></table></figure>
+<h2 id="解决方法">解决方法</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add -A 或者 git add --all</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>算法</tag>
-        <tag>C++</tag>
+        <tag>工具</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -374,24 +392,6 @@
 ]]></content>
       <tags>
         <tag>安装</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git使用</title>
-    <url>/2022/08/08/git%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h1>快速入门</h1>
-<h2 id="1-找到要上传的文件夹（Win10">1. 找到要上传的文件夹（Win10)</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.1 右击出现 Git Bash Here</span><br><span class="line">1.2 配置好邮箱，用户名，密码</span><br><span class="line">git config --global user.name &quot;xxx&quot;</span><br><span class="line">git config --global user.email &quot;xxx&quot;</span><br><span class="line">git config --global user.password &quot;xxx&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="2-基本指令">2.基本指令</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 初始化git, 会出现.git的文件夹</span><br><span class="line">git init</span><br><span class="line">// 可加可不加</span><br><span class="line">git add README.md </span><br><span class="line">// git commit 命令将暂存区内容添加到本地仓库</span><br><span class="line">git commit -m &quot;first commit&quot; </span><br><span class="line">// 创建一个新的本地分支main, 不进行切换</span><br><span class="line">git branch -M main</span><br><span class="line">// 添加远程仓库地址</span><br><span class="line">git remote add origin https://github.com/Wilson-Xbort/test.git </span><br><span class="line">// 将本地的 main 分支推送到 origin 主机的 main 分支。</span><br><span class="line">git push -u origin main</span><br><span class="line">// 压缩成.bundle</span><br><span class="line">git bundle create xxx.bundle HEAD main</span><br><span class="line">// 验证校验是否合法</span><br><span class="line">git bundle verify ./xxx.bundle</span><br><span class="line">// 删除远程库</span><br><span class="line">git remote rm origin</span><br><span class="line">// 解压.bundle</span><br><span class="line">git clone xxx.bundle</span><br></pre></td></tr></table></figure>
-<h2 id="3-error和解决方式">3. error和解决方式</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. error: failed to push some refs to &#x27;https://github.com/xxx/xxx.git&#x27;</span><br><span class="line">2. Git:nothing added to commit but untracked files present</span><br><span class="line">3. fatal: Updating an unborn branch with changes added to the index.</span><br></pre></td></tr></table></figure>
-<h2 id="解决方法">解决方法</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add -A 或者 git add --all</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>工具</tag>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -505,36 +505,6 @@
 ]]></content>
       <tags>
         <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>配置Firefox WebDriver, 安装Selenium</title>
-    <url>/2022/06/23/webdriver-config/</url>
-    <content><![CDATA[<h2 id="1-安装Selenium">1.安装Selenium</h2>
-<h4 id="1-1-在Anaconda下">1.1 在Anaconda下</h4>
-<p><img src="/2022/06/23/webdriver-config/img1.png" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install selnium</span><br></pre></td></tr></table></figure>
-<p>#查找Python 安装位置</p>
-<p><img src="/2022/06/23/webdriver-config/img2.png" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">where Python</span><br></pre></td></tr></table></figure>
-<h2 id="2-下载火狐WebDriver">2.下载火狐WebDriver</h2>
-<h4 id="2-1-下载">2.1 下载</h4>
-<h4 id="Tips：一般下载最新版本就行">Tips：一般下载最新版本就行</h4>
-<p><img src="/2022/06/23/webdriver-config/img3.png" alt><br>
-网站如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://github.com/mozilla/geckodriver/releases/</span><br></pre></td></tr></table></figure>
-<h4 id="2-2-解压后放在Python的安装位置">2.2 解压后放在Python的安装位置</h4>
-<p><img src="/2022/06/23/webdriver-config/img4.png" alt></p>
-<h4 id="2-3-在Anaconda-Jupyter下进行测试">2.3 在Anaconda Jupyter下进行测试</h4>
-<p><img src="/2022/06/23/webdriver-config/img5.png" alt><br>
-代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from selenium import webdriver</span><br><span class="line">import time</span><br><span class="line">driver = webdriver.Firefox()</span><br><span class="line">driver.implicitly_wait(5)</span><br><span class="line">driver.get(&quot;https://www.baidu.com&quot;)</span><br><span class="line">time.sleep(3)</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
-<h2 id="测试成功">测试成功</h2>
-<p><img src="/2022/06/23/webdriver-config/img6.png" alt></p>
-]]></content>
-      <tags>
-        <tag>配置</tag>
-        <tag>安装</tag>
       </tags>
   </entry>
   <entry>
@@ -652,11 +622,18 @@
 <blockquote>
 <p>6.堆排序</p>
 </blockquote>
+<p><img src="/2022/07/26/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/heapSort.gif" alt="动图演示"></p>
+<blockquote>
+<p>对于一个完全二叉树，在填满的情况下（非叶子节点都有两个子节点），每一层的元素个数是上一层的二倍，根节点数量是1，所以最后一层的节点数量，一定是之前所有层节点总数+1，<br>
+所以，我们能找到最后一层的第一个节点的索引，即节点总数/2（根节点索引为0），这也就是第一个叶子节点，所以第一个非叶子节点的索引就是第一个叶子结点的索引-1。<br>
+那么对于填不满的二叉树呢？这个计算方式仍然适用，当我们从上往下，从左往右填充二叉树的过程中，第一个叶子节点，一定是序列长度/2，所以第一个非叶子节点的索引就是arr.length / 2 - 1。</p>
+</blockquote>
 <p>代码:</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 大顶堆：每个节点的值都大于或者等于它的左右子节点的值。</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">max_heapify</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; vec, <span class="type">int</span> start, <span class="type">int</span> end)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 父节点 * 2 + 1为左子节点</span></span><br><span class="line">	<span class="comment">// 从最后一个叶子节点开始</span></span><br><span class="line">	<span class="type">int</span> fa = start, so = fa * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span> (so &lt;= end) &#123;</span><br><span class="line">		<span class="comment">// 比较两个子节点大小，选大的那个</span></span><br><span class="line">		<span class="keyword">if</span> (so + <span class="number">1</span> &lt;= end &amp;&amp; vec[so] &lt; vec[so + <span class="number">1</span>]) </span><br><span class="line">			so++; <span class="comment">// so = so + 1;</span></span><br><span class="line">		<span class="keyword">if</span> (vec[fa] &gt; vec[so]) <span class="comment">// 父节点大于子节点则不需要调整</span></span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		<span class="keyword">else</span> &#123; <span class="comment">//否则交换父子内容再继续子节点和孙节点比较</span></span><br><span class="line">			<span class="built_in">swap</span>(vec[fa], vec[so]);</span><br><span class="line">			fa = so;</span><br><span class="line">			so = fa * <span class="number">2</span> + <span class="number">1</span>; <span class="comment">// 这里是*2 不是/2</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">heap_sort</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; vec, <span class="type">int</span> len)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 索引从0开始，寻找第一个非叶子节点</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = len / <span class="number">2</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">		<span class="built_in">max_heapify</span>(vec, i, len - <span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; vec.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">			cout &lt;&lt; vec[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//先将第一个元素和已经排好的元素前一位做交换，再从新调整(刚调整的元素之前的元素)，直到排序完毕</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = len - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">		<span class="built_in">swap</span>(vec[<span class="number">0</span>], vec[i]);</span><br><span class="line">		<span class="built_in">max_heapify</span>(vec, <span class="number">0</span>, i - <span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; vec.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">			cout &lt;&lt; vec[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">// vector&lt;int&gt; vec = &#123; 3, 5, 3, 0, 8, 6, 1, 5, 8, 6, 2, 4, 9, 4, 7, 0, 1, 8, 9, 7, 3, 1, 2, 5, 9, 7, 4, 0, 2, 6 &#125;;</span></span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; vec = &#123; <span class="number">4</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">9</span>, <span class="number">7</span>, <span class="number">1</span> &#125;;</span><br><span class="line">	<span class="type">int</span> len = vec.<span class="built_in">size</span>();</span><br><span class="line">	<span class="built_in">heap_sort</span>(vec, len);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>7.快速排序</p>
 </blockquote>
+<p><img src="/2022/07/26/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/quickSort.gif" alt="动图演示"></p>
 <p>代码:</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(vector&lt;<span class="type">int</span>&gt; vc, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;第&quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;轮 ： &quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> cnt = <span class="number">0</span>; cnt &lt; vc.<span class="built_in">size</span>() - <span class="number">1</span>; ++cnt)</span><br><span class="line">		cout &lt;&lt; vc[cnt] &lt;&lt; <span class="string">&quot; ,&quot;</span>;</span><br><span class="line">	cout &lt;&lt; vc[vc.<span class="built_in">size</span>() - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qsort</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; arr, <span class="type">int</span> low, <span class="type">int</span> high)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (high &lt;= low) <span class="keyword">return</span>;</span><br><span class="line">    <span class="type">int</span> left = low;</span><br><span class="line">    <span class="type">int</span> right = high;</span><br><span class="line">    <span class="type">int</span> key = arr[low];</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">/*从左向右找比key大的值*/</span></span><br><span class="line">        <span class="keyword">while</span> (arr[left] &lt;= key)</span><br><span class="line">        &#123;</span><br><span class="line">            left++;</span><br><span class="line">            <span class="keyword">if</span> (left == high) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/*从右向左找比key小的值*/</span></span><br><span class="line">        <span class="keyword">while</span> (arr[right] &gt;= key)</span><br><span class="line">        &#123;</span><br><span class="line">            right--;</span><br><span class="line">            <span class="keyword">if</span> (right == low)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (left &gt;= right) <span class="keyword">break</span>;</span><br><span class="line">        <span class="built_in">swap</span>(arr[left], arr[right]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*中枢值与j对应值交换*/</span></span><br><span class="line">    arr[low] = arr[right];</span><br><span class="line">    arr[right] = key;</span><br><span class="line">    <span class="built_in">Qsort</span>(arr, low, right - <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">Qsort</span>(arr, right + <span class="number">1</span>, high);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; vc = &#123; <span class="number">22</span>, <span class="number">34</span>, <span class="number">3</span>, <span class="number">32</span>, <span class="number">82</span>, <span class="number">55</span>, <span class="number">89</span>, <span class="number">50</span>, <span class="number">37</span>, <span class="number">5</span>, <span class="number">64</span>, <span class="number">35</span>, <span class="number">9</span>, <span class="number">70</span> &#125;;</span><br><span class="line">    <span class="built_in">Qsort</span>(vc, <span class="number">0</span>, vc.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">print</span>(vc, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -681,19 +658,33 @@
       </tags>
   </entry>
   <entry>
-    <title>字符串转数字</title>
-    <url>/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/</url>
-    <content><![CDATA[<blockquote>
-<p>如图：</p>
-</blockquote>
-<p><img src="/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/img1.PNG" alt></p>
-<blockquote>
-<p>代码:</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vector&lt;int&gt; diffWaysToCompute(string expression) &#123;</span><br><span class="line">        vector&lt;int&gt; ops;</span><br><span class="line">        for (int i = 0; i &lt; expression.size();) &#123;</span><br><span class="line">            // 如果不是数字</span><br><span class="line">            if (!isdigit(expression[i])) &#123;</span><br><span class="line">                if (expression[i] == &#x27;+&#x27;) &#123;</span><br><span class="line">                    ops.push_back(ADDITION);</span><br><span class="line">                &#125; else if (expression[i] == &#x27;-&#x27;) &#123;</span><br><span class="line">                    ops.push_back(SUBTRACTION);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    ops.push_back(MULTIPLICATION);</span><br><span class="line">                &#125;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                int t = 0;</span><br><span class="line">                while (i &lt; expression.size() &amp;&amp; isdigit(expression[i])) &#123;</span><br><span class="line">                    t = t * 10 + expression[i] - &#x27;0&#x27;; // 转换为数字w</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                ops.push_back(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    <title>配置Firefox WebDriver, 安装Selenium</title>
+    <url>/2022/06/23/webdriver-config/</url>
+    <content><![CDATA[<h2 id="1-安装Selenium">1.安装Selenium</h2>
+<h4 id="1-1-在Anaconda下">1.1 在Anaconda下</h4>
+<p><img src="/2022/06/23/webdriver-config/img1.png" alt></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install selnium</span><br></pre></td></tr></table></figure>
+<p>#查找Python 安装位置</p>
+<p><img src="/2022/06/23/webdriver-config/img2.png" alt></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">where Python</span><br></pre></td></tr></table></figure>
+<h2 id="2-下载火狐WebDriver">2.下载火狐WebDriver</h2>
+<h4 id="2-1-下载">2.1 下载</h4>
+<h4 id="Tips：一般下载最新版本就行">Tips：一般下载最新版本就行</h4>
+<p><img src="/2022/06/23/webdriver-config/img3.png" alt><br>
+网站如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://github.com/mozilla/geckodriver/releases/</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-解压后放在Python的安装位置">2.2 解压后放在Python的安装位置</h4>
+<p><img src="/2022/06/23/webdriver-config/img4.png" alt></p>
+<h4 id="2-3-在Anaconda-Jupyter下进行测试">2.3 在Anaconda Jupyter下进行测试</h4>
+<p><img src="/2022/06/23/webdriver-config/img5.png" alt><br>
+代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from selenium import webdriver</span><br><span class="line">import time</span><br><span class="line">driver = webdriver.Firefox()</span><br><span class="line">driver.implicitly_wait(5)</span><br><span class="line">driver.get(&quot;https://www.baidu.com&quot;)</span><br><span class="line">time.sleep(3)</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
+<h2 id="测试成功">测试成功</h2>
+<p><img src="/2022/06/23/webdriver-config/img6.png" alt></p>
+]]></content>
       <tags>
-        <tag>算法</tag>
-        <tag>C++</tag>
+        <tag>配置</tag>
+        <tag>安装</tag>
       </tags>
   </entry>
   <entry>
@@ -820,6 +811,22 @@
       <tags>
         <tag>C++</tag>
         <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>字符串转数字</title>
+    <url>/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/</url>
+    <content><![CDATA[<blockquote>
+<p>如图：</p>
+</blockquote>
+<p><img src="/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/img1.PNG" alt></p>
+<blockquote>
+<p>代码:</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vector&lt;int&gt; diffWaysToCompute(string expression) &#123;</span><br><span class="line">        vector&lt;int&gt; ops;</span><br><span class="line">        for (int i = 0; i &lt; expression.size();) &#123;</span><br><span class="line">            // 如果不是数字</span><br><span class="line">            if (!isdigit(expression[i])) &#123;</span><br><span class="line">                if (expression[i] == &#x27;+&#x27;) &#123;</span><br><span class="line">                    ops.push_back(ADDITION);</span><br><span class="line">                &#125; else if (expression[i] == &#x27;-&#x27;) &#123;</span><br><span class="line">                    ops.push_back(SUBTRACTION);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    ops.push_back(MULTIPLICATION);</span><br><span class="line">                &#125;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                int t = 0;</span><br><span class="line">                while (i &lt; expression.size() &amp;&amp; isdigit(expression[i])) &#123;</span><br><span class="line">                    t = t * 10 + expression[i] - &#x27;0&#x27;; // 转换为数字w</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                ops.push_back(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>算法</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -1234,6 +1241,103 @@
       </tags>
   </entry>
   <entry>
+    <title>模拟面试</title>
+    <url>/2022/08/23/%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95/</url>
+    <content><![CDATA[<h1>2022-8-23</h1>
+<h2 id="1-常见的HTTP协议状态码有哪些？">1. 常见的HTTP协议状态码有哪些？</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">标准回答</span><br><span class="line"></span><br><span class="line">常见的状态码有：</span><br><span class="line">    1xx代表服务器端已经接受了请求。</span><br><span class="line">    2xx代表请求已经被服务器端成功接收，最常见的有200、201状态码。</span><br><span class="line">    3xx代表路径被服务器端重定向到了一个新的URL，最常见的有301、302状态码。</span><br><span class="line">    4xx代表客户端的请求发生了错误，最常见的有401、404状态码。</span><br><span class="line">    5xx代表服务器端的响应出现了错误。 </span><br><span class="line"></span><br><span class="line">加分回答</span><br><span class="line"></span><br><span class="line">    1xx：指定客户端相应的某些动作，代表请求已被接受，需要继续处理。由于 HTTP/1.0 协议中没有定义任何 1xx 状态码，所以除非在某些试验条件下，服务器禁止向此类客户端发送 1xx 响应。</span><br><span class="line"></span><br><span class="line">    2xx：代表请求已成功被服务器接收、理解、并接受。这系列中最常见的有200、201状态码。</span><br><span class="line">        200（成功）：服务器已成功处理了请求。 通常，这表示服务器提供了请求的网页。</span><br><span class="line">        201（已创建）：请求成功并且服务器创建了新的资源。</span><br><span class="line">        202（已接受）：服务器已接受请求，但尚未处理。</span><br><span class="line">        203（非授权信息）：服务器已成功处理了请求，但返回的信息可能来自另一来源。</span><br><span class="line">        204（无内容）：服务器成功处理了请求，但没有返回任何内容。</span><br><span class="line">        205（重置内容）：服务器成功处理了请求，但没有返回任何内容。</span><br><span class="line">        206（部分内容）：服务器成功处理了部分 GET 请求。 </span><br><span class="line"></span><br><span class="line">    3xx：代表需要客户端采取进一步的操作才能完成请求，这些状态码用来重定向，后续的请求地址（重定向目标）在响应头Location字段中指明。这系列中最常见的有301、302状态码。</span><br><span class="line">        300（多种选择）：针对请求，服务器可执行多种操作。 服务器可根据请求者 (user agent) 选择一项操作，或提供操作列表供请求者选择。</span><br><span class="line">        301（永久移动）：请求的网页已永久移动到新位置。 服务器返回此响应（对 GET 或 HEAD 请求的响应）时，会自动将请求者转到新位置。</span><br><span class="line">        302（临时移动）：服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。</span><br><span class="line">        303（查看其他位置）：请求者应当对不同的位置使用单独的 GET 请求来检索响应时，服务器返回此代码。</span><br><span class="line">        304（未修改）：自从上次请求后，请求的网页未修改过。 服务器返回此响应时，不会返回网页内容。</span><br><span class="line">        305（使用代理）：请求者只能使用代理访问请求的网页。 如果服务器返回此响应，还表示请求者应使用代理。</span><br><span class="line">        307（临时重定向）：服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。 </span><br><span class="line"></span><br><span class="line">    4xx：表示请求错误。代表了客户端看起来可能发生了错误，妨碍了服务器的处理。常见有：401、404状态码。</span><br><span class="line"></span><br><span class="line">        400（错误请求）：服务器不理解请求的语法。</span><br><span class="line"></span><br><span class="line">        401（未授权）：请求要求身份验证。 对于需要登录的网页，服务器可能返回此响应。</span><br><span class="line"></span><br><span class="line">        403（禁止）：服务器拒绝请求。</span><br><span class="line"></span><br><span class="line">        404（未找到）：服务器找不到请求的网页。</span><br><span class="line"></span><br><span class="line">        405（方法禁用）：禁用请求中指定的方法。</span><br><span class="line"></span><br><span class="line">        406（不接受）：无法使用请求的内容特性响应请求的网页。</span><br><span class="line"></span><br><span class="line">        407（需要代理授权）：此状态代码与 401（未授权）类似，但指定请求者应当授权使用代理。</span><br><span class="line"></span><br><span class="line">        408（请求超时）：服务器等候请求时发生超时。</span><br><span class="line"></span><br><span class="line">        409（冲突）：服务器在完成请求时发生冲突。 服务器必须在响应中包含有关冲突的信息。</span><br><span class="line"></span><br><span class="line">        410（已删除）：如果请求的资源已永久删除，服务器就会返回此响应。</span><br><span class="line"></span><br><span class="line">        411（需要有效长度）：服务器不接受不含有效内容长度标头字段的请求。</span><br><span class="line"></span><br><span class="line">        412（未满足前提条件）：服务器未满足请求者在请求中设置的其中一个前提条件。</span><br><span class="line"></span><br><span class="line">        413（请求实体过大）：服务器无法处理请求，因为请求实体过大，超出服务器的处理能力。</span><br><span class="line"></span><br><span class="line">        414（请求的 URI 过长）：请求的 URI（通常为网址）过长，服务器无法处理。</span><br><span class="line"></span><br><span class="line">        415（不支持的媒体类型）：请求的格式不受请求页面的支持。</span><br><span class="line"></span><br><span class="line">        416（请求范围不符合要求）：如果页面无法提供请求的范围，则服务器会返回此状态代码。</span><br><span class="line"></span><br><span class="line">        417 （未满足期望值）：服务器未满足&quot;期望&quot;请求标头字段的要求。</span><br><span class="line"></span><br><span class="line">    5xx：代表了服务器在处理请求的过程中有错误或者异常状态发生，也有可能是服务器意识到以当前的软硬件资源无法完成对请求的处理。常见有500、503状态码。</span><br><span class="line">        500（服务器内部错误）：服务器遇到错误，无法完成请求。</span><br><span class="line">        501（尚未实施）：服务器不具备完成请求的功能。 例如，服务器无法识别请求方法时可能会返回此代码。</span><br><span class="line">        502（错误网关）：服务器作为网关或代理，从上游服务器收到无效响应。</span><br><span class="line">        503（服务不可用）：服务器目前无法使用（由于超载或停机维护）。 通常，这只是暂时状态。</span><br><span class="line">        504（网关超时）：服务器作为网关或代理，但是没有及时从上游服务器收到请求。</span><br><span class="line">        505（HTTP 版本不受支持）：服务器不支持请求中所用的 HTTP 协议版本。 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="2-简述一下C-中的四种类型转换">2.简述一下C++ 中的四种类型转换</h2>
+<blockquote>
+<p>const_cast 只能改变运算对象的底层const,只有const_cast能改变表达式的常量属性,将常量对象转换成非常量对象的行为，我们一般称其为&quot;去掉const性质。一旦我们去掉了某个对象的const性质，编译器就不再阻止我们对改对象进行读写操作了。如果对象本身不是一个常量，使用强制类型转换获得写权限是合法行为。<br>
+然而如果对象是一个常量，再使用const_cast执行写操作就会产生未定义的后果。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 正确</span></span><br><span class="line"><span class="type">const</span> <span class="type">char</span> *pc;</span><br><span class="line"><span class="type">char</span> *p = <span class="built_in">const_cast</span>&lt;<span class="type">char</span>*&gt;(pc); <span class="comment">// 正确：但是通过p写值是未定义的行为</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span>* cp;</span><br><span class="line"><span class="comment">// 错误：static_cast不能转换调const性质</span></span><br><span class="line"><span class="type">char</span> *q = <span class="built_in">static_cast</span>&lt;<span class="type">char</span>*&gt;(cp);</span><br><span class="line"><span class="keyword">static_cast</span>&lt;string&gt;cp; <span class="comment">//正确：字符串字面值转换成string类型</span></span><br><span class="line"><span class="keyword">const_cast</span>&lt;string&gt;cp;  <span class="comment">// 错误：const_cast只改变常量属性</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>static_cast: 任何具有明确定义的类型转换，只要不包含底层const,都可以使用static_cast。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 正确</span></span><br><span class="line"><span class="type">double</span> slope = <span class="built_in">static_cast</span>&lt;<span class="type">double</span>&gt;(j) / i</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>reinterpret_cast：reinterpret_cast，是C++里强制类型转换符。</p>
+</blockquote>
+<blockquote>
+<p>dynamic_cast是将一个基类对象指针（或引用）转换到继承类指针，dynamic_cast会根据基类指针是否真正指向继承类指针来做相应处理。dynamic_cast运算符涉及到编译器的属性设置，而且牵扯到的面向对象的多态性跟程序运行时的状态也有关系，所以不能完全的使用传统的替换方式来代替。但是也因此它最常用，是最不可缺少的一个运算符。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Base &amp;b;</span><br><span class="line"><span class="type">const</span> Derived &amp;d = <span class="built_in">dynamic_cast</span>&lt;<span class="type">const</span> Derived&amp;&gt;(b);</span><br></pre></td></tr></table></figure>
+<h2 id="3-简述C-的内存管理">3.简述C++ 的内存管理</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">C++的内存分区主要有五个区：分别是代码区、未初始化的数据区、已初始化数据区、堆区和栈区。</span><br><span class="line">代码区：存放所有可执行代码的区域，在代码执行时，此内存不可修改</span><br><span class="line">未初始化的数据区：存放未初始化或初始化为0的全局变量和静态变量</span><br><span class="line">已初始化的数据区：存放已初始化的全局变量和静态变量</span><br><span class="line">栈区：先进后出的一种内存结构，由编译器自动分配释放，存放函数的参数值、返回值和局部变量等</span><br><span class="line">堆区：容量要比栈大得多，用于动态内存分配，有程序员自己分配释放，如果没释放，结束时会被操作系统自动回收。 </span><br></pre></td></tr></table></figure>
+<h2 id="两数之和">两数之和</h2>
+<blockquote>
+<p>给出一个整型数组 numbers 和一个目标值 target，请在数组中找出两个加起来等于目标值的数的下标，返回的下标按升序排列。<br>
+（注：返回的数组下标从1开始算起，保证target一定可以由数组里面2个数字相加得到）</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; numbers, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// write code here</span></span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">    unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; hash;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numbers.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        <span class="comment">// 判断哈希表里面是否有tmp</span></span><br><span class="line">        <span class="type">int</span> tmp = target - numbers[i];</span><br><span class="line">        <span class="comment">// 如果没有</span></span><br><span class="line">        <span class="keyword">if</span> (hash.<span class="built_in">find</span>(tmp) == hash.<span class="built_in">end</span>()) &#123;</span><br><span class="line">            hash[numbers[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(hash[tmp] + <span class="number">1</span>); <span class="comment">// 索引+1</span></span><br><span class="line">            res.<span class="built_in">push_back</span>(i + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="C-为什么要实现多态">C++ 为什么要实现多态?</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">C++ 多态意味着调用成员函数时，会根据调用函数的对象的类型来执行不同的函数。需要在基类函数前加virtual。</span><br></pre></td></tr></table></figure>
+<h3 id="看代码：">看代码：</h3>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_map&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Father</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;调用Father类函数&quot;</span> &lt;&lt; std::endl; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Son</span> : <span class="keyword">public</span> Father &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;调用Son类函数&quot;</span> &lt;&lt; std::endl; &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	Son son1;</span><br><span class="line"></span><br><span class="line">	Father* fp = &amp;son1;</span><br><span class="line">	fp-&gt;<span class="built_in">func</span>();</span><br><span class="line"></span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>上图代码函数没有加virtual，导致了fp-&gt;func()最后输出父类的func，而加了virual后，按照原则：不管谁指向/引用谁，都是自动识别调子类自己的函数(调用被重写过的函数）。</p>
+</blockquote>
+<h2 id="虚函数的作用？">虚函数的作用？</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">用基类的指针指向不同的派生类的对象时，</span><br><span class="line">基类指针调用其虚成员函数，则会调用其真正指向对象的成员函数，</span><br><span class="line">而不是基类中定义的成员函数（只要派生类改写了该成员函数）。</span><br><span class="line">若不是虚函数，则不管基类指针指向的哪个派生类对象，调用时都</span><br><span class="line">会调用基类中定义的那个函数。</span><br></pre></td></tr></table></figure>
+<h2 id="C-重载怎么实现？">C++ 重载怎么实现？</h2>
+<h2 id="C-重写和重载的区别？">C++ 重写和重载的区别？</h2>
+<blockquote>
+<p>函数重载是指在 同一作用域内，可以有一组具有 相同函数名，不同参数列表 的函数，这组函数被称为重载函数。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="built_in">A</span>() = <span class="keyword">default</span>;</span><br><span class="line">    ~<span class="built_in">A</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">printc</span><span class="params">(<span class="type">long</span> a)</span> </span>&#123; .. &#125; <span class="comment">// 重载</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">printc</span><span class="params">(<span class="type">char</span> a)</span> </span>&#123; .. &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> : <span class="keyword">public</span> A &#123;</span><br><span class="line">     <span class="built_in">B</span>() = <span class="keyword">default</span>;</span><br><span class="line">    ~<span class="built_in">B</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">printc</span><span class="params">()</span> </span>&#123; .. &#125; <span class="comment">// 重写</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="二叉树的使用场景">二叉树的使用场景?</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 数据压缩(哈夫曼树)</span><br><span class="line">2. STL的容器(map, set) (红黑树)</span><br></pre></td></tr></table></figure>
+<h2 id="堆和栈的区别？">堆和栈的区别？</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 栈是系统自动分配，堆是人为申请分配。</span><br><span class="line">2. 栈获得的空间较小，堆获得的空间大。</span><br><span class="line">3. 申请效率不同，栈由系统分配，速度较快。</span><br><span class="line">4. 栈是连续空间，堆是不连续空间。</span><br><span class="line">5. 存储内容不同，栈在函数调用时，函数调用的下一条可执行语句的地址第一个进栈,</span><br><span class="line">然后函数的参数进栈，静态变量不如栈。堆是在头部用一个字节存放堆的大小，堆中的具体内容是人为安排的。</span><br></pre></td></tr></table></figure>
+<h2 id="public-private-protected-继承">public/private/protected 继承</h2>
+<blockquote>
+<p>C++ Primer 15.5</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">公有继承(public)、私有继承(private)、保护继承(protected)是常用的三种继承方式。　　</span><br><span class="line">1. 公有继承(public) 　　</span><br><span class="line">公有继承的特点是基类的公有成员和保护成员作为派生类的成员时，它们都保持原有的状态，而基类的私有成员仍然是私有的，不能被这个派生类的子类所访问。　　</span><br><span class="line">2. 私有继承(private) 　默认的继承方式（如果缺省，默认为private继承)</span><br><span class="line">私有继承的特点是基类的公有成员和保护成员都作为派生类的私有成员，并且不能被这个派生类的子类所访问。　</span><br><span class="line">子类也不能转换成相应的基类，如果转换，会报错：“不允许对不可访问的基类进行转换”。</span><br><span class="line">3. 保护继承(protected) 　　</span><br><span class="line">保护继承的特点是基类的所有公有成员和保护成员都成为派生类的保护成员，并且只能被它的派生类成员函数或友元访问，基类的私有成员仍然是私有的。　　</span><br></pre></td></tr></table></figure>
+<h2 id="C-优先队列中的less和greater">C++优先队列中的less和greater</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">priority_queue &lt;<span class="type">int</span>,vector&lt;<span class="type">int</span>&gt;,less&lt;<span class="type">int</span>&gt; &gt;q;</span><br><span class="line">priority_queue &lt;<span class="type">int</span>,vector&lt;<span class="type">int</span>&gt;,greater&lt;<span class="type">int</span>&gt; &gt;q;</span><br></pre></td></tr></table></figure>
+<h3 id="less源代码：">less源代码：</h3>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt; <span class="keyword">struct</span> <span class="title class_">less</span> &#123;</span><br><span class="line">  <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span> <span class="params">(<span class="type">const</span> T&amp; x, <span class="type">const</span> T&amp; y)</span> <span class="type">const</span> </span>&#123;<span class="keyword">return</span> x&lt;y;&#125;</span><br><span class="line">  <span class="keyword">typedef</span> T first_argument_type;</span><br><span class="line">  <span class="keyword">typedef</span> T second_argument_type;</span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">bool</span> result_type;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="less-example">less example</h3>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// less example</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>     <span class="comment">// std::cout</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;functional&gt;</span>   <span class="comment">// std::less</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span>    <span class="comment">// std::sort, std::includes</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> foo[]=&#123;<span class="number">10</span>,<span class="number">20</span>,<span class="number">5</span>,<span class="number">15</span>,<span class="number">25</span>&#125;;</span><br><span class="line">  <span class="type">int</span> bar[]=&#123;<span class="number">15</span>,<span class="number">10</span>,<span class="number">20</span>&#125;;</span><br><span class="line">  std::<span class="built_in">sort</span> (foo, foo+<span class="number">5</span>, std::<span class="built_in">less</span>&lt;<span class="type">int</span>&gt;());  <span class="comment">// 5 10 15 20 25</span></span><br><span class="line">  std::<span class="built_in">sort</span> (bar, bar+<span class="number">3</span>, std::<span class="built_in">less</span>&lt;<span class="type">int</span>&gt;());  <span class="comment">//   10 15 20</span></span><br><span class="line">  <span class="keyword">if</span> (std::<span class="built_in">includes</span> (foo, foo+<span class="number">5</span>, bar, bar+<span class="number">3</span>, std::<span class="built_in">less</span>&lt;<span class="type">int</span>&gt;()))</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;foo includes bar.\n&quot;</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="greater源代码：">greater源代码：</h3>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt; <span class="keyword">struct</span> <span class="title class_">greater</span> &#123;</span><br><span class="line">  <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span> <span class="params">(<span class="type">const</span> T&amp; x, <span class="type">const</span> T&amp; y)</span> <span class="type">const</span> </span>&#123;<span class="keyword">return</span> x&gt;y;&#125;</span><br><span class="line">  <span class="keyword">typedef</span> T first_argument_type;</span><br><span class="line">  <span class="keyword">typedef</span> T second_argument_type;</span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">bool</span> result_type;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="greater-example">greater example</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// greater example</span><br><span class="line">#include &lt;iostream&gt;     // std::cout</span><br><span class="line">#include &lt;functional&gt;   // std::greater</span><br><span class="line">#include &lt;algorithm&gt;    // std::sort</span><br><span class="line"></span><br><span class="line">int main () &#123;</span><br><span class="line">  int numbers[]=&#123;20,40,50,10,30&#125;;</span><br><span class="line">  std::sort (numbers, numbers+5, std::greater&lt;int&gt;());</span><br><span class="line">  for (int i=0; i&lt;5; i++)</span><br><span class="line">    std::cout &lt;&lt; numbers[i] &lt;&lt; &#x27; &#x27;;</span><br><span class="line">  std::cout &lt;&lt; &#x27;\n&#x27;;</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>我们可以知道less<type>()是从小到大排序，greater<type>()是从大到小排序</type></type></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在C++ STL的priority_queue中：</span><br><span class="line">priority_queue&lt;int, vector&lt;int&gt;,greater&lt;int&gt; &gt;que       -&gt;      从小到大排序</span><br><span class="line">priority_queue&lt;int, vector&lt;int&gt;,less&lt;int&gt; &gt;que          -&gt;      从大到小排序</span><br></pre></td></tr></table></figure>
+<h2 id="请你介绍一下死锁，产生的必要条件，产生的原因，怎么预防死锁-※">请你介绍一下死锁，产生的必要条件，产生的原因，怎么预防死锁 ※</h2>
+<h3 id="死锁：">死锁：</h3>
+<blockquote>
+<p>两个或两个以上的进程在执行过程中，因争夺共享资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁。这些永远在互相等待的进程称为死锁进程。</p>
+</blockquote>
+<h3 id="死锁产生的必要条件">死锁产生的必要条件</h3>
+<blockquote>
+<ul>
+<li>互斥条件：指进程对所分配到的资源进行排它性使用，即在一段时间内某资源只由一个进程占用。如果此时还有其它进程请求资源，则请求者只能等待，直至占有资源的进程用毕释放；</li>
+<li>请求和保持条件：指进程已经保持至少一个资源，但又提出了新的资源请求，而该资源已被其它进程占有，此时请求进程阻塞，但又对自己已获得的其它资源保持不放；</li>
+<li>不剥夺条件：指进程已获得的资源，在未使用完之前，不能被剥夺，只能在使用完时由自己释放；</li>
+<li>环路等待条件：指在发生死锁时，必然存在一个进程——资源的环形链，即进程集合 {P0，P1，P2，···，Pn} 中的 P0 正在等待一个 P1 占用的资源；P1 正在等待 P2 占用的资源，……，Pn 正在等待已被 P0 占用的资源。</li>
+</ul>
+</blockquote>
+<h3 id="死锁产生的原因">死锁产生的原因</h3>
+<blockquote>
+<p>竞争资源 - 进程间推进顺序非法</p>
+</blockquote>
+<h3 id="怎么预防死锁">怎么预防死锁</h3>
+<blockquote>
+<p>有序资源分配法 - 银行家算法</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>八股文</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>模板与泛型编程</title>
     <url>/2022/08/11/%E6%A8%A1%E6%9D%BF%E4%B8%8E%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/</url>
     <content><![CDATA[<h1>第十六章 模板和泛型编程</h1>
@@ -1434,20 +1538,6 @@ j的值被copy到t1。f中的引用参数被绑定带t1,而非j,从而其改变�
       </tags>
   </entry>
   <entry>
-    <title>水晶头连线</title>
-    <url>/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/</url>
-    <content><![CDATA[<h3 id="颜色：">颜色：</h3>
-<blockquote>
-<p>白橙 橙 白绿 蓝 白蓝 绿 白棕 棕</p>
-</blockquote>
-<h3 id="图片：">图片：</h3>
-<p><img src="/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/conn_img1.PNG" alt></p>
-]]></content>
-      <tags>
-        <tag>网络</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>流迭代器</title>
     <url>/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
     <content><![CDATA[<blockquote>
@@ -1465,6 +1555,20 @@ j的值被copy到t1。f中的引用参数被绑定带t1,而非j,从而其改变�
 ]]></content>
       <tags>
         <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>水晶头连线</title>
+    <url>/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/</url>
+    <content><![CDATA[<h3 id="颜色：">颜色：</h3>
+<blockquote>
+<p>白橙 橙 白绿 蓝 白蓝 绿 白棕 棕</p>
+</blockquote>
+<h3 id="图片：">图片：</h3>
+<p><img src="/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/conn_img1.PNG" alt></p>
+]]></content>
+      <tags>
+        <tag>网络</tag>
       </tags>
   </entry>
   <entry>

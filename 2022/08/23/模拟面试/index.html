@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Gelasio:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wilson-xbort.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="2022-8-23 1. 常见的HTTP协议状态码有哪些？ 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475标准回答常见的状态码有：    1xx代表服务器端已经接受">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模拟面试">
+<meta property="og:url" content="https://wilson-xbort.github.io/2022/08/23/%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95/index.html">
+<meta property="og:site_name" content="博客">
+<meta property="og:description" content="2022-8-23 1. 常见的HTTP协议状态码有哪些？ 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475标准回答常见的状态码有：    1xx代表服务器端已经接受">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-23T07:55:06.000Z">
+<meta property="article:modified_time" content="2022-08-24T01:25:42.334Z">
+<meta property="article:author" content="Willson-Xbort">
+<meta property="article:tag" content="八股文">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://wilson-xbort.github.io/2022/08/23/%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>模拟面试 | 博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+  <!--此处为建站时间 -->
+  <!--<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("09/24/2018 23:45:01");
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML ="(ㆆᴗㆆ)本弱已菜菜的存活了"+dnum+"&thinsp;天"; 
+        document.getElementById("times").innerHTML = hnum + "&thinsp;时" + mnum + "&thinsp;分" + snum + "&thinsp;秒"; 
+    } 
+  setInterval("createtime()",250);-->
+
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/08/23/%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ico.jpg">
+      <meta itemprop="name" content="Willson-Xbort">
+      <meta itemprop="description" content="none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          模拟面试
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-08-23 15:55:06" itemprop="dateCreated datePublished" datetime="2022-08-23T15:55:06+08:00">2022-08-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-08-24 09:25:42" itemprop="dateModified" datetime="2022-08-24T09:25:42+08:00">2022-08-24</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1>2022-8-23</h1>
+<h2 id="1-常见的HTTP协议状态码有哪些？">1. 常见的HTTP协议状态码有哪些？</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">标准回答</span><br><span class="line"></span><br><span class="line">常见的状态码有：</span><br><span class="line">    1xx代表服务器端已经接受了请求。</span><br><span class="line">    2xx代表请求已经被服务器端成功接收，最常见的有200、201状态码。</span><br><span class="line">    3xx代表路径被服务器端重定向到了一个新的URL，最常见的有301、302状态码。</span><br><span class="line">    4xx代表客户端的请求发生了错误，最常见的有401、404状态码。</span><br><span class="line">    5xx代表服务器端的响应出现了错误。 </span><br><span class="line"></span><br><span class="line">加分回答</span><br><span class="line"></span><br><span class="line">    1xx：指定客户端相应的某些动作，代表请求已被接受，需要继续处理。由于 HTTP/1.0 协议中没有定义任何 1xx 状态码，所以除非在某些试验条件下，服务器禁止向此类客户端发送 1xx 响应。</span><br><span class="line"></span><br><span class="line">    2xx：代表请求已成功被服务器接收、理解、并接受。这系列中最常见的有200、201状态码。</span><br><span class="line">        200（成功）：服务器已成功处理了请求。 通常，这表示服务器提供了请求的网页。</span><br><span class="line">        201（已创建）：请求成功并且服务器创建了新的资源。</span><br><span class="line">        202（已接受）：服务器已接受请求，但尚未处理。</span><br><span class="line">        203（非授权信息）：服务器已成功处理了请求，但返回的信息可能来自另一来源。</span><br><span class="line">        204（无内容）：服务器成功处理了请求，但没有返回任何内容。</span><br><span class="line">        205（重置内容）：服务器成功处理了请求，但没有返回任何内容。</span><br><span class="line">        206（部分内容）：服务器成功处理了部分 GET 请求。 </span><br><span class="line"></span><br><span class="line">    3xx：代表需要客户端采取进一步的操作才能完成请求，这些状态码用来重定向，后续的请求地址（重定向目标）在响应头Location字段中指明。这系列中最常见的有301、302状态码。</span><br><span class="line">        300（多种选择）：针对请求，服务器可执行多种操作。 服务器可根据请求者 (user agent) 选择一项操作，或提供操作列表供请求者选择。</span><br><span class="line">        301（永久移动）：请求的网页已永久移动到新位置。 服务器返回此响应（对 GET 或 HEAD 请求的响应）时，会自动将请求者转到新位置。</span><br><span class="line">        302（临时移动）：服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。</span><br><span class="line">        303（查看其他位置）：请求者应当对不同的位置使用单独的 GET 请求来检索响应时，服务器返回此代码。</span><br><span class="line">        304（未修改）：自从上次请求后，请求的网页未修改过。 服务器返回此响应时，不会返回网页内容。</span><br><span class="line">        305（使用代理）：请求者只能使用代理访问请求的网页。 如果服务器返回此响应，还表示请求者应使用代理。</span><br><span class="line">        307（临时重定向）：服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。 </span><br><span class="line"></span><br><span class="line">    4xx：表示请求错误。代表了客户端看起来可能发生了错误，妨碍了服务器的处理。常见有：401、404状态码。</span><br><span class="line"></span><br><span class="line">        400（错误请求）：服务器不理解请求的语法。</span><br><span class="line"></span><br><span class="line">        401（未授权）：请求要求身份验证。 对于需要登录的网页，服务器可能返回此响应。</span><br><span class="line"></span><br><span class="line">        403（禁止）：服务器拒绝请求。</span><br><span class="line"></span><br><span class="line">        404（未找到）：服务器找不到请求的网页。</span><br><span class="line"></span><br><span class="line">        405（方法禁用）：禁用请求中指定的方法。</span><br><span class="line"></span><br><span class="line">        406（不接受）：无法使用请求的内容特性响应请求的网页。</span><br><span class="line"></span><br><span class="line">        407（需要代理授权）：此状态代码与 401（未授权）类似，但指定请求者应当授权使用代理。</span><br><span class="line"></span><br><span class="line">        408（请求超时）：服务器等候请求时发生超时。</span><br><span class="line"></span><br><span class="line">        409（冲突）：服务器在完成请求时发生冲突。 服务器必须在响应中包含有关冲突的信息。</span><br><span class="line"></span><br><span class="line">        410（已删除）：如果请求的资源已永久删除，服务器就会返回此响应。</span><br><span class="line"></span><br><span class="line">        411（需要有效长度）：服务器不接受不含有效内容长度标头字段的请求。</span><br><span class="line"></span><br><span class="line">        412（未满足前提条件）：服务器未满足请求者在请求中设置的其中一个前提条件。</span><br><span class="line"></span><br><span class="line">        413（请求实体过大）：服务器无法处理请求，因为请求实体过大，超出服务器的处理能力。</span><br><span class="line"></span><br><span class="line">        414（请求的 URI 过长）：请求的 URI（通常为网址）过长，服务器无法处理。</span><br><span class="line"></span><br><span class="line">        415（不支持的媒体类型）：请求的格式不受请求页面的支持。</span><br><span class="line"></span><br><span class="line">        416（请求范围不符合要求）：如果页面无法提供请求的范围，则服务器会返回此状态代码。</span><br><span class="line"></span><br><span class="line">        417 （未满足期望值）：服务器未满足&quot;期望&quot;请求标头字段的要求。</span><br><span class="line"></span><br><span class="line">    5xx：代表了服务器在处理请求的过程中有错误或者异常状态发生，也有可能是服务器意识到以当前的软硬件资源无法完成对请求的处理。常见有500、503状态码。</span><br><span class="line">        500（服务器内部错误）：服务器遇到错误，无法完成请求。</span><br><span class="line">        501（尚未实施）：服务器不具备完成请求的功能。 例如，服务器无法识别请求方法时可能会返回此代码。</span><br><span class="line">        502（错误网关）：服务器作为网关或代理，从上游服务器收到无效响应。</span><br><span class="line">        503（服务不可用）：服务器目前无法使用（由于超载或停机维护）。 通常，这只是暂时状态。</span><br><span class="line">        504（网关超时）：服务器作为网关或代理，但是没有及时从上游服务器收到请求。</span><br><span class="line">        505（HTTP 版本不受支持）：服务器不支持请求中所用的 HTTP 协议版本。 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="2-简述一下C-中的四种类型转换">2.简述一下C++ 中的四种类型转换</h2>
+<blockquote>
+<p>const_cast 只能改变运算对象的底层const,只有const_cast能改变表达式的常量属性,将常量对象转换成非常量对象的行为，我们一般称其为&quot;去掉const性质。一旦我们去掉了某个对象的const性质，编译器就不再阻止我们对改对象进行读写操作了。如果对象本身不是一个常量，使用强制类型转换获得写权限是合法行为。<br>
+然而如果对象是一个常量，再使用const_cast执行写操作就会产生未定义的后果。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 正确</span></span><br><span class="line"><span class="type">const</span> <span class="type">char</span> *pc;</span><br><span class="line"><span class="type">char</span> *p = <span class="built_in">const_cast</span>&lt;<span class="type">char</span>*&gt;(pc); <span class="comment">// 正确：但是通过p写值是未定义的行为</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span>* cp;</span><br><span class="line"><span class="comment">// 错误：static_cast不能转换调const性质</span></span><br><span class="line"><span class="type">char</span> *q = <span class="built_in">static_cast</span>&lt;<span class="type">char</span>*&gt;(cp);</span><br><span class="line"><span class="keyword">static_cast</span>&lt;string&gt;cp; <span class="comment">//正确：字符串字面值转换成string类型</span></span><br><span class="line"><span class="keyword">const_cast</span>&lt;string&gt;cp;  <span class="comment">// 错误：const_cast只改变常量属性</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>static_cast: 任何具有明确定义的类型转换，只要不包含底层const,都可以使用static_cast。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 正确</span></span><br><span class="line"><span class="type">double</span> slope = <span class="built_in">static_cast</span>&lt;<span class="type">double</span>&gt;(j) / i</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>reinterpret_cast：reinterpret_cast，是C++里强制类型转换符。</p>
+</blockquote>
+<blockquote>
+<p>dynamic_cast是将一个基类对象指针（或引用）转换到继承类指针，dynamic_cast会根据基类指针是否真正指向继承类指针来做相应处理。dynamic_cast运算符涉及到编译器的属性设置，而且牵扯到的面向对象的多态性跟程序运行时的状态也有关系，所以不能完全的使用传统的替换方式来代替。但是也因此它最常用，是最不可缺少的一个运算符。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Base &amp;b;</span><br><span class="line"><span class="type">const</span> Derived &amp;d = <span class="built_in">dynamic_cast</span>&lt;<span class="type">const</span> Derived&amp;&gt;(b);</span><br></pre></td></tr></table></figure>
+<h2 id="3-简述C-的内存管理">3.简述C++ 的内存管理</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C++的内存分区主要有五个区：分别是代码区、未初始化的数据区、已初始化数据区、堆区和栈区。</span><br><span class="line">代码区：存放所有可执行代码的区域，在代码执行时，此内存不可修改</span><br><span class="line">未初始化的数据区：存放未初始化或初始化为0的全局变量和静态变量</span><br><span class="line">已初始化的数据区：存放已初始化的全局变量和静态变量</span><br><span class="line">栈区：先进后出的一种内存结构，由编译器自动分配释放，存放函数的参数值、返回值和局部变量等</span><br><span class="line">堆区：容量要比栈大得多，用于动态内存分配，有程序员自己分配释放，如果没释放，结束时会被操作系统自动回收。 </span><br></pre></td></tr></table></figure>
+<h2 id="两数之和">两数之和</h2>
+<blockquote>
+<p>给出一个整型数组 numbers 和一个目标值 target，请在数组中找出两个加起来等于目标值的数的下标，返回的下标按升序排列。<br>
+（注：返回的数组下标从1开始算起，保证target一定可以由数组里面2个数字相加得到）</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; numbers, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// write code here</span></span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">    unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; hash;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numbers.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        <span class="comment">// 判断哈希表里面是否有tmp</span></span><br><span class="line">        <span class="type">int</span> tmp = target - numbers[i];</span><br><span class="line">        <span class="comment">// 如果没有</span></span><br><span class="line">        <span class="keyword">if</span> (hash.<span class="built_in">find</span>(tmp) == hash.<span class="built_in">end</span>()) &#123;</span><br><span class="line">            hash[numbers[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(hash[tmp] + <span class="number">1</span>); <span class="comment">// 索引+1</span></span><br><span class="line">            res.<span class="built_in">push_back</span>(i + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="C-为什么要实现多态">C++ 为什么要实现多态?</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C++ 多态意味着调用成员函数时，会根据调用函数的对象的类型来执行不同的函数。需要在基类函数前加virtual。</span><br></pre></td></tr></table></figure>
+<h3 id="看代码：">看代码：</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_map&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Father</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;调用Father类函数&quot;</span> &lt;&lt; std::endl; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Son</span> : <span class="keyword">public</span> Father &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;调用Son类函数&quot;</span> &lt;&lt; std::endl; &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	Son son1;</span><br><span class="line"></span><br><span class="line">	Father* fp = &amp;son1;</span><br><span class="line">	fp-&gt;<span class="built_in">func</span>();</span><br><span class="line"></span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>上图代码函数没有加virtual，导致了fp-&gt;func()最后输出父类的func，而加了virual后，按照原则：不管谁指向/引用谁，都是自动识别调子类自己的函数(调用被重写过的函数）。</p>
+</blockquote>
+<h2 id="虚函数的作用？">虚函数的作用？</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">用基类的指针指向不同的派生类的对象时，</span><br><span class="line">基类指针调用其虚成员函数，则会调用其真正指向对象的成员函数，</span><br><span class="line">而不是基类中定义的成员函数（只要派生类改写了该成员函数）。</span><br><span class="line">若不是虚函数，则不管基类指针指向的哪个派生类对象，调用时都</span><br><span class="line">会调用基类中定义的那个函数。</span><br></pre></td></tr></table></figure>
+<h2 id="C-重载怎么实现？">C++ 重载怎么实现？</h2>
+<h2 id="C-重写和重载的区别？">C++ 重写和重载的区别？</h2>
+<blockquote>
+<p>函数重载是指在 同一作用域内，可以有一组具有 相同函数名，不同参数列表 的函数，这组函数被称为重载函数。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="built_in">A</span>() = <span class="keyword">default</span>;</span><br><span class="line">    ~<span class="built_in">A</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">printc</span><span class="params">(<span class="type">long</span> a)</span> </span>&#123; .. &#125; <span class="comment">// 重载</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">printc</span><span class="params">(<span class="type">char</span> a)</span> </span>&#123; .. &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> : <span class="keyword">public</span> A &#123;</span><br><span class="line">     <span class="built_in">B</span>() = <span class="keyword">default</span>;</span><br><span class="line">    ~<span class="built_in">B</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">printc</span><span class="params">()</span> </span>&#123; .. &#125; <span class="comment">// 重写</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="二叉树的使用场景">二叉树的使用场景?</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 数据压缩(哈夫曼树)</span><br><span class="line">2. STL的容器(map, set) (红黑树)</span><br></pre></td></tr></table></figure>
+<h2 id="堆和栈的区别？">堆和栈的区别？</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 栈是系统自动分配，堆是人为申请分配。</span><br><span class="line">2. 栈获得的空间较小，堆获得的空间大。</span><br><span class="line">3. 申请效率不同，栈由系统分配，速度较快。</span><br><span class="line">4. 栈是连续空间，堆是不连续空间。</span><br><span class="line">5. 存储内容不同，栈在函数调用时，函数调用的下一条可执行语句的地址第一个进栈,</span><br><span class="line">然后函数的参数进栈，静态变量不如栈。堆是在头部用一个字节存放堆的大小，堆中的具体内容是人为安排的。</span><br></pre></td></tr></table></figure>
+<h2 id="public-private-protected-继承">public/private/protected 继承</h2>
+<blockquote>
+<p>C++ Primer 15.5</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">公有继承(public)、私有继承(private)、保护继承(protected)是常用的三种继承方式。　　</span><br><span class="line">1. 公有继承(public) 　　</span><br><span class="line">公有继承的特点是基类的公有成员和保护成员作为派生类的成员时，它们都保持原有的状态，而基类的私有成员仍然是私有的，不能被这个派生类的子类所访问。　　</span><br><span class="line">2. 私有继承(private) 　默认的继承方式（如果缺省，默认为private继承)</span><br><span class="line">私有继承的特点是基类的公有成员和保护成员都作为派生类的私有成员，并且不能被这个派生类的子类所访问。　</span><br><span class="line">子类也不能转换成相应的基类，如果转换，会报错：“不允许对不可访问的基类进行转换”。</span><br><span class="line">3. 保护继承(protected) 　　</span><br><span class="line">保护继承的特点是基类的所有公有成员和保护成员都成为派生类的保护成员，并且只能被它的派生类成员函数或友元访问，基类的私有成员仍然是私有的。　　</span><br></pre></td></tr></table></figure>
+<h2 id="C-优先队列中的less和greater">C++优先队列中的less和greater</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">priority_queue &lt;<span class="type">int</span>,vector&lt;<span class="type">int</span>&gt;,less&lt;<span class="type">int</span>&gt; &gt;q;</span><br><span class="line">priority_queue &lt;<span class="type">int</span>,vector&lt;<span class="type">int</span>&gt;,greater&lt;<span class="type">int</span>&gt; &gt;q;</span><br></pre></td></tr></table></figure>
+<h3 id="less源代码：">less源代码：</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt; <span class="keyword">struct</span> <span class="title class_">less</span> &#123;</span><br><span class="line">  <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span> <span class="params">(<span class="type">const</span> T&amp; x, <span class="type">const</span> T&amp; y)</span> <span class="type">const</span> </span>&#123;<span class="keyword">return</span> x&lt;y;&#125;</span><br><span class="line">  <span class="keyword">typedef</span> T first_argument_type;</span><br><span class="line">  <span class="keyword">typedef</span> T second_argument_type;</span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">bool</span> result_type;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="less-example">less example</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// less example</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>     <span class="comment">// std::cout</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;functional&gt;</span>   <span class="comment">// std::less</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span>    <span class="comment">// std::sort, std::includes</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> foo[]=&#123;<span class="number">10</span>,<span class="number">20</span>,<span class="number">5</span>,<span class="number">15</span>,<span class="number">25</span>&#125;;</span><br><span class="line">  <span class="type">int</span> bar[]=&#123;<span class="number">15</span>,<span class="number">10</span>,<span class="number">20</span>&#125;;</span><br><span class="line">  std::<span class="built_in">sort</span> (foo, foo+<span class="number">5</span>, std::<span class="built_in">less</span>&lt;<span class="type">int</span>&gt;());  <span class="comment">// 5 10 15 20 25</span></span><br><span class="line">  std::<span class="built_in">sort</span> (bar, bar+<span class="number">3</span>, std::<span class="built_in">less</span>&lt;<span class="type">int</span>&gt;());  <span class="comment">//   10 15 20</span></span><br><span class="line">  <span class="keyword">if</span> (std::<span class="built_in">includes</span> (foo, foo+<span class="number">5</span>, bar, bar+<span class="number">3</span>, std::<span class="built_in">less</span>&lt;<span class="type">int</span>&gt;()))</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;foo includes bar.\n&quot;</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="greater源代码：">greater源代码：</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt; <span class="keyword">struct</span> <span class="title class_">greater</span> &#123;</span><br><span class="line">  <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span> <span class="params">(<span class="type">const</span> T&amp; x, <span class="type">const</span> T&amp; y)</span> <span class="type">const</span> </span>&#123;<span class="keyword">return</span> x&gt;y;&#125;</span><br><span class="line">  <span class="keyword">typedef</span> T first_argument_type;</span><br><span class="line">  <span class="keyword">typedef</span> T second_argument_type;</span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">bool</span> result_type;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="greater-example">greater example</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// greater example</span><br><span class="line">#include &lt;iostream&gt;     // std::cout</span><br><span class="line">#include &lt;functional&gt;   // std::greater</span><br><span class="line">#include &lt;algorithm&gt;    // std::sort</span><br><span class="line"></span><br><span class="line">int main () &#123;</span><br><span class="line">  int numbers[]=&#123;20,40,50,10,30&#125;;</span><br><span class="line">  std::sort (numbers, numbers+5, std::greater&lt;int&gt;());</span><br><span class="line">  for (int i=0; i&lt;5; i++)</span><br><span class="line">    std::cout &lt;&lt; numbers[i] &lt;&lt; &#x27; &#x27;;</span><br><span class="line">  std::cout &lt;&lt; &#x27;\n&#x27;;</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>我们可以知道less<type>()是从小到大排序，greater<type>()是从大到小排序</type></type></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在C++ STL的priority_queue中：</span><br><span class="line">priority_queue&lt;int, vector&lt;int&gt;,greater&lt;int&gt; &gt;que       -&gt;      从小到大排序</span><br><span class="line">priority_queue&lt;int, vector&lt;int&gt;,less&lt;int&gt; &gt;que          -&gt;      从大到小排序</span><br></pre></td></tr></table></figure>
+<h2 id="请你介绍一下死锁，产生的必要条件，产生的原因，怎么预防死锁-※">请你介绍一下死锁，产生的必要条件，产生的原因，怎么预防死锁 ※</h2>
+<h3 id="死锁：">死锁：</h3>
+<blockquote>
+<p>两个或两个以上的进程在执行过程中，因争夺共享资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁。这些永远在互相等待的进程称为死锁进程。</p>
+</blockquote>
+<h3 id="死锁产生的必要条件">死锁产生的必要条件</h3>
+<blockquote>
+<ul>
+<li>互斥条件：指进程对所分配到的资源进行排它性使用，即在一段时间内某资源只由一个进程占用。如果此时还有其它进程请求资源，则请求者只能等待，直至占有资源的进程用毕释放；</li>
+<li>请求和保持条件：指进程已经保持至少一个资源，但又提出了新的资源请求，而该资源已被其它进程占有，此时请求进程阻塞，但又对自己已获得的其它资源保持不放；</li>
+<li>不剥夺条件：指进程已获得的资源，在未使用完之前，不能被剥夺，只能在使用完时由自己释放；</li>
+<li>环路等待条件：指在发生死锁时，必然存在一个进程——资源的环形链，即进程集合 {P0，P1，P2，···，Pn} 中的 P0 正在等待一个 P1 占用的资源；P1 正在等待 P2 占用的资源，……，Pn 正在等待已被 P0 占用的资源。</li>
+</ul>
+</blockquote>
+<h3 id="死锁产生的原因">死锁产生的原因</h3>
+<blockquote>
+<p>竞争资源 - 进程间推进顺序非法</p>
+</blockquote>
+<h3 id="怎么预防死锁">怎么预防死锁</h3>
+<blockquote>
+<p>有序资源分配法 - 银行家算法</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <!-- after add -->
+    
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+    
+       <!-- after add finish -->
+
+
+      
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%85%AB%E8%82%A1%E6%96%87/" rel="tag"><i class="fa fa-tag"></i># 八股文</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/" rel="prev" title="CentOS配置和下载">
+      <i class="fa fa-chevron-left"></i> CentOS配置和下载
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">2022-8-23</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%B8%B8%E8%A7%81%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E7%8A%B6%E6%80%81%E7%A0%81%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">1. 常见的HTTP协议状态码有哪些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%AE%80%E8%BF%B0%E4%B8%80%E4%B8%8BC-%E4%B8%AD%E7%9A%84%E5%9B%9B%E7%A7%8D%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.2.</span> <span class="nav-text">2.简述一下C++ 中的四种类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%AE%80%E8%BF%B0C-%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">1.3.</span> <span class="nav-text">3.简述C++ 的内存管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C"><span class="nav-number">1.4.</span> <span class="nav-text">两数之和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AE%9E%E7%8E%B0%E5%A4%9A%E6%80%81"><span class="nav-number">1.5.</span> <span class="nav-text">C++ 为什么要实现多态?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9C%8B%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="nav-number">1.5.1.</span> <span class="nav-text">看代码：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="nav-number">1.6.</span> <span class="nav-text">虚函数的作用？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E9%87%8D%E8%BD%BD%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%EF%BC%9F"><span class="nav-number">1.7.</span> <span class="nav-text">C++ 重载怎么实现？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E9%87%8D%E5%86%99%E5%92%8C%E9%87%8D%E8%BD%BD%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.8.</span> <span class="nav-text">C++ 重写和重载的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.9.</span> <span class="nav-text">二叉树的使用场景?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E5%92%8C%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.10.</span> <span class="nav-text">堆和栈的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-private-protected-%E7%BB%A7%E6%89%BF"><span class="nav-number">1.11.</span> <span class="nav-text">public&#x2F;private&#x2F;protected 继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%E4%B8%AD%E7%9A%84less%E5%92%8Cgreater"><span class="nav-number">1.12.</span> <span class="nav-text">C++优先队列中的less和greater</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#less%E6%BA%90%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="nav-number">1.12.1.</span> <span class="nav-text">less源代码：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less-example"><span class="nav-number">1.12.2.</span> <span class="nav-text">less example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#greater%E6%BA%90%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="nav-number">1.12.3.</span> <span class="nav-text">greater源代码：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#greater-example"><span class="nav-number">1.12.4.</span> <span class="nav-text">greater example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E4%BD%A0%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B%E6%AD%BB%E9%94%81%EF%BC%8C%E4%BA%A7%E7%94%9F%E7%9A%84%E5%BF%85%E8%A6%81%E6%9D%A1%E4%BB%B6%EF%BC%8C%E4%BA%A7%E7%94%9F%E7%9A%84%E5%8E%9F%E5%9B%A0%EF%BC%8C%E6%80%8E%E4%B9%88%E9%A2%84%E9%98%B2%E6%AD%BB%E9%94%81-%E2%80%BB"><span class="nav-number">1.13.</span> <span class="nav-text">请你介绍一下死锁，产生的必要条件，产生的原因，怎么预防死锁 ※</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%EF%BC%9A"><span class="nav-number">1.13.1.</span> <span class="nav-text">死锁：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E4%BA%A7%E7%94%9F%E7%9A%84%E5%BF%85%E8%A6%81%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.13.2.</span> <span class="nav-text">死锁产生的必要条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E4%BA%A7%E7%94%9F%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">1.13.3.</span> <span class="nav-text">死锁产生的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E9%A2%84%E9%98%B2%E6%AD%BB%E9%94%81"><span class="nav-number">1.13.4.</span> <span class="nav-text">怎么预防死锁</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Willson-Xbort"
+      src="/images/ico.jpg">
+  <p class="site-author-name" itemprop="name">Willson-Xbort</p>
+  <div class="site-description" itemprop="description">none</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wilson-xbort" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wilson-xbort" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Willson-Xbort</span>
+
+  <!-- after add-->
+  <!---->
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

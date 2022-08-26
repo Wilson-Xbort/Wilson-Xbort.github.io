@@ -1,35 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>CentOS配置和下载</title>
-    <url>/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/</url>
-    <content><![CDATA[<h1>CentOS配置和下载</h1>
-<h2 id="下载">下载</h2>
-<h3 id="进入官网">进入官网</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://www.centos.org/</span><br></pre></td></tr></table></figure>
-<h3 id="如图：">如图：</h3>
-<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_1.PNG" alt></p>
-<h3 id="点击CentOS-Linux">点击CentOS Linux</h3>
-<h3 id="如图：-2">如图：</h3>
-<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_2.png" alt></p>
-<h3 id="点击x86-64后，链接随便选一个">点击x86/64后，链接随便选一个</h3>
-<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_3.png" alt></p>
-<h2 id="问题">问题</h2>
-<h3 id="1-虚拟机安装出现system-not-found">1.虚拟机安装出现system not found</h3>
-<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_5.png" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 打开虚拟机设置 -&gt; 设备状态 -&gt; 启动时连接</span><br></pre></td></tr></table></figure>
-<h3 id="2-安装好后发现无法联网">2.安装好后发现无法联网</h3>
-<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_6.png" alt><br>
-<img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_4.png" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 进入root账号</span><br><span class="line">2. 输入 `cd /etc/sysconfig/network-scripts`</span><br><span class="line">3. 输入 `vi ifcfg-ens34`</span><br><span class="line">4. 输入i, `ONBOOT=no`,改成 `ONBOOT=yes`, 输入`wq!`</span><br><span class="line">5. 重启服务 `systemctl restart network`</span><br><span class="line">6. 输入`ip addr`</span><br></pre></td></tr></table></figure>
-<h2 id="配置">配置</h2>
-]]></content>
-      <tags>
-        <tag>配置</tag>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2022-8-4面试整理</title>
     <url>/2022/08/08/2022-8-4%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/</url>
     <content><![CDATA[<h2 id="算法题1：">算法题1：</h2>
@@ -80,13 +51,58 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux 高性能服务器理解</title>
-    <url>/2022/07/26/Linux-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%90%86%E8%A7%A3/</url>
-    <content><![CDATA[]]></content>
+    <title>CentOS配置和下载</title>
+    <url>/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/</url>
+    <content><![CDATA[<h1>CentOS配置和下载</h1>
+<h2 id="下载">下载</h2>
+<h3 id="进入官网">进入官网</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://www.centos.org/</span><br></pre></td></tr></table></figure>
+<h3 id="如图：">如图：</h3>
+<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_1.PNG" alt></p>
+<h3 id="点击CentOS-Linux">点击CentOS Linux</h3>
+<h3 id="如图：-2">如图：</h3>
+<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_2.png" alt></p>
+<h3 id="点击x86-64后，链接随便选一个">点击x86/64后，链接随便选一个</h3>
+<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_3.png" alt></p>
+<h2 id="问题">问题</h2>
+<h3 id="1-虚拟机安装出现system-not-found">1.虚拟机安装出现system not found</h3>
+<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_5.png" alt></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 打开虚拟机设置 -&gt; 设备状态 -&gt; 启动时连接</span><br></pre></td></tr></table></figure>
+<h3 id="2-安装好后发现无法联网">2.安装好后发现无法联网</h3>
+<p><img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_6.png" alt><br>
+<img src="/2022/08/22/CentOS%E9%85%8D%E7%BD%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/CentOS_img_4.png" alt></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 进入root账号</span><br><span class="line">2. 输入 `cd /etc/sysconfig/network-scripts`</span><br><span class="line">3. 输入 `vi ifcfg-ens34`</span><br><span class="line">4. 输入i, `ONBOOT=no`,改成 `ONBOOT=yes`, 输入`wq!`</span><br><span class="line">5. 重启服务 `systemctl restart network`</span><br><span class="line">6. 输入`ip addr`</span><br></pre></td></tr></table></figure>
+<h2 id="配置">配置</h2>
+]]></content>
       <tags>
+        <tag>配置</tag>
         <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>尾置返回类型</title>
+    <url>/2022/06/30/Trailing-return-type/</url>
+    <content><![CDATA[<h3 id="C-Primer-第五版-第六章-P221-P224">C++ Primer 第五版 第六章 P221~P224</h3>
+<blockquote>
+<p>函数指针P221</p>
+</blockquote>
+<p><img src="/2022/06/30/Trailing-return-type/screen_img1.PNG" alt><br>
+<img src="/2022/06/30/Trailing-return-type/screen_img2.PNG" alt><br>
+<img src="/2022/06/30/Trailing-return-type/screen_img3.PNG" alt><br>
+<img src="/2022/06/30/Trailing-return-type/screen_img4.PNG" alt><br>
+<img src="/2022/06/30/Trailing-return-type/screen_img5.PNG" alt><br>
+<img src="/2022/06/30/Trailing-return-type/screen_img6.PNG" alt></p>
+<blockquote>
+<p>代码示例</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 类型别名</span><br><span class="line">typedef string str_arr[10];</span><br><span class="line">str_arr&amp; fun();</span><br><span class="line"></span><br><span class="line">// 尾置返回类型</span><br><span class="line">auto fun()-&gt;string(&amp;)[10];</span><br><span class="line"></span><br><span class="line">// 使用decltype关键字</span><br><span class="line">string s[10];</span><br><span class="line">decltype(s)&amp; fun();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>简单的示例：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">// print containers like vector, deque, list, etc.</span><br><span class="line">// 可以看到这里也使用了尾置返回类型，但是由于类型并非是函数类型，因此没有那么复杂</span><br><span class="line">template&lt;typename Sequence&gt;</span><br><span class="line">auto println(Sequence const&amp; seq) -&gt; std::ostream&amp;</span><br><span class="line">&#123;</span><br><span class="line">    for (auto const&amp; elem : seq) </span><br><span class="line">        std::cout &lt;&lt; elem &lt;&lt; &quot; &quot;;</span><br><span class="line">    return std::cout &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">auto eliminate_duplicates(std::vector&lt;std::string&gt; &amp;vs) -&gt; std::vector&lt;std::string&gt;&amp;</span><br><span class="line">&#123;</span><br><span class="line">    std::sort(vs.begin(), vs.end());</span><br><span class="line">    println(vs);</span><br><span class="line"></span><br><span class="line">    auto new_end = std::unique(vs.begin(), vs.end());</span><br><span class="line">    println(vs);</span><br><span class="line"></span><br><span class="line">    vs.erase(new_end, vs.end());</span><br><span class="line">    return vs;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    std::vector&lt;std::string&gt; vs&#123; &quot;a&quot;, &quot;v&quot;, &quot;a&quot;, &quot;s&quot;, &quot;v&quot;, &quot;a&quot;, &quot;a&quot; &#125;;</span><br><span class="line">    println(vs);</span><br><span class="line">    println(eliminate_duplicates(vs));</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
         <tag>C++</tag>
-        <tag>socket</tag>
       </tags>
   </entry>
   <entry>
@@ -119,29 +135,56 @@
       </tags>
   </entry>
   <entry>
-    <title>尾置返回类型</title>
-    <url>/2022/06/30/Trailing-return-type/</url>
-    <content><![CDATA[<h3 id="C-Primer-第五版-第六章-P221-P224">C++ Primer 第五版 第六章 P221~P224</h3>
-<blockquote>
-<p>函数指针P221</p>
-</blockquote>
-<p><img src="/2022/06/30/Trailing-return-type/screen_img1.PNG" alt><br>
-<img src="/2022/06/30/Trailing-return-type/screen_img2.PNG" alt><br>
-<img src="/2022/06/30/Trailing-return-type/screen_img3.PNG" alt><br>
-<img src="/2022/06/30/Trailing-return-type/screen_img4.PNG" alt><br>
-<img src="/2022/06/30/Trailing-return-type/screen_img5.PNG" alt><br>
-<img src="/2022/06/30/Trailing-return-type/screen_img6.PNG" alt></p>
-<blockquote>
-<p>代码示例</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 类型别名</span><br><span class="line">typedef string str_arr[10];</span><br><span class="line">str_arr&amp; fun();</span><br><span class="line"></span><br><span class="line">// 尾置返回类型</span><br><span class="line">auto fun()-&gt;string(&amp;)[10];</span><br><span class="line"></span><br><span class="line">// 使用decltype关键字</span><br><span class="line">string s[10];</span><br><span class="line">decltype(s)&amp; fun();</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>简单的示例：</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">// print containers like vector, deque, list, etc.</span><br><span class="line">// 可以看到这里也使用了尾置返回类型，但是由于类型并非是函数类型，因此没有那么复杂</span><br><span class="line">template&lt;typename Sequence&gt;</span><br><span class="line">auto println(Sequence const&amp; seq) -&gt; std::ostream&amp;</span><br><span class="line">&#123;</span><br><span class="line">    for (auto const&amp; elem : seq) </span><br><span class="line">        std::cout &lt;&lt; elem &lt;&lt; &quot; &quot;;</span><br><span class="line">    return std::cout &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">auto eliminate_duplicates(std::vector&lt;std::string&gt; &amp;vs) -&gt; std::vector&lt;std::string&gt;&amp;</span><br><span class="line">&#123;</span><br><span class="line">    std::sort(vs.begin(), vs.end());</span><br><span class="line">    println(vs);</span><br><span class="line"></span><br><span class="line">    auto new_end = std::unique(vs.begin(), vs.end());</span><br><span class="line">    println(vs);</span><br><span class="line"></span><br><span class="line">    vs.erase(new_end, vs.end());</span><br><span class="line">    return vs;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    std::vector&lt;std::string&gt; vs&#123; &quot;a&quot;, &quot;v&quot;, &quot;a&quot;, &quot;s&quot;, &quot;v&quot;, &quot;a&quot;, &quot;a&quot; &#125;;</span><br><span class="line">    println(vs);</span><br><span class="line">    println(eliminate_duplicates(vs));</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>Linux 高性能服务器理解</title>
+    <url>/2022/07/26/Linux-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>Linux</tag>
+        <tag>C++</tag>
+        <tag>socket</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>性能测试工具的简单使用</title>
+    <url>/2022/07/03/Use-of-performance-test-tools/</url>
+    <content><![CDATA[<h2 id="下载工具：">下载工具：</h2>
+<table>
+<thead>
+<tr>
+<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon1.PNG" alt="virtual User Generator"></th>
+<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon2.PNG" alt="controller"></th>
+<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon3.PNG" alt="Analysis"></th>
+</tr>
+</thead>
+</table>
+<h2 id="打开virtual-User-Generator：">打开virtual User Generator：</h2>
+<ol>
+<li>点击录制按钮，选择协议<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img1.png" alt><br>
+2.在高级选项中选择明确包含url的脚本<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img2.png" alt><br>
+3.点击开始录制后就会进入你所写的url链接，结束后就可以看到Action的代码<br>
+4.可以点击<em>设计工作室</em>进行关联<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img3.png" alt><br>
+5.点击运行，看到为√的时候就成功了<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img4.png" alt></li>
+</ol>
+<h2 id="打开controller：">打开controller：</h2>
+<p>1.选择脚本<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img5.png" alt><br>
+2.进行设置，在基本计划下可以设置用户数量<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img6.png" alt><br>
+3.点击运行时设置，可以将自动事务的勾选去掉<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img7.png" alt><br>
+4.设置全部完成后可以运行<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img8.png" alt><br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img9.png" alt><br>
+5.点击结果-&gt;分析结果<br>
+<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img10.png" alt><br>
+将会自动打开<em>Analysis</em>显示结果</p>
 ]]></content>
       <tags>
-        <tag>C++</tag>
+        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -201,49 +244,6 @@
       <tags>
         <tag>算法</tag>
         <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>性能测试工具的简单使用</title>
-    <url>/2022/07/03/Use-of-performance-test-tools/</url>
-    <content><![CDATA[<h2 id="下载工具：">下载工具：</h2>
-<table>
-<thead>
-<tr>
-<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon1.PNG" alt="virtual User Generator"></th>
-<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon2.PNG" alt="controller"></th>
-<th><img src="/2022/07/03/Use-of-performance-test-tools/uoptt_icon3.PNG" alt="Analysis"></th>
-</tr>
-</thead>
-</table>
-<h2 id="打开virtual-User-Generator：">打开virtual User Generator：</h2>
-<ol>
-<li>点击录制按钮，选择协议<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img1.png" alt><br>
-2.在高级选项中选择明确包含url的脚本<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img2.png" alt><br>
-3.点击开始录制后就会进入你所写的url链接，结束后就可以看到Action的代码<br>
-4.可以点击<em>设计工作室</em>进行关联<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img3.png" alt><br>
-5.点击运行，看到为√的时候就成功了<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img4.png" alt></li>
-</ol>
-<h2 id="打开controller：">打开controller：</h2>
-<p>1.选择脚本<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img5.png" alt><br>
-2.进行设置，在基本计划下可以设置用户数量<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img6.png" alt><br>
-3.点击运行时设置，可以将自动事务的勾选去掉<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img7.png" alt><br>
-4.设置全部完成后可以运行<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img8.png" alt><br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img9.png" alt><br>
-5.点击结果-&gt;分析结果<br>
-<img src="/2022/07/03/Use-of-performance-test-tools/uoptt_img10.png" alt><br>
-将会自动打开<em>Analysis</em>显示结果</p>
-]]></content>
-      <tags>
-        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -334,24 +334,6 @@
       </tags>
   </entry>
   <entry>
-    <title>git使用</title>
-    <url>/2022/08/08/git%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h1>快速入门</h1>
-<h2 id="1-找到要上传的文件夹（Win10">1. 找到要上传的文件夹（Win10)</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.1 右击出现 Git Bash Here</span><br><span class="line">1.2 配置好邮箱，用户名，密码</span><br><span class="line">git config --global user.name &quot;xxx&quot;</span><br><span class="line">git config --global user.email &quot;xxx&quot;</span><br><span class="line">git config --global user.password &quot;xxx&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="2-基本指令">2.基本指令</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 初始化git, 会出现.git的文件夹</span><br><span class="line">git init</span><br><span class="line">// 可加可不加</span><br><span class="line">git add README.md </span><br><span class="line">// git commit 命令将暂存区内容添加到本地仓库</span><br><span class="line">git commit -m &quot;first commit&quot; </span><br><span class="line">// 创建一个新的本地分支main, 不进行切换</span><br><span class="line">git branch -M main</span><br><span class="line">// 添加远程仓库地址</span><br><span class="line">git remote add origin https://github.com/Wilson-Xbort/test.git </span><br><span class="line">// 将本地的 main 分支推送到 origin 主机的 main 分支。</span><br><span class="line">git push -u origin main</span><br><span class="line">// 压缩成.bundle</span><br><span class="line">git bundle create xxx.bundle HEAD main</span><br><span class="line">// 验证校验是否合法</span><br><span class="line">git bundle verify ./xxx.bundle</span><br><span class="line">// 删除远程库</span><br><span class="line">git remote rm origin</span><br><span class="line">// 解压.bundle</span><br><span class="line">git clone xxx.bundle</span><br></pre></td></tr></table></figure>
-<h2 id="3-error和解决方式">3. error和解决方式</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. error: failed to push some refs to &#x27;https://github.com/xxx/xxx.git&#x27;</span><br><span class="line">2. Git:nothing added to commit but untracked files present</span><br><span class="line">3. fatal: Updating an unborn branch with changes added to the index.</span><br></pre></td></tr></table></figure>
-<h2 id="解决方法">解决方法</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add -A 或者 git add --all</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>工具</tag>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>安装</title>
     <url>/2022/05/31/install/</url>
     <content><![CDATA[<h2 id="快速开始-win-下的安装）">快速开始(win 下的安装）</h2>
@@ -392,6 +374,24 @@
 ]]></content>
       <tags>
         <tag>安装</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git使用</title>
+    <url>/2022/08/08/git%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h1>快速入门</h1>
+<h2 id="1-找到要上传的文件夹（Win10">1. 找到要上传的文件夹（Win10)</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.1 右击出现 Git Bash Here</span><br><span class="line">1.2 配置好邮箱，用户名，密码</span><br><span class="line">git config --global user.name &quot;xxx&quot;</span><br><span class="line">git config --global user.email &quot;xxx&quot;</span><br><span class="line">git config --global user.password &quot;xxx&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="2-基本指令">2.基本指令</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 初始化git, 会出现.git的文件夹</span><br><span class="line">git init</span><br><span class="line">// 可加可不加</span><br><span class="line">git add README.md </span><br><span class="line">// git commit 命令将暂存区内容添加到本地仓库</span><br><span class="line">git commit -m &quot;first commit&quot; </span><br><span class="line">// 创建一个新的本地分支main, 不进行切换</span><br><span class="line">git branch -M main</span><br><span class="line">// 添加远程仓库地址</span><br><span class="line">git remote add origin https://github.com/Wilson-Xbort/test.git </span><br><span class="line">// 将本地的 main 分支推送到 origin 主机的 main 分支。</span><br><span class="line">git push -u origin main</span><br><span class="line">// 压缩成.bundle</span><br><span class="line">git bundle create xxx.bundle HEAD main</span><br><span class="line">// 验证校验是否合法</span><br><span class="line">git bundle verify ./xxx.bundle</span><br><span class="line">// 删除远程库</span><br><span class="line">git remote rm origin</span><br><span class="line">// 解压.bundle</span><br><span class="line">git clone xxx.bundle</span><br></pre></td></tr></table></figure>
+<h2 id="3-error和解决方式">3. error和解决方式</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. error: failed to push some refs to &#x27;https://github.com/xxx/xxx.git&#x27;</span><br><span class="line">2. Git:nothing added to commit but untracked files present</span><br><span class="line">3. fatal: Updating an unborn branch with changes added to the index.</span><br></pre></td></tr></table></figure>
+<h2 id="解决方法">解决方法</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add -A 或者 git add --all</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>工具</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -505,6 +505,36 @@
 ]]></content>
       <tags>
         <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>配置Firefox WebDriver, 安装Selenium</title>
+    <url>/2022/06/23/webdriver-config/</url>
+    <content><![CDATA[<h2 id="1-安装Selenium">1.安装Selenium</h2>
+<h4 id="1-1-在Anaconda下">1.1 在Anaconda下</h4>
+<p><img src="/2022/06/23/webdriver-config/img1.png" alt></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install selnium</span><br></pre></td></tr></table></figure>
+<p>#查找Python 安装位置</p>
+<p><img src="/2022/06/23/webdriver-config/img2.png" alt></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">where Python</span><br></pre></td></tr></table></figure>
+<h2 id="2-下载火狐WebDriver">2.下载火狐WebDriver</h2>
+<h4 id="2-1-下载">2.1 下载</h4>
+<h4 id="Tips：一般下载最新版本就行">Tips：一般下载最新版本就行</h4>
+<p><img src="/2022/06/23/webdriver-config/img3.png" alt><br>
+网站如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://github.com/mozilla/geckodriver/releases/</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-解压后放在Python的安装位置">2.2 解压后放在Python的安装位置</h4>
+<p><img src="/2022/06/23/webdriver-config/img4.png" alt></p>
+<h4 id="2-3-在Anaconda-Jupyter下进行测试">2.3 在Anaconda Jupyter下进行测试</h4>
+<p><img src="/2022/06/23/webdriver-config/img5.png" alt><br>
+代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from selenium import webdriver</span><br><span class="line">import time</span><br><span class="line">driver = webdriver.Firefox()</span><br><span class="line">driver.implicitly_wait(5)</span><br><span class="line">driver.get(&quot;https://www.baidu.com&quot;)</span><br><span class="line">time.sleep(3)</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
+<h2 id="测试成功">测试成功</h2>
+<p><img src="/2022/06/23/webdriver-config/img6.png" alt></p>
+]]></content>
+      <tags>
+        <tag>配置</tag>
+        <tag>安装</tag>
       </tags>
   </entry>
   <entry>
@@ -658,33 +688,19 @@
       </tags>
   </entry>
   <entry>
-    <title>配置Firefox WebDriver, 安装Selenium</title>
-    <url>/2022/06/23/webdriver-config/</url>
-    <content><![CDATA[<h2 id="1-安装Selenium">1.安装Selenium</h2>
-<h4 id="1-1-在Anaconda下">1.1 在Anaconda下</h4>
-<p><img src="/2022/06/23/webdriver-config/img1.png" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install selnium</span><br></pre></td></tr></table></figure>
-<p>#查找Python 安装位置</p>
-<p><img src="/2022/06/23/webdriver-config/img2.png" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">where Python</span><br></pre></td></tr></table></figure>
-<h2 id="2-下载火狐WebDriver">2.下载火狐WebDriver</h2>
-<h4 id="2-1-下载">2.1 下载</h4>
-<h4 id="Tips：一般下载最新版本就行">Tips：一般下载最新版本就行</h4>
-<p><img src="/2022/06/23/webdriver-config/img3.png" alt><br>
-网站如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://github.com/mozilla/geckodriver/releases/</span><br></pre></td></tr></table></figure>
-<h4 id="2-2-解压后放在Python的安装位置">2.2 解压后放在Python的安装位置</h4>
-<p><img src="/2022/06/23/webdriver-config/img4.png" alt></p>
-<h4 id="2-3-在Anaconda-Jupyter下进行测试">2.3 在Anaconda Jupyter下进行测试</h4>
-<p><img src="/2022/06/23/webdriver-config/img5.png" alt><br>
-代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from selenium import webdriver</span><br><span class="line">import time</span><br><span class="line">driver = webdriver.Firefox()</span><br><span class="line">driver.implicitly_wait(5)</span><br><span class="line">driver.get(&quot;https://www.baidu.com&quot;)</span><br><span class="line">time.sleep(3)</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
-<h2 id="测试成功">测试成功</h2>
-<p><img src="/2022/06/23/webdriver-config/img6.png" alt></p>
-]]></content>
+    <title>字符串转数字</title>
+    <url>/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/</url>
+    <content><![CDATA[<blockquote>
+<p>如图：</p>
+</blockquote>
+<p><img src="/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/img1.PNG" alt></p>
+<blockquote>
+<p>代码:</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vector&lt;int&gt; diffWaysToCompute(string expression) &#123;</span><br><span class="line">        vector&lt;int&gt; ops;</span><br><span class="line">        for (int i = 0; i &lt; expression.size();) &#123;</span><br><span class="line">            // 如果不是数字</span><br><span class="line">            if (!isdigit(expression[i])) &#123;</span><br><span class="line">                if (expression[i] == &#x27;+&#x27;) &#123;</span><br><span class="line">                    ops.push_back(ADDITION);</span><br><span class="line">                &#125; else if (expression[i] == &#x27;-&#x27;) &#123;</span><br><span class="line">                    ops.push_back(SUBTRACTION);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    ops.push_back(MULTIPLICATION);</span><br><span class="line">                &#125;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                int t = 0;</span><br><span class="line">                while (i &lt; expression.size() &amp;&amp; isdigit(expression[i])) &#123;</span><br><span class="line">                    t = t * 10 + expression[i] - &#x27;0&#x27;; // 转换为数字w</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                ops.push_back(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
       <tags>
-        <tag>配置</tag>
-        <tag>安装</tag>
+        <tag>算法</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -811,22 +827,6 @@
       <tags>
         <tag>C++</tag>
         <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>字符串转数字</title>
-    <url>/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/</url>
-    <content><![CDATA[<blockquote>
-<p>如图：</p>
-</blockquote>
-<p><img src="/2022/07/01/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E5%AD%97/img1.PNG" alt></p>
-<blockquote>
-<p>代码:</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vector&lt;int&gt; diffWaysToCompute(string expression) &#123;</span><br><span class="line">        vector&lt;int&gt; ops;</span><br><span class="line">        for (int i = 0; i &lt; expression.size();) &#123;</span><br><span class="line">            // 如果不是数字</span><br><span class="line">            if (!isdigit(expression[i])) &#123;</span><br><span class="line">                if (expression[i] == &#x27;+&#x27;) &#123;</span><br><span class="line">                    ops.push_back(ADDITION);</span><br><span class="line">                &#125; else if (expression[i] == &#x27;-&#x27;) &#123;</span><br><span class="line">                    ops.push_back(SUBTRACTION);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    ops.push_back(MULTIPLICATION);</span><br><span class="line">                &#125;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                int t = 0;</span><br><span class="line">                while (i &lt; expression.size() &amp;&amp; isdigit(expression[i])) &#123;</span><br><span class="line">                    t = t * 10 + expression[i] - &#x27;0&#x27;; // 转换为数字w</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                ops.push_back(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <tags>
-        <tag>算法</tag>
-        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -1332,6 +1332,51 @@
 <blockquote>
 <p>有序资源分配法 - 银行家算法</p>
 </blockquote>
+<h2 id="x-x-1-x-1-x-哪个效率高？">x = x + 1, x += 1, x++ 哪个效率高？</h2>
+<blockquote>
+<p>x = x + 1 执行效率如下：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 读取右x的地址</span><br><span class="line">2. x + 1</span><br><span class="line">3. 读取左x的地址</span><br><span class="line">4.将右表达式的值传递给左x</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>x += 1 执行效率如下：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 读取x的地址</span><br><span class="line">2. x + 1</span><br><span class="line">3. 将得到的值传给x</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>x++</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 读取x的地址</span><br><span class="line">2. 自增操作</span><br></pre></td></tr></table></figure>
+<h2 id="const-和-define-的区别">const 和 #define 的区别</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. #define 只在预编译阶段起作用, const在编译、运行的时候起作用</span><br><span class="line">2. #define 只是简单的字符串替换，没有类型检查。而const有对应的数据类型，需要进行类型检查。</span><br><span class="line">3. #define 只是进行展开,有多少地方使用就替换多少次，它定义的宏常量在内存中有多个备份，const定义的只读变量在程序运行中只有一份备份。</span><br><span class="line">4. #define 是不能进行调试的在预编译阶段就替换了，const常量可以进行调试</span><br></pre></td></tr></table></figure>
+<h2 id="new-和-malloc的区别和联系">new 和 malloc的区别和联系</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. new 是 C++中的操作符，malloc是c中的一个函数</span><br><span class="line">2. new不只是分配内存，还会调用类的构造函数，同理，delete会调用类的析构函数，malloc则只会分配内存，不会进行初始化类成员的工作，free也不会调用析构函数。</span><br><span class="line">3. new的指针是直接带着类型信息的，malloc返回的是void*</span><br><span class="line">4. new，delete || new [], delete[] || malloc, free配套使用</span><br></pre></td></tr></table></figure>
+<h2 id="构造函数和析构函数可不可以为虚函数？为什么？">构造函数和析构函数可不可以为虚函数？为什么？</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">析构函数可以是虚函数，构造函数不可以。因为构造函数有特殊的工作，它处在对象创建初期，先调用基类的构造函数，再按照继承顺序调用派生类的构造函数。</span><br><span class="line">而析构函数和构造函数恰恰相反，从最后的派生类开始，依次到向上到基类，析构函数确切知道它从哪个类派生而来。</span><br><span class="line"></span><br><span class="line">如果某个类不包含虚函数,一般是表示它将不作为一个基类来使用,当一个类不作为基类使用时，析构函数没必要声明为虚函数，以防虚函数表指针浪费空间。</span><br></pre></td></tr></table></figure>
+<h2 id="strcpy-和-memcpy的区别">strcpy 和 memcpy的区别</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1）复制的内容不同，strcpy只能用于字符串copy，memcpy可以复制任何类型的内容，用途更广。</span><br><span class="line">2）复制的方法不同，strcpy不需要指定长度，遇到&#x27;\0&#x27;才会结束，容易溢出。memcpy需要设置复制长度。</span><br><span class="line">3）用途不同。一般复制字符串才会使用strcpy，其他类型使用memcpy</span><br></pre></td></tr></table></figure>
+<h2 id="如何限制一个类对象只在堆-栈）上分配空间？">如何限制一个类对象只在堆(栈）上分配空间？</h2>
+<h3 id="1-类对象只建立在堆上">1.类对象只建立在堆上</h3>
+<blockquote>
+<p>容易想到将构造函数设为私有。在构造函数私有之后，无法在类外部调用构造函数来构造类对象，只能使用new运算符来建立对象。</p>
+</blockquote>
+<blockquote>
+<p>然而，前面已经说过，new运算符的执行过程分为两步，C++提供new运算符的重载，其实是只允许重载operator new()函数，而operator()函数用于分配内存，无法提供构造功能。因此，这种方法不可以。</p>
+</blockquote>
+<blockquote>
+<p>当对象建立在栈上面时，是由编译器分配内存空间的，调用构造函数来构造栈对象。<code>当对象使用完后，编译器会调用析构函数来释放栈对象所占的空间。</code>编译器管理了对象的整个生命周期。如果编译器无法调用类的析构函数，情况会是怎样的呢？</p>
+</blockquote>
+<blockquote>
+<p>比如，类的析构函数是私有的，编译器无法调用析构函数来释放内存。所以，编译器在为类对象分配栈空间时，会先检查类的析构函数的访问性，其实不光是析构函数，只要是非静态的函数，编译器都会进行检查。如果类的析构函数是私有的，则编译器不会在栈空间上为类对象分配内存。<br>
+因此，将析构函数设为私有，类对象就无法建立在栈上了。代码如下：</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>  </span><br><span class="line">&#123;  </span><br><span class="line"><span class="keyword">public</span>:  </span><br><span class="line">    <span class="built_in">A</span>()&#123;&#125;  </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">destory</span><span class="params">()</span></span>&#123;<span class="keyword">delete</span> <span class="keyword">this</span>;&#125;  </span><br><span class="line"><span class="keyword">private</span>:  </span><br><span class="line">    ~<span class="built_in">A</span>()&#123;&#125;  </span><br><span class="line">&#125;;  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="2-类对象只建立在栈上">2.类对象只建立在栈上</h3>
+<blockquote>
+<p>只有使用new运算符，对象才会建立在堆上，因此，只要禁用new运算符就可以实现类对象只能建立在栈上。将operator new()设为私有即可。代码如下：</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>  </span><br><span class="line">&#123;  </span><br><span class="line"><span class="keyword">private</span>:  </span><br><span class="line">    <span class="function"><span class="type">void</span>* <span class="keyword">operator</span> <span class="title">new</span><span class="params">(<span class="type">size_t</span> t)</span></span>&#123;&#125;     <span class="comment">// 注意函数的第一个参数和返回值都是固定的  </span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="keyword">operator</span> <span class="title">delete</span><span class="params">(<span class="type">void</span>* ptr)</span></span>&#123;&#125; <span class="comment">// 重载了new就需要重载delete  </span></span><br><span class="line"><span class="keyword">public</span>:  </span><br><span class="line">    <span class="built_in">A</span>()&#123;&#125;  </span><br><span class="line">    ~<span class="built_in">A</span>()&#123;&#125;  </span><br><span class="line">&#125;; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>重载类的new操作符，使重载后的new操作符的功能为空。这样就使外层程序无法在堆上分配对象，只可以在栈上分配。</p>
+</blockquote>
 ]]></content>
       <tags>
         <tag>八股文</tag>
@@ -1538,6 +1583,20 @@ j的值被copy到t1。f中的引用参数被绑定带t1,而非j,从而其改变�
       </tags>
   </entry>
   <entry>
+    <title>水晶头连线</title>
+    <url>/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/</url>
+    <content><![CDATA[<h3 id="颜色：">颜色：</h3>
+<blockquote>
+<p>白橙 橙 白绿 蓝 白蓝 绿 白棕 棕</p>
+</blockquote>
+<h3 id="图片：">图片：</h3>
+<p><img src="/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/conn_img1.PNG" alt></p>
+]]></content>
+      <tags>
+        <tag>网络</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>流迭代器</title>
     <url>/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
     <content><![CDATA[<blockquote>
@@ -1555,20 +1614,6 @@ j的值被copy到t1。f中的引用参数被绑定带t1,而非j,从而其改变�
 ]]></content>
       <tags>
         <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>水晶头连线</title>
-    <url>/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/</url>
-    <content><![CDATA[<h3 id="颜色：">颜色：</h3>
-<blockquote>
-<p>白橙 橙 白绿 蓝 白蓝 绿 白棕 棕</p>
-</blockquote>
-<h3 id="图片：">图片：</h3>
-<p><img src="/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/conn_img1.PNG" alt></p>
-]]></content>
-      <tags>
-        <tag>网络</tag>
       </tags>
   </entry>
   <entry>
@@ -1610,6 +1655,29 @@ j的值被copy到t1。f中的引用参数被绑定带t1,而非j,从而其改变�
 </div>]]></content>
       <tags>
         <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>访问控制与继承</title>
+    <url>/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/</url>
+    <content><![CDATA[<h1>C++ primer 第15章 面向对象程序设计</h1>
+<h2 id="访问控制和继承">访问控制和继承</h2>
+<p><img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img1.PNG" alt><br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img2.PNG" alt><br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img3.PNG" alt></p>
+<blockquote>
+<p>基类对象不能访问基类的peotected,private成员<br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_qx.jpg" alt></p>
+</blockquote>
+<p><img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img4.PNG" alt><br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img5.PNG" alt><br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img6.PNG" alt></p>
+<blockquote>
+<p>只有public继承的时候才能使用派生类向基类的转换</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -1688,26 +1756,16 @@ Bear/Raccoon的构造函数将直接初始化其ZooAnimal基类部分</p>
       </tags>
   </entry>
   <entry>
-    <title>访问控制与继承</title>
-    <url>/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/</url>
-    <content><![CDATA[<h1>C++ primer 第15章 面向对象程序设计</h1>
-<h2 id="访问控制和继承">访问控制和继承</h2>
-<p><img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img1.PNG" alt><br>
-<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img2.PNG" alt><br>
-<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img3.PNG" alt></p>
+    <title>面试小知识： 取反符号~</title>
+    <url>/2022/07/13/%E9%9D%A2%E8%AF%95%E5%B0%8F%E7%9F%A5%E8%AF%86%EF%BC%9A-%E5%8F%96%E5%8F%8D%E7%AC%A6%E5%8F%B7/</url>
+    <content><![CDATA[<h3 id="今天在力扣刷题的时候看到这么一个问题：-0-？">今天在力扣刷题的时候看到这么一个问题： ~ 0 = ？</h3>
 <blockquote>
-<p>基类对象不能访问基类的peotected,private成员<br>
-<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_qx.jpg" alt></p>
+<p>按照公式：</p>
 </blockquote>
-<p><img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img4.PNG" alt><br>
-<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img5.PNG" alt><br>
-<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img6.PNG" alt></p>
-<blockquote>
-<p>只有public继承的时候才能使用派生类向基类的转换</p>
-</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">~x = -(x + 1) </span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>C++</tag>
+        <tag>面试</tag>
       </tags>
   </entry>
   <entry>
@@ -1740,19 +1798,6 @@ Bear/Raccoon的构造函数将直接初始化其ZooAnimal基类部分</p>
 ]]></content>
       <tags>
         <tag>C++</tag>
-        <tag>面试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>面试小知识： 取反符号~</title>
-    <url>/2022/07/13/%E9%9D%A2%E8%AF%95%E5%B0%8F%E7%9F%A5%E8%AF%86%EF%BC%9A-%E5%8F%96%E5%8F%8D%E7%AC%A6%E5%8F%B7/</url>
-    <content><![CDATA[<h3 id="今天在力扣刷题的时候看到这么一个问题：-0-？">今天在力扣刷题的时候看到这么一个问题： ~ 0 = ？</h3>
-<blockquote>
-<p>按照公式：</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">~x = -(x + 1) </span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
         <tag>面试</tag>
       </tags>
   </entry>

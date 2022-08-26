@@ -205,6 +205,118 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/08/26/307%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ico.jpg">
+      <meta itemprop="name" content="Willson-Xbort">
+      <meta itemprop="description" content="none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/08/26/307%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/" class="post-title-link" itemprop="url">307场周赛复盘</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-08-26 12:02:17 / 修改时间：20:41:26" itemprop="dateCreated datePublished" datetime="2022-08-26T12:02:17+08:00">2022-08-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>Leetcode 第307场周赛复盘</h1>
+<h2 id="1-赢得比赛需要的最少训练时长">1.赢得比赛需要的最少训练时长</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">你正在参加一场比赛，给你两个 正 整数 initialEnergy 和 initialExperience 分别表示你的初始精力和初始经验。</span><br><span class="line"></span><br><span class="line">另给你两个下标从 0 开始的整数数组 energy 和 experience，长度均为 n 。</span><br><span class="line"></span><br><span class="line">你将会 依次 对上 n 个对手。第 i 个对手的精力和经验分别用 energy[i] 和 experience[i] 表示。当你对上对手时，需要在经验和精力上都 严格 超过对手才能击败他们，然后在可能的情况下继续对上下一个对手。</span><br><span class="line"></span><br><span class="line">击败第 i 个对手会使你的经验 增加 experience[i]，但会将你的精力 减少  energy[i] 。</span><br><span class="line"></span><br><span class="line">在开始比赛前，你可以训练几个小时。每训练一个小时，你可以选择将增加经验增加 1 或者 将精力增加 1 。</span><br><span class="line"></span><br><span class="line">返回击败全部 n 个对手需要训练的 最少 小时数目。</span><br></pre></td></tr></table></figure>
+<h3 id="示例1：">示例1：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">输入：initialEnergy = 5, initialExperience = 3, energy = [1,4,3,2], experience = [2,6,3,1]</span><br><span class="line">输出：8</span><br><span class="line">解释：在 6 小时训练后，你可以将精力提高到 11 ，并且再训练 2 个小时将经验提高到 5 。</span><br><span class="line">按以下顺序与对手比赛：</span><br><span class="line">- 你的精力与经验都超过第 0 个对手，所以获胜。</span><br><span class="line">  精力变为：11 - 1 = 10 ，经验变为：5 + 2 = 7 。</span><br><span class="line">- 你的精力与经验都超过第 1 个对手，所以获胜。</span><br><span class="line">  精力变为：10 - 4 = 6 ，经验变为：7 + 6 = 13 。</span><br><span class="line">- 你的精力与经验都超过第 2 个对手，所以获胜。</span><br><span class="line">  精力变为：6 - 3 = 3 ，经验变为：13 + 3 = 16 。</span><br><span class="line">- 你的精力与经验都超过第 3 个对手，所以获胜。</span><br><span class="line">  精力变为：3 - 2 = 1 ，经验变为：16 + 1 = 17 。</span><br><span class="line">在比赛前进行了 8 小时训练，所以返回 8 。</span><br><span class="line">可以证明不存在更小的答案。</span><br></pre></td></tr></table></figure>
+<h3 id="示例2：">示例2：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：initialEnergy = 2, initialExperience = 4, energy = [1], experience = [3]</span><br><span class="line">输出：0</span><br><span class="line">解释：你不需要额外的精力和经验就可以赢得比赛，所以返回 0 。</span><br></pre></td></tr></table></figure>
+<h3 id="我的题解：">我的题解：</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minNumberOfHours</span><span class="params">(<span class="type">int</span> initialEnergy, <span class="type">int</span> initialExperience, vector&lt;<span class="type">int</span>&gt;&amp; energy, vector&lt;<span class="type">int</span>&gt;&amp; experience)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> energy_len = energy.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> experience_len = energy.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 经验训练次数，精力训练次数</span></span><br><span class="line">        <span class="type">int</span> exp_time_experience = <span class="number">0</span>, exp_time_energy = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 训练</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; experience_len; ) &#123;</span><br><span class="line">            <span class="comment">// 必须是经验和精力严格大于敌人才能击败敌人</span></span><br><span class="line">            <span class="keyword">if</span>(initialExperience &gt; experience[i] &amp;&amp; initialEnergy &gt; energy[i]) &#123;</span><br><span class="line">                initialExperience += experience[i];</span><br><span class="line">                initialEnergy -= energy[i];</span><br><span class="line">                i++;</span><br><span class="line">            &#125; <span class="comment">// 如果精力不大于敌人，我们就训练精力</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(initialEnergy - energy[i] &lt; <span class="number">1</span>)&#123;</span><br><span class="line">                exp_time_energy++;</span><br><span class="line">                initialEnergy++;</span><br><span class="line">            &#125; <span class="comment">// 如果经验不大于敌人，我们就训练经验</span></span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                exp_time_experience++;</span><br><span class="line">                initialExperience++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 最后返回经验和精力的训练次数之和</span></span><br><span class="line">        <span class="keyword">return</span> exp_time_experience + exp_time_energy;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="2-最大回文数字">2.最大回文数字</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">给你一个仅由数字（0 - 9）组成的字符串 num 。</span><br><span class="line"></span><br><span class="line">请你找出能够使用 num 中数字形成的 最大回文 整数，并以字符串形式返回。该整数不含 前导零 。</span><br><span class="line"></span><br><span class="line">注意：</span><br><span class="line"></span><br><span class="line">    你 无需 使用 num 中的所有数字，但你必须使用 至少 一个数字。</span><br><span class="line">    数字可以重新排序。</span><br></pre></td></tr></table></figure>
+<h3 id="示例1：-2">示例1：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：num = &quot;444947137&quot;</span><br><span class="line">输出：&quot;7449447&quot;</span><br><span class="line">解释：</span><br><span class="line">从 &quot;444947137&quot; 中选用数字 &quot;4449477&quot;，可以形成回文整数 &quot;7449447&quot; 。</span><br><span class="line">可以证明 &quot;7449447&quot; 是能够形成的最大回文整数。</span><br></pre></td></tr></table></figure>
+<h3 id="示例2：-2">示例2：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：num = &quot;00009&quot;</span><br><span class="line">输出：&quot;9&quot;</span><br><span class="line">解释：</span><br><span class="line">可以证明 &quot;9&quot; 能够形成的最大回文整数。</span><br><span class="line">注意返回的整数不应含前导零。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>我们要考虑的情况：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">思路： 先构造左半部分，最后填充镜像字符串</span><br><span class="line">1. 前导 ‘0’： 比如 0000。 -&gt; 【字符串长度超过1的情况，你的第一个字母不能是0】</span><br><span class="line">2. 例如 100  ： 如果安装每次取偶数个数填左右，可能变成 010。 -&gt;【从9开始枚举到1，单独考虑0】</span><br><span class="line">3. 考虑从中间填一个字符串 -&gt; [从9开始枚举到0]</span><br><span class="line">4. 最后填充镜像字符串</span><br></pre></td></tr></table></figure>
+<h1>我的题解：</h1>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">largestPalindromic</span><span class="params">(string num)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(num.<span class="built_in">size</span>() == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">cnt</span><span class="params">(<span class="number">10</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> c : num) cnt[c - <span class="string">&#x27;0&#x27;</span>]++;   </span><br><span class="line">        <span class="comment">// 特殊情况 0000</span></span><br><span class="line">        <span class="keyword">if</span>(cnt[<span class="number">0</span>] == num.<span class="built_in">size</span>()) <span class="keyword">return</span> <span class="string">&quot;0&quot;</span>;</span><br><span class="line">        <span class="comment">// 从9枚举到1,单独考虑0</span></span><br><span class="line">        string res = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">9</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="comment">// 找出成对的最大数字</span></span><br><span class="line">             <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; cnt[i] / <span class="number">2</span>; j++)</span><br><span class="line">                res += (i + <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (res.<span class="built_in">size</span>() != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; cnt[<span class="number">0</span>] / <span class="number">2</span>; i++)</span><br><span class="line">                res += <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">        &#125;   </span><br><span class="line">        <span class="comment">// 翻转字符串</span></span><br><span class="line">        string tmp = res;</span><br><span class="line">        <span class="built_in">reverse</span>(tmp.<span class="built_in">begin</span>(), tmp.<span class="built_in">end</span>());</span><br><span class="line">        <span class="comment">// 考虑中间填一个字符，遍历num选择最大数,[0, 9]</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">9</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">if</span>(cnt[i] % <span class="number">2</span> == <span class="number">1</span>) &#123;</span><br><span class="line">                res += i + <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res += tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="感染二叉树需要的总时间">感染二叉树需要的总时间</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">给你一棵二叉树的根节点 root ，二叉树中节点的值 互不相同 。另给你一个整数 start 。在第 0 分钟，感染 将会从值为 start 的节点开始爆发。</span><br><span class="line"></span><br><span class="line">每分钟，如果节点满足以下全部条件，就会被感染：</span><br><span class="line"></span><br><span class="line">    节点此前还没有感染。</span><br><span class="line">    节点与一个已感染节点相邻。</span><br><span class="line"></span><br><span class="line">返回感染整棵树需要的分钟数。</span><br></pre></td></tr></table></figure>
+<h2 id="示例1">示例1</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [1,5,3,null,4,10,6,9,2], start = 3</span><br><span class="line">输出：4</span><br><span class="line">解释：节点按以下过程被感染：</span><br><span class="line">- 第 0 分钟：节点 3</span><br><span class="line">- 第 1 分钟：节点 1、10、6</span><br><span class="line">- 第 2 分钟：节点5</span><br><span class="line">- 第 3 分钟：节点 4</span><br><span class="line">- 第 4 分钟：节点 9 和 2</span><br><span class="line">感染整棵树需要 4 分钟，所以返回 4 。</span><br></pre></td></tr></table></figure>
+<h2 id="示例2">示例2</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [1], start = 1</span><br><span class="line">输出：0</span><br><span class="line">解释：第 0 分钟，树中唯一一个节点处于感染状态，返回 0 。</span><br></pre></td></tr></table></figure>
+<h3 id="题解：（没看懂）">题解：（没看懂）</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * struct TreeNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode *left;</span><br><span class="line"> *     TreeNode *right;</span><br><span class="line"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="line"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="line"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int max = 0;</span><br><span class="line">    int dfs(TreeNode* root, int start, int sum) &#123;</span><br><span class="line">        // 没感染返回-1,为nullptr自然不会被感染</span><br><span class="line">        if(root == NULL) return -1;</span><br><span class="line">        if(sum == -1 &amp;&amp; root-&gt;val == start) &#123; // 本节点为感染节点</span><br><span class="line">            sum = 0;</span><br><span class="line">        &#125;</span><br><span class="line">        if(sum != -1) &#123;</span><br><span class="line">            // 本节点已经感染，传递到子树中</span><br><span class="line">            dfs(root-&gt;left, start, sum + 1);</span><br><span class="line">            dfs(root-&gt;right, start, sum + 1);</span><br><span class="line">            if(sum &gt; max) max = sum;</span><br><span class="line">            return sum + 1;</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            int tem = dfs(root-&gt;left, start, sum);</span><br><span class="line">            if(tem != -1) &#123; // 左子树被感染，传递到右子树</span><br><span class="line">                sum = tem;</span><br><span class="line">                dfs(root-&gt;right, start, sum + 1);</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                sum = dfs(root-&gt;right, start, sum);</span><br><span class="line">                dfs(root-&gt;left, start, sum + 1);</span><br><span class="line">            &#125;   </span><br><span class="line">        &#125;</span><br><span class="line">        if(sum &gt; max) max = sum;</span><br><span class="line">        if(sum != -1) return sum + 1;</span><br><span class="line">        return -1;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    int amountOfTime(TreeNode* root, int start) &#123;</span><br><span class="line">        // 一个节点被感染，可以分为四种方向, 本身感染，从父节点感染，从左子树感染，从右子树感染</span><br><span class="line">        dfs(root, start, -1);</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="找出数组的第-K-大和">找出数组的第 K 大和</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">给你一个整数数组 nums 和一个 正 整数 k 。你可以选择数组的任一 子序列 并且对其全部元素求和。</span><br><span class="line"></span><br><span class="line">数组的 第 k 大和 定义为：可以获得的第 k 个 最大 子序列和（子序列和允许出现重复）</span><br><span class="line"></span><br><span class="line">返回数组的 第 k 大和 。</span><br><span class="line"></span><br><span class="line">子序列是一个可以由其他数组删除某些或不删除元素排生而来的数组，且派生过程不改变剩余元素的顺序。</span><br><span class="line"></span><br><span class="line">注意：空子序列的和视作 0 。</span><br></pre></td></tr></table></figure>
+<h3 id="示例1：-3">示例1：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [2,4,-2], k = 5</span><br><span class="line">输出：2</span><br><span class="line">解释：所有可能获得的子序列和列出如下，按递减顺序排列：</span><br><span class="line">- 6、4、4、2、2、0、0、-2</span><br><span class="line">数组的第 5 大和是 2 。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>子序列：序列中的一个元素可选可不选。</code></p>
+</blockquote>
+<h3 id="示例2：-3">示例2：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,-2,3,4,-10,12], k = 16</span><br><span class="line">输出：10</span><br><span class="line">解释：数组的第 16 大和是 10 。</span><br></pre></td></tr></table></figure>
+<h3 id="方法一、堆">方法一、堆</h3>
+<h4 id="提示一">提示一</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">记 nums 中所有非负数的和为 sum。</span><br><span class="line"></span><br><span class="line">任意一个子序列的和，都等价于从 sum 中减去某些非负数 / 加上某些负数得到。</span><br></pre></td></tr></table></figure>
+<h4 id="提示二">提示二</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">将 nums 所有数取绝对值，这样可以统一成从 sum 中减去某些数。</span><br><span class="line"></span><br><span class="line">我们需要按照从小到大的顺序取出 sum 要减去的子序列，如何做到？</span><br></pre></td></tr></table></figure>
+<h4 id="提示三">提示三</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">将 nums 所有数取绝对值后排序，然后用最大堆来实现。</span><br></pre></td></tr></table></figure>
+<h4 id="提示四">提示四</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">具体来说，最大堆维护子序列的和，以及（后续需要减去的）数字的下标 i。</span><br><span class="line"></span><br><span class="line">初始时，将 sum 和下标 0 入堆。</span><br><span class="line"></span><br><span class="line">每次弹出堆顶时，将子序列的和减去 nums[i]，并考虑是否保留 nums[i−1]，从而满足子序列每个元素「选或不选」的要求。</span><br><span class="line"></span><br><span class="line">这一做法可以不重不漏地生成所有子序列的和，再配合堆，就可以从大到小生成。</span><br><span class="line">循环 k−1k-1k−1 次后，堆顶的和就是答案。</span><br></pre></td></tr></table></figure>
+<h4 id="提示五">提示五</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> 1. 从最大的子序列和来考虑，那么这个序列和就是所有正数的和 sum。</span><br><span class="line"> 2. 怎么找到第二大的子序列和？从最大的子序列和中减去最小的正数或加上最大的负数。</span><br><span class="line"> 3. 为了统一操作，将负数取反，然后排序，每次取最小的数，得到的就是最小的正数或最大的负数。</span><br><span class="line"> sum 中减去它，就可以得到下一个更小的子序列和。</span><br><span class="line"> 4. 被减去的数们实际上也是组成了一个子序列。按照生成子序列的模板，就是依次对每个数，考虑</span><br><span class="line"> 选择它，还是不选择它。</span><br><span class="line"></span><br><span class="line">这样分析之后，就可以回答大家的两个问题：</span><br><span class="line"></span><br><span class="line">Q：怎么保证 pq 的顶就是答案？A：因为是用当前值最大和减去最小值，所以得到的一定是下一个略小的最大和。</span><br><span class="line">Q：保留和不保留 nums[i-1] 是不是写反了？A：是否保留指的是在被 *减去* 的子序列中是否保留此数。所以，如果不保留的话，反而是要加回来，因为它不该被从 sum 里减去。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="解法：">解法：</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">kSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="type">long</span> sum = <span class="number">0L</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> &amp;x : nums)</span><br><span class="line">            <span class="keyword">if</span> (x &gt;= <span class="number">0</span>) sum += x;</span><br><span class="line">            <span class="keyword">else</span> x = -x;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        priority_queue&lt;pair&lt;<span class="type">long</span>, <span class="type">int</span>&gt;&gt; pq;</span><br><span class="line">        pq.<span class="built_in">emplace</span>(sum, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">while</span> (--k) &#123;</span><br><span class="line">            <span class="keyword">auto</span>[sum, i] = pq.<span class="built_in">top</span>();</span><br><span class="line">            pq.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">if</span> (i &lt; nums.<span class="built_in">size</span>()) &#123;</span><br><span class="line">                pq.<span class="built_in">emplace</span>(sum - nums[i], i + <span class="number">1</span>); <span class="comment">// 保留 nums[i-1]</span></span><br><span class="line">                <span class="keyword">if</span> (i) pq.<span class="built_in">emplace</span>(sum - nums[i] + nums[i - <span class="number">1</span>], i + <span class="number">1</span>); <span class="comment">// 不保留 nums[i-1]，把之前减去的加回来</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> pq.<span class="built_in">top</span>().first;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <!-- after add -->
+    
+       <!-- after add finish -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/08/23/%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1435,78 +1547,10 @@ Bear/Raccoon的构造函数将直接初始化其ZooAnimal基类部分</p>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/26/Linux-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%90%86%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ico.jpg">
-      <meta itemprop="name" content="Willson-Xbort">
-      <meta itemprop="description" content="none">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/07/26/Linux-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">Linux 高性能服务器理解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-07-26 20:51:48" itemprop="dateCreated datePublished" datetime="2022-07-26T20:51:48+08:00">2022-07-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-07-27 19:41:23" itemprop="dateModified" datetime="2022-07-27T19:41:23+08:00">2022-07-27</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-
-    <!-- after add -->
-    
-       <!-- after add finish -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1574,7 +1618,7 @@ Bear/Raccoon的构造函数将直接初始化其ZooAnimal基类部分</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

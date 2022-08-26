@@ -80,29 +80,13 @@
       </tags>
   </entry>
   <entry>
-    <title>尾置返回类型</title>
-    <url>/2022/06/30/Trailing-return-type/</url>
-    <content><![CDATA[<h3 id="C-Primer-第五版-第六章-P221-P224">C++ Primer 第五版 第六章 P221~P224</h3>
-<blockquote>
-<p>函数指针P221</p>
-</blockquote>
-<p><img src="/2022/06/30/Trailing-return-type/screen_img1.PNG" alt><br>
-<img src="/2022/06/30/Trailing-return-type/screen_img2.PNG" alt><br>
-<img src="/2022/06/30/Trailing-return-type/screen_img3.PNG" alt><br>
-<img src="/2022/06/30/Trailing-return-type/screen_img4.PNG" alt><br>
-<img src="/2022/06/30/Trailing-return-type/screen_img5.PNG" alt><br>
-<img src="/2022/06/30/Trailing-return-type/screen_img6.PNG" alt></p>
-<blockquote>
-<p>代码示例</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 类型别名</span><br><span class="line">typedef string str_arr[10];</span><br><span class="line">str_arr&amp; fun();</span><br><span class="line"></span><br><span class="line">// 尾置返回类型</span><br><span class="line">auto fun()-&gt;string(&amp;)[10];</span><br><span class="line"></span><br><span class="line">// 使用decltype关键字</span><br><span class="line">string s[10];</span><br><span class="line">decltype(s)&amp; fun();</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>简单的示例：</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">// print containers like vector, deque, list, etc.</span><br><span class="line">// 可以看到这里也使用了尾置返回类型，但是由于类型并非是函数类型，因此没有那么复杂</span><br><span class="line">template&lt;typename Sequence&gt;</span><br><span class="line">auto println(Sequence const&amp; seq) -&gt; std::ostream&amp;</span><br><span class="line">&#123;</span><br><span class="line">    for (auto const&amp; elem : seq) </span><br><span class="line">        std::cout &lt;&lt; elem &lt;&lt; &quot; &quot;;</span><br><span class="line">    return std::cout &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">auto eliminate_duplicates(std::vector&lt;std::string&gt; &amp;vs) -&gt; std::vector&lt;std::string&gt;&amp;</span><br><span class="line">&#123;</span><br><span class="line">    std::sort(vs.begin(), vs.end());</span><br><span class="line">    println(vs);</span><br><span class="line"></span><br><span class="line">    auto new_end = std::unique(vs.begin(), vs.end());</span><br><span class="line">    println(vs);</span><br><span class="line"></span><br><span class="line">    vs.erase(new_end, vs.end());</span><br><span class="line">    return vs;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    std::vector&lt;std::string&gt; vs&#123; &quot;a&quot;, &quot;v&quot;, &quot;a&quot;, &quot;s&quot;, &quot;v&quot;, &quot;a&quot;, &quot;a&quot; &#125;;</span><br><span class="line">    println(vs);</span><br><span class="line">    println(eliminate_duplicates(vs));</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
+    <title>Linux 高性能服务器理解</title>
+    <url>/2022/07/26/Linux-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[]]></content>
       <tags>
+        <tag>Linux</tag>
         <tag>C++</tag>
+        <tag>socket</tag>
       </tags>
   </entry>
   <entry>
@@ -135,13 +119,29 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux 高性能服务器理解</title>
-    <url>/2022/07/26/Linux-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%90%86%E8%A7%A3/</url>
-    <content><![CDATA[]]></content>
+    <title>尾置返回类型</title>
+    <url>/2022/06/30/Trailing-return-type/</url>
+    <content><![CDATA[<h3 id="C-Primer-第五版-第六章-P221-P224">C++ Primer 第五版 第六章 P221~P224</h3>
+<blockquote>
+<p>函数指针P221</p>
+</blockquote>
+<p><img src="/2022/06/30/Trailing-return-type/screen_img1.PNG" alt><br>
+<img src="/2022/06/30/Trailing-return-type/screen_img2.PNG" alt><br>
+<img src="/2022/06/30/Trailing-return-type/screen_img3.PNG" alt><br>
+<img src="/2022/06/30/Trailing-return-type/screen_img4.PNG" alt><br>
+<img src="/2022/06/30/Trailing-return-type/screen_img5.PNG" alt><br>
+<img src="/2022/06/30/Trailing-return-type/screen_img6.PNG" alt></p>
+<blockquote>
+<p>代码示例</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 类型别名</span><br><span class="line">typedef string str_arr[10];</span><br><span class="line">str_arr&amp; fun();</span><br><span class="line"></span><br><span class="line">// 尾置返回类型</span><br><span class="line">auto fun()-&gt;string(&amp;)[10];</span><br><span class="line"></span><br><span class="line">// 使用decltype关键字</span><br><span class="line">string s[10];</span><br><span class="line">decltype(s)&amp; fun();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>简单的示例：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">// print containers like vector, deque, list, etc.</span><br><span class="line">// 可以看到这里也使用了尾置返回类型，但是由于类型并非是函数类型，因此没有那么复杂</span><br><span class="line">template&lt;typename Sequence&gt;</span><br><span class="line">auto println(Sequence const&amp; seq) -&gt; std::ostream&amp;</span><br><span class="line">&#123;</span><br><span class="line">    for (auto const&amp; elem : seq) </span><br><span class="line">        std::cout &lt;&lt; elem &lt;&lt; &quot; &quot;;</span><br><span class="line">    return std::cout &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">auto eliminate_duplicates(std::vector&lt;std::string&gt; &amp;vs) -&gt; std::vector&lt;std::string&gt;&amp;</span><br><span class="line">&#123;</span><br><span class="line">    std::sort(vs.begin(), vs.end());</span><br><span class="line">    println(vs);</span><br><span class="line"></span><br><span class="line">    auto new_end = std::unique(vs.begin(), vs.end());</span><br><span class="line">    println(vs);</span><br><span class="line"></span><br><span class="line">    vs.erase(new_end, vs.end());</span><br><span class="line">    return vs;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    std::vector&lt;std::string&gt; vs&#123; &quot;a&quot;, &quot;v&quot;, &quot;a&quot;, &quot;s&quot;, &quot;v&quot;, &quot;a&quot;, &quot;a&quot; &#125;;</span><br><span class="line">    println(vs);</span><br><span class="line">    println(eliminate_duplicates(vs));</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
       <tags>
-        <tag>Linux</tag>
         <tag>C++</tag>
-        <tag>socket</tag>
       </tags>
   </entry>
   <entry>
@@ -247,19 +247,6 @@
       </tags>
   </entry>
   <entry>
-    <title>删除重复元素</title>
-    <url>/2022/07/10/delete-duplicate-elements/</url>
-    <content><![CDATA[<h3 id="快速入手">快速入手</h3>
-<h4 id="代码如下：">代码如下：</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">void elimdups(std::vector&lt;std::string&gt;&amp; vs)</span><br><span class="line">&#123;</span><br><span class="line">    std::sort(vs.begin(), vs.end());</span><br><span class="line">    auto new_end = std::unique(vs.begin(), vs.end());</span><br><span class="line">    // 删除重复</span><br><span class="line">    vs.erase(new_end, vs.end());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="思路：先用std-sort-排序，通过std-unique-将重复元素放入容器末尾，最后擦除">思路：先用std::sort()排序，通过std::unique() 将重复元素放入容器末尾，最后擦除</h4>
-]]></content>
-      <tags>
-        <tag>算法</tag>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>const 和 static</title>
     <url>/2022/07/27/const-%E5%92%8C-static/</url>
     <content><![CDATA[<blockquote>
@@ -334,6 +321,37 @@
       </tags>
   </entry>
   <entry>
+    <title>删除重复元素</title>
+    <url>/2022/07/10/delete-duplicate-elements/</url>
+    <content><![CDATA[<h3 id="快速入手">快速入手</h3>
+<h4 id="代码如下：">代码如下：</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">void elimdups(std::vector&lt;std::string&gt;&amp; vs)</span><br><span class="line">&#123;</span><br><span class="line">    std::sort(vs.begin(), vs.end());</span><br><span class="line">    auto new_end = std::unique(vs.begin(), vs.end());</span><br><span class="line">    // 删除重复</span><br><span class="line">    vs.erase(new_end, vs.end());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="思路：先用std-sort-排序，通过std-unique-将重复元素放入容器末尾，最后擦除">思路：先用std::sort()排序，通过std::unique() 将重复元素放入容器末尾，最后擦除</h4>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git使用</title>
+    <url>/2022/08/08/git%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h1>快速入门</h1>
+<h2 id="1-找到要上传的文件夹（Win10">1. 找到要上传的文件夹（Win10)</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.1 右击出现 Git Bash Here</span><br><span class="line">1.2 配置好邮箱，用户名，密码</span><br><span class="line">git config --global user.name &quot;xxx&quot;</span><br><span class="line">git config --global user.email &quot;xxx&quot;</span><br><span class="line">git config --global user.password &quot;xxx&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="2-基本指令">2.基本指令</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 初始化git, 会出现.git的文件夹</span><br><span class="line">git init</span><br><span class="line">// 可加可不加</span><br><span class="line">git add README.md </span><br><span class="line">// git commit 命令将暂存区内容添加到本地仓库</span><br><span class="line">git commit -m &quot;first commit&quot; </span><br><span class="line">// 创建一个新的本地分支main, 不进行切换</span><br><span class="line">git branch -M main</span><br><span class="line">// 添加远程仓库地址</span><br><span class="line">git remote add origin https://github.com/Wilson-Xbort/test.git </span><br><span class="line">// 将本地的 main 分支推送到 origin 主机的 main 分支。</span><br><span class="line">git push -u origin main</span><br><span class="line">// 压缩成.bundle</span><br><span class="line">git bundle create xxx.bundle HEAD main</span><br><span class="line">// 验证校验是否合法</span><br><span class="line">git bundle verify ./xxx.bundle</span><br><span class="line">// 删除远程库</span><br><span class="line">git remote rm origin</span><br><span class="line">// 解压.bundle</span><br><span class="line">git clone xxx.bundle</span><br></pre></td></tr></table></figure>
+<h2 id="3-error和解决方式">3. error和解决方式</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. error: failed to push some refs to &#x27;https://github.com/xxx/xxx.git&#x27;</span><br><span class="line">2. Git:nothing added to commit but untracked files present</span><br><span class="line">3. fatal: Updating an unborn branch with changes added to the index.</span><br></pre></td></tr></table></figure>
+<h2 id="解决方法">解决方法</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add -A 或者 git add --all</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>工具</tag>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>安装</title>
     <url>/2022/05/31/install/</url>
     <content><![CDATA[<h2 id="快速开始-win-下的安装）">快速开始(win 下的安装）</h2>
@@ -374,24 +392,6 @@
 ]]></content>
       <tags>
         <tag>安装</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git使用</title>
-    <url>/2022/08/08/git%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h1>快速入门</h1>
-<h2 id="1-找到要上传的文件夹（Win10">1. 找到要上传的文件夹（Win10)</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.1 右击出现 Git Bash Here</span><br><span class="line">1.2 配置好邮箱，用户名，密码</span><br><span class="line">git config --global user.name &quot;xxx&quot;</span><br><span class="line">git config --global user.email &quot;xxx&quot;</span><br><span class="line">git config --global user.password &quot;xxx&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="2-基本指令">2.基本指令</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 初始化git, 会出现.git的文件夹</span><br><span class="line">git init</span><br><span class="line">// 可加可不加</span><br><span class="line">git add README.md </span><br><span class="line">// git commit 命令将暂存区内容添加到本地仓库</span><br><span class="line">git commit -m &quot;first commit&quot; </span><br><span class="line">// 创建一个新的本地分支main, 不进行切换</span><br><span class="line">git branch -M main</span><br><span class="line">// 添加远程仓库地址</span><br><span class="line">git remote add origin https://github.com/Wilson-Xbort/test.git </span><br><span class="line">// 将本地的 main 分支推送到 origin 主机的 main 分支。</span><br><span class="line">git push -u origin main</span><br><span class="line">// 压缩成.bundle</span><br><span class="line">git bundle create xxx.bundle HEAD main</span><br><span class="line">// 验证校验是否合法</span><br><span class="line">git bundle verify ./xxx.bundle</span><br><span class="line">// 删除远程库</span><br><span class="line">git remote rm origin</span><br><span class="line">// 解压.bundle</span><br><span class="line">git clone xxx.bundle</span><br></pre></td></tr></table></figure>
-<h2 id="3-error和解决方式">3. error和解决方式</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. error: failed to push some refs to &#x27;https://github.com/xxx/xxx.git&#x27;</span><br><span class="line">2. Git:nothing added to commit but untracked files present</span><br><span class="line">3. fatal: Updating an unborn branch with changes added to the index.</span><br></pre></td></tr></table></figure>
-<h2 id="解决方法">解决方法</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add -A 或者 git add --all</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>工具</tag>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -1583,20 +1583,6 @@ j的值被copy到t1。f中的引用参数被绑定带t1,而非j,从而其改变�
       </tags>
   </entry>
   <entry>
-    <title>水晶头连线</title>
-    <url>/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/</url>
-    <content><![CDATA[<h3 id="颜色：">颜色：</h3>
-<blockquote>
-<p>白橙 橙 白绿 蓝 白蓝 绿 白棕 棕</p>
-</blockquote>
-<h3 id="图片：">图片：</h3>
-<p><img src="/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/conn_img1.PNG" alt></p>
-]]></content>
-      <tags>
-        <tag>网络</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>流迭代器</title>
     <url>/2022/07/16/%E6%B5%81%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
     <content><![CDATA[<blockquote>
@@ -1614,6 +1600,20 @@ j的值被copy到t1。f中的引用参数被绑定带t1,而非j,从而其改变�
 ]]></content>
       <tags>
         <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>水晶头连线</title>
+    <url>/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/</url>
+    <content><![CDATA[<h3 id="颜色：">颜色：</h3>
+<blockquote>
+<p>白橙 橙 白绿 蓝 白蓝 绿 白棕 棕</p>
+</blockquote>
+<h3 id="图片：">图片：</h3>
+<p><img src="/2022/07/10/%E6%B0%B4%E6%99%B6%E5%A4%B4%E8%BF%9E%E7%BA%BF/conn_img1.PNG" alt></p>
+]]></content>
+      <tags>
+        <tag>网络</tag>
       </tags>
   </entry>
   <entry>
@@ -1655,29 +1655,6 @@ j的值被copy到t1。f中的引用参数被绑定带t1,而非j,从而其改变�
 </div>]]></content>
       <tags>
         <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>访问控制与继承</title>
-    <url>/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/</url>
-    <content><![CDATA[<h1>C++ primer 第15章 面向对象程序设计</h1>
-<h2 id="访问控制和继承">访问控制和继承</h2>
-<p><img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img1.PNG" alt><br>
-<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img2.PNG" alt><br>
-<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img3.PNG" alt></p>
-<blockquote>
-<p>基类对象不能访问基类的peotected,private成员<br>
-<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_qx.jpg" alt></p>
-</blockquote>
-<p><img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img4.PNG" alt><br>
-<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img5.PNG" alt><br>
-<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img6.PNG" alt></p>
-<blockquote>
-<p>只有public继承的时候才能使用派生类向基类的转换</p>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -1756,16 +1733,26 @@ Bear/Raccoon的构造函数将直接初始化其ZooAnimal基类部分</p>
       </tags>
   </entry>
   <entry>
-    <title>面试小知识： 取反符号~</title>
-    <url>/2022/07/13/%E9%9D%A2%E8%AF%95%E5%B0%8F%E7%9F%A5%E8%AF%86%EF%BC%9A-%E5%8F%96%E5%8F%8D%E7%AC%A6%E5%8F%B7/</url>
-    <content><![CDATA[<h3 id="今天在力扣刷题的时候看到这么一个问题：-0-？">今天在力扣刷题的时候看到这么一个问题： ~ 0 = ？</h3>
+    <title>访问控制与继承</title>
+    <url>/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/</url>
+    <content><![CDATA[<h1>C++ primer 第15章 面向对象程序设计</h1>
+<h2 id="访问控制和继承">访问控制和继承</h2>
+<p><img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img1.PNG" alt><br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img2.PNG" alt><br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img3.PNG" alt></p>
 <blockquote>
-<p>按照公式：</p>
+<p>基类对象不能访问基类的peotected,private成员<br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_qx.jpg" alt></p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">~x = -(x + 1) </span><br></pre></td></tr></table></figure>
+<p><img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img4.PNG" alt><br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img5.PNG" alt><br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img6.PNG" alt></p>
+<blockquote>
+<p>只有public继承的时候才能使用派生类向基类的转换</p>
+</blockquote>
 ]]></content>
       <tags>
-        <tag>面试</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -1798,6 +1785,19 @@ Bear/Raccoon的构造函数将直接初始化其ZooAnimal基类部分</p>
 ]]></content>
       <tags>
         <tag>C++</tag>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面试小知识： 取反符号~</title>
+    <url>/2022/07/13/%E9%9D%A2%E8%AF%95%E5%B0%8F%E7%9F%A5%E8%AF%86%EF%BC%9A-%E5%8F%96%E5%8F%8D%E7%AC%A6%E5%8F%B7/</url>
+    <content><![CDATA[<h3 id="今天在力扣刷题的时候看到这么一个问题：-0-？">今天在力扣刷题的时候看到这么一个问题： ~ 0 = ？</h3>
+<blockquote>
+<p>按照公式：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">~x = -(x + 1) </span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
         <tag>面试</tag>
       </tags>
   </entry>

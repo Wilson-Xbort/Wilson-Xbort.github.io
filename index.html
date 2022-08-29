@@ -205,6 +205,112 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/08/29/leetcode-%E5%91%A8%E8%B5%9B308/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ico.jpg">
+      <meta itemprop="name" content="Willson-Xbort">
+      <meta itemprop="description" content="none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/08/29/leetcode-%E5%91%A8%E8%B5%9B308/" class="post-title-link" itemprop="url">leetcode 周赛308</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-08-29 10:15:44 / 修改时间：20:19:34" itemprop="dateCreated datePublished" datetime="2022-08-29T10:15:44+08:00">2022-08-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>Leetcode 周赛308复盘</h1>
+<h2 id="1-和有限的最长子序列">1. 和有限的最长子序列</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">给你一个长度为 n 的整数数组 nums ，和一个长度为 m 的整数数组 queries 。</span><br><span class="line"></span><br><span class="line">返回一个长度为 m 的数组 answer ，其中 answer[i] 是 nums 中 元素之和小于等于 queries[i] 的 子序列 的 最大 长度  。</span><br><span class="line"></span><br><span class="line">子序列 是由一个数组删除某些元素（也可以不删除）但不改变剩余元素顺序得到的一个数组。</span><br></pre></td></tr></table></figure>
+<h3 id="示例1：-4">示例1：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [4,5,2,1], queries = [3,10,21]</span><br><span class="line">输出：[2,3,4]</span><br><span class="line">解释：queries 对应的 answer 如下：</span><br><span class="line">- 子序列 [2,1] 的和小于或等于 3 。可以证明满足题目要求的子序列的最大长度是 2 ，所以 answer[0] = 2 。</span><br><span class="line">- 子序列 [4,5,1] 的和小于或等于 10 。可以证明满足题目要求的子序列的最大长度是 3 ，所以 answer[1] = 3 。</span><br><span class="line">- 子序列 [4,5,2,1] 的和小于或等于 21 。可以证明满足题目要求的子序列的最大长度是 4 ，所以 answer[2] = 4 。</span><br></pre></td></tr></table></figure>
+<h3 id="示例2：-4">示例2：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [2,3,4,5], queries = [1]</span><br><span class="line">输出：[0]</span><br><span class="line">解释：空子序列是唯一一个满足元素和小于或等于 1 的子序列，所以 answer[0] = 0 。</span><br></pre></td></tr></table></figure>
+<h3 id="解析：">解析：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 关键字： 子序列，求和</span><br><span class="line">2. 要求的和 与数组元素在数组中的顺序无关 =&gt; 先对数组排序</span><br><span class="line">3. 前缀和 ： 前缀和就是从位置1到位置i这个区间内的所有的数字之和。</span><br><span class="line">4. 循环遍历</span><br></pre></td></tr></table></figure>
+<h3 id="代码：-4">代码：</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">answerQueries</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, vector&lt;<span class="type">int</span>&gt;&amp; queries)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> m = queries.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">        <span class="comment">// 求前缀和</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            nums[i] += nums[i - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="type">int</span> p = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (queries[i] &gt;= nums[j])</span><br><span class="line">                    p++;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            res.<span class="built_in">push_back</span>(p);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-给你一个包含若干星号-的字符串-s-。">2.给你一个包含若干星号 * 的字符串 s 。</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">在一步操作中，你可以：</span><br><span class="line"></span><br><span class="line">    选中 s 中的一个星号。</span><br><span class="line">    移除星号 左侧 最近的那个 非星号 字符，并移除该星号自身。</span><br><span class="line"></span><br><span class="line">返回移除 所有 星号之后的字符串。</span><br><span class="line"></span><br><span class="line">注意：</span><br><span class="line"></span><br><span class="line">    生成的输入保证总是可以执行题面中描述的操作。</span><br><span class="line">    可以证明结果字符串是唯一的。</span><br></pre></td></tr></table></figure>
+<h3 id="示例1-2">示例1:</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;leet**cod*e&quot;</span><br><span class="line">输出：&quot;lecoe&quot;</span><br><span class="line">解释：从左到右执行移除操作：</span><br><span class="line">- 距离第 1 个星号最近的字符是 &quot;leet**cod*e&quot; 中的 &#x27;t&#x27; ，s 变为 &quot;lee*cod*e&quot; 。</span><br><span class="line">- 距离第 2 个星号最近的字符是 &quot;lee*cod*e&quot; 中的 &#x27;e&#x27; ，s 变为 &quot;lecod*e&quot; 。</span><br><span class="line">- 距离第 3 个星号最近的字符是 &quot;lecod*e&quot; 中的 &#x27;d&#x27; ，s 变为 &quot;lecoe&quot; 。</span><br><span class="line">不存在其他星号，返回 &quot;lecoe&quot; 。</span><br></pre></td></tr></table></figure>
+<h3 id="示例2-2">示例2:</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;erase*****&quot;</span><br><span class="line">输出：&quot;&quot;</span><br><span class="line">解释：整个字符串都会被移除，所以返回空字符串。</span><br></pre></td></tr></table></figure>
+<h3 id="解析：-2">解析：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 使用栈将非*的元素压入栈中</span><br><span class="line">2. 遇到*，出栈一个元素，如果栈为空，直接返回 &quot;&quot;</span><br><span class="line">3. 反转字符串 reserve</span><br></pre></td></tr></table></figure>
+<h3 id="代码：-5">代码：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">string removeStars(string s) &#123;</span><br><span class="line">        int n = s.size();</span><br><span class="line">        stack&lt;char&gt; ss;</span><br><span class="line">        for(int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            if(s[i] != &#x27;*&#x27;) ss.push(s[i]);</span><br><span class="line">            else &#123;</span><br><span class="line">                if(!ss.empty()) </span><br><span class="line">                    ss.pop();</span><br><span class="line">                </span><br><span class="line">                else </span><br><span class="line">                    return &quot;&quot;;  </span><br><span class="line">            &#125;   </span><br><span class="line">        &#125;</span><br><span class="line">        string res;</span><br><span class="line">        while(!ss.empty()) &#123;</span><br><span class="line">            res += ss.top();</span><br><span class="line">            ss.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        reverse(res.begin(), res.end());</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-收集垃圾的最少总时间">3.收集垃圾的最少总时间</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">给你一个下标从 0 开始的字符串数组 garbage ，其中 garbage[i] 表示第 i 个房子的垃圾集合。garbage[i] 只包含字符 &#x27;M&#x27; ，&#x27;P&#x27; 和 &#x27;G&#x27; ，但可能包含多个相同字符，每个字符分别表示一单位的金属、纸和玻璃。垃圾车收拾 一 单位的任何一种垃圾都需要花费 1 分钟。</span><br><span class="line"></span><br><span class="line">同时给你一个下标从 0 开始的整数数组 travel ，其中 travel[i] 是垃圾车从房子 i 行驶到房子 i + 1 需要的分钟数。</span><br><span class="line"></span><br><span class="line">城市里总共有三辆垃圾车，分别收拾三种垃圾。每辆垃圾车都从房子 0 出发，按顺序 到达每一栋房子。但它们 不是必须 到达所有的房子。</span><br><span class="line"></span><br><span class="line">任何时刻只有 一辆 垃圾车处在使用状态。当一辆垃圾车在行驶或者收拾垃圾的时候，另外两辆车 不能 做任何事情。</span><br><span class="line"></span><br><span class="line">请你返回收拾完所有垃圾需要花费的 最少 总分钟数。</span><br></pre></td></tr></table></figure>
+<h3 id="示例1-3">示例1:</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">输入：garbage = [&quot;G&quot;,&quot;P&quot;,&quot;GP&quot;,&quot;GG&quot;], travel = [2,4,3]</span><br><span class="line">输出：21</span><br><span class="line">解释：</span><br><span class="line">收拾纸的垃圾车：</span><br><span class="line">1. 从房子 0 行驶到房子 1</span><br><span class="line">2. 收拾房子 1 的纸垃圾</span><br><span class="line">3. 从房子 1 行驶到房子 2</span><br><span class="line">4. 收拾房子 2 的纸垃圾</span><br><span class="line">收拾纸的垃圾车总共花费 8 分钟收拾完所有的纸垃圾。</span><br><span class="line">收拾玻璃的垃圾车：</span><br><span class="line">1. 收拾房子 0 的玻璃垃圾</span><br><span class="line">2. 从房子 0 行驶到房子 1</span><br><span class="line">3. 从房子 1 行驶到房子 2</span><br><span class="line">4. 收拾房子 2 的玻璃垃圾</span><br><span class="line">5. 从房子 2 行驶到房子 3</span><br><span class="line">6. 收拾房子 3 的玻璃垃圾</span><br><span class="line">收拾玻璃的垃圾车总共花费 13 分钟收拾完所有的玻璃垃圾。</span><br><span class="line">由于没有金属垃圾，收拾金属的垃圾车不需要花费任何时间。</span><br><span class="line">所以总共花费 8 + 13 = 21 分钟收拾完所有垃圾。</span><br></pre></td></tr></table></figure>
+<h3 id="示例2：-5">示例2：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：garbage = [&quot;MMM&quot;,&quot;PGM&quot;,&quot;GP&quot;], travel = [3,10]</span><br><span class="line">输出：37</span><br><span class="line">解释：</span><br><span class="line">收拾金属的垃圾车花费 7 分钟收拾完所有的金属垃圾。</span><br><span class="line">收拾纸的垃圾车花费 15 分钟收拾完所有的纸垃圾。</span><br><span class="line">收拾玻璃的垃圾车花费 15 分钟收拾完所有的玻璃垃圾。</span><br><span class="line">总共花费 7 + 15 + 15 = 37 分钟收拾完所有的垃圾。</span><br></pre></td></tr></table></figure>
+<h3 id="解题思路：">解题思路：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 只要算出收集所有垃圾需要的时间 =&gt; garbage 所有字符串长度之和</span><br><span class="line">2. 考虑在房子之间移动的时间/距离之和 （比如M，只需要找到最后出现的下标就行)</span><br><span class="line">3. 加起来就是答案</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">garbageCollection</span><span class="params">(vector&lt;string&gt;&amp; garbage, vector&lt;<span class="type">int</span>&gt;&amp; travel)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> len = garbage.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        unordered_set&lt;<span class="type">char</span>&gt; s;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = len - <span class="number">1</span>; i &gt;= <span class="number">0</span> ; i--) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">const</span> <span class="type">char</span> &amp; c : garbage[i]) &#123;</span><br><span class="line">                <span class="keyword">if</span> (s.<span class="built_in">find</span>(c) == s.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                    s.<span class="built_in">insert</span>(c);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 收集所有垃圾需要的时间</span></span><br><span class="line">            res += garbage[i].<span class="built_in">size</span>();</span><br><span class="line">            <span class="comment">// 最后出现的下标 * travel[下标 - 1]</span></span><br><span class="line">            res += i &gt; <span class="number">0</span> ? s.<span class="built_in">size</span>() * travel[i - <span class="number">1</span>] : <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-给定条件下构造矩阵">4.给定条件下构造矩阵</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">给你一个 正 整数 k ，同时给你：</span><br><span class="line"></span><br><span class="line">    一个大小为 n 的二维整数数组 rowConditions ，其中 rowConditions[i] = [abovei, belowi] 和</span><br><span class="line">    一个大小为 m 的二维整数数组 colConditions ，其中 colConditions[i] = [lefti, righti] 。</span><br><span class="line"></span><br><span class="line">两个数组里的整数都是 1 到 k 之间的数字。</span><br><span class="line"></span><br><span class="line">你需要构造一个 k x k 的矩阵，1 到 k 每个数字需要 恰好出现一次 。剩余的数字都是 0 。</span><br><span class="line"></span><br><span class="line">矩阵还需要满足以下条件：</span><br><span class="line"></span><br><span class="line">    对于所有 0 到 n - 1 之间的下标 i ，数字 abovei 所在的 行 必须在数字 belowi 所在行的上面。</span><br><span class="line">    对于所有 0 到 m - 1 之间的下标 i ，数字 lefti 所在的 列 必须在数字 righti 所在列的左边。</span><br><span class="line"></span><br><span class="line">返回满足上述要求的 任意 矩阵。如果不存在答案，返回一个空的矩阵。</span><br></pre></td></tr></table></figure>
+<h3 id="示例1：-5">示例1：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入：k = 3, rowConditions = [[1,2],[3,2]], colConditions = [[2,1],[3,2]]</span><br><span class="line">输出：[[3,0,0],[0,0,1],[0,2,0]]</span><br><span class="line">解释：上图为一个符合所有条件的矩阵。</span><br><span class="line">行要求如下：</span><br><span class="line">- 数字 1 在第 1 行，数字 2 在第 2 行，1 在 2 的上面。</span><br><span class="line">- 数字 3 在第 0 行，数字 2 在第 2 行，3 在 2 的上面。</span><br><span class="line">列要求如下：</span><br><span class="line">- 数字 2 在第 1 列，数字 1 在第 2 列，2 在 1 的左边。</span><br><span class="line">- 数字 3 在第 0 列，数字 2 在第 1 列，3 在 2 的左边。</span><br><span class="line">注意，可能有多种正确的答案。</span><br></pre></td></tr></table></figure>
+<h3 id="示例2：-6">示例2：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：k = 3, rowConditions = [[1,2],[2,3],[3,1],[2,3]], colConditions = [[2,1]]</span><br><span class="line">输出：[]</span><br><span class="line">解释：由前两个条件可以得到 3 在 1 的下面，但第三个条件是 3 在 1 的上面。</span><br><span class="line">没有符合条件的矩阵存在，所以我们返回空矩阵。</span><br></pre></td></tr></table></figure>
+<h3 id="提示1：">提示1：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">数字之间的约束只发生在行与行、列于列，而行与列之间没有任何约束。</span><br><span class="line"></span><br><span class="line">因此我们可以分别处理行与列中数字的相对顺序，如何求出这个相对顺序呢？</span><br></pre></td></tr></table></figure>
+<h3 id="提示2：">提示2：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">拓扑排序。</span><br></pre></td></tr></table></figure>
+<h3 id="提示3：">提示3：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">对于 rowConditions，我们可以从 abovei​ 向 belowi 连一条有向边，得到一张有向图。在这张图上跑拓扑排序，得到的拓扑序就是行与行中数字的相对顺序，这样我们就知道了每一行要填哪个数字。如果得到的拓扑序长度不足 kkk，说明图中有环，无法构造，答案不存在。</span><br><span class="line"></span><br><span class="line">对 colConditions 也执行上述过程，得到每一列要填哪个数字，进而得到每个数字要填到哪一列中，这样我们就知道每一行的数字要填到哪一列了。</span><br></pre></td></tr></table></figure>
+<h3 id="代码：-6">代码：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line"></span><br><span class="line">    vector&lt;int&gt; topo_sort(int k, vector&lt;vector&lt;int&gt;&gt;&amp; edges) &#123;</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; g(k);</span><br><span class="line">        vector&lt;int&gt; in_deg(k); // 入度</span><br><span class="line">        for(auto &amp;e : edges) &#123;</span><br><span class="line">            // 总共两个元素, x 在 y的上方 / 左边</span><br><span class="line">            // 顶点编号从 0 开始，方便计算</span><br><span class="line">            int x = e[0] - 1, y = e[1] - 1;</span><br><span class="line">            // 先将下边/右边的添加进图(g)中</span><br><span class="line">            g[x].push_back(y);</span><br><span class="line">            // 入度 + 1</span><br><span class="line">            ++in_deg[y];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        vector&lt;int&gt; order;</span><br><span class="line">        queue&lt;int&gt; q;</span><br><span class="line">        for (int i = 0; i &lt; k; ++i)</span><br><span class="line">            if (in_deg[i] == 0) // 入度为0，进入队列</span><br><span class="line">                q.push(i);</span><br><span class="line">        // 使用BFS，拓扑排序和BFS原理一样，都是先从最外围的开始       </span><br><span class="line">        while(!q.empty()) &#123;</span><br><span class="line">            int x = q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">            order.push_back(x);</span><br><span class="line">            for(int y : g[x]) </span><br><span class="line">                if(--in_deg[y] == 0) // 入度为0，进入队列</span><br><span class="line">                q.push(y);</span><br><span class="line">        &#125;</span><br><span class="line">        return order;</span><br><span class="line">    &#125;</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; buildMatrix(int k, vector&lt;vector&lt;int&gt;&gt;&amp; rowConditions, vector&lt;vector&lt;int&gt;&gt;&amp; colConditions) &#123;</span><br><span class="line">        auto row = topo_sort(k, rowConditions), col = topo_sort(k, colConditions);</span><br><span class="line">        if (row.size() &lt; k || col.size() &lt; k) return &#123;&#125;;</span><br><span class="line">        vector&lt;int&gt; pos(k);</span><br><span class="line">        for (int i = 0; i &lt; k; ++i)</span><br><span class="line">            // pos[x] 表示元素 x 应该在哪一列，这样最后的答案就知道要把 row[i] 放在哪一列了</span><br><span class="line">            pos[col[i]] = i;</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; ans(k, vector&lt;int&gt;(k));</span><br><span class="line">        for (int i = 0; i &lt; k; ++i)</span><br><span class="line">            ans[i][pos[row[i]]] = row[i] + 1;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <!-- after add -->
+    
+       <!-- after add finish -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/08/26/307%E5%9C%BA%E5%91%A8%E8%B5%9B%E5%A4%8D%E7%9B%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -348,7 +454,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-08-26 08:37:11" itemprop="dateModified" datetime="2022-08-26T08:37:11+08:00">2022-08-26</time>
+                <time title="修改时间：2022-08-27 11:20:32" itemprop="dateModified" datetime="2022-08-27T11:20:32+08:00">2022-08-27</time>
               </span>
 
           
@@ -384,7 +490,7 @@
 </blockquote>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Base &amp;b;</span><br><span class="line"><span class="type">const</span> Derived &amp;d = <span class="built_in">dynamic_cast</span>&lt;<span class="type">const</span> Derived&amp;&gt;(b);</span><br></pre></td></tr></table></figure>
 <h2 id="3-简述C-的内存管理">3.简述C++ 的内存管理</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C++的内存分区主要有五个区：分别是代码区、未初始化的数据区、已初始化数据区、堆区和栈区。</span><br><span class="line">代码区：存放所有可执行代码的区域，在代码执行时，此内存不可修改</span><br><span class="line">未初始化的数据区：存放未初始化或初始化为0的全局变量和静态变量</span><br><span class="line">已初始化的数据区：存放已初始化的全局变量和静态变量</span><br><span class="line">栈区：先进后出的一种内存结构，由编译器自动分配释放，存放函数的参数值、返回值和局部变量等</span><br><span class="line">堆区：容量要比栈大得多，用于动态内存分配，有程序员自己分配释放，如果没释放，结束时会被操作系统自动回收。 </span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C++的内存分区主要有五个区：分别是代码区、全局/静态存储区、常量存储区、堆区和栈区。</span><br><span class="line">代码区：存放代码，不允许修改，但可以执行。编译后的二进制文件存放在这里。</span><br><span class="line">全局区/静态存储区（.bss【Block Started by Symbol】 段和 .data 段）：存放全局变量和静态变量，程序运行结束操作系统自动释放，在 C 语言中，未初始化的放在 .bss 段中，初始化的放在 .data 段中，C++ 中不再区分了。</span><br><span class="line">常量存储区：存放的是常量，不允许修改，程序运行结束自动释放。</span><br><span class="line">栈区：存放函数的局部变量、函数参数、返回地址等，由编译器自动分配和释放。</span><br><span class="line">堆区：动态申请的内存空间，就是由 malloc 分配的内存块，由程序员控制它的分配和释放，如果程序执行结束还没有释放，操作系统会自动回收。</span><br></pre></td></tr></table></figure>
 <h2 id="两数之和">两数之和</h2>
 <blockquote>
 <p>给出一个整型数组 numbers 和一个目标值 target，请在数组中找出两个加起来等于目标值的数的下标，返回的下标按升序排列。<br>
@@ -473,28 +579,111 @@
 <h2 id="strcpy-和-memcpy的区别">strcpy 和 memcpy的区别</h2>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1）复制的内容不同，strcpy只能用于字符串copy，memcpy可以复制任何类型的内容，用途更广。</span><br><span class="line">2）复制的方法不同，strcpy不需要指定长度，遇到&#x27;\0&#x27;才会结束，容易溢出。memcpy需要设置复制长度。</span><br><span class="line">3）用途不同。一般复制字符串才会使用strcpy，其他类型使用memcpy</span><br></pre></td></tr></table></figure>
 <h2 id="如何限制一个类对象只在堆-栈）上分配空间？">如何限制一个类对象只在堆(栈）上分配空间？</h2>
+<blockquote>
+<p>说明：C++ 中的类的对象的建立分为两种：静态建立、动态建立。</p>
+</blockquote>
+<blockquote>
+<p>静态建立：由编译器为对象在栈空间上分配内存，直接调用类的构造函数创建对象。例如：A a;</p>
+</blockquote>
+<blockquote>
+<p>动态建立：使用 new 关键字在堆空间上创建对象，底层首先调用 operator new() 函数，在堆空间上寻找合适的内存并分配；然后，调用类的构造函数创建对象。例如：A *p = new A();</p>
+</blockquote>
 <h3 id="1-类对象只建立在堆上">1.类对象只建立在堆上</h3>
 <blockquote>
-<p>容易想到将构造函数设为私有。在构造函数私有之后，无法在类外部调用构造函数来构造类对象，只能使用new运算符来建立对象。</p>
+<p>最直观的思想：避免直接调用类的构造函数，因为对象静态建立时，会调用类的构造函数创建对象。但是直接将类的构造函数设为私有并不可行，因为当构造函数设置为私有后，不能在类的外部调用构造函数来构造对象，只能用 new 来建立对象。但是由于 new 创建对象时，底层也会调用类的构造函数，将构造函数设置为私有后，那就无法在类的外部使用 new 创建对象了。因此，这种方法不可行。</p>
+</blockquote>
+<h4 id="解决方法1：">解决方法1：</h4>
+<blockquote>
+<p>将析构函数设置为私有。原因：静态对象建立在栈上，是由编译器分配和释放内存空间，编译器为对象分配内存空间时，会对类的非静态函数进行检查，即编译器会检查析构函数的访问性。当析构函数设为私有时，编译器创建的对象就无法通过访问析构函数来释放对象的内存空间，因此，编译器不会在栈上为对象分配内存。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">A</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">destory</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">delete</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    ~<span class="built_in">A</span>()&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="该方法存在的问题：">该方法存在的问题：</h4>
+<blockquote>
+<p>用 new 创建的对象，通常会使用 delete 释放该对象的内存空间，但此时类的外部无法调用析构函数，因此类内必须定义一个 destory() 函数，用来释放 new 创建的对象。</p>
 </blockquote>
 <blockquote>
-<p>然而，前面已经说过，new运算符的执行过程分为两步，C++提供new运算符的重载，其实是只允许重载operator new()函数，而operator()函数用于分配内存，无法提供构造功能。因此，这种方法不可以。</p>
+<p>无法解决继承问题，因为如果这个类作为基类，析构函数要设置成 virtual，然后在派生类中重写该函数，来实现多态。但此时，析构函数是私有的，派生类中无法访问。</p>
 </blockquote>
+<h4 id="解决方法2：">解决方法2：</h4>
 <blockquote>
-<p>当对象建立在栈上面时，是由编译器分配内存空间的，调用构造函数来构造栈对象。<code>当对象使用完后，编译器会调用析构函数来释放栈对象所占的空间。</code>编译器管理了对象的整个生命周期。如果编译器无法调用类的析构函数，情况会是怎样的呢？</p>
+<p>构造函数设置为 protected，并提供一个 public 的静态函数来完成构造，而不是在类的外部使用 new 构造；将析构函数设置为 protected。原因：类似于单例模式，也保证了在派生类中能够访问析构函数。通过调用 create() 函数在堆上创建对象。</p>
 </blockquote>
-<blockquote>
-<p>比如，类的析构函数是私有的，编译器无法调用析构函数来释放内存。所以，编译器在为类对象分配栈空间时，会先检查类的析构函数的访问性，其实不光是析构函数，只要是非静态的函数，编译器都会进行检查。如果类的析构函数是私有的，则编译器不会在栈空间上为类对象分配内存。<br>
-因此，将析构函数设为私有，类对象就无法建立在栈上了。代码如下：</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>  </span><br><span class="line">&#123;  </span><br><span class="line"><span class="keyword">public</span>:  </span><br><span class="line">    <span class="built_in">A</span>()&#123;&#125;  </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">destory</span><span class="params">()</span></span>&#123;<span class="keyword">delete</span> <span class="keyword">this</span>;&#125;  </span><br><span class="line"><span class="keyword">private</span>:  </span><br><span class="line">    ~<span class="built_in">A</span>()&#123;&#125;  </span><br><span class="line">&#125;;  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class A</span><br><span class="line">&#123;</span><br><span class="line">protected:</span><br><span class="line">    A() &#123;&#125;</span><br><span class="line">    ~A() &#123;&#125;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">    static A *create()</span><br><span class="line">    &#123;</span><br><span class="line">        return new A();</span><br><span class="line">    &#125;</span><br><span class="line">    void destory()</span><br><span class="line">    &#123;</span><br><span class="line">        delete this;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="2-类对象只建立在栈上">2.类对象只建立在栈上</h3>
 <blockquote>
-<p>只有使用new运算符，对象才会建立在堆上，因此，只要禁用new运算符就可以实现类对象只能建立在栈上。将operator new()设为私有即可。代码如下：</p>
+<p>解决方法：将 operator new() 设置为私有。原因：当对象建立在堆上时，是采用 new 的方式进行建立，其底层会调用 operator new() 函数，因此只要对该函数加以限制，就能够防止对象建立在堆上。</p>
 </blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>  </span><br><span class="line">&#123;  </span><br><span class="line"><span class="keyword">private</span>:  </span><br><span class="line">    <span class="function"><span class="type">void</span>* <span class="keyword">operator</span> <span class="title">new</span><span class="params">(<span class="type">size_t</span> t)</span></span>&#123;&#125;     <span class="comment">// 注意函数的第一个参数和返回值都是固定的  </span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="keyword">operator</span> <span class="title">delete</span><span class="params">(<span class="type">void</span>* ptr)</span></span>&#123;&#125; <span class="comment">// 重载了new就需要重载delete  </span></span><br><span class="line"><span class="keyword">public</span>:  </span><br><span class="line">    <span class="built_in">A</span>()&#123;&#125;  </span><br><span class="line">    ~<span class="built_in">A</span>()&#123;&#125;  </span><br><span class="line">&#125;; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class A  </span><br><span class="line">&#123;  </span><br><span class="line">private:  </span><br><span class="line">    void* operator new(size_t t)&#123;&#125;     // 注意函数的第一个参数和返回值都是固定的  </span><br><span class="line">    void operator delete(void* ptr)&#123;&#125; // 重载了new就需要重载delete  </span><br><span class="line">public:  </span><br><span class="line">    A()&#123;&#125;  </span><br><span class="line">    ~A()&#123;&#125;  </span><br><span class="line">&#125;; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>重载类的new操作符，使重载后的new操作符的功能为空。这样就使外层程序无法在堆上分配对象，只可以在栈上分配。</p>
+</blockquote>
+<h2 id="C-程序编译过程">C++ 程序编译过程</h2>
+<h3 id="1-编译预处理">1. 编译预处理</h3>
+<blockquote>
+<p>编译预处理：处理以 # 开头的指令；</p>
+</blockquote>
+<h3 id="2-编译、优化">2. 编译、优化</h3>
+<blockquote>
+<p>编译、优化：将源码 .cpp 文件翻译成 .s 汇编代码；</p>
+</blockquote>
+<h3 id="3-汇编">3. 汇编</h3>
+<blockquote>
+<p>汇编：将汇编代码 .s 翻译成机器指令 .o 文件；</p>
+</blockquote>
+<h3 id="4-链接">4. 链接</h3>
+<blockquote>
+<p>链接：汇编程序生成的目标文件，即 .o 文件，并不会立即执行，因为可能会出现：.cpp 文件中的函数引用了另一个 .cpp 文件中定义的符号或者调用了某个库文件中的函数。那链接的目的就是将这些文件对应的目标文件连接成一个整体，从而生成可执行的程序 .exe 文件。</p>
+</blockquote>
+<p><img src="/2022/08/23/%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95/mock_interview_img1.png" alt></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">链接分为两种：</span><br><span class="line"></span><br><span class="line">    静态链接：代码从其所在的静态链接库中拷贝到最终的可执行程序中，在该程序被执行时，这些代码会被装入到该进程的虚拟地址空间中。</span><br><span class="line">    动态链接：代码被放到动态链接库或共享对象的某个目标文件中，链接程序只是在最终的可执行程序中记录了共享对象的名字等一些信息。</span><br><span class="line">    在程序执行时，动态链接库的全部内容会被映射到运行时相应进行的虚拟地址的空间。</span><br><span class="line"></span><br><span class="line">二者的优缺点：</span><br><span class="line"></span><br><span class="line">    静态链接：浪费空间，每个可执行程序都会有目标文件的一个副本，这样如果目标文件进行了更新操作，就需要重新进行编译链接生成可</span><br><span class="line">    执行程序（更新困难）；优点就是执行的时候运行速度快，因为可执行程序具备了程序运行的所有内容。</span><br><span class="line">    动态链接：节省内存、更新方便，但是动态链接是在程序运行时，每次执行都需要链接，相比静态链接会有一定的性能损失。</span><br></pre></td></tr></table></figure>
+<h2 id="栈和堆的区别">栈和堆的区别</h2>
+<blockquote>
+<p>申请方式：栈是系统自动分配，堆是程序员主动申请。</p>
+</blockquote>
+<blockquote>
+<p>申请后系统响应：分配栈空间，如果剩余空间大于申请空间则分配成功，否则分配失败栈溢出；申请堆空间，堆在内存中呈现的方式类似于链表（记录空闲地址空间的链表），在链表上寻找第一个大于申请空间的节点分配给程序，将该节点从链表中删除，大多数系统中该块空间的首地址存放的是本次分配空间的大小，便于释放，将该块空间上的剩余空间再次连接在空闲链表上。</p>
+</blockquote>
+<blockquote>
+<p>栈在内存中是连续的一块空间（向低地址扩展）最大容量是系统预定好的，堆在内存中的空间（向高地址扩展）是不连续的。</p>
+</blockquote>
+<blockquote>
+<p>申请效率：栈是有系统自动分配，申请效率高，但程序员无法控制；堆是由程序员主动申请，效率低，使用起来方便但是容易产生碎片。</p>
+</blockquote>
+<blockquote>
+<p>存放的内容：栈中存放的是局部变量，函数的参数；堆中存放的内容由程序员控制。</p>
+</blockquote>
+<h2 id="变量的区别">变量的区别</h2>
+<blockquote>
+<p>C++ 变量根据定义的位置的不同的生命周期，具有不同的作用域，作用域可分为 6 种：全局作用域，局部作用域，语句作用域，类作用域，命名空间作用域和文件作用域。</p>
+</blockquote>
+<h3 id="从作用域看：">从作用域看：</h3>
+<blockquote>
+<p>全局变量：具有全局作用域。全局变量只需在一个源文件中定义，就可以作用于所有的源文件。当然，其他不包含全局变量定义的源文件需要用 extern 关键字再次声明这个全局变量。</p>
+</blockquote>
+<blockquote>
+<p>静态全局变量：具有文件作用域。它与全局变量的区别在于如果程序包含多个文件的话，它作用于定义它的文件里，不能作用到其它文件里，即被 static 关键字修饰过的变量具有文件作用域。这样即使两个不同的源文件都定义了相同名字的静态全局变量，它们也是不同的变量。</p>
+</blockquote>
+<blockquote>
+<p>局部变量：具有局部作用域。它是自动对象（auto），在程序运行期间不是一直存在，而是只在函数执行期间存在，函数的一次调用执行结束后，变量被撤销，其所占用的内存也被收回。</p>
+</blockquote>
+<blockquote>
+<p>静态局部变量：具有局部作用域。它只被初始化一次，自从第一次被初始化直到程序运行结束都一直存在，它和全局变量的区别在于全局变量对所有的函数都是可见的，而静态局部变量只对定义自己的函数体始终可见。</p>
+</blockquote>
+<h3 id="从分配内存空间看：">从分配内存空间看：</h3>
+<blockquote>
+<p>静态存储区：全局变量，静态局部变量，静态全局变量。</p>
+</blockquote>
+<blockquote>
+<p>栈：局部变量。</p>
+</blockquote>
+<h2 id="全局变量定义在头文件中有什么问题？">全局变量定义在头文件中有什么问题？</h2>
+<blockquote>
+<p>如果在头文件中定义全局变量，当该头文件被多个文件 include 时，该头文件中的全局变量就会被定义多次，导致重复定义，因此不能再头文件中定义全局变量。</p>
+</blockquote>
+<h3 id="解决方法：">解决方法：</h3>
+<blockquote>
+<p>1）在头文件起始位置使用预处理指令，也就是 #ifndef，可以防止同一个头文件在一个 cpp 的include 链中被重复 include。<br>
+2）头文件不做变量或者函数的定义，只做声明，定义放在cpp文件。</p>
 </blockquote>
 
       
@@ -1420,133 +1609,6 @@ Bear/Raccoon的构造函数将直接初始化其ZooAnimal基类部分</p>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/27/const-%E5%92%8C-static/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ico.jpg">
-      <meta itemprop="name" content="Willson-Xbort">
-      <meta itemprop="description" content="none">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/07/27/const-%E5%92%8C-static/" class="post-title-link" itemprop="url">const 和 static</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-07-27 08:32:51 / 修改时间：09:43:53" itemprop="dateCreated datePublished" datetime="2022-07-27T08:32:51+08:00">2022-07-27</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>const 复习</p>
-</blockquote>
-<p>1.const 有哪些用法？</p>
-<pre><code>1.const修饰变量，使得变量成为一个常量
-</code></pre>
-<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img1.PNG" alt><br>
-注意点：const 变量要初始化</p>
-<pre><code>2.默认情况下,const对象只在文件内有效
-</code></pre>
-<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img2.PNG" alt></p>
-<pre><code>3.const 可以引用
-</code></pre>
-<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img3.PNG" alt><br>
-注意点：const不能改变</p>
-<pre><code>4.const 指针
-</code></pre>
-<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img4.PNG" alt><br>
-有以下几种形式：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="type">const</span>* p; <span class="comment">//指针本身可以修改，指向的内容不能修改</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* p; <span class="comment">//指针本身可以修改，指向的内容不能修改 -》 指向常量的指针</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span>* <span class="type">const</span> p; <span class="comment">// 指针本身不能修改，指向的内容可以修改</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="type">const</span>* <span class="type">const</span> p; <span class="comment">// 指针本身不能修改，指向的内容不能修改</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> p; <span class="comment">// 指针本身不能修改，指向的内容不能修改</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img5.PNG" alt><br>
-<img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img6.PNG" alt></p>
-<pre><code>5. const 加在函数后方，不能修改成员变量
-</code></pre>
-<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img7.PNG" alt><br>
-提示：只允许在类的非static成员函数后加const<br>
-注意点：函数后加的const其实this指针进行修饰，即const *this</p>
-<blockquote>
-<p>static 复习</p>
-</blockquote>
-<p>2.static 有哪些用法？</p>
-<pre><code>1. 修饰局部变量
-</code></pre>
-<p>看代码:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line">	cout &lt;&lt; ++a &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">		<span class="built_in">test</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img8.PNG" alt></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line">	cout &lt;&lt; ++a &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">		<span class="built_in">test</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img9.PNG" alt></p>
-<blockquote>
-<p>static 修饰的局部变量(静态变量)是存储在静态区内部，而不再是本来的栈区，它的生命周期和程序的生命周期已经一样长。<br>
-也就是说 静态变量出了作用域{} 也不会被销毁，除非程序结束。</p>
-</blockquote>
-<pre><code>2.修饰全局变量
-</code></pre>
-<p>测试：头文件不影响extern<br>
-<img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img10.PNG" alt><br>
-和<br>
-<img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img11.PNG" alt></p>
-<p>但是在源文件影响extern<br>
-<img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img12.PNG" alt><br>
-和<br>
-<img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img13.PNG" alt></p>
-<blockquote>
-<p>全局变量是具有外部链接属性的，而static修饰的全局变量的时候就把这个外部链接属性变成了内部链接属性。生命周期是整个工程。</p>
-</blockquote>
-<pre><code>3. 修饰函数
-</code></pre>
-<p><img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img14.PNG" alt><br>
-和<br>
-<img src="/2022/07/27/const-%E5%92%8C-static/const_static_review_img15.PNG" alt></p>
-<p>发现和上方是同一个问题</p>
-<blockquote>
-<p>static修饰函数其实和全局变量差不多，因为函数也具有外部链接属性，被static修饰后就变成内部链接属性了，其他源文件不能再使用。</p>
-</blockquote>
-<p>参考资料：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_66769266/article/details/124247596">https://blog.csdn.net/m0_66769266/article/details/124247596</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <!-- after add -->
-    
-       <!-- after add finish -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1618,7 +1680,7 @@ Bear/Raccoon的构造函数将直接初始化其ZooAnimal基类部分</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

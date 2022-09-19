@@ -205,6 +205,141 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ico.jpg">
+      <meta itemprop="name" content="Willson-Xbort">
+      <meta itemprop="description" content="none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/" class="post-title-link" itemprop="url">虚函数复习</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-08-05 08:52:47" itemprop="dateCreated datePublished" datetime="2022-08-05T08:52:47+08:00">2022-08-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-08-22 20:03:10" itemprop="dateModified" datetime="2022-08-22T20:03:10+08:00">2022-08-22</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>C++ primer 第15章 面向对象程序设计</h1>
+<h1>虚函数</h1>
+<p><img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img1.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img2.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img3.PNG" alt></p>
+<h2 id="final-和-override">final 和 override</h2>
+<blockquote>
+<p>final 不允许后续的其他类覆盖<br>
+override 帮助编译器说明派生类中的虚函数</p>
+</blockquote>
+<p><img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img4.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img5.PNG" alt></p>
+<h2 id="抽象基类-含有纯虚函数）">抽象基类(含有纯虚函数）</h2>
+<blockquote>
+<p>有纯虚函数的类才称之为抽象类</p>
+</blockquote>
+<p><img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img6.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img7.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img8.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img9.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img10.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img11.PNG" alt></p>
+<h2 id="虚析构函数">虚析构函数</h2>
+<p><img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img12.PNG" alt><br>
+<img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img13.PNG" alt></p>
+<h2 id="重载和隐藏">重载和隐藏</h2>
+<blockquote>
+<p>同一作用域，那就是重载。不同作用域，那就是隐藏。</p>
+</blockquote>
+<p><img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img14.PNG" alt></p>
+<h1>虚继承</h1>
+<h2 id="前置：">前置：</h2>
+<blockquote>
+<p>IO标准库的istream 和 ostream分别继承了base_ios的抽象基类。改抽象基类负责保存流的缓冲内容并管理流的条件状态。iostream是另外一个类，<br>
+它从istream和ostream直接继承而来，可以同时读写流的内容。因为istream和ostream都继承自base_ios，所以iostream继承了base_ios两次，一次是通过<br>
+istream，另一次通过ostream。<br>
+在默认情况下，派生类中含有继承链上每个类对应的子部分。如果某个类在派生过程中出现了很多次，则派生类中将包含该类的多个子对象。<br>
+这种默认的情况对某些形如iostream的类显然是行不通的。一个iostream对象肯定希望在同一个缓冲区中进行读写操作，也会要求条件状态能同时反映输入和输出操作的情况。<br>
+加入在iostream对象中真的包含了base_ios的两份拷贝，则上述的共享行为就无法实现。</p>
+</blockquote>
+<h2 id="实现：">实现：</h2>
+<h3 id="如图：-3">如图：</h3>
+<p><img src="/2022/08/05/%E8%99%9A%E5%87%BD%E6%95%B0%E5%A4%8D%E4%B9%A0/virtual_img15.PNG" alt></p>
+<blockquote>
+<p>对于Panda进行修改，使其同时继承Raccoon科和Bear科，此时，为了避免赋予Panda两份ZooAnimal的子对象，我们将Bear和Raccoon继承ZooAnimal的方式定义为虚继承。</p>
+</blockquote>
+<h3 id="使用虚基类：">使用虚基类：</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Raccoon</span> : <span class="keyword">public</span> <span class="keyword">virtual</span> ZooAnimal &#123; ... &#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Bear</span> : <span class="keyword">public</span> <span class="keyword">virtual</span> ZooAnimal &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>以上代码我们将ZooAnimal定义为Raccoon和Bear的虚基类。<br>
+virtual说明符表面了一种愿望，即在后续派生类中共享虚基类的同一份实例。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Panda</span> : <span class="keyword">public</span> Bear,</span><br><span class="line">			  <span class="keyword">public</span> Raccoon, <span class="keyword">public</span> Endangered&#123;&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Panda通过Raccoon和Bear继承了ZooAnimal,因为Raccoon和Bear继承ZooAnimal的方式都是虚继承，所以Panda中只有一个ZooAnimal基类部分。</p>
+</blockquote>
+<h3 id="构造函数和虚继承">构造函数和虚继承</h3>
+<blockquote>
+<p>在虚派生中，虚基类是由最底层的派生类初始化的。<br>
+只要我们能创建虚基类的派生类对象(Bear/Raccoon),该派生类的构造函数就必须初始化它的虚基类。当创建一个Bear/Raccoon对象时，它已经位于派生的最底层，因此<br>
+Bear/Raccoon的构造函数将直接初始化其ZooAnimal基类部分</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Bear::<span class="built_in">Bear</span>(std::string name, <span class="type">bool</span> onExhibit):</span><br><span class="line">	<span class="built_in">ZooAnimal</span>(name, onExhibit, <span class="string">&quot;Bear&quot;</span>) &#123; &#125;</span><br><span class="line">Raccoon::<span class="built_in">Raccoon</span>(std::string name, <span class="type">bool</span> onExhibit):</span><br><span class="line">	<span class="built_in">ZooAnimal</span>(name, onExhibit, <span class="string">&quot;Raccoon&quot;</span>) &#123; &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>而当创建一个Panda对象时，Panda位于派生类的最底层并由它负责初始化共享的ZooAnimal基类部分。即使ZooAnimal不是Panda的直接基类，Panda的构造函数也可以初始化ZooAnimal:</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Panda::<span class="built_in">Panda</span>(std::string name, <span class="type">bool</span> onExhibit)</span><br><span class="line">	:<span class="built_in">ZooAnimal</span>(name, onExhibit, <span class="string">&quot;Panda&quot;</span>),</span><br><span class="line">	<span class="built_in">Bear</span>(name, onExhibit),</span><br><span class="line">	<span class="built_in">Raccoon</span>(name, onExhibit),</span><br><span class="line">	<span class="built_in">Endangered</span>(Endangered::critical),</span><br><span class="line">	<span class="built_in">sleeping_flag</span>(<span class="literal">false</span>) &#123; .. &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 首先使用Panda的构造函数初始值列表中提供的初始值构造虚基类ZooAnimal部分。</span><br><span class="line">2. 接下来构造Bear部分</span><br><span class="line">3. 构造Raccoon部分</span><br><span class="line">4. 构造第三直接基类Endangered</span><br><span class="line">5. 最后构造Panda部分</span><br><span class="line"></span><br><span class="line">如果Panda没有显示地初始化ZooAnimal基类，则ZooAnimal的默认构造函数将被调用。如果ZooAnimal没有默认构造函数，则代码将发生错误。</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <!-- after add -->
+    
+       <!-- after add finish -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/27/const-%E5%92%8C-static/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -310,74 +445,6 @@
 </blockquote>
 <p>参考资料：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_66769266/article/details/124247596">https://blog.csdn.net/m0_66769266/article/details/124247596</a></p>
 
-      
-    </div>
-
-    
-    
-    
-
-    <!-- after add -->
-    
-       <!-- after add finish -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/07/26/Linux-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%90%86%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ico.jpg">
-      <meta itemprop="name" content="Willson-Xbort">
-      <meta itemprop="description" content="none">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/07/26/Linux-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">Linux 高性能服务器理解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-07-26 20:51:48" itemprop="dateCreated datePublished" datetime="2022-07-26T20:51:48+08:00">2022-07-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-07-27 19:41:23" itemprop="dateModified" datetime="2022-07-27T19:41:23+08:00">2022-07-27</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
       
     </div>
 
@@ -1645,7 +1712,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

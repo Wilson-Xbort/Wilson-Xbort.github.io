@@ -205,6 +205,76 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/06/30/python-%E6%AF%8F%E6%97%A5%E4%B8%80%E6%8A%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ico.jpg">
+      <meta itemprop="name" content="Willson-Xbort">
+      <meta itemprop="description" content="none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/30/python-%E6%AF%8F%E6%97%A5%E4%B8%80%E6%8A%A5/" class="post-title-link" itemprop="url">python 每日一报</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-30 18:24:15" itemprop="dateCreated datePublished" datetime="2022-06-30T18:24:15+08:00">2022-06-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-03 09:51:32" itemprop="dateModified" datetime="2022-07-03T09:51:32+08:00">2022-07-03</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="代码较简单">代码较简单</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">from selenium import webdriver</span><br><span class="line">from selenium.webdriver.common.by import By</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">from selenium.webdriver.support.wait import WebDriverWait</span><br><span class="line"></span><br><span class="line">driver = webdriver.Firefox()</span><br><span class="line">driver.implicitly_wait(10)</span><br><span class="line">driver.get(&#x27;https://id.sspu.edu.cn/cas/login?service=https%3a%2f%2fhsm.sspu.edu.cn%2fselfreport%2fLoginSSO.aspx%3ftargetUrl%3d%7bbase64%7daHR0cHM6Ly9oc20uc3NwdS5lZHUuY24vc2VsZnJlcG9ydC9JbmRleC5hc3B4&#x27;)</span><br><span class="line">driver.find_element(By.ID, &quot;username&quot;).send_keys(&quot;your admin&quot;)</span><br><span class="line">driver.find_element(By.ID, &quot;password&quot;).send_keys(&quot;your password&quot;)</span><br><span class="line">driver.find_element(By.CSS_SELECTOR, &#x27;.submit_button&#x27;).click()</span><br><span class="line">driver.implicitly_wait(10)</span><br><span class="line">driver.find_element(By.XPATH, &quot;/html/body/form/div[6]/ul/li[1]/a/span&quot;).click();</span><br><span class="line"># 报送日期</span><br><span class="line">js=&quot;document.getElementById(&#x27;p1_BaoSRQ-inputEl&#x27;).removeAttribute(&#x27;readonly&#x27;)&quot;</span><br><span class="line">#js = &quot;$(&#x27;input:eq(0)&#x27;).removeAttr(&#x27;readonly&#x27;)&quot;</span><br><span class="line">driver.execute_script(js)</span><br><span class="line">input_datetime = driver.find_element(By.XPATH, &#x27;//*[@id=&quot;p1_BaoSRQ-inputEl&quot;]&#x27;)</span><br><span class="line">input_datetime.clear()</span><br><span class="line">input_datetime.send_keys(&quot;2022-06-23&quot;)</span><br><span class="line"></span><br><span class="line"># 国内</span><br><span class="line">driver.find_element(By.ID, &#x27;p1_TiWen-inputEl&#x27;).send_keys(36.6)</span><br><span class="line">driver.find_element(By.CSS_SELECTOR, &#x27;.f-btn-text&#x27;).click()</span><br><span class="line">time.sleep(1)</span><br><span class="line"># driver.find_element(By.CSS_SELECTOR, &#x27;.f-btn-text&#x27;).click()</span><br><span class="line">driver.quit()</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    print(&#x27;PyCharm&#x27;)</span><br><span class="line"></span><br><span class="line"># See PyCharm help at https://www.jetbrains.com/help/pycharm/</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <!-- after add -->
+    
+       <!-- after add finish -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/06/23/webdriver-config/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -464,14 +534,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

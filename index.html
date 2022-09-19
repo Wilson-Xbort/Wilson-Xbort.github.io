@@ -205,6 +205,128 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ico.jpg">
+      <meta itemprop="name" content="Willson-Xbort">
+      <meta itemprop="description" content="none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/" class="post-title-link" itemprop="url">Linux高性能服务器第二章</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-09-19 12:25:30 / 修改时间：15:51:35" itemprop="dateCreated datePublished" datetime="2022-09-19T12:25:30+08:00">2022-09-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>IP协议详解</h1>
+<p><code>IP协议是TCP/IP协议簇的核心协议</code></p>
+<h2 id="IP服务的特点">IP服务的特点</h2>
+<blockquote>
+<p>IP协议是TCP/IP协议族的动力，它为上层协议提供无状态、无连接、不可靠的服务。</p>
+</blockquote>
+<h3 id="1-无状态">1. 无状态</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">无状态（stateless）是指IP通信双方不同步传输数据的状态信息，因此所有IP数据报的发送、传输和接收都是相互独立、没有上下文关</span><br><span class="line">系的。</span><br><span class="line"></span><br><span class="line">这种服务最大的缺点是无法处理乱序和重复的IP数据报。</span><br></pre></td></tr></table></figure>
+<h4 id="1-1例子">1.1例子</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">比如:</span><br><span class="line"></span><br><span class="line">发送端发送出的第N个IP数据报可能比第N+1个IP数据报后到达接收端，而同一个IP数据报也可能经过不同的路径多次到达接收端。在这</span><br><span class="line">两种情况下，接收端的IP模块无法检测到乱序和重复，因为这些IP数据报之间没有任何上下文关系。接收端的IP模块只要收到了完整的</span><br><span class="line">IP数据报（如果是IP分片的话，IP模块将先执行重组），就将其数据部分（TCP报文段、UDP数据报或者ICMP报文）上交给上层协议。那</span><br><span class="line">么从上层协议来看，这些数据就可能是乱序的、重复的。</span><br></pre></td></tr></table></figure>
+<p>面向连接的协议，比如TCP协议，则能够自己处理乱序的、重复的报文段，它递交给上层协议的内容绝对是有序的、正确的。</p>
+<h3 id="2-无连接">2. 无连接</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">无连接（connectionless）是指IP通信双方都不长久地维持对方的任何信息。这样，上层协议每次发送数据的时候，都必须明确指定对</span><br><span class="line">方的IP地址。</span><br></pre></td></tr></table></figure>
+<h3 id="3-不可靠">3. 不可靠</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">不可靠是指IP协议不能保证IP数据报准确地到达接收端，它只是承诺尽最大努力（best effort）。</span><br></pre></td></tr></table></figure>
+<h4 id="3-1-例子">3.1 例子</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">比如:</span><br><span class="line"></span><br><span class="line">某个中转路由器发现IP数据报在网络上存活的时间太长（根据IP数据报头部字段TTL判断，见后文），那么它将丢弃之，并</span><br><span class="line">返回一个ICMP错误消息（超时错误）给发送端。</span><br><span class="line"></span><br><span class="line">又比如：</span><br><span class="line">接收端发现收到的IP数据报不正确（通过校验机制），它也将丢弃之，并返回一个ICMP错误消息（IP头部参数错误）给发送端。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>发送端的IP模块一旦检测到IP数据报发送失败，就通知上层协议发送失败，而不会试图重传。</p>
+</blockquote>
+<blockquote>
+<p>因此，使用IP服务的上层协议（比如TCP协议）需要自己实现数据确认、超时重传等机制以达到可靠传输的目的。</p>
+</blockquote>
+<h2 id="IPv4头部结构">IPv4头部结构</h2>
+<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img1.PNG" alt></p>
+<h3 id="版本号-bit-4bit">版本号(bit) 4bit</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4位版本号（version）指定IP协议的版本。对IPv4来说，其值是0100。</span><br></pre></td></tr></table></figure>
+<h3 id="头部长度-bit-4bit">头部长度(bit) 4bit</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">4位头部长度（header length）标识该IP头部有多少个32 bit字（4字节）。</span><br><span class="line">4(字节）*5行 = 20字节</span><br><span class="line">而选项最多40字节</span><br><span class="line">可以推出IP头部最长60字节</span><br></pre></td></tr></table></figure>
+<h3 id="服务类型（bit）-8bit">服务类型（bit） 8bit</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">8位服务类型（Type Of Service，TOS）包括一个3位的优先权字段（现在已经被忽略），4位的TOS字段和1位保留字段（必须置0）。</span><br><span class="line"></span><br><span class="line">4位 的TOS字段分别表示：最小延时，最大吞吐量，最高可靠性和最小费用。其中最多有一个能置为1，应用程序应该根据实际需要来设置它。</span><br><span class="line">比如像ssh和telnet这样的登录程序需要的是最小延时的服务，而文件传输程序ftp则需要最大吞吐量的服务。</span><br></pre></td></tr></table></figure>
+<h3 id="总长度（packet-length）-16bit">总长度（packet length） 16bit</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">16位总长度（total length）是指整个IP数据报的长度，以字节为单位，因此IP数据报的最大长度为65 535（216-1）字节。</span><br><span class="line">但由于MTU的限制，长度超过MTU的数据报都将被分片传输，所以实际传输的IP数据报（或分片）的长度都远远没有达到最大值。</span><br><span class="line"></span><br><span class="line">包括了ip头部和data</span><br></pre></td></tr></table></figure>
+<h3 id="标识符（identification）-16bit">标识符（identification） 16bit</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">16位标识（identification）唯一地标识主机发送的每一个数据报。</span><br><span class="line">其初始值由系统随机生成；每发送一个数据报，其值就加1。该值在数据报分片时被复制到每个分片中，因此同一个数据报的所有分片都具</span><br><span class="line">有相同的标识值。</span><br><span class="line"></span><br><span class="line">值1—65535（2^16-1）</span><br></pre></td></tr></table></figure>
+<h3 id="标志（Flags）-3bit">标志（Flags） 3bit</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">标志字段用以指出该IP数据报后面是否还有分段</span><br><span class="line">第一位 R 保留位一般是空的。</span><br><span class="line">第二位 DF（Don’t Fragment）位 不分片位 1表示不分片，0表示分片。</span><br><span class="line">第三位 MF（More Fragment）位 更多分片位 1表示后面还有分片，0表示无。除了数据报的最后一个分片外，其他分片都要把它置1。</span><br></pre></td></tr></table></figure>
+<h3 id="分片偏移（Flag-offset）-13bit">分片偏移（Flag offset） 13bit</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">13位分片偏移（fragmentation offset）是分片相对原始IP数据报开始处（仅指数据部分）的偏移。实际的偏移值是该值左移3位（乘8）</span><br><span class="line">后得到的。</span><br><span class="line"></span><br><span class="line">由于这个原因，除了最后一个IP分片外，每个IP分片的数据部分的长度必须是8的整数倍（这样才能保证后面的IP分片拥有一个合适的偏移值）。</span><br></pre></td></tr></table></figure>
+<h3 id="生存时间-Time-to-live-8bit">生存时间(Time to live) 8bit</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">8位生存时间（Time To Live，TTL）是数据报到达目的地之前允许经过的路由器跳数。</span><br><span class="line"></span><br><span class="line">TTL值被发送端设置（常见的值是64）。</span><br><span class="line">数据报在转发过程中每经过一个路由，该值就被路由器减1。当TTL值减为0时，路由器将丢弃数据报，并向源端发送一个ICMP差错报文。</span><br><span class="line"></span><br><span class="line">TTL值可以防止数据报陷入路由循环。</span><br></pre></td></tr></table></figure>
+<h3 id="协议号（protocol）-8bit">协议号（protocol） 8bit</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">8位协议（protocol）用来区分上层协议。</span><br><span class="line"></span><br><span class="line">/etc/protocols文件定义了所有上层协议对应的protocol字段的数值。其中，ICMP是1，TCP是6，UDP是17。</span><br><span class="line">/etc/protocols文件是RFC 1700的一个子集。</span><br></pre></td></tr></table></figure>
+<h3 id="头部校验和（header-checksum）-16bit">头部校验和（header checksum） 16bit</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">16位头部校验和（header checksum）由发送端填充，接收端对其使用CRC算法以检验IP数据报头部（注意，仅检验头部）在传输过程</span><br><span class="line">中是否损坏。</span><br></pre></td></tr></table></figure>
+<h3 id="源ip地址（Source-address）-32bit">源ip地址（Source address） 32bit</h3>
+<h3 id="目标ip地址（Destination-address）-32bit">目标ip地址（Destination address） 32bit</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">32位的源端IP地址和目的端IP地址用来标识数据报的发送端和接收端。一般情况下，这两个地址在整个数据报的传递过程中保持不变，</span><br><span class="line">而不论它中间经过多少个中转路由器。</span><br></pre></td></tr></table></figure>
+<h3 id="可选项（options）">可选项（options）</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">完成一些特殊功能：严格路由 松散路由 记录路由 时间戳只能在options 里面做。</span><br><span class="line">这部分最多包含40字节，因为IP头部最长是60字节（其中还包含前面讨论的20字节的固定部分）。</span><br></pre></td></tr></table></figure>
+<h2 id="使用tcpdump观察IPv4头部结构">使用tcpdump观察IPv4头部结构</h2>
+<h3 id="操作过程如下">操作过程如下:</h3>
+<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img2.PNG" alt></p>
+<h3 id="用tcpdump抓取数据包">用tcpdump抓取数据包:</h3>
+<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img3.PNG" alt></p>
+<blockquote>
+<p>这次抓包我们开启了tcpdump的-x选项，使之输出数据包的二进制码。此数据包共包含60字节，其中前20字节是IP头部，后40字节是TCP头部，不包含应用程序数据（length值为0）。</p>
+</blockquote>
+<h3 id="分析头部的字节">分析头部的字节</h3>
+<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img4.PNG" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <!-- after add -->
+    
+       <!-- after add finish -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/09/19/%E9%9D%A2%E7%BB%8F%E6%95%B4%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1561,115 +1683,6 @@ j的值被copy到t1。f中的引用参数被绑定带t1,而非j,从而其改变�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/08/08/2022-8-4%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ico.jpg">
-      <meta itemprop="name" content="Willson-Xbort">
-      <meta itemprop="description" content="none">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/08/08/2022-8-4%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">2022-8-4面试整理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-08-08 14:06:48" itemprop="dateCreated datePublished" datetime="2022-08-08T14:06:48+08:00">2022-08-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-08-11 10:28:30" itemprop="dateModified" datetime="2022-08-11T10:28:30+08:00">2022-08-11</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="算法题1：">算法题1：</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">假设有从小到大顺序排列，不一定连续但没有重复的整数序列A=&#123;a1, a2, a3,...am-1,am,am+1,...an-1,an&#125;,</span><br><span class="line">将该序列重新排列为B&#123;am,am+1,...an-1,an,a1,a2,...am-1&#125;。试给出一个程序从符合B序列的数组中找到a1的</span><br><span class="line">位置，要求算法复杂度&lt;O(N).</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这题我没有好好审题，一看a1，没有想到是求最小值，确实应该使用二分法</span><br></pre></td></tr></table></figure>
-<p>代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">(vector&lt;<span class="type">int</span>&gt; B)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> n = B.<span class="built_in">size</span>();</span><br><span class="line">	<span class="type">int</span> left = <span class="number">0</span>, right = n - <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">		<span class="type">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span> (B[mid] &gt; B[right]) &#123;</span><br><span class="line">			<span class="comment">// 中间点要比右边界大，很有可能min值在中间点右边</span></span><br><span class="line">			left = mid + <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (B[mid] &lt; B[right]) &#123;</span><br><span class="line">			<span class="comment">// 中间点比右边界小，那最小值应该在中间值的左侧</span></span><br><span class="line">			right = mid;</span><br><span class="line">		&#125; </span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			right -= <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> left;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span> </span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; A = &#123; <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">15</span>, <span class="number">17</span>, <span class="number">21</span>, <span class="number">25</span> &#125;;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; B = &#123; <span class="number">10</span>, <span class="number">11</span>, <span class="number">15</span>, <span class="number">17</span>, <span class="number">21</span>, <span class="number">25</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span> &#125;;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">func</span>(B);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="算法题2：">算法题2：</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">实现以下函数，中间不能调用其他任何标准库中的函数（返回一个指针指向第一次出现在字符串中的StrSearch)</span><br><span class="line">Returns a pointer to the first occurrence of strSearch in string</span><br></pre></td></tr></table></figure>
-<p>代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">judge</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* string, <span class="type">const</span> <span class="type">char</span>* strSearch, <span class="type">int</span> len)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (string[i] != strSearch[i]) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">char</span>* _strstr(<span class="type">const</span> <span class="type">char</span>* string, <span class="type">const</span> <span class="type">char</span>* strSearch) &#123;</span><br><span class="line">	<span class="type">int</span> len_str = <span class="built_in">strlen</span>(string);</span><br><span class="line">	<span class="type">int</span> len_compare = <span class="built_in">strlen</span>(strSearch);</span><br><span class="line">	<span class="keyword">if</span> (len_str &lt; len_compare) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="type">const</span> <span class="type">char</span>* pos = string;</span><br><span class="line">	<span class="comment">// 去除&#x27;\0&#x27;</span></span><br><span class="line">	<span class="type">const</span> <span class="type">char</span>* pos_end = string + len_str - <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (; pos &lt;= pos_end - len_compare; pos++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">judge</span>(pos, strSearch, len_compare) == <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">return</span> pos;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span> </span>&#123;</span><br><span class="line">	<span class="type">const</span> <span class="type">char</span> a[] = <span class="string">&quot;Hello, world&quot;</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, _strstr(a, <span class="string">&quot;,&quot;</span>));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="虚函数程序题">虚函数程序题</h2>
-<p>代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="type">int</span> iValue;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">fun1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Base fun1&quot;</span> &lt;&lt; endl;</span><br><span class="line">		<span class="built_in">fun2</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">fun2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Base fun2&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived</span> : <span class="keyword">public</span> Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="type">char</span>* pValue;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">fun1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Derived fun1&quot;</span> &lt;&lt; endl;</span><br><span class="line">		<span class="built_in">fun2</span>();</span><br><span class="line">		Base::<span class="built_in">fun1</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">fun2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Derived fun2&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MoreDerived</span> : <span class="keyword">public</span> Derived &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="type">static</span> <span class="type">double</span> dValue;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="built_in">sizeof</span>(Base) &lt;&lt; endl	 </span><br><span class="line">		&lt;&lt; <span class="built_in">sizeof</span>(Derived) &lt;&lt; endl</span><br><span class="line">		&lt;&lt; <span class="built_in">sizeof</span>(MoreDerived) &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	Derived d;</span><br><span class="line"></span><br><span class="line">	Base&amp; rB = d;</span><br><span class="line">	rB.<span class="built_in">fun1</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	Base* pB = &amp;d;</span><br><span class="line">	pB-&gt;<span class="built_in">fun1</span>();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 以下3种写法一样</span></span><br><span class="line">	pB = (Base*)&amp;d;</span><br><span class="line">	<span class="comment">// pB = &amp;d;</span></span><br><span class="line">	<span class="comment">// pB = &amp;(Base&amp;)d; // (Base)是个临时变量，而取地址符&amp;右边必须是左值，所以（Base&amp;)引用</span></span><br><span class="line">	pB-&gt;<span class="built_in">fun1</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="首先要知道的知识">首先要知道的知识</h2>
-<ol>
-<li>字节对齐：</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">类的默认的对齐方式：规定各成员变量存放的起始地址相对于结构的起始地址的偏移量必须为该变量的类型所占用的字节数的倍数。</span><br><span class="line">各成员变量在存放的时候根据在结构中出现的顺序依次申请空间结构的字节边界数。</span><br><span class="line">结构中占用最大空间的类型所占用的字节数的倍数。</span><br></pre></td></tr></table></figure>
-<p>常用类型的对齐方式如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.	char 1的倍数</span><br><span class="line">2.	int 4的倍数</span><br><span class="line">3.	float 4的倍数</span><br><span class="line">4.	double 8的倍数</span><br><span class="line">5.	short 2的倍数</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>虚指针：</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">多态是由虚函数实现的，而虚函数主要通过虚函数表（V-Table） 来实现。</span><br><span class="line">虚函数表每一项存储的一个虚函数的地址。  </span><br><span class="line">类的每一个对象都会包含一个虚指针，这个虚指针指向虚函数表。</span><br><span class="line"></span><br><span class="line">在32位下，虚指针占4个字节，在64位下，虚指针占8个字节。</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>C++ 对象的内存布局查看</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 打开vs2022自带的【x86 Native Tools Command Prompt for VS 2022】</span><br><span class="line">2. 转入到要调试的cpp目录下： 例如C:\\Users\\Administrator\\source\\repos\\test</span><br><span class="line">3. 输入cl -d1reportSingleClassLayoutXXX MMM.cpp 【xxx为类名，MMM是文件名】</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>左值和右值</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">左值（L-value）：表示存储在计算机内存的对象，可寻址，相当于地址值</span><br><span class="line"></span><br><span class="line">右值（R-value）：代表的为真实值，可读，即数据值</span><br><span class="line"></span><br><span class="line">因为左值是一个地址值，因此可以对左值进行赋值操作，而右值本身就是同一个数据值，就不存在对一个数据值就行赋值的操作。</span><br><span class="line"></span><br><span class="line">int a,b;</span><br><span class="line">a=5;//为合法的操作，因为a是个地址值；</span><br><span class="line">b=a;//这个也是个合法操作，在这里b为地址值，a取其数据值即5(注意这里不是取地址值，因为a是作为一个右值)</span><br><span class="line">5=5;//这是一个非法操作，因为左值是个数据值，右值也是个数据值</span><br></pre></td></tr></table></figure>
-<h2 id="开始调试">开始调试</h2>
-<table>
-<thead>
-<tr>
-<th><img src="/2022/08/08/2022-8-4%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/virtual_interview_img2.PNG" alt></th>
-<th><img src="/2022/08/08/2022-8-4%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/virtual_interview_img3.PNG" alt="controller"></th>
-<th><img src="/2022/08/08/2022-8-4%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/virtual_interview_img4.PNG" alt="Analysis"></th>
-</tr>
-</thead>
-</table>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; sizeof(Base) &lt;&lt; endl	// 	虚指针8字节，int字节对齐=8 =》 16</span><br><span class="line">     &lt;&lt; sizeof(Derived) &lt;&lt; endl //  继承后pValue 字节对齐 + 8 =》 16 + 8 = 24</span><br><span class="line">	 &lt;&lt; sizeof(MoreDerived) &lt;&lt; endl; // 因为是static在静态区，不变还是24</span><br><span class="line"></span><br><span class="line">Derived d;</span><br><span class="line"></span><br><span class="line">Base&amp; rB = d;</span><br><span class="line">rB.fun1();	// 不管谁指向/引用谁，都是自动识别调子类自己的函数(调用被重写过的函数）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Base* pB = &amp;d;</span><br><span class="line">pB-&gt;fun1(); // 不管谁指向/引用谁，都是自动识别调子类自己的函数(调用被重写过的函数）</span><br><span class="line"></span><br><span class="line">pB = (Base*)&amp;d;</span><br><span class="line">//pB = &amp;(Base&amp;)d;</span><br><span class="line">// pB = &amp;d;</span><br><span class="line">pB-&gt;fun3(); // 强转后还是先调用被重写的函数，如果没有再往基类找</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <!-- after add -->
-    
-       <!-- after add finish -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1741,7 +1754,7 @@ j的值被copy到t1。f中的引用参数被绑定带t1,而非j,从而其改变�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -228,10 +228,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-09-19 12:25:30 / 修改时间：15:51:35" itemprop="dateCreated datePublished" datetime="2022-09-19T12:25:30+08:00">2022-09-19</time>
+              <time title="创建时间：2022-09-19 12:25:30" itemprop="dateCreated datePublished" datetime="2022-09-19T12:25:30+08:00">2022-09-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-09-22 20:16:38" itemprop="dateModified" datetime="2022-09-22T20:16:38+08:00">2022-09-22</time>
+              </span>
 
           
 
@@ -304,6 +310,82 @@
 </blockquote>
 <h3 id="分析头部的字节">分析头部的字节</h3>
 <p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img4.PNG" alt></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0x0000: 4510 003c a5da 4000 4006 96cf 7f00 0001</span><br><span class="line">解析：</span><br><span class="line">	都是16进制，1个16进制是4位，对照下方的表格看</span><br><span class="line">	IP版本号4，头部长度20字节，开启最小延时服务，禁止分片，TTL最多经过64个路由器，上层协议是TCP。</span><br></pre></td></tr></table></figure>
+<h1>IP分片</h1>
+<blockquote>
+<p>当IP数据报的长度超过帧的MTU时，它将被分片传<br>
+输。分片可能发生在发送端，也可能发生在中转路由器上，而且可能<br>
+在传输过程中被多次分片，但只有在最终的目标机器上，这些分片才<br>
+会被内核中的IP模块重新组装。</p>
+</blockquote>
+<blockquote>
+<p>IP头部中的如下三个字段给IP的分片和重组提供了足够的信息：<code>数据报标识、 标志和片偏移</code>。一个IP数据报的每个分片都具有自己的IP头<br>
+部，它们具有相同的标识值，但具有不同的片偏移。并且除了最后一<br>
+个分片外，其他分片都将设置<code>MF</code>标志。此外，每个分片的IP头部的总<br>
+长度字段将被设置为该分片的长度。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">以太网帧的MTU是1500字节（可以通过ifconfig命令或者netstat命令查看），因此它携带的IP数据报的数据部分最多是1480字节（IP头部</span><br><span class="line">占用20字节）。考虑用IP数据报封装一个长度为1481字节的ICMP报文（包括8字节的ICMP头部，所以其数据部分长度为1473字节），则该</span><br><span class="line">数据报在使用以太网帧传输时必须被分片。</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img5.PNG" alt></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  长度为1501字节的IP数据报被拆分成两个IP分片，第一个IP分片长度为1500字节，第二个IP分片的长度为21字节。每个IP分片</span><br><span class="line">都包含自己的IP头部（20字节），且第一个IP分片的IP头部设置了MF标志，而第二个IP分片的IP头部则没有设置该标志，因为它</span><br><span class="line">已经是最后一个分片了。原始IP数据报中的ICMP头部内容被完整地复制到了第一个IP分片中。第二个IP分片不包含ICMP头部信息</span><br><span class="line">，因为IP模块重组该ICMP报文的时候只需要一份ICMP头部信息，重复传送这个信息没有任何益处。1473字节的ICMP报文数据的前</span><br><span class="line">1472字节被IP模块复制到第一个IP分片中，使其总长度为1500字节，从而满足MTU的要求；而多出的最后1字节则被复制到第二个</span><br><span class="line">IP分片中。</span><br><span class="line"></span><br><span class="line">  需要指出的是，ICMP报文的头部长度取决于报文的类型，其变化范围很大。图2-2以8字节为例，因为后面的例子用到了ping程序，而</span><br><span class="line">ping程序使用的ICMP回显和应答报文的头部长度是8字节。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>为了看清楚IP分片的具体过程，考虑从ernest-laptop来ping机器Kongming20，每次传送1473字节的数据（这是ICMP报文的数据部分）<br>
+以强制引起IP分片，并用tcpdump抓取这一过程中双方交换的数据包。具体操作过程如下：</p>
+</blockquote>
+<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img6.PNG" alt></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">这两个IP分片的标识值都是61197，说明它们是同一个IP数据报的分片。</span><br><span class="line"></span><br><span class="line">第一个分片的片偏移值为0，而第二个则是1480。很显然，第二个分片的片偏移值实际上也是第一个分片的ICMP报文的长度。</span><br><span class="line">第一个分片设置了MF标志以表示还有后续分片，所以tcpdump输 出“flags[+]”。</span><br><span class="line">而第二个分片则没有设置任何标志，所以tcpdump输 出“flags[none]”。这个两个分片的长度分别为1500字节和21字节。</span><br><span class="line"></span><br><span class="line">最后，IP层传递给数据链路层的数据可能是一个完整的IP数据报，也可能是一个IP分片，它们统称为IP分组（packet）。</span><br></pre></td></tr></table></figure>
+<h1>IP路由</h1>
+<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img7.PNG" alt></p>
+<p>从右往左看：</p>
+<blockquote>
+<p>当IP模块接收到来自数据链路层的IP数据报时，它首先对该数据报的头部做CRC校验，确认无误之后就分析其头部的具体信息。</p>
+</blockquote>
+<blockquote>
+<p>如果该IP数据报的头部设置了<code>源站选路选项</code>（松散源路由选择或严格源路由选择），则IP模块调用数据报转发子模块来处理该数据报。如果该IP数据报的头部中目标IP地址是本机的某个IP地址，或者是广播地址，即该数据报是发送给本机的，则IP模块就根据数据报头部中的协议字段来决定将它派发给哪个上层应用（分用）。如果IP模块发现这个数据报不是发送给本机的，则也调用数据报转发子模块来处理该数据报。</p>
+</blockquote>
+<blockquote>
+<p>IP数据报应该发送至哪个下一跳路由（或者目标机器），以及经过哪个网卡来发送，就是IP路由过程，即图2-3中“计算下一跳路由”子模块。IP模块实现数据报路由的核心数据结构是<code>路由表</code>。这个表按照数据报的目标IP地址分类，同一类型的IP数据报将被发往相同的下一跳路由器（或者目标机器）。我们将在后面讨论IP路由过程。</p>
+</blockquote>
+<blockquote>
+<p>IP输出队列中存放的是所有等待发送的IP数据报，其中除了需要转发的IP数据报外，还包括封装了本机上层数据（ICMP报文、TCP报文段和UDP数据报）的IP数据报。</p>
+</blockquote>
+<blockquote>
+<p>图2-3中的虚线箭头显示了<code>路由表更新的过程</code>。这一过程是指通过路由协议或者route命令调整路由表，使之更适应最新的网络拓扑结构，称为IP路由策略。</p>
+</blockquote>
+<h2 id="路由机制">路由机制</h2>
+<blockquote>
+<p>要研究IP路由机制，需要先了解路由表的内容。我们可以使用<code>route</code>命令或<code>netstat</code>命令查看路由表。在测试机器ernest-laptop上执行route命令。</p>
+</blockquote>
+<h3 id="路由表实例">路由表实例</h3>
+<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img8.PNG" alt></p>
+<p>该路由表包含两项，每项都包含8个字段。<br>
+<img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img9.PNG" alt></p>
+<blockquote>
+<p>第一项的目标地址是default，即所谓的<code>默认路由项</code>。该项包含一个“G”标志，说明路由的下一跳目标是网关，其地址是192.168.1.1（这是测试网络中路由器的本地IP地址）。另外一个路由项的目标地址是192.168.1.0，它指的是<code>本地局域网</code>。该路由项的网关地址为*，说明数据报不需要路由中转，可以直接发送到目标机器。</p>
+</blockquote>
+<p>那么路由表是如何按照IP地址分类的呢？或者说给定数据报的目标IP地址，它将匹配路由表中的哪一项呢？这就是IP的路由机制，分为<br>
+3个步骤：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1）查找路由表中和数据报的目标IP地址完全匹配的主机IP地址。</span><br><span class="line">如果找到，就使用该路由项，没找到则转步骤2。</span><br><span class="line"></span><br><span class="line">2）查找路由表中和数据报的目标IP地址具有相同网路ID的网络IP</span><br><span class="line">地址（比如代码清单2-2所示的路由表中的第二项）。如果找到，就使</span><br><span class="line">用该路由项；没找到则转步骤3。</span><br><span class="line"></span><br><span class="line">3）选择默认路由项，这通常意味着数据报的下一跳路由是网关。</span><br><span class="line">因此，对于测试机器ernest-laptop而言，所有发送到IP地址为</span><br><span class="line">192.168.1.*的机器的IP数据报都可以直接发送到目标机器（匹配路由表</span><br><span class="line">第二项），而所有访问因特网的请求都将通过网关来转发（匹配默认</span><br><span class="line">路由项）。</span><br></pre></td></tr></table></figure>
+<h2 id="路由表更新">路由表更新</h2>
+<blockquote>
+<p>路由表必须能够更新，以反映网络连接的变化，这样IP模块才能准确、高效地转发数据报。route命令可以修改路由表。我们看如下几个例子（在机器ernest-laptop上执行）：</p>
+</blockquote>
+<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img10.PNG" alt></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">第1行表示添加主机192.168.1.109（机器Kongming20）对应的路由项。</span><br><span class="line">这样设置之后，所有从ernest-laptop发送到Kongming20的IP数据报将通过网卡eth0直接发送至目标机器的接收网卡。</span><br><span class="line"></span><br><span class="line">第2行表示删除网络192.168.1.0对应的路由项。</span><br><span class="line">这样，除了机器Kongming20外，测试机器ernest-laptop将无法访问该局域网上的任何其他机器（能访问到Kongming20是由于执行了上一条命令）。</span><br><span class="line"></span><br><span class="line">第3行表示删除默认路由项，这样做的后果是无法访问因特网。</span><br><span class="line"></span><br><span class="line">第4行表示重新设置默认路由项，不过这次其网关是机器Kongming20（而不是能直接访问因特网的路由器）！</span><br><span class="line">经过上述修改后的路由表如下：</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img11.PNG" alt></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">这个新的路由表中，第一个路由项是主机路由项，所以它被设置了“H”标志。我们设计这样一个路由表的目的是为后文讨论ICMP重定</span><br><span class="line">向提供环境。</span><br><span class="line"></span><br><span class="line">通过route命令或其他工具手工修改路由表，是静态的路由更新方式。对于大型的路由器，它们通常通过BGP（Border Gateway</span><br><span class="line">Protocol，边际网关协议）、RIP（Routing Information Protocol，路由信息协议）、OSPF等协议来发现路径，并更新自己的路由表。这种更新</span><br><span class="line">方式是动态的、自动的。这部分内容超出了本书的讨论范围，感兴趣的读者可阅读参考资料1。</span><br></pre></td></tr></table></figure>
+<h1>IP转发</h1>
+<blockquote>
+<p>不是发送给本机的IP数据报将由数据报转发子模块来处理。路由器都能执行数据报的转发操作，而主机一般只发送和接收数据报，这是因为主机上/proc/sys/net/ipv4/ip_forward内核参数默认被设置为0。我们可以通过修改它来使能主机的数据报转发功能（在测试<br>
+机器Kongming20上以root身份执行）：</p>
+</blockquote>
+<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img12.PNG" alt></p>
+<blockquote>
+<p>对于允许IP数据报转发的系统（主机或路由器），数据报转发子模块将对期望转发的数据报执行如下操作：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1）检查数据报头部的TTL值。如果TTL值已经是0，则丢弃该数据报。</span><br><span class="line"></span><br><span class="line">2）查看数据报头部的严格源路由选择选项。如果该选项被设置，则检测数据报的目标IP地址是否是本机的某个IP地址。如果不是，则发送一个ICMP源站选路失败报文给发送端。</span><br><span class="line"></span><br><span class="line">3）如果有必要，则给源端发送一个ICMP重定向报文，以告诉它一个更合理的下一跳路由器。</span><br><span class="line"></span><br><span class="line">4）将TTL值减1。</span><br><span class="line"></span><br><span class="line">5）处理IP头部选项。</span><br><span class="line"></span><br><span class="line">6）如果有必要，则执行IP分片操作。</span><br></pre></td></tr></table></figure>
+<h1>重定向</h1>
+<h2 id="ICMP重定向报文">ICMP重定向报文</h2>
+<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img13.PNG" alt></p>
 
       
     </div>

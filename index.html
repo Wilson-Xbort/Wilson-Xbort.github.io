@@ -205,520 +205,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ico.jpg">
-      <meta itemprop="name" content="Willson-Xbort">
-      <meta itemprop="description" content="none">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Linux高性能服务器第三章阅读笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-09-25 09:17:45" itemprop="dateCreated datePublished" datetime="2022-09-25T09:17:45+08:00">2022-09-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-02 16:58:37" itemprop="dateModified" datetime="2022-10-02T16:58:37+08:00">2022-10-02</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>TCP协议详解</h1>
-<h2 id="TCP服务的特点">TCP服务的特点</h2>
-<p>传输层协议主要有两个：<code>TCP协议</code>和<code>UDP</code>协议。<code>TCP协议</code>相对于<code>UDP协议</code>的特点是：面向连接、字节流和可靠传输。</p>
-<blockquote>
-<p>使用TCP协议通信的双方必须先建立连接，然后才能开始数据的读写。双方都必须为该连接分配必要的内核资源，以管理连接的状态和连接上数据的传输。</p>
-</blockquote>
-<blockquote>
-<p>TCP连接是<code>全双工的</code>，即双方的数据读写可以通过一个连接进行。完成数据交换之后，通信双方都必须断开连接以释放系统资源。</p>
-</blockquote>
-<blockquote>
-<p>TCP协议的这种连接是<code>一对一</code>的，所以基于广播和多播（目标是多个主机地址）的应用程序不能使用TCP服务。而无连接协议UDP则非常适合于广播和多播。</p>
-</blockquote>
-<blockquote>
-<p>字节流服务和数据报服务的区别。<br>
-这种区别对应到实际编程中，则体现为通信双方是否必须执行相同次数的<br>
-读、写操作（当然，这只是表现形式）。当发送端应用程序连续执行<br>
-多次写操作时，TCP模块先将这些数据放入TCP发送缓冲区中。当TCP<br>
-模块真正开始发送数据时，发送缓冲区中这些等待发送的数据可能被<br>
-封装成一个或多个TCP报文段发出。因此，<code>TCP模块发送出的TCP报文 段的个数和应用程序执行的写操作次数之间没有固定的数量关系</code>。</p>
-</blockquote>
-<blockquote>
-<p>综上所述，发送端执行的写操作次数和接收端执行的读操作次数<br>
-之间<code>没有任何数量关系</code>，这就是<code>字节流</code>的概念：应用程序对数据的发<br>
-送和接收是没有边界限制的。UDP则不然。发送端应用程序每执行一<br>
-次写操作，UDP模块就将其封装成一个UDP数据报并发送之。接收端<br>
-必须及时针对每一个UDP数据报执行读操作（通过recvfrom系统调<br>
-用），否则就会丢包（这经常发生在较慢的服务器上）。并且，<code>如果 用户没有指定足够的应用程序缓冲区来读取UDP数据，则UDP数据将 被截断</code>。</p>
-</blockquote>
-<blockquote>
-<p>图3-1和图3-2显示了TCP字节流服务和UDP数据报服务的上述区别。两图中省略了传输层以下的通信细节。</p>
-</blockquote>
-<p><img src="/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_C3_img1.PNG" alt></p>
-<blockquote>
-<p>TCP传输是<code>可靠</code>的。首先，TCP协议采用<code>发送应答机制</code>，即发送端<br>
-发送的每个TCP报文段都必须得到接收方的应答，才认为这个TCP报文<br>
-段传输成功。其次，TCP协议采用<code>超时重传机制</code>，发送端在发送出一个<br>
-TCP报文段之后启动定时器，如果在定时时间内未收到应答，它将重发<br>
-该报文段。最后，因为TCP报文段最终是以IP数据报发送的，而IP数据<br>
-报到达接收端可能乱序、重复，所以TCP协议还会对接收到的TCP报文<br>
-段<code>重排、整理</code>，再交付给应用层。</p>
-</blockquote>
-<h2 id="TCP头部结构">TCP头部结构</h2>
-<p><img src="/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_C3_img2.PNG" alt></p>
-<h3 id="端口号-bit-16bit">端口号(bit) 16bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">16位端口号（port number）：</span><br><span class="line">告知主机该报文段是来自哪里（源端口）以及传给哪个上层协议或应用程序（目的端口）的。</span><br><span class="line"></span><br><span class="line">进行TCP通信时，客户端通常使用系统自动选择的临时端口号，而服务器则使用知名服务端口号。</span><br><span class="line"></span><br><span class="line">所有知名服务使用的端口号都定义在/etc/services文件中。</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_C3_img3.PNG" alt></p>
-<h3 id="序号-bit-32bit">序号(bit) 32bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">32位序号（sequence number）：一次TCP通信（从TCP连接建立到断开）过程中某一个传输方向上的字节流的每个字节的编号。</span><br><span class="line"></span><br><span class="line">假设主机A和主机B进行TCP通信，A发送给B的第一个TCP报文段中，序号值被系统初始化为某个随机值ISN（Initial Sequence Number，初始序号值）。</span><br><span class="line">那么在该传输方向上（从A到B），后续的TCP报文段中序号值将被系统设置成ISN加上该报文段所携带数据的第一个字节在整个字节流中的偏移。</span><br><span class="line"></span><br><span class="line">例如，某个TCP报文段传送的数据是字节流中的第1025～2048字节，那么该报文段的序号值就是ISN+1025。</span><br><span class="line">另外一个传输方向（从B到A）的TCP报文段的序号值也具有相同的含义。</span><br></pre></td></tr></table></figure>
-<h3 id="确认号-bit-32bit">确认号(bit) 32bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">32位确认号（acknowledgement number）：用作对另一方发送来的TCP报文段的响应。</span><br><span class="line"></span><br><span class="line">其值是收到的TCP报文段的序号值加1。假设主机A和主机B进行TCP通信，那么A发送出的TCP报文段不仅携带自己的序</span><br><span class="line">号，而且包含对B发送来的TCP报文段的确认号。</span><br><span class="line"></span><br><span class="line">反之，B发送出的TCP报文段也同时携带自己的序号和对A发送来的报文段的确认号。</span><br></pre></td></tr></table></figure>
-<h3 id="头部长度-bit-4bit">头部长度(bit) 4bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">4位头部长度（header length）标识该IP头部有多少个32 bit字（4字节）。</span><br><span class="line">4(字节）*5行 = 20字节</span><br><span class="line">而选项最多40字节</span><br><span class="line">可以推出TCP头部最长60字节</span><br></pre></td></tr></table></figure>
-<h3 id="标志位-bit-6bit">标志位(bit) 6bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">URG标志，表示紧急指针（urgent pointer）是否有效。</span><br><span class="line"></span><br><span class="line">ACK标志，表示确认号是否有效。我们称携带ACK标志的TCP报文段为确认报文段。</span><br><span class="line"></span><br><span class="line">PSH标志，提示接收端应用程序应该立即从TCP接收缓冲区中读走数据，为接收后续数据腾出空间（如果应用程序不将接收到的数据</span><br><span class="line">读走，它们就会一直停留在TCP接收缓冲区中）。</span><br><span class="line"></span><br><span class="line">RST标志，表示要求对方重新建立连接。我们称携带RST(reset)标志的TCP报文段为复位报文段。</span><br><span class="line"></span><br><span class="line">SYN标志，表示请求建立一个连接。我们称携带SYN标志的TCP报文段为同步报文段。</span><br><span class="line"></span><br><span class="line">FIN标志，表示通知对方本端要关闭连接了。我们称携带FIN标志的TCP报文段为结束报文段。</span><br></pre></td></tr></table></figure>
-<h3 id="窗口大小-bit-16bit">窗口大小(bit) 16bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">16位窗口大小（window size）: 是TCP流量控制的一个手段。</span><br><span class="line"></span><br><span class="line">这里说的窗口，指的是接收通告窗口（Receiver Window，RWND）。</span><br><span class="line">它告诉对方本端的TCP接收缓冲区还能容纳多少字节的数据，这样对方就可以控制发送数据的速度。</span><br></pre></td></tr></table></figure>
-<h2 id="TCP头部选项（了解）">TCP头部选项（了解）</h2>
-<blockquote>
-<p>TCP头部的最后一个选项字段（options）是可变长的可选信息。这部分最多包含40字节，因为TCP头部最长是60字节（其中还包含前面讨<br>
-论的20字节的固定部分）。</p>
-</blockquote>
-<p><img src="/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_C3_img4.PNG" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">选项的第一个字段kind说明选项的类型。有的TCP选项没有后面两个字段，仅包含1字节的kind字段。</span><br><span class="line"></span><br><span class="line">第二个字段length（如果有的话）指定该选项的总长度，该长度包括kind字段和length字段占据的2字节。</span><br><span class="line"></span><br><span class="line">第三个字段info（如果有的话）是选项的具体信息。常见的TCP选项有7种，如图3-5所示。</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_C3_img5.PNG" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">kind=0是选项表结束选项。</span><br><span class="line"></span><br><span class="line">kind=1是空操作（nop）选项，没有特殊含义，一般用于将TCP选项的总长度填充为4字节的整数倍。</span><br><span class="line"></span><br><span class="line">kind=2是最大报文段长度选项。TCP连接初始化时，通信双方使用该选项来协商最大报文段长度（Max Segment Size，MSS）。</span><br><span class="line">TCP模块通常将MSS设置为（MTU-40）字节（减掉的这40字节包括20字节的TCP头部和20字节的IP头部）。</span><br><span class="line"></span><br><span class="line">这样携带TCP报文段的IP数据报的长度就不会超过MTU【最大传输单元（Maximum Transmission Unit，MTU）】（假设TCP头部和IP头部都不包含选项字段，并且这也是一般情况），</span><br><span class="line">从而避免本机发生IP分片。对以太网而言，MSS值 是1460（1500-40）字节。</span><br><span class="line"></span><br><span class="line">kind=3是窗口扩大因子选项。TCP连接初始化时，通信双方使用该选项来协商接收通告窗口的扩大因子。</span><br><span class="line">在TCP的头部中，接收通告窗口大小是用16位表示的，故最大为65 535字节，但实际上TCP模块允许的接收通告窗口大小远不止这个数（为了提高TCP通信的吞吐量）。</span><br><span class="line">窗口扩大因子解决了这个问题。假设TCP头部中的接收通告窗口大小是N，窗口扩大因子（移位数）是M，那么TCP报文段的实际接收通告窗口大</span><br><span class="line">小是N乘2M，或者说N左移M位。注意，M的取值范围是0～14。</span><br><span class="line">我们可以通过修改/proc/sys/net/ipv4/tcp_window_scaling内核变量来启用或关闭窗口扩大因子选项。</span><br><span class="line"></span><br><span class="line">kind=4是选择性确认（Selective Acknowledgment，SACK）选项。</span><br><span class="line">TCP通信时，如果某个TCP报文段丢失，则TCP模块会重传最后被确认的TCP报文段后续的所有报文段，这样原先已经正确传输的TCP报文段</span><br><span class="line">也可能重复发送，从而降低了TCP性能。SACK技术正是为改善这种情况而产生的，它使TCP模块只重新发送丢失的TCP报文段，不用发送所</span><br><span class="line">有未被确认的TCP报文段。选择性确认选项用在连接初始化时，表示是否支持SACK技术。我们可以通过修改/proc/sys/net/ipv4/tcp_sack内核变</span><br><span class="line">量来启用或关闭选择性确认选项。</span><br><span class="line"></span><br><span class="line">kind=5是SACK实际工作的选项。</span><br><span class="line">该选项的参数告诉发送方本端已经收到并缓存的不连续的数据块，从而让发送端可以据此检查并重发丢失的数据块。</span><br><span class="line">每个块边沿（edge of block）参数包含一个4字节的序号。其中块左边沿表示不连续块的第一个数据的序号，而块右边沿则</span><br><span class="line">表示不连续块的最后一个数据的序号的下一个序号。这样一对参数（块左边沿和块右边沿）之间的数据是没有收到的。因为一个块信息</span><br><span class="line">占用8字节，所以TCP头部选项中实际上最多可以包含4个这样的不连续数据块（考虑选项类型和长度占用的2字节）。</span><br><span class="line"></span><br><span class="line">kind=8是时间戳选项。该选项提供了较为准确的计算通信双方之间的回路时间（Round Trip Time，RTT）的方法，从而为TCP流量控制提</span><br><span class="line">供重要信息。</span><br><span class="line">我们可以通过修改/proc/sys/net/ipv4/tcp_timestamps内核变量来启用或关闭时间戳选项。</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_C3_img6.PNG" alt><br>
-<img src="/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_C3_img7.PNG" alt><br>
-<img src="/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_C3_img8.PNG" alt></p>
-<h2 id="使用tcpdump观察TCP头部信息">使用tcpdump观察TCP头部信息</h2>
-<p><img src="/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_C3_img9.PNG" alt></p>
-<blockquote>
-<p>tcpdump输出Flags[S]，表示该TCP报文段包含SYN标志，因此它是<br>
-一个同步报文段。如果TCP报文段包含其他标志，则tcpdump也会将该<br>
-标志的首字母显示在“Flags”后的方括号中。</p>
-</blockquote>
-<blockquote>
-<p>seq是序号值。因为该同步报文段是从127.0.0.1.41621（客户端IP地<br>
-址和端口号）到127.0.0.1.23（服务器IP地址和端口号）这个传输方向<br>
-上的第一个TCP报文段，所以这个序号值也就是此次通信过程中该传输<br>
-方向的ISN值。并且，因为这是整个通信过程中的第一个TCP报文段，<br>
-所以它没有针对对方发送来的TCP报文段的确认值（尚未收到任何对方<br>
-发送来的TCP报文段）。</p>
-</blockquote>
-<blockquote>
-<p>win是接收通告窗口的大小。因为这是一个同步报文段，所以win<br>
-值反映的是实际的接收通告窗口大小。</p>
-</blockquote>
-<blockquote>
-<p>options是TCP选项，其具体内容列在方括号中。mss是发送端（客<br>
-户端）通告的最大报文段长度。通过ifconfig命令查看回路接口的MTU<br>
-为16436字节，因此可以预想到TCP报文段的MSS为16396（16436-40）<br>
-字节。sackOK表示发送端支持并同意使用SACK选项。TS val是发送端<br>
-的时间戳。ecr是时间戳回显应答。因为这是一次TCP通信的第一个<br>
-TCP报文段，所以它针对对方的时间戳的应答为0（尚未收到对方的时<br>
-间戳）。紧接着的nop是一个空操作选项。wscale指出发送端使用的窗<br>
-口扩大因子为6。</p>
-</blockquote>
-<p><img src="/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_C3_img10.PNG" alt></p>
-<h1>TCP连接的建立和关闭</h1>
-<h2 id="使用tcpdump观察TCP连接的建立和关闭">使用tcpdump观察TCP连接的建立和关闭</h2>
-<p><img src="/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_C3_img11.PNG" alt></p>
-<blockquote>
-<p>当执行telnet命令并在两台通信主机之间建立TCP连接后（telnet输 出“Connected to 192.168.1.109”），输入Ctrl+]以调出telnet程序的命令提<br>
-示符，然后在telnet命令提示符后输入quit以退出telnet客户端程序，从<br>
-而结束TCP连接。整个过程中（从连接建立到结束），tcpdump输出的<br>
-内容如代码清单3-2所示。</p>
-</blockquote>
-<p><img src="/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_C3_img12.PNG" alt></p>
-<blockquote>
-<p>因为整个过程并没有发生应用层数据的交换，所以TCP报文段的数<br>
-据部分的长度（length）总是0。为了更清楚地表示建立和关闭TCP连接<br>
-的整个过程，我们将tcpdump输出的内容绘制成图3-6所示的时序图。</p>
-</blockquote>
-<p><img src="/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_C3_img13.PNG" alt></p>
-<blockquote>
-<p>第1个TCP报文段包含<code>SYN</code>标志，因此它是一个同步报文段，即<br>
-ernest-laptop（客户端）向Kongming20（服务器）<code>发起连接请求</code>。同<br>
-时，该同步报文段包含一个ISN值为535734930的序号。第2个TCP报文<br>
-段也是同步报文段，表示Kongming20同意与ernest-laptop建立连接。同<br>
-时它发送自己的ISN值为2159701207的序号，并对第1个同步报文段进<br>
-行确认。确认值是535734931，即第1个同步报文段的序号值加1。前文<br>
-说过，序号值是用来标识TCP数据流中的每一字节的。但同步报文段比<br>
-较特殊，即使它并没有携带任何应用程序数据，它也要占用一个序号<br>
-值。第3个TCP报文段是ernest-laptop对第2个同步报文段的确认。至<br>
-此，TCP连接就建立起来了。建立TCP连接的这3个步骤被称为TCP三<br>
-次握手。</p>
-</blockquote>
-<blockquote>
-<p>从第3个TCP报文段开始，tcpdump输出的序号值和确认值都是相对<br>
-初始ISN值的偏移。当然，我们可以开启tcpdump的-S选项来选择打印<br>
-序号的绝对值。</p>
-</blockquote>
-<blockquote>
-<p>后面4个TCP报文段是关闭连接的过程。第4个TCP报文段包含FIN<br>
-标志，因此它是一个结束报文段，即ernest-laptop要求关闭连接。结束<br>
-报文段和同步报文段一样，也要占用一个序号值。Kongming20用TCP<br>
-报文段5来确认该结束报文段。紧接着Kongming20发送自己的结束报文<br>
-段6，ernest-laptop则用TCP报文段7给予确认。实际上，仅用于确认目<br>
-的的确认报文段5是可以省略的，因为结束报文段6也携带了该确认信<br>
-息。确认报文段5是否出现在连接断开的过程中，取决于TCP的延迟确<br>
-认特性。延迟确认将在后面讨论。</p>
-</blockquote>
-<blockquote>
-<p>在连接的关闭过程中，因为ernest-laptop先发送结束报文段（telnet<br>
-客户端程序主动退出），故称ernest-laptop执行主动关闭，而称<br>
-Kongming20执行被动关闭。</p>
-</blockquote>
-<blockquote>
-<p>一般而言，TCP连接是由客户端发起，并通过三次握手建立（特殊<br>
-情况是所谓同时打开[1]）的。TCP连接的关闭过程相对复杂一些。可能<br>
-是客户端执行主动关闭，比如前面的例子；也可能是服务器执行主动<br>
-关闭，比如服务器程序被中断而强制关闭连接；还可能是同时关闭<br>
-（和同时打开一样，非常少见）。</p>
-</blockquote>
-<h2 id="半关闭状态">半关闭状态</h2>
-<blockquote>
-<p>TCP连接是全双工的，所以它允许两个方向的数据传输被独立关<br>
-闭。换言之，通信的一端可以发送结束报文段给对方，告诉它本端已<br>
-经完成了数据的发送，但允许继续接收来自对方的数据，直到对方也<br>
-发送结束报文段以关闭连接。TCP连接的这种状态称为半关闭（half<br>
-close）状态，如图3-7所示。</p>
-</blockquote>
-<p><img src="/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_C3_img14.PNG" alt></p>
-<blockquote>
-<p>请注意，在图3-7中，服务器和客户端应用程序判断对方是否已经<br>
-关闭连接的方法是：read系统调用返回0（收到结束报文段）。当然，<br>
-Linux还提供其他检测连接是否被对方关闭的方法，这将在后续章节讨<br>
-论。</p>
-</blockquote>
-<blockquote>
-<p>socket网络编程接口通过shutdown函数提供了对半关闭的支持，我<br>
-们将在后续章节讨论它。这里强调一下，虽然我们介绍了半关闭状<br>
-态，但是使用半关闭的应用程序很少见。</p>
-</blockquote>
-<h2 id="连接超时">连接超时</h2>
-<p><img src="/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_C3_img15.PNG" alt><br>
-<img src="/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_C3_img16.PNG" alt><br>
-<img src="/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_C3_img17.PNG" alt></p>
-<blockquote>
-<p>这次抓包我们保留了tcpdump输出的时间戳（不使用其-t选项），<br>
-以便推理Linux的超时重连策略。<br>
-我们一共抓取到6个TCP报文段，它们都是同步报文段，并且具有<br>
-相同的序号值，这说明后面5个同步报文段都是超时重连报文段。观察<br>
-这些TCP报文段被发送的时间间隔，它们分别为1s、2s、4s、8s和<br>
-16s（由于定时器精度的问题，这些时间间隔都有一定偏差），可以推<br>
-断最后一个TCP报文段的超时时间是32s（63s-16s-8s-4s-2s-1s）。因<br>
-此，TCP模块一共执行了5次重连操作，这是<br>
-由/proc/sys/net/ipv4/tcp_syn_retries内核变量所定义的。每次重连的超时<br>
-时间都增加一倍。在5次重连均失败的情况下，TCP模块放弃连接并通<br>
-知应用程序。</p>
-</blockquote>
-<h2 id="TCP状态转移">TCP状态转移</h2>
-<blockquote>
-<p>TCP连接的任意一端在任一时刻都处于某种状态，当前状态可以通<br>
-过netstat命令（见第17章）查看。本节我们要讨论的是TCP连接从建立<br>
-到关闭的整个过程中通信两端状态的变化。图3-8是完整的状态转移<br>
-图，它描绘了所有的TCP状态以及可能的状态转换。</p>
-</blockquote>
-<p><img src="/2022/09/25/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_C3_img18.PNG" alt></p>
-<blockquote>
-<p>图3-8中的粗虚线表示典型的服务器端连接的状态转移；粗实线表<br>
-示典型的客户端连接的状态转移。CLOSED是一个假想的起始点，并<br>
-不是一个实际的状态。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-
-    <!-- after add -->
-    
-       <!-- after add finish -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ico.jpg">
-      <meta itemprop="name" content="Willson-Xbort">
-      <meta itemprop="description" content="none">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/" class="post-title-link" itemprop="url">Linux高性能服务器第二章</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-09-19 12:25:30" itemprop="dateCreated datePublished" datetime="2022-09-19T12:25:30+08:00">2022-09-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-09-24 20:55:36" itemprop="dateModified" datetime="2022-09-24T20:55:36+08:00">2022-09-24</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>IP协议详解</h1>
-<p><code>IP协议是TCP/IP协议簇的核心协议</code></p>
-<h2 id="IP服务的特点">IP服务的特点</h2>
-<blockquote>
-<p>IP协议是TCP/IP协议族的动力，它为上层协议提供无状态、无连接、不可靠的服务。</p>
-</blockquote>
-<h3 id="1-无状态">1. 无状态</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">无状态（stateless）是指IP通信双方不同步传输数据的状态信息，因此所有IP数据报的发送、传输和接收都是相互独立、没有上下文关</span><br><span class="line">系的。</span><br><span class="line"></span><br><span class="line">这种服务最大的缺点是无法处理乱序和重复的IP数据报。</span><br></pre></td></tr></table></figure>
-<h4 id="1-1例子">1.1例子</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">比如:</span><br><span class="line"></span><br><span class="line">发送端发送出的第N个IP数据报可能比第N+1个IP数据报后到达接收端，而同一个IP数据报也可能经过不同的路径多次到达接收端。在这</span><br><span class="line">两种情况下，接收端的IP模块无法检测到乱序和重复，因为这些IP数据报之间没有任何上下文关系。接收端的IP模块只要收到了完整的</span><br><span class="line">IP数据报（如果是IP分片的话，IP模块将先执行重组），就将其数据部分（TCP报文段、UDP数据报或者ICMP报文）上交给上层协议。那</span><br><span class="line">么从上层协议来看，这些数据就可能是乱序的、重复的。</span><br></pre></td></tr></table></figure>
-<p>面向连接的协议，比如TCP协议，则能够自己处理乱序的、重复的报文段，它递交给上层协议的内容绝对是有序的、正确的。</p>
-<h3 id="2-无连接">2. 无连接</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">无连接（connectionless）是指IP通信双方都不长久地维持对方的任何信息。这样，上层协议每次发送数据的时候，都必须明确指定对</span><br><span class="line">方的IP地址。</span><br></pre></td></tr></table></figure>
-<h3 id="3-不可靠">3. 不可靠</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">不可靠是指IP协议不能保证IP数据报准确地到达接收端，它只是承诺尽最大努力（best effort）。</span><br></pre></td></tr></table></figure>
-<h4 id="3-1-例子">3.1 例子</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">比如:</span><br><span class="line"></span><br><span class="line">某个中转路由器发现IP数据报在网络上存活的时间太长（根据IP数据报头部字段TTL判断，见后文），那么它将丢弃之，并</span><br><span class="line">返回一个ICMP错误消息（超时错误）给发送端。</span><br><span class="line"></span><br><span class="line">又比如：</span><br><span class="line">接收端发现收到的IP数据报不正确（通过校验机制），它也将丢弃之，并返回一个ICMP错误消息（IP头部参数错误）给发送端。</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>发送端的IP模块一旦检测到IP数据报发送失败，就通知上层协议发送失败，而不会试图重传。</p>
-</blockquote>
-<blockquote>
-<p>因此，使用IP服务的上层协议（比如TCP协议）需要自己实现数据确认、超时重传等机制以达到可靠传输的目的。</p>
-</blockquote>
-<h2 id="IPv4头部结构">IPv4头部结构</h2>
-<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img1.PNG" alt><br>
-其长度通常为20字节，除非含有可变长的选项部分。</p>
-<h3 id="版本号-bit-4bit">版本号(bit) 4bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4位版本号（version）指定IP协议的版本。对IPv4来说，其值是0100。</span><br></pre></td></tr></table></figure>
-<h3 id="头部长度-bit-4bit-2">头部长度(bit) 4bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">4位头部长度（header length）标识该IP头部有多少个32 bit字（4字节）。</span><br><span class="line">4(字节）*5行 = 20字节</span><br><span class="line">而选项最多40字节</span><br><span class="line">可以推出IP头部最长60字节</span><br></pre></td></tr></table></figure>
-<h3 id="服务类型（bit）-8bit">服务类型（bit） 8bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">8位服务类型（Type Of Service，TOS）包括一个3位的优先权字段（现在已经被忽略），4位的TOS字段和1位保留字段（必须置0）。</span><br><span class="line"></span><br><span class="line">4位 的TOS字段分别表示：最小延时，最大吞吐量，最高可靠性和最小费用。其中最多有一个能置为1，应用程序应该根据实际需要来设置它。</span><br><span class="line">比如像ssh和telnet这样的登录程序需要的是最小延时的服务，而文件传输程序ftp则需要最大吞吐量的服务。</span><br></pre></td></tr></table></figure>
-<h3 id="总长度（packet-length）-16bit">总长度（packet length） 16bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">16位总长度（total length）是指整个IP数据报的长度，以字节为单位，因此IP数据报的最大长度为65 535（216-1）字节。</span><br><span class="line">但由于MTU的限制，长度超过MTU的数据报都将被分片传输，所以实际传输的IP数据报（或分片）的长度都远远没有达到最大值。</span><br><span class="line"></span><br><span class="line">包括了ip头部和data</span><br></pre></td></tr></table></figure>
-<h3 id="标识符（identification）-16bit">标识符（identification） 16bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">16位标识（identification）唯一地标识主机发送的每一个数据报。</span><br><span class="line">其初始值由系统随机生成；每发送一个数据报，其值就加1。该值在数据报分片时被复制到每个分片中，因此同一个数据报的所有分片都具</span><br><span class="line">有相同的标识值。</span><br><span class="line"></span><br><span class="line">值1—65535（2^16-1）</span><br></pre></td></tr></table></figure>
-<h3 id="标志（Flags）-3bit">标志（Flags） 3bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">标志字段用以指出该IP数据报后面是否还有分段</span><br><span class="line">第一位 R 保留位一般是空的。</span><br><span class="line">第二位 DF（Don’t Fragment）位 不分片位 1表示不分片，0表示分片。</span><br><span class="line">第三位 MF（More Fragment）位 更多分片位 1表示后面还有分片，0表示无。除了数据报的最后一个分片外，其他分片都要把它置1。</span><br></pre></td></tr></table></figure>
-<h3 id="分片偏移（Flag-offset）-13bit">分片偏移（Flag offset） 13bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">13位分片偏移（fragmentation offset）是分片相对原始IP数据报开始处（仅指数据部分）的偏移。实际的偏移值是该值左移3位（乘8）</span><br><span class="line">后得到的。</span><br><span class="line"></span><br><span class="line">由于这个原因，除了最后一个IP分片外，每个IP分片的数据部分的长度必须是8的整数倍（这样才能保证后面的IP分片拥有一个合适的偏移值）。</span><br></pre></td></tr></table></figure>
-<h3 id="生存时间-Time-to-live-8bit">生存时间(Time to live) 8bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">8位生存时间（Time To Live，TTL）是数据报到达目的地之前允许经过的路由器跳数。</span><br><span class="line"></span><br><span class="line">TTL值被发送端设置（常见的值是64）。</span><br><span class="line">数据报在转发过程中每经过一个路由，该值就被路由器减1。当TTL值减为0时，路由器将丢弃数据报，并向源端发送一个ICMP差错报文。</span><br><span class="line"></span><br><span class="line">TTL值可以防止数据报陷入路由循环。</span><br></pre></td></tr></table></figure>
-<h3 id="协议号（protocol）-8bit">协议号（protocol） 8bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">8位协议（protocol）用来区分上层协议。</span><br><span class="line"></span><br><span class="line">/etc/protocols文件定义了所有上层协议对应的protocol字段的数值。其中，ICMP是1，TCP是6，UDP是17。</span><br><span class="line">/etc/protocols文件是RFC 1700的一个子集。</span><br></pre></td></tr></table></figure>
-<h3 id="头部校验和（header-checksum）-16bit">头部校验和（header checksum） 16bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">16位头部校验和（header checksum）由发送端填充，接收端对其使用CRC算法以检验IP数据报头部（注意，仅检验头部）在传输过程</span><br><span class="line">中是否损坏。</span><br></pre></td></tr></table></figure>
-<h3 id="源ip地址（Source-address）-32bit">源ip地址（Source address） 32bit</h3>
-<h3 id="目标ip地址（Destination-address）-32bit">目标ip地址（Destination address） 32bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">32位的源端IP地址和目的端IP地址用来标识数据报的发送端和接收端。一般情况下，这两个地址在整个数据报的传递过程中保持不变，</span><br><span class="line">而不论它中间经过多少个中转路由器。</span><br></pre></td></tr></table></figure>
-<h3 id="可选项（options）">可选项（options）</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">完成一些特殊功能：严格路由 松散路由 记录路由 时间戳只能在options 里面做。</span><br><span class="line">这部分最多包含40字节，因为IP头部最长是60字节（其中还包含前面讨论的20字节的固定部分）。</span><br></pre></td></tr></table></figure>
-<h2 id="使用tcpdump观察IPv4头部结构">使用tcpdump观察IPv4头部结构</h2>
-<h3 id="操作过程如下">操作过程如下:</h3>
-<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img2.PNG" alt></p>
-<h3 id="用tcpdump抓取数据包">用tcpdump抓取数据包:</h3>
-<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img3.PNG" alt></p>
-<blockquote>
-<p>这次抓包我们开启了tcpdump的-x选项，使之输出数据包的二进制码。此数据包共包含60字节，其中前20字节是IP头部，后40字节是TCP头部，不包含应用程序数据（length值为0）。</p>
-</blockquote>
-<h3 id="分析头部的字节">分析头部的字节</h3>
-<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img4.PNG" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0x0000: 4510 003c a5da 4000 4006 96cf 7f00 0001</span><br><span class="line">解析：</span><br><span class="line">	都是16进制，1个16进制是4位，对照下方的表格看</span><br><span class="line">	IP版本号4，头部长度20字节，开启最小延时服务，禁止分片，TTL最多经过64个路由器，上层协议是TCP。</span><br></pre></td></tr></table></figure>
-<h1>IP分片</h1>
-<blockquote>
-<p>当IP数据报的长度超过帧的MTU时，它将被分片传<br>
-输。分片可能发生在发送端，也可能发生在中转路由器上，而且可能<br>
-在传输过程中被多次分片，但只有在最终的目标机器上，这些分片才<br>
-会被内核中的IP模块重新组装。</p>
-</blockquote>
-<blockquote>
-<p>IP头部中的如下三个字段给IP的分片和重组提供了足够的信息：<code>数据报标识、 标志和片偏移</code>。一个IP数据报的每个分片都具有自己的IP头<br>
-部，它们具有相同的标识值，但具有不同的片偏移。并且除了最后一<br>
-个分片外，其他分片都将设置<code>MF</code>标志。此外，每个分片的IP头部的总<br>
-长度字段将被设置为该分片的长度。</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">以太网帧的MTU是1500字节（可以通过ifconfig命令或者netstat命令查看），因此它携带的IP数据报的数据部分最多是1480字节（IP头部</span><br><span class="line">占用20字节）。考虑用IP数据报封装一个长度为1481字节的ICMP报文（包括8字节的ICMP头部，所以其数据部分长度为1473字节），则该</span><br><span class="line">数据报在使用以太网帧传输时必须被分片。</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img5.PNG" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  长度为1501字节的IP数据报被拆分成两个IP分片，第一个IP分片长度为1500字节，第二个IP分片的长度为21字节。每个IP分片</span><br><span class="line">都包含自己的IP头部（20字节），且第一个IP分片的IP头部设置了MF标志，而第二个IP分片的IP头部则没有设置该标志，因为它</span><br><span class="line">已经是最后一个分片了。原始IP数据报中的ICMP头部内容被完整地复制到了第一个IP分片中。第二个IP分片不包含ICMP头部信息</span><br><span class="line">，因为IP模块重组该ICMP报文的时候只需要一份ICMP头部信息，重复传送这个信息没有任何益处。1473字节的ICMP报文数据的前</span><br><span class="line">1472字节被IP模块复制到第一个IP分片中，使其总长度为1500字节，从而满足MTU的要求；而多出的最后1字节则被复制到第二个</span><br><span class="line">IP分片中。</span><br><span class="line"></span><br><span class="line">  需要指出的是，ICMP报文的头部长度取决于报文的类型，其变化范围很大。图2-2以8字节为例，因为后面的例子用到了ping程序，而</span><br><span class="line">ping程序使用的ICMP回显和应答报文的头部长度是8字节。</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>为了看清楚IP分片的具体过程，考虑从ernest-laptop来ping机器Kongming20，每次传送1473字节的数据（这是ICMP报文的数据部分）<br>
-以强制引起IP分片，并用tcpdump抓取这一过程中双方交换的数据包。具体操作过程如下：</p>
-</blockquote>
-<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img6.PNG" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">这两个IP分片的标识值都是61197，说明它们是同一个IP数据报的分片。</span><br><span class="line"></span><br><span class="line">第一个分片的片偏移值为0，而第二个则是1480。很显然，第二个分片的片偏移值实际上也是第一个分片的ICMP报文的长度。</span><br><span class="line">第一个分片设置了MF标志以表示还有后续分片，所以tcpdump输 出“flags[+]”。</span><br><span class="line">而第二个分片则没有设置任何标志，所以tcpdump输 出“flags[none]”。这个两个分片的长度分别为1500字节和21字节。</span><br><span class="line"></span><br><span class="line">最后，IP层传递给数据链路层的数据可能是一个完整的IP数据报，也可能是一个IP分片，它们统称为IP分组（packet）。</span><br></pre></td></tr></table></figure>
-<h1>IP路由</h1>
-<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img7.PNG" alt></p>
-<p>从右往左看：</p>
-<blockquote>
-<p>当IP模块接收到来自数据链路层的IP数据报时，它首先对该数据报的头部做CRC校验，确认无误之后就分析其头部的具体信息。</p>
-</blockquote>
-<blockquote>
-<p>如果该IP数据报的头部设置了<code>源站选路选项</code>（松散源路由选择或严格源路由选择），则IP模块调用数据报转发子模块来处理该数据报。如果该IP数据报的头部中目标IP地址是本机的某个IP地址，或者是广播地址，即该数据报是发送给本机的，则IP模块就根据数据报头部中的协议字段来决定将它派发给哪个上层应用（分用）。如果IP模块发现这个数据报不是发送给本机的，则也调用数据报转发子模块来处理该数据报。</p>
-</blockquote>
-<blockquote>
-<p>IP数据报应该发送至哪个下一跳路由（或者目标机器），以及经过哪个网卡来发送，就是IP路由过程，即图2-3中“计算下一跳路由”子模块。IP模块实现数据报路由的核心数据结构是<code>路由表</code>。这个表按照数据报的目标IP地址分类，同一类型的IP数据报将被发往相同的下一跳路由器（或者目标机器）。我们将在后面讨论IP路由过程。</p>
-</blockquote>
-<blockquote>
-<p>IP输出队列中存放的是所有等待发送的IP数据报，其中除了需要转发的IP数据报外，还包括封装了本机上层数据（ICMP报文、TCP报文段和UDP数据报）的IP数据报。</p>
-</blockquote>
-<blockquote>
-<p>图2-3中的虚线箭头显示了<code>路由表更新的过程</code>。这一过程是指通过路由协议或者route命令调整路由表，使之更适应最新的网络拓扑结构，称为IP路由策略。</p>
-</blockquote>
-<h2 id="路由机制">路由机制</h2>
-<blockquote>
-<p>要研究IP路由机制，需要先了解路由表的内容。我们可以使用<code>route</code>命令或<code>netstat</code>命令查看路由表。在测试机器ernest-laptop上执行route命令。</p>
-</blockquote>
-<h3 id="路由表实例">路由表实例</h3>
-<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img8.PNG" alt></p>
-<p>该路由表包含两项，每项都包含8个字段。<br>
-<img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img9.PNG" alt></p>
-<blockquote>
-<p>第一项的目标地址是default，即所谓的<code>默认路由项</code>。该项包含一个“G”标志，说明路由的下一跳目标是网关，其地址是192.168.1.1（这是测试网络中路由器的本地IP地址）。另外一个路由项的目标地址是192.168.1.0，它指的是<code>本地局域网</code>。该路由项的网关地址为*，说明数据报不需要路由中转，可以直接发送到目标机器。</p>
-</blockquote>
-<p>那么路由表是如何按照IP地址分类的呢？或者说给定数据报的目标IP地址，它将匹配路由表中的哪一项呢？这就是IP的路由机制，分为<br>
-3个步骤：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1）查找路由表中和数据报的目标IP地址完全匹配的主机IP地址。</span><br><span class="line">如果找到，就使用该路由项，没找到则转步骤2。</span><br><span class="line"></span><br><span class="line">2）查找路由表中和数据报的目标IP地址具有相同网路ID的网络IP</span><br><span class="line">地址（比如代码清单2-2所示的路由表中的第二项）。如果找到，就使</span><br><span class="line">用该路由项；没找到则转步骤3。</span><br><span class="line"></span><br><span class="line">3）选择默认路由项，这通常意味着数据报的下一跳路由是网关。</span><br><span class="line">因此，对于测试机器ernest-laptop而言，所有发送到IP地址为</span><br><span class="line">192.168.1.*的机器的IP数据报都可以直接发送到目标机器（匹配路由表</span><br><span class="line">第二项），而所有访问因特网的请求都将通过网关来转发（匹配默认</span><br><span class="line">路由项）。</span><br></pre></td></tr></table></figure>
-<h2 id="路由表更新">路由表更新</h2>
-<blockquote>
-<p>路由表必须能够更新，以反映网络连接的变化，这样IP模块才能准确、高效地转发数据报。route命令可以修改路由表。我们看如下几个例子（在机器ernest-laptop上执行）：</p>
-</blockquote>
-<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img10.PNG" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">第1行表示添加主机192.168.1.109（机器Kongming20）对应的路由项。</span><br><span class="line">这样设置之后，所有从ernest-laptop发送到Kongming20的IP数据报将通过网卡eth0直接发送至目标机器的接收网卡。</span><br><span class="line"></span><br><span class="line">第2行表示删除网络192.168.1.0对应的路由项。</span><br><span class="line">这样，除了机器Kongming20外，测试机器ernest-laptop将无法访问该局域网上的任何其他机器（能访问到Kongming20是由于执行了上一条命令）。</span><br><span class="line"></span><br><span class="line">第3行表示删除默认路由项，这样做的后果是无法访问因特网。</span><br><span class="line"></span><br><span class="line">第4行表示重新设置默认路由项，不过这次其网关是机器Kongming20（而不是能直接访问因特网的路由器）！</span><br><span class="line">经过上述修改后的路由表如下：</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img11.PNG" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">这个新的路由表中，第一个路由项是主机路由项，所以它被设置了“H”标志。我们设计这样一个路由表的目的是为后文讨论ICMP重定</span><br><span class="line">向提供环境。</span><br><span class="line"></span><br><span class="line">通过route命令或其他工具手工修改路由表，是静态的路由更新方式。对于大型的路由器，它们通常通过BGP（Border Gateway</span><br><span class="line">Protocol，边际网关协议）、RIP（Routing Information Protocol，路由信息协议）、OSPF等协议来发现路径，并更新自己的路由表。这种更新</span><br><span class="line">方式是动态的、自动的。这部分内容超出了本书的讨论范围，感兴趣的读者可阅读参考资料1。</span><br></pre></td></tr></table></figure>
-<h1>IP转发</h1>
-<blockquote>
-<p>不是发送给本机的IP数据报将由数据报转发子模块来处理。路由器都能执行数据报的转发操作，而主机一般只发送和接收数据报，这是因为主机上/proc/sys/net/ipv4/ip_forward内核参数默认被设置为0。我们可以通过修改它来使能主机的数据报转发功能（在测试<br>
-机器Kongming20上以root身份执行）：</p>
-</blockquote>
-<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img12.PNG" alt></p>
-<blockquote>
-<p>对于允许IP数据报转发的系统（主机或路由器），数据报转发子模块将对期望转发的数据报执行如下操作：</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1）检查数据报头部的TTL值。如果TTL值已经是0，则丢弃该数据报。</span><br><span class="line"></span><br><span class="line">2）查看数据报头部的严格源路由选择选项。如果该选项被设置，则检测数据报的目标IP地址是否是本机的某个IP地址。如果不是，则发送一个ICMP源站选路失败报文给发送端。</span><br><span class="line"></span><br><span class="line">3）如果有必要，则给源端发送一个ICMP重定向报文，以告诉它一个更合理的下一跳路由器。</span><br><span class="line"></span><br><span class="line">4）将TTL值减1。</span><br><span class="line"></span><br><span class="line">5）处理IP头部选项。</span><br><span class="line"></span><br><span class="line">6）如果有必要，则执行IP分片操作。</span><br></pre></td></tr></table></figure>
-<h1>重定向</h1>
-<h2 id="ICMP重定向报文">ICMP重定向报文</h2>
-<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img13.PNG" alt></p>
-<blockquote>
-<p>过ICMP报文头部的3个固定字段：8位类型、8位代码和16位校验和。ICMP重定向报文的类型值是5，代码字段有4个可选值，用来区分不同的重定向类型。本书仅讨论主机重定向，其代码值为1。</p>
-</blockquote>
-<p>ICMP重定向报文的数据部分含义很明确，它给接收方提供了如下两个信息：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.引起重定向的IP数据报（即图2-4中的原始IP数据报）的源端IP地址。</span><br><span class="line">2.应该使用的路由器的IP地址。</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">接收主机根据这两个信息就可以断定引起重定向的IP数据报应该使用哪个路由器来转发，并且以此来更新路由表（通常是更新路由表缓冲，而不是直接更改路由表）。</span><br><span class="line"></span><br><span class="line">/proc/sys/net/ipv4/conf/all/send_redirects内核参数指定是否允许发送ICMP重定向报文，而/proc/sys/net/ipv4/conf/all/accept_redirects内核参数则指定是否允许接收ICMP重定向报文。</span><br><span class="line"></span><br><span class="line">一般来说，主机只能接收ICMP重定向报文，而路由器只能发送ICMP重定向报文。</span><br></pre></td></tr></table></figure>
-<h2 id="主机重定向实例">主机重定向实例</h2>
-<p>我们把机器ernest-laptop的网关设置成了机器<br>
-Kongming20，2.5节中我们又使能了Kongming20的数据报转发功能，因此机器ernest-laptop将通过Kongming20来访问因特网，比如在ernest-laptop上执行如下ping命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ping www.baidu.com</span><br><span class="line">PING www.a.shifen.com(119.75.217.56)56(84)bytes of data.</span><br><span class="line">From Kongming20(192.168.1.109):icmp_seq=1 Redirect Host(New</span><br><span class="line">nexthop:192.168.1.1)</span><br><span class="line">64 bytes from 119.75.217.56:icmp_seq=1 ttl=54 time=6.78 ms</span><br><span class="line">---www.a.shifen.com ping statistics---</span><br><span class="line">1 packets transmitted,1 received,0%packet loss,time 0ms</span><br><span class="line">rtt min/avg/max/mdev=6.789/6.789/6.789/0.000 ms</span><br></pre></td></tr></table></figure>
-<p>从ping命令的输出来看，Kongming20给ernest-laptop发送了一个ICMP重定向报文，告诉它请通过192.168.1.1来访问目标机器，因为这对ernest-laptop来说是更合理的路由方式。当主机ernest-laptop收到这样的ICMP重定向报文后，它将更新其路由表缓冲（使用命令route-Cn查看），并使用新的路由方式来发送后续数据报。上面讨论的重定向过程可用图2-5来总结。</p>
-<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img14.PNG" alt></p>
-<h2 id="IPv6头部结构">IPv6头部结构</h2>
-<p>IPv6头部由40字节的固定头部和可变长的扩展头部组成。<br>
-<img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img15.PNG" alt></p>
-<h3 id="版本号-bit-4bit-2">版本号(bit) 4bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4位版本号（version）指定IP协议的版本。对IPv6来说，其值是6。</span><br></pre></td></tr></table></figure>
-<h3 id="通信类型-bit-8bit">通信类型(bit) 8bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8位通信类型（traffic class）指示数据流通信类型或优先级，和IPv4中的TOS类似。</span><br></pre></td></tr></table></figure>
-<h3 id="流标签-bit-20bit">流标签(bit) 20bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">20位流标签（flow label）是IPv6新增加的字段，用于某些对连接的服务质量有特殊要求的通信，比如音频或视频等实时数据传输。</span><br></pre></td></tr></table></figure>
-<h3 id="净荷长度-bit-16bit">净荷长度(bit) 16bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">16位净荷长度（payload length）指的是IPv6扩展头部和应用程序数据长度之和，不包括固定头部长度。</span><br></pre></td></tr></table></figure>
-<h3 id="下一个包头-bit-8bit">下一个包头(bit) 8bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8位下一个包头（next header）指出紧跟IPv6固定头部后的包头类型，如扩展头（如果有的话）或某个上层协议头（比如TCP，UDP或ICMP）。它类似于IPv4头部中的协议字段，且相同的取值有相同的含义。</span><br></pre></td></tr></table></figure>
-<h3 id="IP地址-bit-128bit">IP地址(bit) 128bit</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IPv6用128位（16字节）来表示IP地址，使得IP地址的总量达到了2^128个。所以有人说，“IPv6使得地球上的每粒沙子都有一个IP地址”。</span><br></pre></td></tr></table></figure>
-<p>说明：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">32位表示的IPv4地址一般用点分十进制来表示，而IPv6地址则用十</span><br><span class="line">六进制字符串表示，比</span><br><span class="line">如“FE80:0000:0000:0000:1234:5678:0000:0012”。可见，IPv6地址</span><br><span class="line">用“:”分割成8组，每组包含2字节。</span><br></pre></td></tr></table></figure>
-<h3 id="零压缩法（省略连续的、全零的组）">零压缩法（省略连续的、全零的组）</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">上面的例子使用零压缩法可表示为“FE80::1234:5678:0000:0012”。</span><br><span class="line">不过零压缩法对一个IPv6地址只能使用一次，比如上面的例子中，</span><br><span class="line">字节组“5678”后面的全零组就不能再省略，否则我们就无法计算每个“::”之间省略了多少个全零组。</span><br></pre></td></tr></table></figure>
-<h3 id="IPv6扩展头部">IPv6扩展头部</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">可变长的扩展头部使得IPv6能支持更多的选项，并且很便于将来的扩展需要。</span><br><span class="line"></span><br><span class="line">它的长度可以是0，表示数据报没使用任何扩展头部。一个数据报可以包含多个扩展头部，每个扩展头部的类型由前一个头部</span><br><span class="line">（固定头部或扩展头部）中的下一个报头字段指定。目前可以使用的扩展头部如表2-3所示。</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/09/19/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0/Linux_Server_C2_img16.PNG" alt></p>
-<blockquote>
-<p>IPv6协议并不是IPv4协议的简单扩展，而是完全独立的协议。用以太网帧封装的IPv6数据报和IPv4数据报具有不同的类型值。第1章提到，IPv4数据报的以太网帧封装类型值是0x800，而IPv6数据报的以太网帧封装类型值是0x86dd（见RFC 2464）。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-
-    <!-- after add -->
-    
-       <!-- after add finish -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/09/19/%E9%9D%A2%E7%BB%8F%E6%95%B4%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -814,154 +300,6 @@ Kongming20，2.5节中我们又使能了Kongming20的数据报转发功能，因
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A.八皇后 B.最小生成树 C.单源最短路径 D.最佳合并模式</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>应该是八皇后（应该使用回溯法）</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-
-    <!-- after add -->
-    
-       <!-- after add finish -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/09/17/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ico.jpg">
-      <meta itemprop="name" content="Willson-Xbort">
-      <meta itemprop="description" content="none">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/09/17/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Linux高性能服务器阅读笔记第一章</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-09-17 19:50:36" itemprop="dateCreated datePublished" datetime="2022-09-17T19:50:36+08:00">2022-09-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-09-18 19:18:23" itemprop="dateModified" datetime="2022-09-18T19:18:23+08:00">2022-09-18</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>TCP/IP协议簇以及主要协议</h1>
-<h2 id="OSI四层协议">OSI四层协议</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 数据链路层 -&gt; 第一层</span><br><span class="line">2. 网络层 -&gt; 第二层</span><br><span class="line">3. 传输层 -&gt; 第三层</span><br><span class="line">4. 应用层 -&gt; 第四层</span><br></pre></td></tr></table></figure>
-<h2 id="主要协议">主要协议</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">应用层	  ping - telent	- OSPF - DNS      用户空间</span><br><span class="line">----------------------------------------- socket</span><br><span class="line">传输层			TCP	- UDP</span><br><span class="line">-----------------------------------------</span><br><span class="line">网络层		    ICMP - IP				  内核空间</span><br><span class="line">-----------------------------------------</span><br><span class="line">数据链路层		ARP - RARP</span><br><span class="line">----------------------------------------- 物理传输媒介</span><br></pre></td></tr></table></figure>
-<h3 id="1-数据链路层">1.数据链路层</h3>
-<blockquote>
-<p>数据链路层实现了网卡接口的网络驱动程序，以处理数据在物理媒介(比如以太网、令牌环等）上的传输。常用协议是<code>ARP(Address Resolve Protocol)</code>和<code>RARP(Reverse Address Resolve Protocol)</code>协议。</p>
-</blockquote>
-<h3 id="2-网络层">2. 网络层</h3>
-<blockquote>
-<p>网络层实现数据包的选路和转发。核心协议是<code>IP(Internet Protocol)</code>和<code>ICMP(Internet Control Message Protocol)</code>协议。</p>
-</blockquote>
-<h4 id="2-1-ICMP报文格式">2.1 ICMP报文格式</h4>
-<p><img src="/2022/09/17/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_img1.PNG" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">8位类型字段用于区分报文类型。它将ICMP报文分为两大类：</span><br><span class="line">	</span><br><span class="line">一类是差错报文，这类报文主要用来回应网络错误，比如目标不可到达（类型值为3）和重定向（类型值为5；</span><br><span class="line"></span><br><span class="line">另一类是查询报文，这类报文用来查询网络信息，比如ping程序就是使用ICMP报文查看目标是否可到达（类型值为8）的。有的ICMP报文还使用8位代码字</span><br><span class="line">段来进一步细分不同的条件。比如重定向报文使用代码值0表示对网络重定向，代码值1表示对主机重定向。ICMP报文使用16位校验和字段对整个报文（包</span><br><span class="line">括头部和内容部分）进行循环冗余校验（Cyclic Redundancy Check，CRC），以检验报文在传输过程中是否损坏。不同的ICMP报文类型具有不同的正文内</span><br><span class="line">容。</span><br><span class="line"></span><br><span class="line">其他ICMP报文格式请参考ICMP协议的标准文档RFC792。</span><br><span class="line"></span><br><span class="line">需要指出的是，ICMP协议并非严格意义上的网络层协议，因为它使用处于同一层的IP协议提供的服务（一般来说，上层协议使用下层协议提供的服务）。</span><br></pre></td></tr></table></figure>
-<h3 id="3-传输层">3. 传输层</h3>
-<blockquote>
-<p>传输层为两台主机上的应用程序提供端到端（end to end）的通信。与网络层使用的逐跳通信方式不同，传输层只关心通信的起始端和目的端，而不在乎数据包的中转过程。核心协议是<code>TCP协议，UDP协议，SCTP协议</code>。</p>
-</blockquote>
-<h4 id="3-1-TCP-IP">3.1 TCP/IP</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">TCP协议（Transmission Control Protocol，传输控制协议）为应用层提供可靠的、面向连接的和基于流（stream）的服务。</span><br><span class="line"></span><br><span class="line">TCP协议使用超时重传、数据确认等方式来确保数据包被正确地发送至目的端，因此TCP服务是可靠的。</span><br><span class="line"></span><br><span class="line">使用TCP协议通信的双方必须先建立TCP连接，并在内核中为该连接维持一些必要的数据结构，比如连接的状态、读写缓冲区，以及诸多定时器等。</span><br><span class="line">当通信结束时，双方必须关闭连接以释放这些内核数据。</span><br><span class="line"></span><br><span class="line">TCP服务是基于流的。基于流的数据没有边界（长度）限制，它源源不断地从通信的一端流入另一端。发送端可以逐个字节地向数据流中写入数据</span><br><span class="line">，接收端也可以逐个字节地将它们读出。</span><br></pre></td></tr></table></figure>
-<h4 id="3-2-UDP协议">3.2 UDP协议</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">UDP协议（User Datagram Protocol，用户数据报协议）则与TCP协议完全相反，它为应用层提供不可靠、无连接和基于数据报的服务。</span><br><span class="line"></span><br><span class="line">“不可靠”意味着UDP协议无法保证数据从发送端正确地传送到目的端。如果数据在中途丢失，或者目的端通过数据校验发现数据错误而将其丢弃，</span><br><span class="line">则UDP协议只是简单地通知应用程序发送失败。因此，使用UDP协议的应用程序通常要自己处理数据确认、超时重传等逻辑。</span><br><span class="line"></span><br><span class="line">UDP协议是无连接的，即通信双方不保持一个长久的联系，因此应用程序每次发送数据都要明确指定接收端的地址（IP地址等信息）。</span><br><span class="line"></span><br><span class="line">基于数据报的服务，是相对基于流的服务而言的。每个UDP数据报都有一个长度，接收端必须以该长度为最小单位将其所有内容一次性读出，否则数据将被截断。</span><br></pre></td></tr></table></figure>
-<h4 id="3-3-SCTP协议">3.3 SCTP协议</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SCTP协议（Stream Control Transmission Protocol，流控制传输协议）是一种相对较新的传输层协议，它是为了在因特网上传输电话信号而设计的。</span><br><span class="line"></span><br><span class="line">可参考其标准文档RFC 2960</span><br></pre></td></tr></table></figure>
-<h3 id="4-应用层">4. 应用层</h3>
-<blockquote>
-<p>应用层负责处理应用程序的逻辑。数据链路层、网络层和传输层负责处理网络通信细节，这部分必须既稳定又高效，因此它们都在内核空间中实现，而应用层则在用户空间实现，因为它负责处理众多逻辑，比如文件传输、名称查询和网络管理等。如果应用层也在内核中实现，则会使内核变得非常庞大。当然，也有少数服务器程序是在内核中实现的，这样代码就无须在用户空间和内核空间来回切换（主要是数据的复制），极大地提高了工作效率。不过这种代码实现起来较复杂，不够灵活，且不便于移植。</p>
-</blockquote>
-<h4 id="4-1-telent-协议">4.1 telent 协议</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telnet协议是一种远程登录协议，它使我们能在本地完成远程任务，本书后续章节将会多次使用telnet客户端登录到其他服务上。</span><br></pre></td></tr></table></figure>
-<h4 id="4-2-OSPF-协议">4.2 OSPF 协议</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OSPF（Open Shortest Path First，开放最短路径优先）协议是一种动态路由更新协议，用于路由器之间的通信，以告知对方各自的路由信息。</span><br></pre></td></tr></table></figure>
-<h4 id="4-3-DNS-协议">4.3 DNS 协议</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DNS（Domain Name Service，域名服务）协议提供机器域名到IP地址的转换，我们将在后面简要介绍DNS协议。</span><br></pre></td></tr></table></figure>
-<h2 id="封装">封装</h2>
-<blockquote>
-<p>每层协议都将在上层数据的基础上加上自己的头部信息（有时还包括尾部信息），以实现该层的功能，这个过程就称为封装。</p>
-</blockquote>
-<p><img src="/2022/09/17/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_img2.PNG" alt></p>
-<blockquote>
-<p>经过TCP封装后的数据称为TCP报文段（TCP message segment），或者简称TCP段。前文提到，TCP协议为通信双方维持一个连接，并且在内核中存储相关数据。这部分数据中的TCP头部信息和TCP内核缓冲区（发送缓冲区或接收缓冲区）数据一起构成了TCP报文段，如下图中的虚线框所示。</p>
-</blockquote>
-<p><img src="/2022/09/17/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_img3.PNG" alt></p>
-<blockquote>
-<p>当发送端应用程序使用send（或者write）函数向一个TCP连接写入数据时，内核中的TCP模块首先把这些数据复制到与该连接对应的TCP内核发送缓冲区中，然后TCP模块调用IP模块提供的服务，传递的参数包括TCP头部信息和TCP发送缓冲区中的数据，即TCP报文段。</p>
-</blockquote>
-<blockquote>
-<p>经过UDP封装后的数据称为UDP数据报（UDP datagram）。UDP对应用程序数据的封装与TCP类似。不同的是，UDP无须为应用层数据保存副本，因为它提供的服务是不可靠的。当一个UDP数据报被成功发送之后，UDP内核缓冲区中的该数据报就被丢弃了。如果应用程序检测到该数据报未能被接收端正确接收，并打算重发这个数据报，则应用程序需要重新从用户空间将该数据报拷贝到UDP内核发送缓冲区中。</p>
-</blockquote>
-<blockquote>
-<p>经过IP封装后的数据称为IP数据报（IP datagram）。IP数据报也包括头部信息和数据部分，其中数据部分就是一个TCP报文段、UDP数据报或者ICMP报文。</p>
-</blockquote>
-<blockquote>
-<p>经过数据链路层封装的数据称为帧（frame）。</p>
-</blockquote>
-<h3 id="以太网帧">以太网帧</h3>
-<p><img src="/2022/09/17/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_img4.PNG" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">帧的最大传输单元（Max Transmit Unit，MTU），即帧最多能携带多少上层协议数据（比如IP数据报），通常受到网络类型的限制。</span><br><span class="line">图1-6所示的以太网帧的MTU是1500字节。</span><br></pre></td></tr></table></figure>
-<h2 id="分用">分用</h2>
-<blockquote>
-<p>当帧到达目的主机时，将沿着协议栈自底向上依次传递。各层协议依次处理帧中本层负责的头部数据，以获取所需的信息，并最终将处理后的帧交给目标应用程序。这个过程称为分用（demultiplexing）。分用是依靠头部信息中的类型字段实现的。</p>
-</blockquote>
-<p><img src="/2022/09/17/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_img5.PNG" alt></p>
-<h2 id="测试网络">测试网络</h2>
-<blockquote>
-<p>测试网络两台主机A和B，以及一个连接到因特网的路由器。</p>
-</blockquote>
-<p><img src="/2022/09/17/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Linux_Server_img6.PNG" alt></p>
-<h2 id="socket">socket</h2>
-<blockquote>
-<p>数据链路层、网络层、传输层协议是在内核中实现的。因此操作系统需要实现一组系统调用，使得应用程序能够访问这些协议提供的服务。实现这组系统调用的API（ApplicationProgramming Interface，应用程序编程接口）主要有两套：socket和XTI。</p>
-</blockquote>
-<blockquote>
-<p>由socket定义的这一组API提供如下两点功能：一是将应用程序数据从用户缓冲区中复制到TCP/UDP内核发送缓冲区，以交付内核来发送数据（比如图1-5所示的send函数），或者是从内核TCP/UDP接收缓冲区中复制数据到用户缓冲区，以读取数据；二是应用程序可以通过它们来修改内核中各层协议的某些头部信息或其他数据结构，从而精细地控制底层通信的行为。</p>
-</blockquote>
-<blockquote>
-<p>值得一提的是，socket是一套通用网络编程接口，它不但可以访问内核中TCP/IP协议栈，而且可以访问其他网络协议栈（比如X.25协议栈、UNIX本地域协议栈等）</p>
 </blockquote>
 
       
@@ -1998,6 +1336,263 @@ j的值被copy到t1。f中的引用参数被绑定带t1,而非j,从而其改变�
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ico.jpg">
+      <meta itemprop="name" content="Willson-Xbort">
+      <meta itemprop="description" content="none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/" class="post-title-link" itemprop="url">访问控制与继承</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-08-10 10:52:54 / 修改时间：14:25:38" itemprop="dateCreated datePublished" datetime="2022-08-10T10:52:54+08:00">2022-08-10</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>C++ primer 第15章 面向对象程序设计</h1>
+<h2 id="访问控制和继承">访问控制和继承</h2>
+<p><img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img1.PNG" alt><br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img2.PNG" alt><br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img3.PNG" alt></p>
+<blockquote>
+<p>基类对象不能访问基类的peotected,private成员<br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_qx.jpg" alt></p>
+</blockquote>
+<p><img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img4.PNG" alt><br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img5.PNG" alt><br>
+<img src="/2022/08/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%BB%A7%E6%89%BF/protected_img6.PNG" alt></p>
+<blockquote>
+<p>只有public继承的时候才能使用派生类向基类的转换</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <!-- after add -->
+    
+       <!-- after add finish -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/08/08/2022-8-4%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ico.jpg">
+      <meta itemprop="name" content="Willson-Xbort">
+      <meta itemprop="description" content="none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/08/08/2022-8-4%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">2022-8-4面试整理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-08-08 14:06:48" itemprop="dateCreated datePublished" datetime="2022-08-08T14:06:48+08:00">2022-08-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-08-11 10:28:30" itemprop="dateModified" datetime="2022-08-11T10:28:30+08:00">2022-08-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="算法题1：">算法题1：</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">假设有从小到大顺序排列，不一定连续但没有重复的整数序列A=&#123;a1, a2, a3,...am-1,am,am+1,...an-1,an&#125;,</span><br><span class="line">将该序列重新排列为B&#123;am,am+1,...an-1,an,a1,a2,...am-1&#125;。试给出一个程序从符合B序列的数组中找到a1的</span><br><span class="line">位置，要求算法复杂度&lt;O(N).</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这题我没有好好审题，一看a1，没有想到是求最小值，确实应该使用二分法</span><br></pre></td></tr></table></figure>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">(vector&lt;<span class="type">int</span>&gt; B)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> n = B.<span class="built_in">size</span>();</span><br><span class="line">	<span class="type">int</span> left = <span class="number">0</span>, right = n - <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">		<span class="type">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span> (B[mid] &gt; B[right]) &#123;</span><br><span class="line">			<span class="comment">// 中间点要比右边界大，很有可能min值在中间点右边</span></span><br><span class="line">			left = mid + <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (B[mid] &lt; B[right]) &#123;</span><br><span class="line">			<span class="comment">// 中间点比右边界小，那最小值应该在中间值的左侧</span></span><br><span class="line">			right = mid;</span><br><span class="line">		&#125; </span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			right -= <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> left;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span> </span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; A = &#123; <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">15</span>, <span class="number">17</span>, <span class="number">21</span>, <span class="number">25</span> &#125;;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; B = &#123; <span class="number">10</span>, <span class="number">11</span>, <span class="number">15</span>, <span class="number">17</span>, <span class="number">21</span>, <span class="number">25</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span> &#125;;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">func</span>(B);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="算法题2：">算法题2：</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">实现以下函数，中间不能调用其他任何标准库中的函数（返回一个指针指向第一次出现在字符串中的StrSearch)</span><br><span class="line">Returns a pointer to the first occurrence of strSearch in string</span><br></pre></td></tr></table></figure>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">judge</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* string, <span class="type">const</span> <span class="type">char</span>* strSearch, <span class="type">int</span> len)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (string[i] != strSearch[i]) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">char</span>* _strstr(<span class="type">const</span> <span class="type">char</span>* string, <span class="type">const</span> <span class="type">char</span>* strSearch) &#123;</span><br><span class="line">	<span class="type">int</span> len_str = <span class="built_in">strlen</span>(string);</span><br><span class="line">	<span class="type">int</span> len_compare = <span class="built_in">strlen</span>(strSearch);</span><br><span class="line">	<span class="keyword">if</span> (len_str &lt; len_compare) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="type">const</span> <span class="type">char</span>* pos = string;</span><br><span class="line">	<span class="comment">// 去除&#x27;\0&#x27;</span></span><br><span class="line">	<span class="type">const</span> <span class="type">char</span>* pos_end = string + len_str - <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (; pos &lt;= pos_end - len_compare; pos++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">judge</span>(pos, strSearch, len_compare) == <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">return</span> pos;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span> </span>&#123;</span><br><span class="line">	<span class="type">const</span> <span class="type">char</span> a[] = <span class="string">&quot;Hello, world&quot;</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, _strstr(a, <span class="string">&quot;,&quot;</span>));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="虚函数程序题">虚函数程序题</h2>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="type">int</span> iValue;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">fun1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Base fun1&quot;</span> &lt;&lt; endl;</span><br><span class="line">		<span class="built_in">fun2</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">fun2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Base fun2&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived</span> : <span class="keyword">public</span> Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="type">char</span>* pValue;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">fun1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Derived fun1&quot;</span> &lt;&lt; endl;</span><br><span class="line">		<span class="built_in">fun2</span>();</span><br><span class="line">		Base::<span class="built_in">fun1</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">fun2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Derived fun2&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MoreDerived</span> : <span class="keyword">public</span> Derived &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="type">static</span> <span class="type">double</span> dValue;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="built_in">sizeof</span>(Base) &lt;&lt; endl	 </span><br><span class="line">		&lt;&lt; <span class="built_in">sizeof</span>(Derived) &lt;&lt; endl</span><br><span class="line">		&lt;&lt; <span class="built_in">sizeof</span>(MoreDerived) &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	Derived d;</span><br><span class="line"></span><br><span class="line">	Base&amp; rB = d;</span><br><span class="line">	rB.<span class="built_in">fun1</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	Base* pB = &amp;d;</span><br><span class="line">	pB-&gt;<span class="built_in">fun1</span>();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 以下3种写法一样</span></span><br><span class="line">	pB = (Base*)&amp;d;</span><br><span class="line">	<span class="comment">// pB = &amp;d;</span></span><br><span class="line">	<span class="comment">// pB = &amp;(Base&amp;)d; // (Base)是个临时变量，而取地址符&amp;右边必须是左值，所以（Base&amp;)引用</span></span><br><span class="line">	pB-&gt;<span class="built_in">fun1</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="首先要知道的知识">首先要知道的知识</h2>
+<ol>
+<li>字节对齐：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">类的默认的对齐方式：规定各成员变量存放的起始地址相对于结构的起始地址的偏移量必须为该变量的类型所占用的字节数的倍数。</span><br><span class="line">各成员变量在存放的时候根据在结构中出现的顺序依次申请空间结构的字节边界数。</span><br><span class="line">结构中占用最大空间的类型所占用的字节数的倍数。</span><br></pre></td></tr></table></figure>
+<p>常用类型的对齐方式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.	char 1的倍数</span><br><span class="line">2.	int 4的倍数</span><br><span class="line">3.	float 4的倍数</span><br><span class="line">4.	double 8的倍数</span><br><span class="line">5.	short 2的倍数</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>虚指针：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">多态是由虚函数实现的，而虚函数主要通过虚函数表（V-Table） 来实现。</span><br><span class="line">虚函数表每一项存储的一个虚函数的地址。  </span><br><span class="line">类的每一个对象都会包含一个虚指针，这个虚指针指向虚函数表。</span><br><span class="line"></span><br><span class="line">在32位下，虚指针占4个字节，在64位下，虚指针占8个字节。</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>C++ 对象的内存布局查看</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 打开vs2022自带的【x86 Native Tools Command Prompt for VS 2022】</span><br><span class="line">2. 转入到要调试的cpp目录下： 例如C:\\Users\\Administrator\\source\\repos\\test</span><br><span class="line">3. 输入cl -d1reportSingleClassLayoutXXX MMM.cpp 【xxx为类名，MMM是文件名】</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>左值和右值</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">左值（L-value）：表示存储在计算机内存的对象，可寻址，相当于地址值</span><br><span class="line"></span><br><span class="line">右值（R-value）：代表的为真实值，可读，即数据值</span><br><span class="line"></span><br><span class="line">因为左值是一个地址值，因此可以对左值进行赋值操作，而右值本身就是同一个数据值，就不存在对一个数据值就行赋值的操作。</span><br><span class="line"></span><br><span class="line">int a,b;</span><br><span class="line">a=5;//为合法的操作，因为a是个地址值；</span><br><span class="line">b=a;//这个也是个合法操作，在这里b为地址值，a取其数据值即5(注意这里不是取地址值，因为a是作为一个右值)</span><br><span class="line">5=5;//这是一个非法操作，因为左值是个数据值，右值也是个数据值</span><br></pre></td></tr></table></figure>
+<h2 id="开始调试">开始调试</h2>
+<table>
+<thead>
+<tr>
+<th><img src="/2022/08/08/2022-8-4%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/virtual_interview_img2.PNG" alt></th>
+<th><img src="/2022/08/08/2022-8-4%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/virtual_interview_img3.PNG" alt="controller"></th>
+<th><img src="/2022/08/08/2022-8-4%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/virtual_interview_img4.PNG" alt="Analysis"></th>
+</tr>
+</thead>
+</table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; sizeof(Base) &lt;&lt; endl	// 	虚指针8字节，int字节对齐=8 =》 16</span><br><span class="line">     &lt;&lt; sizeof(Derived) &lt;&lt; endl //  继承后pValue 字节对齐 + 8 =》 16 + 8 = 24</span><br><span class="line">	 &lt;&lt; sizeof(MoreDerived) &lt;&lt; endl; // 因为是static在静态区，不变还是24</span><br><span class="line"></span><br><span class="line">Derived d;</span><br><span class="line"></span><br><span class="line">Base&amp; rB = d;</span><br><span class="line">rB.fun1();	// 不管谁指向/引用谁，都是自动识别调子类自己的函数(调用被重写过的函数）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Base* pB = &amp;d;</span><br><span class="line">pB-&gt;fun1(); // 不管谁指向/引用谁，都是自动识别调子类自己的函数(调用被重写过的函数）</span><br><span class="line"></span><br><span class="line">pB = (Base*)&amp;d;</span><br><span class="line">//pB = &amp;(Base&amp;)d;</span><br><span class="line">// pB = &amp;d;</span><br><span class="line">pB-&gt;fun3(); // 强转后还是先调用被重写的函数，如果没有再往基类找</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <!-- after add -->
+    
+       <!-- after add finish -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wilson-xbort.github.io/2022/08/08/git%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ico.jpg">
+      <meta itemprop="name" content="Willson-Xbort">
+      <meta itemprop="description" content="none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/08/08/git%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">git使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-08-08 13:37:18 / 修改时间：14:04:20" itemprop="dateCreated datePublished" datetime="2022-08-08T13:37:18+08:00">2022-08-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>快速入门</h1>
+<h2 id="1-找到要上传的文件夹（Win10">1. 找到要上传的文件夹（Win10)</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.1 右击出现 Git Bash Here</span><br><span class="line">1.2 配置好邮箱，用户名，密码</span><br><span class="line">git config --global user.name &quot;xxx&quot;</span><br><span class="line">git config --global user.email &quot;xxx&quot;</span><br><span class="line">git config --global user.password &quot;xxx&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="2-基本指令">2.基本指令</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 初始化git, 会出现.git的文件夹</span><br><span class="line">git init</span><br><span class="line">// 可加可不加</span><br><span class="line">git add README.md </span><br><span class="line">// git commit 命令将暂存区内容添加到本地仓库</span><br><span class="line">git commit -m &quot;first commit&quot; </span><br><span class="line">// 创建一个新的本地分支main, 不进行切换</span><br><span class="line">git branch -M main</span><br><span class="line">// 添加远程仓库地址</span><br><span class="line">git remote add origin https://github.com/Wilson-Xbort/test.git </span><br><span class="line">// 将本地的 main 分支推送到 origin 主机的 main 分支。</span><br><span class="line">git push -u origin main</span><br><span class="line">// 压缩成.bundle</span><br><span class="line">git bundle create xxx.bundle HEAD main</span><br><span class="line">// 验证校验是否合法</span><br><span class="line">git bundle verify ./xxx.bundle</span><br><span class="line">// 删除远程库</span><br><span class="line">git remote rm origin</span><br><span class="line">// 解压.bundle</span><br><span class="line">git clone xxx.bundle</span><br></pre></td></tr></table></figure>
+<h2 id="3-error和解决方式">3. error和解决方式</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. error: failed to push some refs to &#x27;https://github.com/xxx/xxx.git&#x27;</span><br><span class="line">2. Git:nothing added to commit but untracked files present</span><br><span class="line">3. fatal: Updating an unborn branch with changes added to the index.</span><br></pre></td></tr></table></figure>
+<h2 id="解决方法">解决方法</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add -A 或者 git add --all</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <!-- after add -->
+    
+       <!-- after add finish -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -2069,14 +1664,14 @@ j的值被copy到t1。f中的引用参数被绑定带t1,而非j,从而其改变�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
